@@ -1,0 +1,17 @@
+<ion-content padding>
+  <div class="logo">
+    <img src="assets/img/login_logo.png">
+  </div>
+  <div class="input-box">
+    <ion-item class="username">
+      <ion-input type="tel" placeholder="ชื่อผู้ใช้งาน" pattern="[0-9]*" [(ngModel)]="inputLoginData.username"></ion-input>
+    </ion-item>
+    <ion-item class="password">
+      <ion-input type="password" placeholder="รหัสผ่าน" [(ngModel)]="inputLoginData.password"></ion-input>
+    </ion-item>
+  </div>
+  <p class="text-forget-password" (click)="forgetPassword()">กดลืมรหัสผ่าน</p>
+  <div class="button-box" (click)="callLogin()">
+    <img src="assets/img/btn_next.png">
+  </div>
+</ion-content>

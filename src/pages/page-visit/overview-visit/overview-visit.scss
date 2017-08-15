@@ -1,0 +1,36 @@
+page-overview-visit {
+    .wrap-overview-visit {
+        border-radius: 5px;
+        .text-overview-visit {
+            text-align: center;
+            color: $singha-survey-color-text;
+            margin: 5% 0;
+            .button-close {
+                position: absolute;
+                right: 15px;
+                font-size: 18px;
+                color: $singha-survey-color-primary;
+            }
+        }
+        .wrap-card {
+            padding: 16px;
+            .wrap-grid {
+                padding: 0;
+                .row {
+                    .col {
+                        padding: 0;
+                        text-align: center;
+                        margin: auto;
+                        .text-name {
+                            color: $singha-survey-color-primaryDark;
+                        }
+                        .text-total {
+                            color: $singha-survey-color-blue-text;
+                            font-size: 22px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

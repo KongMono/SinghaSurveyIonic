@@ -1,0 +1,31 @@
+page-setpin {
+    .title {
+        text-align: center;
+        .toolbar-title {
+            font-size: 16px;
+        }
+    }
+    .text-set-pin {
+        color: $singha-survey-color-text;
+    }
+    .input-box {
+        position: relative;
+        .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+        .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+            border-bottom-color: #dedede;
+            -webkit-box-shadow: inset 0 -1px 0 0 transparent;
+            box-shadow: inset 0 -1px 0 0 transparent;
+        }
+        .text-length-pin {
+            position: absolute;
+            right: 0;
+            z-index: 1;
+            color: $singha-survey-color-gray-text-all;
+            font-size: 12px;
+        }
+    }
+    .button-box {
+        margin: 30px auto;
+        width: 15%;
+    }
+}

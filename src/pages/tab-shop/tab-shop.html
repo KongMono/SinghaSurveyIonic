@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="overviewShop()" tappable>
+        <ion-icon class="icon-size" name="_icon-overview"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons left>
+      <button icon-only style="background-color:#455A64">
+        <ion-icon class="icon-size" name="blank"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="title">ข้อมูลร้านค้า</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="filter()" tappable>
+        <ion-icon class="icon-size" name="_icon-filter"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="searchShop()" tappable>
+        <ion-icon class="icon-size" name="_icon-search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="pullRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="showCheckNameDialog" no-lines>
+    <button ion-item detail-none class="box-customer" style="border-bottom: 1px solid #dedede;" *ngFor="let customer of customersListData" (tap)="onClick(customer)" (press)="onLongPress(customer)" tappable>
+      <ion-thumbnail item-start class="box-project-type">
+        <div class="wrap-project-type" [ngClass]="{'bg-color-yellow': (customer.status_plan == '3'), 'bg-color-blue': (customer.status_plan == '2'), 'bg-color-red': (customer.status_plan == '1'), 'bg-color-gray': (customer.status_plan == '0')}">
+          <div class="type-name">
+            {{customer.project_type_name}}
+          </div>
+        </div>
+      </ion-thumbnail>
+      <p class="text-name">{{customer.name}}</p>
+      <p class="text-group-name">{{customer.customer_group_name}}</p>
+      <p class="text-address">{{customer.address}}</p>
+      <div item-end class="wrap-end">
+        <div class="wrap-end-top">
+          <ion-icon class="icon-marker" name="_icon-marker"></ion-icon>
+          <span class="text-status">{{customer.count_survey}}</span>
+        </div>
+        <div>
+          <ion-icon class="icon-home" name="_icon-home" [ngClass]="{'color-green': (customer.status == '1'), 'color-yellow': (customer.status == '2'), 'color-red': (customer.status == '3')}"></ion-icon>
+        </div>
+      </div>
+    </button>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+    <ion-infinite-scroll-content>
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab right bottom>
+    <button ion-fab color="accent" (click)="addShop()" tappable>
+      <ion-icon name="_icon-plus"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

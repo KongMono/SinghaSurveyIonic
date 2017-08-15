@@ -1,0 +1,29 @@
+<div>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-4>
+        <p>จำนวนบานเปิด</p>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input type="tel" pattern="[0-9]*" placeholder="จำนวน" class="wrap-input" [(ngModel)]="door"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <p>จำนวนตู้</p>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input type="tel" pattern="[0-9]*" placeholder="จำนวน" class="wrap-input" [(ngModel)]="qty"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button class="button-save" (click)="save()">บันทึก</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

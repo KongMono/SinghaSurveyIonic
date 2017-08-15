@@ -1,0 +1,37 @@
+page-tab-manage-visit {
+    .title {
+        text-align: center;
+        .toolbar-title {
+            font-size: 16px;
+        }
+    }
+    .box-manage-visit {
+        .text-name {
+            font-size: 16px;
+            color: $singha-survey-color-primary;
+            margin-left: 10px;
+        }
+        .wrap-start-date {
+            .title-start-date {
+                font-size: 16px;
+                color: $singha-survey-color-primary;
+                margin-bottom: 5px;
+            }
+            .text-start-date {
+                font-size: 14px;
+                color: $singha-survey-color-primary;
+            }
+        }
+        .wrap-end-date {
+            .title-end-date {
+                font-size: 16px;
+                color: $singha-survey-color-primary;
+                margin-bottom: 5px;
+            }
+            .text-end-date {
+                font-size: 14px;
+                color: $singha-survey-color-primary;
+            }
+        }
+    }
+}

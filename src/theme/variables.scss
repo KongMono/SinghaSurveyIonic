@@ -1,0 +1,132 @@
+// Ionic Variables and Theming. For more info, please see:
+// http://ionicframework.com/docs/v2/theming/
+
+// Font path is used to include ionicons,
+// roboto, and noto sans fonts
+$font-path: "../assets/fonts";
+
+
+// The app direction is used to include
+// rtl styles in your app. For more info, please see:
+// http://ionicframework.com/docs/theming/rtl-support/
+$app-direction: ltr;
+
+
+@import "ionic.globals";
+
+
+// Shared Variables
+// --------------------------------------------------
+// To customize the look and feel of this app, you can override
+// the Sass variables found in Ionic's source scss files.
+// To view all the possible Ionic variables, see:
+// http://ionicframework.com/docs/v2/theming/overriding-ionic-variables/
+
+
+
+
+// Named Color Variables
+// --------------------------------------------------
+// Named colors makes it easy to reuse colors on various components.
+// It's highly recommended to change the default colors
+// to match your app's branding. Ionic uses a Sass map of
+// colors so you can add, rename and remove colors as needed.
+// The "primary" color is the only required color in the map.
+
+$singha-survey-color-inactive: #D8D8D8;
+$singha-survey-color-primary: #455A64;
+$singha-survey-color-primaryDark: #263238;
+$singha-survey-color-accent: #CA9837;
+$singha-survey-color-white: #FFFFFF;
+$singha-survey-color-bgHilightBox: #333333;
+$singha-survey-color-IndicatorsSelect: #FFC080;
+$singha-survey-color-IndicatorsUnSelect: #CCCCCC;
+$singha-survey-color-bgIndicators: #f4f4f4;
+$singha-survey-color-black-semi: #000000;
+$singha-survey-color-text: #666666;
+$singha-survey-color-blue-text: #2AB4C0;
+$singha-survey-color-head-text: #fe8200;
+$singha-survey-color-gray-text: #333333;
+$singha-survey-color-gray-text-all: #959595;
+$singha-survey-color-red: #f00;
+$singha-survey-color-white-1: #F5F5F5;
+$singha-survey-color-no-yellow: #ebebeb;
+$singha-survey-color-yellow: #efb41c;
+$singha-survey-color-black: #000000;
+$singha-survey-color-gray-0: #AFAFAF;
+$singha-survey-color-gray-1: #C0C0C0;
+$singha-survey-color-gray-2: #AFAFAF;
+$singha-survey-color-gray-3: #EAEAEA;
+$singha-survey-color-dark-slate-gray: #2F4F4F;
+$singha-survey-color-background_promotion: #E5E5E5;
+$singha-survey-color-txtLevelD: #999999;
+$singha-survey-color-dark_gray: #b3b3b3;
+$singha-survey-color-action_bar_bg: #222;
+$singha-survey-color-transparent: transparent;
+$singha-survey-color-background: #f80;
+$singha-survey-color-fullscreen-control-overlay-color: #000000;
+$singha-survey-color-holo_blue: #33E5B5;
+$singha-survey-color-background-grid: #F1F1F1;
+$singha-survey-color-darkblue: #0099CC;
+$singha-survey-color-darkpurple: #9933CC;
+$singha-survey-color-darkgreen: #669900;
+$singha-survey-color-darkorange: #FF8800;
+
+$colors: (
+  primary: $singha-survey-color-primary,
+  accent: $singha-survey-color-accent
+);
+
+$item-ios-detail-push-show: true;
+$item-md-detail-push-show: true;
+$item-wp-detail-push-show: true;
+$item-ios-detail-push-color: $singha-survey-color-primary;
+$item-md-detail-push-color:	$singha-survey-color-primary;
+$item-wp-detail-push-color:	$singha-survey-color-primary;
+
+// App iOS Variables
+// --------------------------------------------------
+// iOS only Sass variables can go here
+
+
+
+
+// App Material Design Variables
+// --------------------------------------------------
+// Material Design only Sass variables can go here
+
+
+
+
+// App Windows Variables
+// --------------------------------------------------
+// Windows only Sass variables can go here
+
+
+
+
+// App Theme
+// --------------------------------------------------
+// Ionic apps can have different themes applied, which can
+// then be future customized. This import comes last
+// so that the above variables are used and Ionic's
+// default are overridden.
+
+@import "ionic.theme.default";
+
+
+// Ionicons
+// --------------------------------------------------
+// The premium icon font for Ionic. For more info, please see:
+// http://ionicframework.com/docs/v2/ionicons/
+
+@import "ionic.ionicons";
+
+
+// Fonts
+// --------------------------------------------------
+
+@import "roboto";
+@import "noto-sans";
+
+$singha-survey-font: TLight;

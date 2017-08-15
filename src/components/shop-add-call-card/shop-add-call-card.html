@@ -1,0 +1,64 @@
+<div>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-auto>
+        <p>สัญญาเริ่ม - สิ้นสุด</p>
+      </ion-col>
+      <ion-col class="wrap-col">
+        <ion-item class="item-calendar">
+          <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMMM YYYY" [(ngModel)]="inputShopAddCallCardData.start_date"></ion-datetime>
+        </ion-item>
+        <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <p>มูลค่า</p>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input type="tel" pattern="[0-9]*" placeholder="มูลค่า" class="wrap-input" [(ngModel)]="inputShopAddCallCardData.value"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <p>เลขสัญญา SPST</p>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input type="tel" pattern="[0-9]*" placeholder="เลขสัญญา SPST" class="wrap-input" [(ngModel)]="inputShopAddCallCardData.spst_no"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-4>
+        <p>เลขสัญญา PRQ</p>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input type="tel" pattern="[0-9]*" placeholder="เลขสัญญา PRQ" class="wrap-input" [(ngModel)]="inputShopAddCallCardData.prq_no"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <p>รูป</p>
+      </ion-col>
+      <ion-col>
+        <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addImage()"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row class="row-full-size">
+      <ion-col col-12 class="col-sub">
+         <img class="image-shop" [src]="endPoint + inputShopAddCallCardData.images">
+        <!-- <img class="image-shop" src="assets/img/login_logo.png"> -->
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button class="button-save" (click)="save()">บันทึก</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

@@ -1,0 +1,73 @@
+page-announce-change-area {
+    .title {
+        text-align: center;
+        .toolbar-title {
+            font-size: 16px;
+        }
+    }
+    .icon-size {
+        font-size: 20px !important;
+    }
+    .box-map {
+        width: 100%;
+        height: 30%;
+        background-color: black;
+    }
+    .box-edit {
+        padding: 16px;
+        .text-title {
+            font-size: 16px;
+        }
+        .wrap-input {
+            input {
+                margin: 5px 8px;
+                line-height: 32px;
+            }
+            textarea {
+                margin: 5px 8px;
+                overflow: visible;
+            }
+        }
+        .wrap-select {
+            max-width: 100%;
+            width: 100%;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        .line-top-row {
+            border-top: 1px solid #dedede;
+        }
+        .button-add-input {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto 0 auto auto;
+            padding: 0;
+            font-size: 22px;
+            color: $singha-survey-color-primary;
+        }
+        .item-calendar {
+            z-index: 1;
+            background-color: transparent;
+        }
+        .button-calendar {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto 0 auto auto;
+            z-index: 0;
+            font-size: 22px;
+            color: $singha-survey-color-primary;
+        }
+        .button-save {
+            margin: auto;
+            display: flex;
+            background-color: $singha-survey-color-gray-3;
+            color: $singha-survey-color-primaryDark;
+        }
+    }
+}

@@ -1,0 +1,432 @@
+// http://ionicframework.com/docs/v2/theming/
+// App Global Sass
+// --------------------------------------------------
+@font-face {
+    font-family: TLight;
+    src: url('../assets/fonts/TLight.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: TBold;
+    src: url('../assets/fonts/TBold.ttf') format('ttf');
+    font-weight: normal;
+    font-style: normal;
+}
+
+// * {
+//     font-family: $singha-survey-font;
+// }
+// Custom icons
+// Overriding the ion-icon behavior
+// All custom icons will start with "_icon-" prefix
+ion-icon {
+    &[class*="_icon-"] {
+        // Instead of using the font-based icons
+        // We're applying SVG masks
+        mask-size: contain;
+        mask-position: 50% 50%;
+        mask-repeat: no-repeat;
+        background: currentColor;
+        width: 1em;
+        height: 1em;
+    } // custom icons
+    &[class*="_icon-activity"] {
+        mask-image: url(../assets/img/icon_activity_inactive_48.png);
+    }
+    &[class*="_icon-back"] {
+        mask-image: url(../assets/img/icon_back.png);
+    }
+    &[class*="_icon-calendar"] {
+        mask-image: url(../assets/img/icon_calendar.png);
+    }
+    &[class*="_icon-close"] {
+        mask-image: url(../assets/img/icon_close.png);
+    }
+    &[class*="_icon-dashboard"] {
+        mask-image: url(../assets/img/icon_dashboard_inactive.png);
+    }
+    &[class*="_icon-delete_file"] {
+        mask-image: url(../assets/img/icon_delete_file_96.png);
+    }
+    &[class*="_icon-edit"] {
+        mask-image: url(../assets/img/icon_edit_96.png);
+    }
+    &[class*="_icon-filter"] {
+        mask-image: url(../assets/img/icon_filter_48.png);
+    }
+    &[class*="_icon-home"] {
+        mask-image: url(../assets/img/icon_open_home_48.png);
+    }
+    &[class*="_icon-marker"] {
+        mask-image: url(../assets/img/icon_marker_48.png);
+    }
+    &[class*="_icon-map"] {
+        mask-image: url(../assets/img/icon_map.png);
+    }
+    &[class*="_icon-overtime"] {
+        mask-image: url(../assets/img/icon_overtime_inactive.png);
+    }
+    &[class*="_icon-overview"] {
+        mask-image: url(../assets/img/icon_page_overview.png);
+    }
+    &[class*="_icon-plus"] {
+        mask-image: url(../assets/img/icon_plus_48.png);
+    }
+    &[class*="_icon-premium"] {
+        mask-image: url(../assets/img/icon_premium_inactive_48.png);
+    }
+    &[class*="_icon-refresh"] {
+        mask-image: url(../assets/img/icon_refresh_48.png);
+    }
+    &[class*="_icon-restart"] {
+        mask-image: url(../assets/img/icon_restart_64.png);
+    }
+    &[class*="_icon-search"] {
+        mask-image: url(../assets/img/icon_search_48.png);
+    }
+    &[class*="_icon-sale"] {
+        mask-image: url(../assets/img/icon_sale_inactive_48.png);
+    }
+    &[class*="_icon-settings"] {
+        mask-image: url(../assets/img/icon_settings_inactive.png);
+    }
+    &[class*="_icon-tracking"] {
+        mask-image: url(../assets/img/icon_tracking_inactive_48.png);
+    }
+    &[class*="_icon-trash"] {
+        mask-image: url(../assets/img/icon_trash_48.png);
+    }
+    &[class*="_icon-visit"] {
+        mask-image: url(../assets/img/icon_visit_inactive.png);
+    }
+}
+
+ion-loading {
+    ion-backdrop {
+        opacity: 0.1 !important;
+        // background-color: $singha-survey-color-white;
+        background-color: $singha-survey-color-primaryDark;
+    }
+    .loading-wrapper {
+        background: transparent !important;
+        -webkit-box-shadow: initial !important;
+        box-shadow: initial !important;
+        .loading-spinner {
+            ion-spinner {
+                width: 50px;
+                height: 50px;
+                svg {
+                    circle {
+                        stroke: $singha-survey-color-accent;
+                        stroke-width: 5px;
+                        stroke-dasharray: 160px;
+                        stroke-dashoffset: 70px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.toolbar.statusbar-padding {
+    min-height: 44px !important;
+    padding-top: initial !important;
+}
+
+.tabs-ios .tab-button-icon {
+    color: $singha-survey-color-inactive;
+}
+
+.tabs-md .tab-button-icon {
+    color: $singha-survey-color-inactive;
+}
+
+.tabs-wp .tab-button-icon {
+    color: $singha-survey-color-inactive;
+}
+
+.tabs-ios .tab-button[aria-selected=true] .tab-button-icon {
+    color: $singha-survey-color-primary;
+}
+
+.tabs-md .tab-button[aria-selected=true] .tab-button-icon {
+    color: $singha-survey-color-primary;
+}
+
+.tabs-wp .tab-button[aria-selected=true] .tab-button-icon {
+    color: $singha-survey-color-primary;
+}
+
+// <color name="colorPrimary">#455A64</color>
+// <color name="colorPrimaryDark">#263238</color>
+// <color name="colorAccent">#CA9837</color>
+// <color name="colorOptAccent">#CA9837</color>
+// <color name="cAccent">#CA9837</color>
+// <color name="white">#FFFFFF</color>
+// <color name="bgHilightBox">#333333</color>
+// <color name="IndicatorsSelect">#FFC080</color>
+// <color name="IndicatorsUnSelect">#CCCCCC</color>
+// <color name="bgIndicators">#f4f4f4</color>
+// <color name="black_semi_transparent">#B2000000</color>
+// <!-- color -->
+// <color name="text_color">#666666</color>
+// <color name="text_color_blue">#2AB4C0</color>
+// <color name="txt_head">#fe8200</color>
+// <color name="gray_text">#333333</color>
+// <color name="gray_text_all">#959595</color>
+// <color name="red">#f00</color>
+// <color name="white_1">#F5F5F5</color>
+// <color name="no_yellow">#ebebeb</color>
+// <color name="yellow">#efb41c</color>
+// <color name="black">#000000</color>
+// <color name="gray_3">#EAEAEA</color>
+// <color name="gray_2">#AFAFAF</color>
+// <color name="gray_1">#C0C0C0</color>
+// <color name="gray_0">#77AFAFAF</color>
+// <color name="dark_slate_gray">#2F4F4F</color>
+// <color name="background_promotion">#FFE5E5E5</color>
+// <color name="txtLevelD">#999999</color>
+// <color name="dark_gray">#ffb3b3b3</color>
+// <color name="action_bar_bg">#222</color>
+// <color name="transparent">#00000000</color>
+// <color name="background">#f80</color>
+// <color name="fullscreen_control_overlay_color">#66000000</color>
+// <color name="holo_blue">#FF33E5B5</color>
+// <color name="background_grid">#F1F1F1</color>
+// <color name="darkblue">#FF0099CC</color>
+// <color name="darkpurple">#FF9933CC</color>
+// <color name="darkgreen">#FF669900</color>
+// <color name="darkorange">#FFFF8800</color>
+//     <?xml version="1.0" encoding="utf-8"?>
+// <resources>
+//     <string name="app_displayname">Singha Survey</string>
+//     <string name="app_version">1.0.0</string>
+//     <string name="cache_name">SinghaSurvey</string>
+//     <string name="device">ANDROID</string>
+//     <string name="action_settings">Settings</string>
+//     <!-- Close Dialog -->
+//     <string name="exit_alert">Do you want to exit?</string>
+//     <string name="button_ok">OK</string>
+//     <string name="button_cancel">Cancel</string>
+//     <string name="cache_timeout">3600000</string>
+//     <!-- numberic pageindicator -->
+//     <string name="sb1">ข้อมูลร้านค้า</string>
+//     <string name="sb2">เข้าเยี่ยมและบันทึกยอดขาย</string>
+//     <string name="sb3">บริหารการเข้าเยี่ยมร้านค้า</string>
+//     <string name="sb4">ข้อมูลส่วนตัว</string>
+//     <string name="sb5">ออกจากระบบ</string>
+//     <string name="sb6">เพิ่มข้อมูลร้านค้า</string>
+//     <string name="sb7">ข้อมูลผู้ติดต่อ</string>
+//     <string name="sb7.5">ข้อมูลตู้แช่</string>
+//     <string name="sb7.6">ข้อมูล PG ประจำ</string>
+//     <string name="sb8">ช่องทางการซื้อสินค้า</string>
+//     <string name="sb8.5">ข้อมูล Call Card</string>
+//     <string name="sb9">ค้นหาร้านค้า</string>
+//     <string name="sb10">อุปกรณ์ส่งเสริมการขาย</string>
+//     <string name="sb11">ค้นหาเข้าเยี่ยมและบันทึกยอดขาย</string>
+//     <string name="sb12">เพิ่มเข้าเยี่ยมและบันทึกยอดขาย</string>
+//     <string name="sb13">ดูรายละเอียด</string>
+//     <string name="sb14">สินค้า</string>
+//     <string name="sb15">จำนวนพีจี</string>
+//     <string name="sb16">การบริการของพนักงานบุญรอด</string>
+//     <string name="sb17">การบริการของพนักงานไทยเบฟ</string>
+//     <string name="sb18">ค้นหาบริหารการเข้าเยี่ยมร้านค้า</string>
+//     <string name="sb19">เพิ่มบริหารการเข้าเยี่ยมร้านค้า</string>
+//     <string name="sb20">เพิ่มสิทธิ์การเข้าถึงร้านค้า</string>
+//     <string name="sb21">ข้อมูลส่วนตัว</string>
+//     <string name="sb22">แก้ไขบริหารการเข้าเยี่ยมร้านค้า</string>
+//     <string name="permonth">ครั้ง/เดือน</string>
+//     <string name="customer_name">ชื่อร้าน</string>
+//     <string name="name">ชื่อ</string>
+//     <string name="address">ที่อยู่</string>
+//     <string name="province">จังหวัด</string>
+//     <string name="ampher">อำเภอ</string>
+//     <string name="tumbol">ตำบล</string>
+//     <string name="address_passcode">รหัสไปรษณีย์</string>
+//     <string name="address_cid">เลขผู้เสียภาษี</string>
+//     <string name="customer_group">กลุ่มร้านค้า</string>
+//     <string name="customer_type">ประเภทร้านค้า</string>
+//     <string name="customer_table">จำนวนโต๊ะ</string>
+//     <string name="project_type">โครงการ</string>
+//     <string name="tier">ระดับร้านค้า</string>
+//     <string name="geography">กลยุทธ์พื้นที่</string>
+//     <string name="status">สถานะ</string>
+//     <string name="datesetup">วันที่ก่อตั้ง</string>
+//     <string name="etc">หมายเหตุ</string>
+//     <string name="company">บริษัท</string>
+//     <string name="type_channel">ประเภท</string>
+//     <string name="brand">ยี่ห้อ</string>
+//     <string name="picture">รูปร้านค้า</string>
+//     <string name="amount">จำนวน</string>
+//     <string name="amount_freezer">จำนวนบานเปิด</string>
+//     <string name="amount_qty">จำนวนตู้</string>
+//     <string name="add">เพิ่ม</string>
+//     <string name="tel">เบอร์โทร</string>
+//     <string name="contact_name">ผู้ติดต่อ</string>
+//     <string name="contact_number">เบอร์ติดต่อ</string>
+//     <string name="customer_channel">ตัวแทน/ค้าส่ง</string>
+//     <string name="product_category">ประเภทสินค้า</string>
+//     <string name="product">สินค้า</string>
+//     <string name="customer_activity_group">กลุ่มกิจกรรม</string>
+//     <string name="customer_activity">กิจกรรม</string>
+//     <string name="customer_activity_name">ชื่อกิจกรรม</string>
+//     <string name="promotion">โปรโมชั่น</string>
+//     <string name="monthly_total_buy">ยอดซื้อเข้ารายเดือน</string>
+//     <string name="monthly_total_stock">stock รายเดือน</string>
+//     <string name="monthly_total_sales">ยอดขายรายเดือน</string>
+//     <string name="price">ราคา</string>
+//     <string name="big">หน่วยใหญ่</string>
+//     <string name="small">หน่วยย่อย</string>
+//     <string name="check_data">กรุณากรอกข้อมูลให้ถูกต้อง</string>
+//     <string name="delete">ลบ</string>
+//     <string name="save">บันทึก</string>
+//     <string name="edit">แก้ไข</string>
+//     <string name="ok">ตกลง</string>
+//     <string name="cancel">ยกเลิก</string>
+//     <string name="check_passcode">กรุณาเช็ค Passcode อีกครั้ง</string>
+//     <string name="wrong_passcode">รหัสไม่ถูกต้อง</string>
+//     <string name="passcode">Passcode</string>
+//     <string name="new_passcode">New passcode</string>
+//     <string name="confirm_passcode">Confirm new passcode</string>
+//     <string name="share">Share</string>
+//     <string name="forgetpassword">กดลืมรหัสผ่าน</string>
+//     <string name="setup_passcode">กรุณาตั้งรหัส 4 หลัก</string>
+//     <string name="input_passcode">กรุณาใส่รหัส 4 หลัก</string>
+//     <string name="nodata">ไม่มีข้อมูล</string>
+//     <string name="find_store">ค้นหาร้านค้า</string>
+//     <string-array name="tabs">
+//         <item>ดูหนัง</item>
+//         <item>ข้อมูล</item>
+//     </string-array>
+//     <string-array name="tabs_other">
+//         <item>ดูตัวอย่างหนัง</item>
+//         <item>ข้อมูล</item>
+//     </string-array>
+//     <string name="sb12_th">ตั้งค่าการใช้งาน</string>
+//     <string name="sb12_en">Setting</string>
+//     <string name="header_settingpush_th">การแจ้งเตือน</string>
+//     <string name="language_th">ภาษา</string>
+//     <string name="notification_news_th">รับข่าวสารทั่วไป</string>
+//     <string name="notification_series_th">รับข่าวสารหนังซีรี่ย์มาใหม่</string>
+//     <string name="header_settingpush_en">Notification</string>
+//     <string name="language_en">Language</string>
+//     <string name="notification_news_en">News</string>
+//     <string name="notification_series_en">Movie / Series</string>
+//     <string name="TH">ภาษาไทย ></string>
+//     <string name="EN">English ></string>
+//     <string name="watchnow">Watch Now</string>
+//     <string name="all">ทั้งหมด ></string>
+//     <string name="allchannel">ช่องทั้งหมด</string>
+//     <string name="error_title">Something went wrong!</string>
+//     <string name="error_occurred">An error occurred. We\'re deeply sorry.</string>
+//     <string name="error_details">Error details:</string>
+//     <string name="unknown_exception">Unknown exception</string>
+//     <string name="restart_app">Restart app</string>
+//     <string name="close_app">Close app</string>
+//     <!-- We define some custom strings for the default error activity -->
+//     <!-- This only applies when using the default error activity, of course! -->
+//     <!-- To see them, disable the custom error activity in SampleCrashableApplication -->
+//     <string name="customactivityoncrash_error_activity_error_occurred_explanation">An error occurred in this sample app. This is the default error activity with customized strings.</string>
+//     <string name="customactivityoncrash_error_activity_unknown_exception">No stacktrace available!</string>
+//     <string name="customactivityoncrash_error_activity_restart_app">Restart now</string>
+//     <string name="customactivityoncrash_error_activity_close_app">Close now</string>
+//     <string name="customactivityoncrash_error_activity_error_details">Error information</string>
+//     <string name="customactivityoncrash_error_activity_error_details_title">Error information</string>
+//     <string name="customactivityoncrash_error_activity_error_details_close">OK</string>
+//     <string name="title_activity_maps">Map</string>
+//     <!-- TODO: Remove or change this placeholder text -->
+//     <string name="hello_blank_fragment">Hello blank fragment</string>
+//     <string name="header_search_name">ตรวจสอบชื่อร้าน</string>
+//     <string name="search">ค้นหา</string>
+//     <string name="location">ตำแหน่ง</string>
+//     <string name="prq_no">เลขสัญญา PRQ</string>
+//     <string name="spst_no">เลขสัญญา SPST</string>
+//     <string name="images">รูป</string>
+//     <string name="contact_position">ตำแหน่ง</string>
+//     <string name="birthday">วันเกิด</string>
+//     <string name="order_header">ยอดสั่งซื้อย้อนหลัง 3 เดือนจากปัจจุบัน</string>
+//     <string name="sale_boonrawd">ยอดขายสินค้าบุญรอดย้อนหลัง 3 เดือนจากปัจจุบัน</string>
+//     <string name="sale_rival">ยอดขายสินค้าคู่แข่งย้อนหลัง 3 เดือนจากปัจจุบัน</string>
+//     <string name="sale_receipt">แสดงแนบรูปใบเสร็จย้อนหลัง 3 เดือนจากปัจจุบัน</string>
+//     <string-array name="list_province_th">
+//         <item>เชียงราย</item>
+//         <item>เชียงใหม่</item>
+//         <item>น่าน</item>
+//         <item>พะเยา</item>
+//         <item>แพร่</item>
+//         <item>แม่ฮ่องสอน</item>
+//         <item>ลำปาง</item>
+//         <item>ลำพูน</item>
+//         <item>อุตรดิตถ์</item>
+//         <item>กาฬสินธุ์</item>
+//         <item>ขอนแก่น</item>
+//         <item>ชัยภูมิ</item>
+//         <item>นครพนม</item>
+//         <item>นครราชสีมา</item>
+//         <item>บึงกาฬ</item>
+//         <item>บุรีรัมย์</item>
+//         <item>มหาสารคาม</item>
+//         <item>มุกดาหาร</item>
+//         <item>ยโสธร</item>
+//         <item>ร้อยเอ็ด</item>
+//         <item>เลย</item>
+//         <item>ศรีสะเกษ</item>
+//         <item>สกลนคร</item>
+//         <item>สุรินทร์</item>
+//         <item>หนองคาย</item>
+//         <item>หนองบัวลำภู</item>
+//         <item>อำนาจเจริญ</item>
+//         <item>อุดรธานี</item>
+//         <item>อุบลราชธานี</item>
+//         <item>กรุงเทพมหานคร</item>
+//         <item>กำแพงเพชร</item>
+//         <item>ชัยนาท</item>
+//         <item>นครนายก</item>
+//         <item>นครปฐม</item>
+//         <item>นครสวรรค์</item>
+//         <item>นนทบุรี</item>
+//         <item>ปทุมธานี</item>
+//         <item>พระนครศรีอยุธยา</item>
+//         <item>พิจิตร</item>
+//         <item>พิษณุโลก</item>
+//         <item>เพชรบูรณ์</item>
+//         <item>ลพบุรี</item>
+//         <item>สมุทรปราการ</item>
+//         <item>สมุทรสงคราม</item>
+//         <item>สมุทรสาคร</item>
+//         <item>สระบุรี</item>
+//         <item>สิงห์บุรี</item>
+//         <item>สุโขทัย</item>
+//         <item>สุพรรณบุรี</item>
+//         <item>อ่างทอง</item>
+//         <item>อุทัยธานี</item>
+//         <item>จันทบุรี</item>
+//         <item>ชลบุรี</item>
+//         <item>ตราด</item>
+//         <item>ระยอง</item>
+//         <item>ฉะเชิงเทรา</item>
+//         <item>ปราจีนบุรี</item>
+//         <item>สระแก้ว</item>
+//         <item>กาญจนบุรี</item>
+//         <item>ตาก</item>
+//         <item>ประจวบคีรีขันธ์</item>
+//         <item>เพชรบุรี</item>
+//         <item>ราชบุรี</item>
+//         <item>กระบี่</item>
+//         <item>ชุมพร</item>
+//         <item>ตรัง</item>
+//         <item>นครศรีธรรมราช</item>
+//         <item>นราธิวาส</item>
+//         <item>ปัตตานี</item>
+//         <item>พังงา</item>
+//         <item>พัทลุง</item>
+//         <item>ภูเก็ต</item>
+//         <item>ยะลา</item>
+//         <item>ระนอง</item>
+//         <item>สงขลา</item>
+//         <item>สตูล</item>
+//         <item>สุราษฎร์ธานี</item>
+//     </string-array>
+// </resources>

@@ -1,0 +1,410 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="backPage()">
+        <ion-icon class="icon-size" name="_icon-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="title">เพิ่มร้านค้า</ion-title>
+    <ion-buttons right>
+      <button icon-only style="background-color:#455A64">
+        <ion-icon class="icon-size"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="box-map">
+    <sebm-google-map id="map" [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom">
+      <sebm-google-map-marker [latitude]="map.lat" [longitude]="map.lng">
+        <sebm-google-map-info-window>
+          <strong>My location</strong>
+        </sebm-google-map-info-window>
+      </sebm-google-map-marker>
+    </sebm-google-map>
+  </div>
+  <div class="box-detail-shop">
+    <span class="text-title">ข้อมูลร้านค้า</span>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <p>ตำแหน่ง<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="text" disabled placeholder="ตำแหน่ง" [(ngModel)]="latlong" class="wrap-input"></ion-input>
+          </ion-item>
+          <ion-icon name="_icon-refresh" ion-button class="button-reload-location" (click)="reloadLocation()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>ชื่อร้าน<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="text" placeholder="ชื่อร้าน" class="wrap-input"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>ที่อยู่<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <!-- <ion-input type="text" placeholder="ที่อยู่" class="wrap-input"></ion-input> -->
+            <ion-textarea type="text" placeholder="ที่อยู่" rows="2" class="wrap-input"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>จังหวัด<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <!-- <ion-select [(ngModel)]="employee" interface="popover">
+               <ion-option *ngFor="let employee of employees" [value]="employee"></ion-option> 
+            </ion-select> -->
+            <ion-select interface="popover" class="wrap-select">
+              <ion-option>aaa</ion-option>
+              <ion-option>bbb</ion-option>
+              <ion-option>ที่น้ำก็ได้</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>อำเภอ<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select interface="popover" class="wrap-select">
+              <ion-option>aaa</ion-option>
+              <ion-option>bbb</ion-option>
+              <ion-option>ที่น้ำก็ได้</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>ตำบล<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select interface="popover" class="wrap-select">
+              <ion-option>aaa</ion-option>
+              <ion-option>bbb</ion-option>
+              <ion-option>ที่น้ำก็ได้</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-auto style="padding-right: 0;">
+          <p>รหัสไปรษณีย์<span class="required">*</span></p>
+        </ion-col>
+        <ion-col class="wrap-col wrap-length">
+          <ion-item>
+            <ion-input type="tel" placeholder="รหัสไปรษณีย์" maxLength="5" pattern="[0-9]*" [(ngModel)]="inputEditShopData.zipCode" (ngModelChange)="changeZipCodeLength($event)"
+              class="wrap-input"></ion-input>
+          </ion-item>
+          <span class="text-length">{{inputEditShopData.zipCodeLength}} / 5</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-auto style="padding-right: 0;">
+          <p>เลขผู้เสียภาษี</p>
+        </ion-col>
+        <ion-col class="wrap-col wrap-length">
+          <ion-item>
+            <ion-input type="tel" placeholder="เลขผู้เสียภาษี" maxLength="13" pattern="[0-9]*" [(ngModel)]="inputEditShopData.taxID"
+              (ngModelChange)="changeTaxIDLength($event)" class="wrap-input"></ion-input>
+          </ion-item>
+          <span class="text-length">{{inputEditShopData.taxIDLength}} / 13</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>กลุ่มร้านค้า<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select interface="popover" class="wrap-select">
+              <ion-option>aaa</ion-option>
+              <ion-option>bbb</ion-option>
+              <ion-option>ที่น้ำก็ได้</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-auto style="padding-right: 0;">
+          <p>ประเภทร้านค้า<span class="required">*</span></p>
+        </ion-col>
+        <ion-col class="wrap-col">
+          <ion-item>
+            <ion-select interface="popover" class="wrap-select">
+              <ion-option>aaa</ion-option>
+              <ion-option>bbb</ion-option>
+              <ion-option>ที่น้ำก็ได้</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>จำนวนโต๊ะ</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="tel" placeholder="จำนวนโต๊ะ" class="wrap-input"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>โครงการ<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select interface="popover" class="wrap-select">
+              <ion-option>aaa</ion-option>
+              <ion-option>bbb</ion-option>
+              <ion-option>ที่น้ำก็ได้</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>ข้อมูลตู้แช่</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addFreezer()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">จำนวนบานเปิด</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">จำนวนตู้</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">5</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">2</span>
+          </ion-col>
+        </ion-row>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>ข้อมูล PG ประจำ</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addPG()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">ชื่อ PG</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">เบอร์โทร</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">สมชาย</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">0944854896</span>
+          </ion-col>
+        </ion-row>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>ข้อมูลผู้ติดต่อ</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addContact()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">ผู้ติดต่อ</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">เบอร์ผู้ติดต่อ</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">สมชาย</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">0944854896</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">ตำแหน่ง</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">วันเกิด</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">หัวหน้า</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">17 ต.ค. 2558</span>
+          </ion-col>
+        </ion-row>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>ช่องทางการซื้อสินค้า</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addChannel()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">ตัวแทน/ค้าส่ง</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">ประเภทสินค้า</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">หจก. กหด</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">Alcohol</span>
+          </ion-col>
+        </ion-row>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>ข้อมูล Call Card</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addCallCard()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">สัญญาเริ่ม</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-title-sub">สัญญาสิ้นสุด</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">2 ก.ค. 2548</span>
+          </ion-col>
+          <ion-col col-6 class="col-sub">
+            <span class="text-value-sub">25 ก.ค. 2548</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-4 class="col-sub">
+            <span class="text-title-sub">เลข SPST</span>
+          </ion-col>
+          <ion-col col-4 class="col-sub">
+            <span class="text-title-sub">เลข PRQ</span>
+          </ion-col>
+          <ion-col col-4 class="col-sub">
+            <span class="text-title-sub">มูลค่า</span>
+          </ion-col>
+        </ion-row>
+        <ion-row class="row-full-size">
+          <ion-col col-4 class="col-sub">
+            <span class="text-value-sub">494456</span>
+          </ion-col>
+          <ion-col col-4 class="col-sub">
+            <span class="text-value-sub">148966</span>
+          </ion-col>
+          <ion-col col-4 class="col-sub">
+            <span class="text-value-sub">99999999</span>
+          </ion-col>
+        </ion-row>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>รูปร้านค้า</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addImage()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row class="row-full-size">
+        <ion-col col-12 class="col-sub">
+          <!-- <img class="image-shop" [src]="image"> -->
+          <img class="image-shop" src="assets/img/login_logo.png">
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>วันที่ก่อตั้ง</p>
+        </ion-col>
+        <ion-col>
+          <ion-item class="item-calendar">
+            <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMMM YYYY" [(ngModel)]="myDate"></ion-datetime>
+          </ion-item>
+          <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>สถานะ</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select interface="popover" class="wrap-select">
+              <ion-option>aaa</ion-option>
+              <ion-option>bbb</ion-option>
+              <ion-option>ที่น้ำก็ได้</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>หมายเหตุ</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="text" placeholder="หมายเหตุ" class="wrap-input"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 style="padding-left: 0;">
+          <button ion-button class="button-edit" (click)="save()">แก้ไข</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button class="button-cancel" (click)="backPage()">ยกเลิก</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="title">Passcode</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <p class="text-set-pin">กรุณาใส่รหัส 4 หลัก</p>
+  <div class="input-box">
+    <div class=wrap-pin (click)="focusInputPasscode(inputPasscode)">
+      <input type="tel" maxLength="4" pattern="[0-9]*" class="input-pin" [(ngModel)]="inputPinLoginData.passcode" (ngModelChange)="setPasscode($event)" #inputPasscode id="inputPasscode">
+      <div class=pin>
+        <div class=select-pin [hidden]="!inputPinLoginData.pin1"></div>
+      </div>
+      <div class=pin>
+        <div class=select-pin [hidden]="!inputPinLoginData.pin2"></div>
+      </div>
+      <div class=pin>
+        <div class=select-pin [hidden]="!inputPinLoginData.pin3"></div>
+      </div>
+      <div class=pin>
+        <div class=select-pin [hidden]="!inputPinLoginData.pin4"></div>
+      </div>
+    </div>
+  </div>
+  <p class="text-forget-password" (click)="logout()">ลืมรหัส ?</p>
+</ion-content>

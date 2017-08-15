@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="backPage()">
+        <ion-icon class="icon-size" name="_icon-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="title">ค้นหาร้านค้า</ion-title>
+    <ion-buttons right>
+      <button icon-only style="background-color:#455A64">
+        <ion-icon class="icon-size"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="no-scroll">
+  <div class="box-detail-shop">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <p>จังหวัด<span></span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select *ngIf="optionCustomer" interface="popover" [(ngModel)]="indexProvince" (ngModelChange)="indexAmpher = 0; indexTumbol = 0"
+              class="wrap-select">
+              <ion-option *ngFor="let province of optionCustomer.province; let i = index" [value]="i" tappable>{{province.province_th}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>อำเภอ<span></span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select *ngIf="optionCustomer" interface="popover" [(ngModel)]="indexAmpher" (ngModelChange)="indexTumbol = 0" class="wrap-select"
+              tappable>
+              <ion-option *ngFor="let ampher of optionCustomer.province[indexProvince].ampher; let i = index" [value]="i" tappable>{{ampher.ampher_th}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>ตำบล<span></span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select *ngIf="optionCustomer" interface="popover" [(ngModel)]="indexTumbol" class="wrap-select" tappable>
+              <ion-option *ngFor="let tumbol of optionCustomer.province[indexProvince].ampher[indexAmpher].tumbol; let i = index" [value]="i"
+                tappable>{{tumbol.tumbol_th}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <p>กรอกชื่อร้านที่ต้องการค้นหา<span></span></p>
+      </ion-row>
+      <ion-row>
+        <ion-item>
+          <ion-input type="text" placeholder="ชื่อร้าน" [(ngModel)]="keyName" class="wrap-input"></ion-input>
+        </ion-item>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <div class="box-list-search">
+    <ion-list no-lines *ngIf="customersListData">
+      <button ion-item detail-none class="box-customer" style="border-bottom: 1px solid #dedede;" *ngFor="let customer of customersListData"
+        (tap)="onClick(customer)" (press)="onLongPress(customer)">
+      <ion-thumbnail item-start class="box-project-type">
+        <div class="wrap-project-type" [ngClass]="{'bg-color-yellow': (customer.status_plan == '3'), 'bg-color-blue': (customer.status_plan == '2'), 'bg-color-red': (customer.status_plan == '1'), 'bg-color-gray': (customer.status_plan == '0')}">
+          <div class="type-name">
+            {{customer.project_type_name}}
+          </div>
+        </div>
+      </ion-thumbnail>
+      <p class="text-name">{{customer.name}}</p>
+      <p class="text-group-name">{{customer.customer_group_name}}</p>
+      <p class="text-address">{{customer.address}}</p>
+      <div item-end class="wrap-end">
+        <div class="wrap-end-top">
+          <ion-icon class="icon-marker" name="_icon-marker"></ion-icon>
+          <span class="text-status">{{customer.count_survey}}</span>
+        </div>
+        <div>
+          <ion-icon class="icon-home" name="_icon-home" [ngClass]="{'color-green': (customer.status == '1'), 'color-yellow': (customer.status == '2'), 'color-red': (customer.status == '3')}"></ion-icon>
+        </div>
+      </div>
+    </button>
+    </ion-list>
+  </div>
+  <ion-fab right bottom>
+    <button ion-fab color="accent" (click)="SearchShop()" tappable>
+      <ion-icon name="_icon-search"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

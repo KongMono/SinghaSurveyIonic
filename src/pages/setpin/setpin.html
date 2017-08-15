@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title class="title">Passcode</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <p class="text-set-pin">กรุณาตั้งรหัส 4 หลัก</p>
+  <div class="input-box">
+    <ion-item>
+      <ion-input type="tel" placeholder="New passcode" maxLength="4" pattern="[0-9]*" [(ngModel)]="inputSetPinData.passcode" (ngModelChange)="changePasscodeLength($event)"></ion-input>
+    </ion-item>
+    <span class="text-length-pin">{{inputSetPinData.passcodeLength}} / 4</span>
+    <ion-item>
+      <ion-input type="tel" placeholder="Confirm new passcode" maxLength="4" pattern="[0-9]*" [(ngModel)]="inputSetPinData.confirmPasscode" (input)="changeConfirmPasscodeLength($event)"></ion-input>
+    </ion-item>
+    <span class="text-length-pin">{{inputSetPinData.confirmPasscodeLength}} / 4</span>
+  </div>
+  <div class="button-box" (click)="createPasscode()">
+    <img src="assets/img/btn_next.png">
+  </div>
+</ion-content>

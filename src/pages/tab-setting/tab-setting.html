@@ -1,0 +1,46 @@
+<ion-header no-border>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button icon-only style="background-color:#455A64">
+        <ion-icon class="icon-size" name="blank"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="title">ข้อมูลส่วนตัว</ion-title>
+    <ion-buttons right (click)="profile()">
+      <button ion-button icon-only>
+        <ion-icon class="icon-size" name="_icon-restart"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="box-profile">
+    <div class="picture">
+      <!-- <img class="img" src="assets/img/ic_launcher_android.png"> -->
+      <img class="img" [src]="profileData.image">
+    </div>
+    <div class="info">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-6>{{profileData.fullname}}</ion-col>
+          <ion-col col-6>ประเภท: {{profileData.type}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-12>เบอร์โทร: {{profileData.mobile}}</ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col col-auto>พื้นที่</ion-col>
+          <ion-col style="padding-left: 0;">{{profileData.area[0].province}}: <span *ngFor="let ampher of profileData.area[0].ampher; let i = index">{{ampher}}<span *ngIf="(profileData.area[0].ampher.length - 1) != i">, </span></span></ion-col>
+        </ion-row>
+        <ion-row *ngFor="let area of profileData.area; let i = index">
+          <ion-col col-auto style="padding-left: calc(10% + 28px + 5px);" *ngIf="profileData.area.length > 1 && i > 0">{{area.province}}: <span *ngFor="let ampher of area.ampher; let ii = index">{{ampher}}<span *ngIf="(area.ampher.length - 1) != ii">, </span></span></ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <ion-list no-lines>
+    <button ion-item detail-push style="border-bottom: 1px solid #dedede;" (click)="announceChangeArea()">แจ้งเปลี่ยนพื้นที่</button>
+    <button ion-item detail-push style="border-bottom: 1px solid #dedede;" (click)="logout()">ออกจากระบบ</button>
+  </ion-list>
+</ion-content>

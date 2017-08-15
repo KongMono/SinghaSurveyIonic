@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="backPage()">
+        <ion-icon class="icon-size" name="_icon-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="title">{{action}}</ion-title>
+    <ion-buttons right>
+      <button icon-only style="background-color:#455A64">
+        <ion-icon class="icon-size"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <shop-add-call-card *ngIf="action == 'callcard'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-call-card>
+    <shop-add-channel *ngIf="action == 'channels'" [customerDetailDataInput]="data" [option]="option" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-channel>
+    <shop-add-contact *ngIf="action == 'contacts'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-contact>
+    <shop-add-freezer *ngIf="action == 'freezer'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-freezer>
+    <shop-add-pg *ngIf="action == 'pg'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-pg>
+</ion-content>

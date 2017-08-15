@@ -1,0 +1,30 @@
+<div>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <p>ชื่อ</p>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input type="text" placeholder="ชื่อ" class="wrap-input" [(ngModel)]="inputShopAddPGData.name"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <p>เบอร์โทร</p>
+      </ion-col>
+      <ion-col class="wrap-col wrap-length">
+        <ion-item>
+          <ion-input type="tel" placeholder="เบอร์โทร" maxLength="10" pattern="[0-9]*" [(ngModel)]="inputShopAddPGData.tel" (ngModelChange)="changeTelLength($event)" class="wrap-input"></ion-input>
+        </ion-item>
+        <span class="text-length">{{inputShopAddPGData.telLength}} / 10</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button class="button-save" (click)="save()">บันทึก</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

@@ -1,0 +1,158 @@
+page-search-shops {
+    .title {
+        text-align: center;
+        .toolbar-title {
+            font-size: 16px;
+        }
+    }
+    .icon-size {
+        font-size: 20px !important;
+    }
+    .no-scroll {
+        .scroll-content {
+            overflow: initial;
+            .box-detail-shop {
+                padding: 0 16px;
+                display: flex;
+                .wrap-input {
+                    input {
+                        margin: 5px 8px;
+                        line-height: 32px;
+                    }
+                    textarea {
+                        margin: 5px 8px;
+                        overflow: visible;
+                    }
+                }
+                .wrap-select {
+                    max-width: 100%;
+                    width: 100%;
+                    padding-left: 8px;
+                    padding-right: 8px;
+                }
+            }
+            .box-list-search {
+                height: calc(100% - 278px);
+                overflow-y: scroll;
+                .box-customer {
+                    .box-project-type {
+                        min-width: auto;
+                        min-height: auto;
+                        margin: auto 16px auto 0;
+                        .wrap-project-type {
+                            width: 50px;
+                            height: 50px;
+                            display: flex;
+                            border-radius: 5px;
+                            background-color: #F2B32A;
+                            &.bg-color-yellow {
+                                background-color: #F2B32A;
+                            }
+                            &.bg-color-red {
+                                background-color: red;
+                            }
+                            &.bg-color-blue {
+                                background-color: blue;
+                            }
+                            &.bg-color-gray {
+                                background-color: gray;
+                            }
+                            .type-name {
+                                margin: auto;
+                                font-size: 28px;
+                                color: $singha-survey-color-white;
+                            }
+                        }
+                    }
+                    .text-name {
+                        font-size: 16px;
+                        color: $singha-survey-color-gray-text;
+                        white-space: initial;
+                    }
+                    .text-group-name {
+                        font-size: 12px;
+                        color: $singha-survey-color-text;
+                        white-space: initial;
+                    }
+                    .text-address {
+                        font-size: 12px;
+                        color: $singha-survey-color-gray-text-all;
+                        white-space: initial;
+                    }
+                    .wrap-end {
+                        .wrap-end-top {
+                            position: relative;
+                            width: 45px;
+                            .icon-marker {
+                                font-size: 18px;
+                                color: $singha-survey-color-inactive;
+                            }
+                            .text-status {
+                                position: absolute;
+                                bottom: 0;
+                                right: 0;
+                                margin-right: 8px;
+                                font-size: 24px;
+                            }
+                        }
+                        .icon-home {
+                            float: right;
+                            font-size: 28px;
+                            &.color-green {
+                                background-color: #27AE60;
+                            }
+                            &.color-yellow {
+                                background-color: #F2B32A;
+                            }
+                            &.color-red {
+                                background-color: red;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.override-modal-popup-input {
+    ion-backdrop {
+        visibility: visible;
+    }
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: $z-index-overlay;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    contain: strict;
+    .modal-wrapper {
+        &,
+        .ion-page,
+        .ion-page .content,
+        .ion-page .content .scroll-content {
+            contain: content;
+            position: relative;
+            top: auto;
+            left: auto;
+        }
+        z-index: $z-index-overlay-wrapper;
+        display: flex;
+        overflow: hidden;
+        flex-direction: column;
+        opacity: 0;
+        height: auto;
+        max-height: $alert-max-height;
+        width: 90%;
+        min-width: $alert-min-width; // max-width: $alert-md-max-width;
+        max-width: 90%;
+        border-radius: $alert-md-border-radius;
+        background-color: $alert-md-background-color;
+        box-shadow: $alert-md-box-shadow; // .ion-page .content {
+        //     background-color: color($colors, primary);
+        // }
+    }
+}

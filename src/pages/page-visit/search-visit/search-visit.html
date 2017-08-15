@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="backPage()">
+          <ion-icon class="icon-size" name="_icon-back"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title class="title">ค้นหาเข้าเยี่ยมและบันทึกยอดขาย</ion-title>
+    <ion-buttons right>
+      <button icon-only style="background-color:#455A64">
+          <ion-icon class="icon-size"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="wrap-grid">
+    <ion-row>
+      <ion-col col-6 class="line-col">
+        ค้นหาชื่อร้านค้า
+        <ion-input type="text" placeholder="ชื่อร้าน" class="wrap-input"></ion-input>
+      </ion-col>
+      <ion-col col-6>
+        วันเริ่มต้น - วันสิ้นสุด
+        <ion-item class="item-calendar">
+          <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMMM YYYY"></ion-datetime>
+        </ion-item>
+        <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-fab right bottom>
+    <button ion-fab color="accent" (click)="searchVisit()" tappable>
+      <ion-icon name="_icon-search"></ion-icon>
+    </button>
+  </ion-fab>
+</ion-content>

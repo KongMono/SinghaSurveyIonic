@@ -1,0 +1,114 @@
+page-tab-shop {
+    .title {
+        text-align: center;
+        .toolbar-title {
+            font-size: 16px;
+        }
+    }
+    .icon-size {
+        font-size: 20px !important;
+    }
+    .box-customer {
+        .box-project-type {
+            min-width: auto;
+            min-height: auto;
+            margin: auto 16px auto 0;
+            .wrap-project-type {
+                width: 50px;
+                height: 50px;
+                display: flex;
+                border-radius: 5px;
+                background-color: #F2B32A;
+                &.bg-color-yellow {
+                    background-color: #F2B32A;
+                }
+                &.bg-color-red {
+                    background-color: red;
+                }
+                &.bg-color-blue {
+                    background-color: blue;
+                }
+                &.bg-color-gray {
+                    background-color: gray;
+                }
+                .type-name {
+                    margin: auto;
+                    font-size: 28px;
+                    color: $singha-survey-color-white;
+                }
+            }
+        }
+        .text-name {
+            font-size: 16px;
+            color: $singha-survey-color-gray-text;
+            white-space: initial;
+        }
+        .text-group-name {
+            font-size: 12px;
+            color: $singha-survey-color-text;
+            white-space: initial;
+        }
+        .text-address {
+            font-size: 12px;
+            color: $singha-survey-color-gray-text-all;
+            white-space: initial;
+        }
+        .wrap-end {
+            .wrap-end-top {
+                position: relative;
+                width: 45px;
+                .icon-marker {
+                    font-size: 18px;
+                    color: $singha-survey-color-inactive;
+                }
+                .text-status {
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    margin-right: 8px;
+                    font-size: 24px;
+                }
+            }
+            .icon-home {
+                float: right;
+                font-size: 28px;
+                &.color-green {
+                    background-color: #27AE60;
+                }
+                &.color-yellow {
+                    background-color: #F2B32A;
+                }
+                &.color-red {
+                    background-color: red;
+                }
+            }
+        }
+    }
+}
+
+.override-alret-filter {
+    .alert-wrapper {
+        .alert-head {
+            display: none;
+        }
+        .alert-button-group {
+            display: none;
+        }
+    }
+}
+
+.override-modal-add-shop, .override-modal-overview-shop {
+    ion-backdrop {
+        visibility: initial;
+    }
+    .modal-wrapper {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 90%;
+        height: calc(100% - 40px);
+        margin: auto;
+    }
+}

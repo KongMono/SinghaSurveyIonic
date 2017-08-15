@@ -1,0 +1,57 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="overviewVisit()" tappable>
+        <ion-icon class="icon-size" name="_icon-overview"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="title">เข้าเยี่ยมและบันทึกยอดขาย</ion-title>
+    <ion-buttons right>
+      <button ion-button icon-only (click)="searchVisit()" tappable>
+        <ion-icon class="icon-size" name="_icon-search"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="pullRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list no-lines>
+    <button ion-item detail-none class="box-visit-and-record" style="border-bottom: 1px solid #dedede;" *ngFor="let visit of visitListData">
+      <ion-thumbnail item-start class="box-project-type">
+        <div class="wrap-project-type">
+          <div class="type-name">
+            {{visit.project_type_name}}
+          </div>
+        </div>
+      </ion-thumbnail>
+      <p class="text-created-date">{{visit.created_date}}</p>
+      <p class="text-name">{{visit.customer_name}}</p>
+      <p class="text-group-name">{{visit.customer_group_name}}</p>
+      <p class="text-address">{{visit.address}}</p>
+      <div item-end class="wrap-end">
+        <div class="wrap-end-top">
+          <ion-icon name="_icon-sale" [ngClass]="{'icon-sale': (visit.is_sale == '0'), 'icon-sale-active': (visit.is_sale == '1')}"></ion-icon>
+          <ion-icon name="_icon-activity" [ngClass]="{'icon-activity': (visit.is_activity == '0'), 'icon-activity-active': (visit.is_activity == '1')}"></ion-icon>
+        </div>
+        <div class="wrap-end-bottom">
+          <ion-icon name="_icon-premium" [ngClass]="{'icon-premium': (visit.is_premium == '0'), 'icon-premium-active': (visit.is_premium == '1')}"></ion-icon>
+          <ion-icon name="_icon-tracking" [ngClass]="{'icon-tracking': (visit.is_tracking == '0'), 'icon-tracking-active': (visit.is_tracking == '1')}"></ion-icon>
+        </div>
+      </div>
+    </button>
+  </ion-list>
+
+  <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-fab right bottom>
+    <button ion-fab color="accent" (click)="checkNameVisit()" tappable>
+        <ion-icon name="_icon-plus"></ion-icon>
+      </button>
+  </ion-fab>
+</ion-content>

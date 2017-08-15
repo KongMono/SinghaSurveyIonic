@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="backPage()">
+        <ion-icon class="icon-size" name="_icon-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="title">แจ้งเปลี่ยนพื้นที่</ion-title>
+    <ion-buttons right>
+      <button icon-only style="background-color:#455A64">
+        <ion-icon class="icon-size"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="box-edit">
+    <span class="text-title">แก้ไขผู้ใช้งาน</span>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <p>ผู้ใช้งาน</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="tel" placeholder="ผู้ใช้งาน" pattern="[0-9]*" [(ngModel)]="profileData.username" disabled class="wrap-input"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>เบอร์โทร</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="tel" placeholder="เบอร์โทร" maxLength="10" pattern="[0-9]*" [(ngModel)]="profileData.mobile" class="wrap-input"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>วันที่มีผล</p>
+        </ion-col>
+        <ion-col>
+          <ion-item class="item-calendar">
+            <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMMM YYYY"></ion-datetime>
+          </ion-item>
+          <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>Level</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select *ngIf="optionUserData" interface="popover" [(ngModel)]="indexLevel" class="wrap-select">
+              <ion-option *ngFor="let level of optionUserData.level; let i = index" [value]="i">{{level.level_name}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>เลือกพื้นที่</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addArea()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>จังหวัด</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select *ngIf="optionUserData" interface="popover" [(ngModel)]="indexProvince" (ngModelChange)="indexAmpher = 0" class="wrap-select">
+              <ion-option *ngFor="let province of optionUserData.province; let i = index" [value]="i">{{province.province_th}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>อำเภอ</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select *ngIf="optionUserData" interface="popover" [(ngModel)]="indexAmpher" class="wrap-select">
+              <ion-option *ngFor="let ampher of optionUserData.province[indexProvince].ampher; let i = index" [value]="i">{{ampher.ampher_th}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <span style="margin-top: 14px; font-weight: bold;">รายการพื้นที่รับผิดชอบ</span>
+      <div *ngIf="selectArea.length > 0">
+        <div *ngFor="let area of selectArea">
+          <p>{{area.province.province_th}}</p>
+          <p *ngFor="let ampher of area.province.ampher" style="font-size: 12px;">- {{ampher.ampher_th}}</p>
+        </div>
+      </div>
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button class="button-save" (click)="save()">บันทึก</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

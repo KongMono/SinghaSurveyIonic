@@ -1,0 +1,34 @@
+shop-add-pg {
+    .wrap-input {
+        input {
+            margin: 5px 8px;
+            line-height: 32px;
+        }
+    }
+    .wrap-col {
+        max-width: 75%;
+        margin: 0 0 0 auto;
+    }
+    .wrap-length {
+        position: relative;
+        .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+        .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+            border-bottom-color: #dedede;
+            -webkit-box-shadow: inset 0 -1px 0 0 transparent;
+            box-shadow: inset 0 -1px 0 0 transparent;
+        }
+        .text-length {
+            position: absolute;
+            right: 5px;
+            z-index: 1;
+            color: $singha-survey-color-gray-text-all;
+            font-size: 12px;
+        }
+    }
+    .button-save {
+        margin: auto;
+        display: flex;
+        background-color: $singha-survey-color-gray-3;
+        color: $singha-survey-color-primaryDark;
+    }
+}

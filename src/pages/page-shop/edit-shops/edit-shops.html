@@ -1,0 +1,414 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="backPage()">
+        <ion-icon class="icon-size" name="_icon-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="title" *ngIf="customerDetailData">{{customerDetailData.name}}</ion-title>
+    <ion-buttons right>
+      <button icon-only style="background-color:#455A64">
+        <ion-icon class="icon-size"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="customerDetailData">
+  <div class="box-map">
+    <sebm-google-map id="map" [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom">
+      <sebm-google-map-marker [latitude]="map.lat" [longitude]="map.lng">
+        <sebm-google-map-info-window>
+          <strong>My location</strong>
+        </sebm-google-map-info-window>
+      </sebm-google-map-marker>
+    </sebm-google-map>
+  </div>
+  <div class="box-detail-shop">
+    <span class="text-title">ข้อมูลร้านค้า</span>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <p>ตำแหน่ง<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="text" disabled placeholder="ตำแหน่ง" [(ngModel)]="latlong" class="wrap-input"></ion-input>
+          </ion-item>
+          <ion-icon name="_icon-refresh" ion-button class="button-reload-location" (click)="reloadLocation()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>ชื่อร้าน<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="text" placeholder="ชื่อร้าน" class="wrap-input" [(ngModel)]="customerDetailData.name"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>ที่อยู่<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <!-- <ion-input type="text" placeholder="ที่อยู่" class="wrap-input"></ion-input> -->
+            <ion-textarea type="text" placeholder="ที่อยู่" rows="2" class="wrap-input" [(ngModel)]="customerDetailData.address"></ion-textarea>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>จังหวัด<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select *ngIf="optionCustomer.province" interface="popover" [(ngModel)]="indexProvince" (ngModelChange)="indexAmpher = 0; indexTumbol = 0"
+              class="wrap-select">
+              <ion-option *ngFor="let province of optionCustomer.province; let i = index" [value]="i">{{province.province_th}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>อำเภอ<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select *ngIf="optionCustomer.province[indexProvince].ampher" interface="popover" [(ngModel)]="indexAmpher" (ngModelChange)="indexTumbol = 0"
+              class="wrap-select">
+              <ion-option *ngFor="let ampher of optionCustomer.province[indexProvince].ampher; let i = index" [value]="i">{{ampher.ampher_th}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>ตำบล<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select *ngIf="optionCustomer.province[indexProvince].ampher[indexAmpher].tumbol" interface="popover" [(ngModel)]="indexTumbol"
+              class="wrap-select">
+              <ion-option *ngFor="let tumbol of optionCustomer.province[indexProvince].ampher[indexAmpher].tumbol; let i = index" [value]="i">{{tumbol.tumbol_th}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-auto style="padding-right: 0;">
+          <p>รหัสไปรษณีย์<span class="required">*</span></p>
+        </ion-col>
+        <ion-col class="wrap-col wrap-length">
+          <ion-item>
+            <ion-input type="tel" placeholder="รหัสไปรษณีย์" maxLength="5" pattern="[0-9]*" [(ngModel)]="customerDetailData.postcode"
+              class="wrap-input"></ion-input>
+          </ion-item>
+          <span class="text-length">{{customerDetailData.postcode.length}} / 5</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-auto style="padding-right: 0;">
+          <p>เลขผู้เสียภาษี</p>
+        </ion-col>
+        <ion-col class="wrap-col wrap-length">
+          <ion-item>
+            <ion-input type="tel" placeholder="เลขผู้เสียภาษี" maxLength="13" pattern="[0-9]*" [(ngModel)]="customerDetailData.tax_number"
+              class="wrap-input"></ion-input>
+          </ion-item>
+          <span class="text-length">{{customerDetailData.tax_number.length}} / 13</span>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>กลุ่มร้านค้า<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select interface="popover" [(ngModel)]="indexCustomerGroup" (ngModelChange)="indexCustomerType = 0; indexProjectType = 0"
+              class="wrap-select">
+              <ion-option *ngFor="let customerGroup of optionCustomer.customer_group; let i = index" [value]="i">{{customerGroup.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-auto style="padding-right: 0;">
+          <p>ประเภทร้านค้า<span class="required">*</span></p>
+        </ion-col>
+        <ion-col class="wrap-col">
+          <ion-item>
+            <ion-select interface="popover" [(ngModel)]="indexCustomerType" class="wrap-select">
+              <ion-option *ngFor="let customerType of optionCustomer.customer_group[indexCustomerGroup].customer_type; let i = index" [value]="i">{{customerType.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>จำนวนโต๊ะ</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="tel" pattern="[0-9]*" placeholder="จำนวนโต๊ะ" class="wrap-input" [(ngModel)]="customerDetailData.seats"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>โครงการ<span class="required">*</span></p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select interface="popover" [(ngModel)]="indexProjectType" class="wrap-select">
+              <ion-option *ngFor="let projectType of optionCustomer.customer_group[indexCustomerGroup].project_type; let i = index" [value]="i">{{projectType.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>ข้อมูลตู้แช่</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('freezer')"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let freezer of customerDetailData.freezer; let i = index" (click)="actionSheetInList('freezer', i)">
+        <ion-item>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">จำนวนบานเปิด</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">จำนวนตู้</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{freezer.door}}</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{freezer.qty}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>ข้อมูล PG ประจำ</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('pg')"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let pg of customerDetailData.pg; let i = index" (click)="actionSheetInList('pg', i)">
+        <ion-item>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">ชื่อ PG</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">เบอร์โทร</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{pg.name}}</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{pg.tel}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>ข้อมูลผู้ติดต่อ</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('contacts')"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let contacts of customerDetailData.contacts; let i = index" (click)="actionSheetInList('contacts', i)">
+        <ion-item>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">ผู้ติดต่อ</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">เบอร์ผู้ติดต่อ</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{contacts.name}}</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{contacts.tel}}</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">ตำแหน่ง</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">วันเกิด</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{contacts.position}}</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{contacts.birthdate}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>ช่องทางการซื้อสินค้า</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('channels')"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let channels of customerDetail.channels; let i = index" (click)="actionSheetInList('channels', i)">
+        <ion-item>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">ตัวแทน/ค้าส่ง</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">ประเภทสินค้า</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{channels.customer_channel.name}}</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{channels.product_category.name}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>ข้อมูล Call Card</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('callcard')"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let callcard of customerDetailData.callcard; let i = index" (click)="actionSheetInList('callcard', i)">
+        <ion-item>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">สัญญาเริ่ม</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">สัญญาสิ้นสุด</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{callcard.start_date}}</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{callcard.end_date}}</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col col-4 class="col-sub">
+              <span class="text-title-sub">เลข SPST</span>
+            </ion-col>
+            <ion-col col-4 class="col-sub">
+              <span class="text-title-sub">เลข PRQ</span>
+            </ion-col>
+            <ion-col col-4 class="col-sub">
+              <span class="text-title-sub">มูลค่า</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col col-4 class="col-sub">
+              <span class="text-value-sub">{{callcard.spst_no}}</span>
+            </ion-col>
+            <ion-col col-4 class="col-sub">
+              <span class="text-value-sub">{{callcard.prq_no}}</span>
+            </ion-col>
+            <ion-col col-4 class="col-sub">
+              <span class="text-value-sub">{{callcard.value}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <ion-col>
+          <p>รูปร้านค้า</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addImage()"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row class="row-full-size">
+        <ion-col col-4 *ngFor="let images of customerDetailData.images; let i = index" class="col-sub">
+          <img class="image-shop" [src]="'http://128.199.72.29/' + images" (click)="viewImage(i)">
+        </ion-col>
+      </ion-row> -->
+      <ion-row *ngIf="customerDetailData.images" style="height: 80px;">
+        <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
+          <div style="display: flex">
+            <img *ngFor="let images of customerDetailData.images; let i = index" [src]="getImagePath(images)" (click)="viewImage(i)"
+              height="80px" width="auto" style="margin: 0 10px;" />
+          </div>
+        </ion-scroll>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>วันที่ก่อตั้ง</p>
+        </ion-col>
+        <ion-col>
+          <ion-item class="item-calendar">
+            <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMMM YYYY" [(ngModel)]="customerDetailData.founder_date"></ion-datetime>
+          </ion-item>
+          <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>สถานะ</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-select *ngIf="optionCustomer.status" interface="popover" [(ngModel)]="indexStatus" class="wrap-select">
+              <ion-option *ngFor="let status of optionCustomer.status; let i = index" [value]="i">{{status.name}}</ion-option>
+            </ion-select>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>หมายเหตุ</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="text" placeholder="หมายเหตุ" class="wrap-input" [(ngModel)]="customerDetailData.remark"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 style="padding-left: 0;">
+          <button ion-button class="button-edit" (click)="save()">แก้ไข</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button class="button-cancel" (click)="backPage()">ยกเลิก</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

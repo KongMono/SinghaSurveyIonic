@@ -1,0 +1,14 @@
+shop-add-freezer {
+    .wrap-input {
+        input {
+            margin: 5px 8px;
+            line-height: 32px;
+        }
+    }
+    .button-save {
+        margin: auto;
+        display: flex;
+        background-color: $singha-survey-color-gray-3;
+        color: $singha-survey-color-primaryDark;
+    }
+}

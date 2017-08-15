@@ -1,0 +1,11 @@
+{
+  "name": "SinghaSurvey-ionic",
+  "app_id": "",
+  "proxies": [
+    {
+      "path": "/v2",
+      "proxyUrl": "http://128.199.72.29/index.php/v2"
+    }
+  ],
+  "type": "ionic-angular"
+}

@@ -1,0 +1,45 @@
+page-overview-shop {
+    .wrap-overview-shop {
+        border-radius: 5px;
+        .text-overview-shop {
+            text-align: center;
+            color: $singha-survey-color-text;
+            margin: 5% 0;
+            .button-close {
+                position: absolute;
+                right: 15px;
+                font-size: 18px;
+                color: $singha-survey-color-primary;
+            }
+        }
+        .wrap-card {
+            padding: 16px;
+            .wrap-round-progress {
+                float: right;
+            }
+            .box-percent {
+                width: 50px;
+                height: 50px;
+                background-color: $singha-survey-color-primary;
+                border-radius: 50%;
+                align-items: center;
+                display: flex;
+                position: absolute;
+                right: 31px;
+                margin-top: 5px;
+                .text-percent {
+                    color: $singha-survey-color-white;
+                    font-size: 18px;
+                    margin: auto;
+                }
+            }
+            .text-name {
+                color: $singha-survey-color-primaryDark;
+            }
+            .text-total {
+                color: $singha-survey-color-primaryDark;
+                margin-top: 16px;
+            }
+        }
+    }
+}

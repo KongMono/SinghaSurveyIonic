@@ -1,0 +1,58 @@
+page-pin-login {
+    .title {
+        text-align: center;
+        .toolbar-title {
+            font-size: 16px;
+        }
+    }
+    .text-set-pin {
+        text-align: center;
+        color: $singha-survey-color-text;
+        margin: 45px 0;
+    }
+    .input-box {
+        width: 100%;
+        display: inline-block;
+        .wrap-pin {
+            margin: auto;
+            width: 168px;
+            display: flex;
+            .input-pin {
+                position: absolute;
+                width: 169px;
+                right: 0;
+                left: 0;
+                margin: auto;
+                line-height: 26px;
+                color: transparent;
+                transform: scale(0);
+            }
+            .pin {
+                width: 32px;
+                height: 32px;
+                display: flex;
+                vertical-align: middle;
+                border: 2px $singha-survey-color-primary solid;
+                border-radius: 50%;
+                margin: 0 5px;
+                .select-pin {
+                    background-color: $singha-survey-color-primary;
+                    width: 20px;
+                    height: 20px;
+                    border-radius: 50%;
+                    margin: auto;
+                }
+            }
+        }
+    }
+    .text-forget-password {
+        position: absolute;
+        width: 100px;
+        top: 155px;
+        right: 0;
+        left: 0;
+        margin: 20px auto;
+        text-align: center;
+        color: $singha-survey-color-red;
+    }
+}

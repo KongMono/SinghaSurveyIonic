@@ -1,0 +1,52 @@
+page-login {
+    .logo {
+        margin: 30px auto;
+        width: 50%;
+    }
+    .input-box {
+        .username {
+            border: 1px solid $singha-survey-color-inactive;
+            margin: 0 auto 5px auto;
+            width: 90%;
+            height: 45px;
+            .item-inner {
+                border-bottom-color: initial !important;
+                -webkit-box-shadow: initial !important;
+                box-shadow: initial !important;
+                border-bottom: initial;
+            }
+            ion-input {
+                input {
+                    margin: initial;
+                    line-height: 30px;
+                }
+            }
+        }
+        .password {
+            border: 1px solid $singha-survey-color-inactive;
+            margin: 0 auto 5px auto;
+            width: 90%;
+            height: 45px;
+            .item-inner {
+                border-bottom-color: initial !important;
+                -webkit-box-shadow: initial !important;
+                box-shadow: initial !important;
+                border-bottom: initial;
+            }
+            ion-input {
+                input {
+                    margin: initial;
+                    line-height: 30px;
+                }
+            }
+        }
+    }
+    .text-forget-password {
+        text-align: center;
+        color: $singha-survey-color-text; // color: $singha-survey-color-gray-text-all;
+    }
+    .button-box {
+        margin: 30px auto;
+        width: 15%;
+    }
+}

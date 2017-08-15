@@ -1,0 +1,51 @@
+<div>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-3>
+        <p>ผู้ติดต่อ</p>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input type="text" placeholder="ผู้ติดต่อ" class="wrap-input" [(ngModel)]="inputShopAddContactData.name"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <p>เบอร์ติดต่อ</p>
+      </ion-col>
+      <ion-col class="wrap-col wrap-length">
+        <ion-item>
+          <ion-input type="tel" placeholder="เบอร์ติดต่อ" maxLength="10" pattern="[0-9]*" [(ngModel)]="inputShopAddContactData.tel" (ngModelChange)="changeTelLength($event)" class="wrap-input"></ion-input>
+        </ion-item>
+        <span class="text-length">{{inputShopAddContactData.telLength}} / 10</span>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <p>ตำแหน่ง</p>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input type="text" placeholder="ตำแหน่ง" class="wrap-input" [(ngModel)]="inputShopAddContactData.position"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <p>วันเกิด</p>
+      </ion-col>
+      <ion-col>
+        <ion-item class="item-calendar">
+          <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMMM YYYY" [(ngModel)]="inputShopAddContactData.birthdate"></ion-datetime>
+        </ion-item>
+        <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button class="button-save" (click)="save()">บันทึก</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
