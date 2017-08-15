@@ -43,6 +43,14 @@ interface LoginModel {
   'user_id': string;
 }
 
+interface visitCustomersListModel {
+  data: visitList[];
+}
+
+interface visitList {
+  customer_id: string;
+  name: string;
+}
 interface ForgotModel {
   msg: string;
 }

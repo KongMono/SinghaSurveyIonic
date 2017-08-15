@@ -18,7 +18,7 @@ export class TabVisitAndRecord {
   limit: number = 20;
   infiniteScroll: any;
   visitCycleData: VisitCycleModel;
-  customersList = [];
+  customersVisitList = [];
   showCheckNameDialog: boolean = true;
 
   constructor(
@@ -141,15 +141,16 @@ export class TabVisitAndRecord {
     return visitListData;
   }
 
+
   checkNameVisit() {
     this.util.showLoading();
-    this.service.customersCheck()
+    this.service.visitCustomersListCheck()
       .then(
-      (result: customersCheckModel) => {
+      (result: visitCustomersListModel) => {
         this.util.hideLoading();
         this.showCheckNameDialog = false;
-        this.customersList = result.customers;
-        let modal = this.modalCtrl.create('CheckNameVisitPage', { data: this.customersList }, {
+        this.customersVisitList = result.data;
+        let modal = this.modalCtrl.create('CheckNameVisitPage', { data: this.customersVisitList }, {
           cssClass: 'override-modal-check-name-visit',
           enterAnimation: '',
           leaveAnimation: ''

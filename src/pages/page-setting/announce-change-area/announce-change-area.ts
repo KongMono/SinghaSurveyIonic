@@ -16,6 +16,7 @@ import { ConfigApp, IAppConfig } from "../../../app/app.config";
 })
 
 export class AnnounceChangeAreaPage {
+
   optionUserData: OptionUserModel;
   indexProvince = 0;
   indexAmpher = 0;
@@ -112,4 +113,18 @@ export class AnnounceChangeAreaPage {
   save() {
 
   }
+
+  updateUser() {
+    this.util.showLoading();
+    this.service.updateUser("", "", "", "")
+      .then(
+      (result: OptionUserModel) => {
+        this.util.hideLoading(); 
+        this.backPage();
+      }, error => {
+        this.util.hideLoading();
+        console.log(error);
+      });
+  }
+
 }

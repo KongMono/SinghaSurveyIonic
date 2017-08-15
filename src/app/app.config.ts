@@ -174,6 +174,21 @@ export const AppConfig: IAppConfig = {
         date: "",
         area: ""
       }
+    },
+    visitCustomersListCheck: {
+      url: "/v2/visit/customers/format/json",
+      method: "GET",
+      param: {
+        user_id: ""
+      }
+    },
+    visitCustomersChecked: {
+      url: "/v2/visit/selected/format/json",
+      method: "POST",
+      param: {
+        user_id: "",
+        customer_id: ""
+      }
     }
   }
 }

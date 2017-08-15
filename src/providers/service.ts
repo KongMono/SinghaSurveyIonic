@@ -206,7 +206,15 @@ export class SinghaSurveyService {
         return this.Api.call(service.url, service.method, service.param);
     }
 
+    visitCustomersListCheck() {
+        let service = this.config.service.visitCustomersListCheck;
 
+        service.param = {
+            user_id: this.config.userInfo.username
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
 
     uploadImageCustomer(imageBase64) {
         let service = this.config.service.uploadImageCustomer;
