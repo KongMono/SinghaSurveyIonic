@@ -7,6 +7,7 @@ import { ConfigApp, IAppConfig } from "../../../app/app.config";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import * as moment from 'moment';
 
 @IonicPage()
 @Component({

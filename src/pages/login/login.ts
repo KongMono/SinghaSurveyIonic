@@ -9,7 +9,8 @@ import { AppUtilService } from "../../app/app.util";
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',
-  providers: [CallApi,
+  providers: [
+    CallApi,
     SinghaSurveyService,
     AppUtilService]
 })

@@ -11,8 +11,6 @@ import { GoogleMapsAPIWrapper } from 'angular2-google-maps/core/services/google-
 
 import { MyApp } from './app.component';
 import { ConfigApp, AppConfig, IAppConfig } from './app.config';
-
-
 @NgModule({
   declarations: [
     MyApp

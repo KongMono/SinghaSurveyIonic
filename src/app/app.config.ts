@@ -20,7 +20,7 @@ export const AppConfig: IAppConfig = {
   isLogged: null,
   pin_logged: null,
   userInfo: null,
-  isBuildDevice: false,
+  isBuildDevice: true,
   isProduction: false,
 
   endpoint: 'http://128.199.72.29/index.php',
@@ -189,6 +189,66 @@ export const AppConfig: IAppConfig = {
         user_id: "",
         customer_id: ""
       }
+    },
+    createCustomer: {
+      url: "/v2/customers/created/format/json",
+      method: "POST",
+      param: {
+        user_id: "",
+        name: "",
+        latitude: "",
+        longitude: "",
+        address: "",
+        province_id: "",
+        ampher_id: "",
+        tumbol_id: "",
+        postcode: "",
+        tax_number: "",
+        customer_group_id: "",
+        customer_type_id: "",
+        seats: "",
+        project_type_id: "",
+        founder_date: "",
+        status: "",
+        remark: "",
+        contacts: "",
+        channels: "",
+        freezer: "",
+        pg: "",
+        images: "",
+        callcard: ""
+      }
+    },
+    updateCustomer: {
+      url: "/v2/customers/created/format/json",
+      method: "POST",
+      param: {
+        customer_id: "",
+        user_id: "",
+        name: "",
+        latitude: "",
+        longitude: "",
+        address: "",
+        province_id: "",
+        ampher_id: "",
+        tumbol_id: "",
+        postcode: "",
+        tax_number: "",
+        customer_group_id: "",
+        customer_type_id: "",
+        seats: "",
+        project_type_id: "",
+        founder_date: "",
+        status: "",
+        remark: "",
+        contacts: "",
+        channels: "",
+        freezer: "",
+        pg: "",
+        images: "",
+        callcard: ""
+      }
     }
+
   }
 }

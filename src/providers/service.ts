@@ -236,4 +236,118 @@ export class SinghaSurveyService {
 
         return this.Api.call(service.url, service.method, service.param);
     }
+
+    createCustomer(
+        user_id,
+        name,
+        latitude,
+        longitude,
+        address,
+        province_id,
+        ampher_id,
+        tumbol_id,
+        postcode,
+        tax_number,
+        customer_group_id,
+        customer_type_id,
+        seats,
+        project_type_id,
+        founder_date,
+        status,
+        remark,
+        contacts,
+        channels,
+        freezer,
+        pg,
+        images,
+        callcard) {
+
+        let service = this.config.service.updateCustomer;
+
+        service.param = {
+            user_id: user_id,
+            name: name,
+            latitude: latitude,
+            longitude: longitude,
+            address: address,
+            province_id: province_id,
+            ampher_id: ampher_id,
+            tumbol_id: tumbol_id,
+            postcode: postcode,
+            tax_number: tax_number,
+            customer_group_id: customer_group_id,
+            customer_type_id: customer_type_id,
+            seats: seats,
+            project_type_id: project_type_id,
+            founder_date: founder_date,
+            status: status,
+            remark: remark,
+            contacts: contacts,
+            channels: channels,
+            freezer: freezer,
+            pg: pg,
+            images: images,
+            callcard: callcard
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+    updateCustomer(
+        customer_id,
+        user_id,
+        name,
+        latitude,
+        longitude,
+        address,
+        province_id,
+        ampher_id,
+        tumbol_id,
+        postcode,
+        tax_number,
+        customer_group_id,
+        customer_type_id,
+        seats,
+        project_type_id,
+        founder_date,
+        status,
+        remark,
+        contacts,
+        channels,
+        freezer,
+        pg,
+        images,
+        callcard) {
+
+        let service = this.config.service.updateCustomer;
+
+        service.param = {
+            customer_id: customer_id,
+            user_id: user_id,
+            name: name,
+            latitude: latitude,
+            longitude: longitude,
+            address: address,
+            province_id: province_id,
+            ampher_id: ampher_id,
+            tumbol_id: tumbol_id,
+            postcode: postcode,
+            tax_number: tax_number,
+            customer_group_id: customer_group_id,
+            customer_type_id: customer_type_id,
+            seats: seats,
+            project_type_id: project_type_id,
+            founder_date: founder_date,
+            status: status,
+            remark: remark,
+            contacts: contacts,
+            channels: channels,
+            freezer: freezer,
+            pg: pg,
+            images: images,
+            callcard: callcard
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
 }

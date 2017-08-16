@@ -12,14 +12,15 @@ export class CallApi {
     }
 
     private call(url: string, method: string, param: any) {
-        console.log("url", url);
-        console.log("params", param);
-
+       
         if (this.config.isBuildDevice && this.config.isProduction) {
             url = this.config.endpoint_production + url;
         } else if (this.config.isBuildDevice && !this.config.isProduction) {
             url = this.config.endpoint + url;
         }
+
+        console.log("url", url);
+        console.log("params", param);
 
         if (method == "GET") {
             return this._get(url, param);
@@ -50,10 +51,6 @@ export class CallApi {
 
     private _post(url: string, param: any) {
 
-        // if(url == "/v2/customers/image64/format/json"){
-        //     url = "https://ssv.boonrawd.co.th/v2/customers/image64/format/json";
-        // }
-
         return new Promise((resolve, reject) => {
 
             let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -68,7 +65,6 @@ export class CallApi {
                     reject(error);
                 });
         });
-
     }
 
     private extractData(res: Response) {
