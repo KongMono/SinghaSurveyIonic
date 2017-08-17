@@ -12,7 +12,7 @@ export class CallApi {
     }
 
     private call(url: string, method: string, param: any) {
-       
+
         if (this.config.isBuildDevice && this.config.isProduction) {
             url = this.config.endpoint_production + url;
         } else if (this.config.isBuildDevice && !this.config.isProduction) {
@@ -29,10 +29,24 @@ export class CallApi {
         }
     }
 
+    private callform(url: string, method: string, param: any) {
+
+        if (this.config.isBuildDevice && this.config.isProduction) {
+            url = this.config.endpoint_production + url;
+        } else if (this.config.isBuildDevice && !this.config.isProduction) {
+            url = this.config.endpoint + url;
+        }
+
+        console.log("url", url);
+        console.log("params", param);
+
+        return this._post_form(url, param);
+
+    }
+
     private _get(url: string, param: any) {
 
         return new Promise((resolve, reject) => {
-
             let headers = new Headers({ 'Content-Type': 'application/json' });
             let options = new RequestOptions({
                 headers: headers,
@@ -49,12 +63,14 @@ export class CallApi {
         });
     }
 
+
     private _post(url: string, param: any) {
 
         return new Promise((resolve, reject) => {
 
             let headers = new Headers({ 'Content-Type': 'application/json' });
             let options = new RequestOptions({ headers: headers });
+
             let body = JSON.stringify(param);
 
             this.http.post(url, body, options)
@@ -64,6 +80,27 @@ export class CallApi {
                 }, error => {
                     reject(error);
                 });
+        });
+    }
+
+    private _post_form(url: string, param: any) {
+
+        return new Promise((resolve, reject) => {
+
+            let formData = new FormData();
+
+            for (let dataKey in param) {
+                formData.append(dataKey, param[dataKey]);
+            }
+
+            this.http.post(url, formData)
+                .map(res => res.json())
+                .subscribe(data => {
+                    resolve(data);
+                }, error => {
+                    reject(error);
+                });
+
         });
     }
 }

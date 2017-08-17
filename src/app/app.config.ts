@@ -220,7 +220,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     updateCustomer: {
-      url: "/v2/customers/created/format/json",
+      url: "/v2/customers/updated/format/json",
       method: "POST",
       param: {
         customer_id: "",
