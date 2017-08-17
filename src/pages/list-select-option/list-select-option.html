@@ -17,7 +17,7 @@
 <ion-content>
   <ion-list inset>
     <button ion-item detail-none *ngFor="let op of option; let i = index" (click)="itemSelected(i)">
-      <span [ngClass]="{'hightlight-selected': (i == indexSelect)}">{{ op.name }}</span>
+      <span [ngClass]="{'hightlight-selected': (i == indexSelect)}">{{ op[key] }}</span>
     </button>
   </ion-list>
 </ion-content>

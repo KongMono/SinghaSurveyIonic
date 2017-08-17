@@ -141,6 +141,48 @@ export class EditShopsPage {
     }
   }
 
+  selectOption(action) {
+    let listSelectOption, keyOption, indexSelect;
+    if (action == 'province') {
+      listSelectOption = this.optionCustomer.province;
+      keyOption = 'province_th';
+      indexSelect = this.indexProvince;
+    } else if (action == 'ampher') {
+      listSelectOption = this.optionCustomer.province[this.indexProvince].ampher;
+      keyOption = 'ampher_th';
+      indexSelect = this.indexAmpher;
+    } else if (action == 'tumbol') {
+      listSelectOption = this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].tumbol;
+      keyOption = 'tumbol_th';
+      indexSelect = this.indexTumbol;
+    }
+    this.navCtrl.push('ListSelectOptionPage', { action: action, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
+  }
+
+  selectOptionCallback = (_params) => {
+    return new Promise(resolve => {
+      if (_params.action == 'province') {
+        if (this.indexProvince != _params.indexSelect) {
+          this.indexAmpher = 0;
+          this.indexTumbol = 0;
+        }
+        this.indexProvince = _params.indexSelect;
+        resolve();
+      } else if (_params.action == 'ampher') {
+        if (this.indexAmpher != _params.indexSelect) {
+          this.indexTumbol = 0;
+        }
+        this.indexAmpher = _params.indexSelect;
+        resolve();
+      } else if (_params.action == 'tumbol') {
+        this.indexTumbol = _params.indexSelect;
+        resolve();
+      } else {
+        resolve();
+      }
+    });
+  }
+
   popupInput(action, index) {
     this.navCtrl.push('PopupInput', { action: action, data: this.customerDetailData, option: this.optionChannelCustomer, index: index, callback: this.popupInputCallback }, { animate: true, animation: 'transition', direction: 'forward' });
 

@@ -18,6 +18,7 @@ import { AppUtilService } from "../../app/app.util";
 export class ListSelectOptionPage {
     action: any;
     option: any;
+    key: any;
     indexSelect: any;
     callback: any;
 
@@ -28,6 +29,7 @@ export class ListSelectOptionPage {
         public util: AppUtilService) {
         this.action = navParams.get('action');
         this.option = navParams.get('option');
+        this.key = navParams.get('key');
         this.indexSelect = navParams.get('indexSelect');
         this.callback = this.navParams.get("callback")
     }

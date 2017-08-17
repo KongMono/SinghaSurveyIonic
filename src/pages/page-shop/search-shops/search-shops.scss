@@ -30,6 +30,19 @@ page-search-shops {
                     padding-left: 8px;
                     padding-right: 8px;
                 }
+                .wrap-list {
+                    margin: 0;
+                    .item {
+                        .item-inner {
+                            border-bottom: 1px solid #dedede !important;
+                            .input-wrapper {
+                                .label {
+                                    margin: 13px 8px;
+                                }
+                            }
+                        }
+                    }
+                }
             }
             .box-list-search {
                 height: calc(100% - 278px);
