@@ -24,8 +24,7 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public service: SinghaSurveyService,
-    public util: AppUtilService,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    public util: AppUtilService) {
   }
 
   callLogin() {

@@ -37,11 +37,8 @@ export class PinLoginPage {
   }
 
   ionViewDidLoad() {
-    console.log('#');
-    // this.keyboard.show();
-    // this.keyboard.onKeyboardShow();
+    this.keyboard.show();
     this.focusInputPasscode((<HTMLInputElement>window.document.getElementById('inputPasscode')));
-    console.log('##');
   }
 
   focusInputPasscode(inputPasscode: HTMLInputElement) {

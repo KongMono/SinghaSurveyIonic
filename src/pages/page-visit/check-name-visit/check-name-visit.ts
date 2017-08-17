@@ -29,8 +29,7 @@ export class CheckNameVisitPage {
     public navParams: NavParams,
     public service: SinghaSurveyService,
     public util: AppUtilService,
-    public viewCtrl: ViewController,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    public viewCtrl: ViewController) {
     this.searchControl = new FormControl();
   }
 

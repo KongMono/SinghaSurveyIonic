@@ -1,6 +1,5 @@
-import { Component, Inject, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, IonicPage, NavParams, App } from 'ionic-angular';
-import { ConfigApp, IAppConfig } from "../../app/app.config";
 import { CallApi } from "../../providers/call-api";
 import { SinghaSurveyService } from "../../providers/service";
 import { AppUtilService } from './../../app/app.util';
@@ -9,10 +8,7 @@ import {
   GoogleMaps,
   GoogleMap,
   GoogleMapsEvent,
-  LatLng,
-  CameraPosition,
-  MarkerOptions,
-  Marker
+  CameraPosition
 } from '@ionic-native/google-maps';
 
 @IonicPage()
@@ -38,8 +34,7 @@ export class ViewMapPage {
     public service: SinghaSurveyService,
     public util: AppUtilService,
     private googleMaps: GoogleMaps,
-    public geolocation: Geolocation,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    public geolocation: Geolocation) {
   }
 
   // Load map only after view is initialized

@@ -3,7 +3,6 @@ import { NavController, IonicPage, NavParams } from 'ionic-angular';
 import { CallApi } from "../../providers/call-api";
 import { SinghaSurveyService } from "../../providers/service";
 import { AppUtilService } from "../../app/app.util";
-import { ConfigApp, IAppConfig } from "../../app/app.config";
 
 
 @IonicPage()
@@ -26,8 +25,7 @@ export class ListSelectOptionPage {
         public navCtrl: NavController,
         public navParams: NavParams,
         public service: SinghaSurveyService,
-        public util: AppUtilService,
-        @Inject(ConfigApp) private config: IAppConfig) {
+        public util: AppUtilService) {
         this.action = navParams.get('action');
         this.option = navParams.get('option');
         this.indexSelect = navParams.get('indexSelect');

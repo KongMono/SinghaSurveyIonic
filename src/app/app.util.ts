@@ -1,12 +1,13 @@
-import { Injectable, Inject, Component } from '@angular/core';
-import { AlertController, ModalController, Modal, ModalOptions, LoadingController } from "ionic-angular";
+import { Injectable, Inject } from '@angular/core';
+import { LoadingController } from "ionic-angular";
 import { ConfigApp, IAppConfig } from "./app.config";
 import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
+import { Dialogs } from '@ionic-native/dialogs';
 
 @Injectable()
 export class AppUtilService {
-
+    private dialogs: Dialogs;
     loading: any;
     constructor(
         private loadingCtrl: LoadingController,
@@ -70,4 +71,12 @@ export class AppUtilService {
         let valueBE = moment(date, 'YYYY-MM-DD').year(yearBE).format(formatDate);
         return valueBE;
     }
+
+    public showAlertDialog(text) {
+        this.dialogs.alert(text)
+            .then(() => console.log('Dialog dismissed'))
+            .catch(e => console.log('Error displaying dialog', e));
+    }
+
+
 }

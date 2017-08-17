@@ -3,14 +3,14 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
-import { HttpModule, BaseRequestOptions, Http } from '@angular/http';
+import { HttpModule } from '@angular/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { GoogleMapsAPIWrapper } from 'angular2-google-maps/core/services/google-maps-api-wrapper';
 
 import { MyApp } from './app.component';
-import { ConfigApp, AppConfig, IAppConfig } from './app.config';
+import { ConfigApp, AppConfig } from './app.config';
 @NgModule({
   declarations: [
     MyApp

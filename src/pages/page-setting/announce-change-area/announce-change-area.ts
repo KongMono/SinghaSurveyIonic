@@ -29,8 +29,7 @@ export class AnnounceChangeAreaPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public service: SinghaSurveyService,
-    public util: AppUtilService,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    public util: AppUtilService) {
     this.profileData = navParams.get('data');
     console.log(this.profileData);
   }

@@ -3,7 +3,6 @@ import { NavController, IonicPage, NavParams, App, ActionSheetController } from 
 import { CallApi } from "../../../providers/call-api";
 import { SinghaSurveyService } from "../../../providers/service";
 import { AppUtilService } from "../../../app/app.util";
-import { ConfigApp, IAppConfig } from "../../../app/app.config";
 
 
 @IonicPage()
@@ -31,8 +30,7 @@ export class SearchShopsPage {
         public navParams: NavParams,
         public actionSheetCtrl: ActionSheetController,
         public service: SinghaSurveyService,
-        public util: AppUtilService,
-        @Inject(ConfigApp) private config: IAppConfig) {
+        public util: AppUtilService) {
     }
 
     backPage() {

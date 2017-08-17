@@ -3,7 +3,6 @@ import { NavController, IonicPage, NavParams, App, ViewController } from 'ionic-
 import { CallApi } from "../../../providers/call-api";
 import { SinghaSurveyService } from "../../../providers/service";
 import { AppUtilService } from "../../../app/app.util";
-import { ConfigApp, IAppConfig } from "../../../app/app.config";
 
 @IonicPage()
 @Component({
@@ -24,8 +23,7 @@ export class OverviewVisitPage {
     public navParams: NavParams,
     public service: SinghaSurveyService,
     public util: AppUtilService,
-    public viewCtrl: ViewController,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    public viewCtrl: ViewController) {
   }
 
   ionViewDidLoad() {

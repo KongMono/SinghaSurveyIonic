@@ -81,4 +81,40 @@ export class AddShopsPage {
   backPage() {
     this.app.getRootNav().pop();
   }
+
+  callServiceCreateCustomer() {
+    this.util.showLoading();
+    this.service.createCustomer(
+      this.config.userInfo.username,
+      this.customerDetailData.name,
+      this.customerDetailData.latitude,
+      this.customerDetailData.longitude,
+      this.customerDetailData.address,
+      this.customerDetailData.province_id,
+      this.customerDetailData.ampher_id,
+      this.customerDetailData.tumbol_id,
+      this.customerDetailData.postcode,
+      this.customerDetailData.tax_number,
+      this.customerDetailData.customer_group_id,
+      this.customerDetailData.customer_type_id,
+      this.customerDetailData.seats,
+      this.customerDetailData.project_type_id,
+      this.customerDetailData.founder_date,
+      this.customerDetailData.status,
+      this.customerDetailData.remark,
+      JSON.stringify(this.customerDetailData.contacts),
+      JSON.stringify(this.customerDetailData.channels),
+      JSON.stringify(this.customerDetailData.freezer),
+      JSON.stringify(this.customerDetailData.pg),
+      JSON.stringify(this.customerDetailData.images),
+      JSON.stringify(this.customerDetailData.callcard)
+    )
+      .then(result => {
+        this.util.hideLoading();
+        this.backPage();
+      }, error => {
+        this.util.hideLoading();
+        console.log(error);
+      });
+  }
 }

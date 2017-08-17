@@ -262,7 +262,7 @@ export class SinghaSurveyService {
         images,
         callcard) {
 
-        let service = this.config.service.updateCustomer;
+        let service = this.config.service.createCustomer;
 
         service.param = {
             user_id: user_id,
