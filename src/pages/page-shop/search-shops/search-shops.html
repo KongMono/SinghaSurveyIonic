@@ -22,12 +22,17 @@
           <p>จังหวัด<span></span></p>
         </ion-col>
         <ion-col>
-          <ion-item>
+          <ion-list class="wrap-list">
+            <button ion-item (click)="selectOption('province')">
+              {{ optionCustomer.province[indexProvince].province_th }}
+            </button>
+          </ion-list>
+          <!-- <ion-item>
             <ion-select *ngIf="optionCustomer" interface="popover" [(ngModel)]="indexProvince" (ngModelChange)="indexAmpher = 0; indexTumbol = 0"
               class="wrap-select">
               <ion-option *ngFor="let province of optionCustomer.province; let i = index" [value]="i" tappable>{{province.province_th}}</ion-option>
             </ion-select>
-          </ion-item>
+          </ion-item> -->
         </ion-col>
       </ion-row>
       <ion-row>
@@ -35,12 +40,17 @@
           <p>อำเภอ<span></span></p>
         </ion-col>
         <ion-col>
-          <ion-item>
+          <ion-list class="wrap-list">
+            <button ion-item (click)="selectOption('ampher')">
+              {{ optionCustomer.province[indexProvince].ampher[indexAmpher].ampher_th }}
+            </button>
+          </ion-list>
+          <!-- <ion-item>
             <ion-select *ngIf="optionCustomer" interface="popover" [(ngModel)]="indexAmpher" (ngModelChange)="indexTumbol = 0" class="wrap-select"
               tappable>
               <ion-option *ngFor="let ampher of optionCustomer.province[indexProvince].ampher; let i = index" [value]="i" tappable>{{ampher.ampher_th}}</ion-option>
             </ion-select>
-          </ion-item>
+          </ion-item> -->
         </ion-col>
       </ion-row>
       <ion-row>
@@ -48,12 +58,17 @@
           <p>ตำบล<span></span></p>
         </ion-col>
         <ion-col>
-          <ion-item>
+          <ion-list class="wrap-list">
+            <button ion-item (click)="selectOption('tumbol')">
+              {{ optionCustomer.province[indexProvince].ampher[indexAmpher].tumbol[indexTumbol].tumbol_th }}
+            </button>
+          </ion-list>
+          <!-- <ion-item>
             <ion-select *ngIf="optionCustomer" interface="popover" [(ngModel)]="indexTumbol" class="wrap-select" tappable>
               <ion-option *ngFor="let tumbol of optionCustomer.province[indexProvince].ampher[indexAmpher].tumbol; let i = index" [value]="i"
                 tappable>{{tumbol.tumbol_th}}</ion-option>
             </ion-select>
-          </ion-item>
+          </ion-item> -->
         </ion-col>
       </ion-row>
       <ion-row>

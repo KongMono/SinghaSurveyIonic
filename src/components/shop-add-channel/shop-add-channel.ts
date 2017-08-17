@@ -48,18 +48,21 @@ export class ShopAddChannel {
   }
 
   selectOption(action) {
-    let listSelectOption, indexSelect;
+    let listSelectOption, keyOption, indexSelect;
     if (action == 'customer_group') {
       listSelectOption = this.optionChannelCustomer.customer_group;
+      keyOption = 'name';
       indexSelect = this.indexCustomerGroup;
     } else if (action == 'customer_channel') {
       listSelectOption = this.optionChannelCustomer.customer_group[this.indexCustomerGroup].customer_channel;
+      keyOption = 'name';
       indexSelect = this.indexCustomerChannel;
     } else if (action == 'product_category') {
       listSelectOption = this.optionChannelCustomer.product_category;
+      keyOption = 'name';
       indexSelect = this.indexProductCategory;
     }
-    this.navCtrl.push('ListSelectOptionPage', { action: action, option: listSelectOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
+    this.navCtrl.push('ListSelectOptionPage', { action: action, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
   }
 
   selectOptionCallback = (_params) => {

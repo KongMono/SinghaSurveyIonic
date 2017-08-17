@@ -64,12 +64,11 @@
           <p>จังหวัด<span class="required">*</span></p>
         </ion-col>
         <ion-col>
-          <ion-item>
-            <ion-select *ngIf="optionCustomer.province" interface="popover" [(ngModel)]="indexProvince" (ngModelChange)="indexAmpher = 0; indexTumbol = 0"
-              class="wrap-select">
-              <ion-option *ngFor="let province of optionCustomer.province; let i = index" [value]="i">{{province.province_th}}</ion-option>
-            </ion-select>
-          </ion-item>
+          <ion-list class="wrap-list">
+            <button ion-item (click)="selectOption('province')">
+              {{ optionCustomer.province[indexProvince].province_th }}
+            </button>
+          </ion-list>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -77,12 +76,11 @@
           <p>อำเภอ<span class="required">*</span></p>
         </ion-col>
         <ion-col>
-          <ion-item>
-            <ion-select *ngIf="optionCustomer.province[indexProvince].ampher" interface="popover" [(ngModel)]="indexAmpher" (ngModelChange)="indexTumbol = 0"
-              class="wrap-select">
-              <ion-option *ngFor="let ampher of optionCustomer.province[indexProvince].ampher; let i = index" [value]="i">{{ampher.ampher_th}}</ion-option>
-            </ion-select>
-          </ion-item>
+          <ion-list class="wrap-list">
+            <button ion-item (click)="selectOption('ampher')">
+              {{ optionCustomer.province[indexProvince].ampher[indexAmpher].ampher_th }}
+            </button>
+          </ion-list>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -90,12 +88,11 @@
           <p>ตำบล<span class="required">*</span></p>
         </ion-col>
         <ion-col>
-          <ion-item>
-            <ion-select *ngIf="optionCustomer.province[indexProvince].ampher[indexAmpher].tumbol" interface="popover" [(ngModel)]="indexTumbol"
-              class="wrap-select">
-              <ion-option *ngFor="let tumbol of optionCustomer.province[indexProvince].ampher[indexAmpher].tumbol; let i = index" [value]="i">{{tumbol.tumbol_th}}</ion-option>
-            </ion-select>
-          </ion-item>
+          <ion-list class="wrap-list">
+            <button ion-item (click)="selectOption('tumbol')">
+              {{ optionCustomer.province[indexProvince].ampher[indexAmpher].tumbol[indexTumbol].tumbol_th }}
+            </button>
+          </ion-list>
         </ion-col>
       </ion-row>
       <ion-row>
