@@ -22,7 +22,7 @@
           <p>จังหวัด<span></span></p>
         </ion-col>
         <ion-col>
-          <ion-list class="wrap-list">
+          <ion-list class="wrap-list" *ngIf="optionCustomer">
             <button ion-item (click)="selectOption('province')" tappable>
               {{ optionCustomer.province[indexProvince].province_th }}
             </button>
@@ -40,7 +40,7 @@
           <p>อำเภอ<span></span></p>
         </ion-col>
         <ion-col>
-          <ion-list class="wrap-list">
+          <ion-list class="wrap-list" *ngIf="optionCustomer">
             <button ion-item (click)="selectOption('ampher')" tappable>
               {{ optionCustomer.province[indexProvince].ampher[indexAmpher].ampher_th }}
             </button>
@@ -58,7 +58,7 @@
           <p>ตำบล<span></span></p>
         </ion-col>
         <ion-col>
-          <ion-list class="wrap-list">
+          <ion-list class="wrap-list" *ngIf="optionCustomer">
             <button ion-item (click)="selectOption('tumbol')" tappable>
               {{ optionCustomer.province[indexProvince].ampher[indexAmpher].tumbol[indexTumbol].tumbol_th }}
             </button>
