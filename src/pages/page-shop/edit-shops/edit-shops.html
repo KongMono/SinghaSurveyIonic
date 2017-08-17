@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons left>
-      <button ion-button icon-only (click)="backPage()">
+      <button ion-button icon-only (click)="backPage()" tappable>
         <ion-icon class="icon-size" name="_icon-back"></ion-icon>
       </button>
     </ion-buttons>
@@ -35,7 +35,7 @@
           <ion-item>
             <ion-input type="text" disabled placeholder="ตำแหน่ง" [(ngModel)]="latlong" class="wrap-input"></ion-input>
           </ion-item>
-          <ion-icon name="_icon-refresh" ion-button class="button-reload-location" (click)="reloadLocation()"></ion-icon>
+          <ion-icon name="_icon-refresh" ion-button class="button-reload-location" (click)="reloadLocation()" tappable></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -65,7 +65,7 @@
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list">
-            <button ion-item (click)="selectOption('province')">
+            <button ion-item (click)="selectOption('province')" tappable>
               {{ optionCustomer.province[indexProvince].province_th }}
             </button>
           </ion-list>
@@ -89,7 +89,7 @@
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list">
-            <button ion-item (click)="selectOption('tumbol')">
+            <button ion-item (click)="selectOption('tumbol')" tappable>
               {{ optionCustomer.province[indexProvince].ampher[indexAmpher].tumbol[indexTumbol].tumbol_th }}
             </button>
           </ion-list>
@@ -171,10 +171,10 @@
           <p>ข้อมูลตู้แช่</p>
         </ion-col>
         <ion-col>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('freezer')"></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('freezer')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let freezer of customerDetailData.freezer; let i = index" (click)="actionSheetInList('freezer', i)">
+      <ion-row *ngFor="let freezer of customerDetailData.freezer; let i = index" (click)="actionSheetInList('freezer', i)" tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -199,10 +199,10 @@
           <p>ข้อมูล PG ประจำ</p>
         </ion-col>
         <ion-col>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('pg')"></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('pg')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let pg of customerDetailData.pg; let i = index" (click)="actionSheetInList('pg', i)">
+      <ion-row *ngFor="let pg of customerDetailData.pg; let i = index" (click)="actionSheetInList('pg', i)" tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -227,10 +227,10 @@
           <p>ข้อมูลผู้ติดต่อ</p>
         </ion-col>
         <ion-col>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('contacts')"></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('contacts')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let contacts of customerDetailData.contacts; let i = index" (click)="actionSheetInList('contacts', i)">
+      <ion-row *ngFor="let contacts of customerDetailData.contacts; let i = index" (click)="actionSheetInList('contacts', i)" tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -271,10 +271,10 @@
           <p>ช่องทางการซื้อสินค้า</p>
         </ion-col>
         <ion-col>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('channels')"></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('channels')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let channels of customerDetail.channels; let i = index" (click)="actionSheetInList('channels', i)">
+      <ion-row *ngFor="let channels of customerDetail.channels; let i = index" (click)="actionSheetInList('channels', i)" tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -299,10 +299,10 @@
           <p>ข้อมูล Call Card</p>
         </ion-col>
         <ion-col>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('callcard')"></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('callcard')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let callcard of customerDetailData.callcard; let i = index" (click)="actionSheetInList('callcard', i)">
+      <ion-row *ngFor="let callcard of customerDetailData.callcard; let i = index" (click)="actionSheetInList('callcard', i)" tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -349,7 +349,7 @@
           <p>รูปร้านค้า</p>
         </ion-col>
         <ion-col>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addImage()"></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addImage()" tappable></ion-icon>
         </ion-col>
       </ion-row>
       <!-- <ion-row class="row-full-size">
@@ -361,7 +361,7 @@
         <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
           <div style="display: flex">
             <img *ngFor="let images of customerDetailData.images; let i = index" [src]="getImagePath(images)" (click)="viewImage(i)"
-              height="80px" width="auto" style="margin: 0 10px;" />
+              height="80px" width="auto" style="margin: 0 10px;" tappable/>
           </div>
         </ion-scroll>
       </ion-row>
@@ -400,10 +400,10 @@
       </ion-row>
       <ion-row>
         <ion-col col-6 style="padding-left: 0;">
-          <button ion-button class="button-edit" (click)="save()">แก้ไข</button>
+          <button ion-button class="button-edit" (click)="save()" tappable>แก้ไข</button>
         </ion-col>
         <ion-col col-6>
-          <button ion-button class="button-cancel" (click)="backPage()">ยกเลิก</button>
+          <button ion-button class="button-cancel" (click)="backPage()" tappable>ยกเลิก</button>
         </ion-col>
       </ion-row>
     </ion-grid>
