@@ -348,6 +348,6 @@ export class SinghaSurveyService {
             callcard: callcard
         }
 
-        return this.Api.call(service.url, service.method, service.param);
+        return this.Api.callform(service.url, service.method, service.param);
     }
 }

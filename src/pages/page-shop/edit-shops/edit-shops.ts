@@ -7,6 +7,7 @@ import { ConfigApp, IAppConfig } from "../../../app/app.config";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
 
 @IonicPage()
 @Component({
@@ -39,6 +40,7 @@ export class EditShopsPage {
   indexStatus = 0;
   constructor(
     public app: App,
+    private http: Http,
     public navCtrl: NavController,
     private geolocation: Geolocation,
     public navParams: NavParams,
@@ -454,6 +456,10 @@ export class EditShopsPage {
       return;
     }
 
+    if (!this.customerDetailData.images) {
+      this.customerDetailData.images = [];
+    }
+
     this.callServiceUpdateCustomer();
   }
 
@@ -588,6 +594,7 @@ export class EditShopsPage {
 
     console.log("callServiceUpdateCustomer", this.customerDetailData);
     this.util.showLoading();
+
     this.service.updateCustomer(
       this.customerDetailData.customer_id,
       this.config.userInfo.username,
@@ -595,17 +602,17 @@ export class EditShopsPage {
       this.customerDetailData.latitude,
       this.customerDetailData.longitude,
       this.customerDetailData.address,
-      this.customerDetailData.province_id,
-      this.customerDetailData.ampher_id,
-      this.customerDetailData.tumbol_id,
+      this.optionCustomer.province[this.indexProvince].province_id,
+      this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].ampher_id,
+      this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].tumbol[this.indexTumbol].tumbol_id,
       this.customerDetailData.postcode,
       this.customerDetailData.tax_number,
-      this.customerDetailData.customer_group_id,
-      this.customerDetailData.customer_type_id,
+      this.optionCustomer.customer_group[this.indexCustomerGroup].customer_group_id,
+      this.optionCustomer.customer_group[this.indexCustomerGroup].customer_type[this.indexCustomerType].customer_type_id,
       this.customerDetailData.seats,
-      this.customerDetailData.project_type_id,
+      this.optionCustomer.customer_group[this.indexCustomerGroup].project_type[this.indexProjectType].project_type_id,
       this.customerDetailData.founder_date,
-      this.customerDetailData.status,
+      this.optionCustomer.status[this.indexStatus].status_id,
       this.customerDetailData.remark,
       JSON.stringify(this.customerDetailData.contacts),
       JSON.stringify(this.customerDetailData.channels),
@@ -618,7 +625,7 @@ export class EditShopsPage {
         this.backPage();
       }, error => {
         this.util.hideLoading();
-        console.log(error);
+        console.log(error.message);
       });
   }
 }
