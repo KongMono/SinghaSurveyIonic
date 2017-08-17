@@ -144,21 +144,44 @@ export class EditShopsPage {
   }
 
   selectOption(action) {
-    let listSelectOption, keyOption, indexSelect;
+    let title, listSelectOption, keyOption, indexSelect;
     if (action == 'province') {
+      title = 'เลือกจังหวัด';
       listSelectOption = this.optionCustomer.province;
       keyOption = 'province_th';
       indexSelect = this.indexProvince;
     } else if (action == 'ampher') {
+      title = 'เลือกอำเภอ';
       listSelectOption = this.optionCustomer.province[this.indexProvince].ampher;
       keyOption = 'ampher_th';
       indexSelect = this.indexAmpher;
     } else if (action == 'tumbol') {
+      title = 'เลือกตำบล';
       listSelectOption = this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].tumbol;
       keyOption = 'tumbol_th';
       indexSelect = this.indexTumbol;
+    } else if (action == 'customer_group') {
+      title = 'เลือกกลุ่มร้านค้า';
+      listSelectOption = this.optionCustomer.customer_group;
+      keyOption = 'name';
+      indexSelect = this.indexCustomerGroup;
+    } else if (action == 'customer_type') {
+      title = 'เลือกประเภทร้านค้า';
+      listSelectOption = this.optionCustomer.customer_group[this.indexCustomerGroup].customer_type;
+      keyOption = 'name';
+      indexSelect = this.indexCustomerType;
+    } else if (action == 'project_type') {
+      title = 'เลือกโครงการ';
+      listSelectOption = this.optionCustomer.customer_group[this.indexCustomerGroup].project_type;
+      keyOption = 'name';
+      indexSelect = this.indexProjectType;
+    } else if (action == 'status') {
+      title = 'เลือกสถานะ';
+      listSelectOption = this.optionCustomer.status;
+      keyOption = 'name';
+      indexSelect = this.indexStatus;
     }
-    this.navCtrl.push('ListSelectOptionPage', { action: action, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
+    this.navCtrl.push('ListSelectOptionPage', { action: action, title: title, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
   }
 
   selectOptionCallback = (_params) => {
@@ -178,6 +201,22 @@ export class EditShopsPage {
         resolve();
       } else if (_params.action == 'tumbol') {
         this.indexTumbol = _params.indexSelect;
+        resolve();
+      } else if (_params.action == 'customer_group') {
+        if (this.indexCustomerGroup != _params.indexSelect) {
+          this.indexCustomerType = 0;
+          this.indexProjectType = 0;
+        }
+        this.indexCustomerGroup = _params.indexSelect;
+        resolve();
+      } else if (_params.action == 'customer_type') {
+        this.indexCustomerType = _params.indexSelect;
+        resolve();
+      } else if (_params.action == 'project_type') {
+        this.indexProjectType = _params.indexSelect;
+        resolve();
+      } else if (_params.action == 'status') {
+        this.indexStatus = _params.indexSelect;
         resolve();
       } else {
         resolve();

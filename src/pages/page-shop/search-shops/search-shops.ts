@@ -54,21 +54,24 @@ export class SearchShopsPage {
     }
 
     selectOption(action) {
-        let listSelectOption, keyOption, indexSelect;
+        let title, listSelectOption, keyOption, indexSelect;
         if (action == 'province') {
+            title = 'เลือกจังหวัด';
             listSelectOption = this.optionCustomer.province;
             keyOption = 'province_th';
             indexSelect = this.indexProvince;
         } else if (action == 'ampher') {
+            title = 'เลือกอำเภอ';
             listSelectOption = this.optionCustomer.province[this.indexProvince].ampher;
             keyOption = 'ampher_th';
             indexSelect = this.indexAmpher;
         } else if (action == 'tumbol') {
+            title = 'เลือกตำบล';
             listSelectOption = this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].tumbol;
             keyOption = 'tumbol_th';
             indexSelect = this.indexTumbol;
         }
-        this.navCtrl.push('ListSelectOptionPage', { action: action, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
+        this.navCtrl.push('ListSelectOptionPage', { action: action, title: title, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     selectOptionCallback = (_params) => {

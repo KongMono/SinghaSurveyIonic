@@ -55,6 +55,47 @@ export class AnnounceChangeAreaPage {
         console.log(error);
       });
   }
+  
+    selectOption(action) {
+      let title, listSelectOption, keyOption, indexSelect;
+      if (action == 'level') {
+        title = 'เลือกเลเวล';
+        listSelectOption = this.optionUserData.level;
+        keyOption = 'level_name';
+        indexSelect = this.indexLevel;
+      } else if (action == 'province') {
+        title = 'เลือกจังหวัด';
+        listSelectOption = this.optionUserData.province;
+        keyOption = 'province_th';
+        indexSelect = this.indexProvince;
+      } else if (action == 'ampher') {
+        title = 'เลือกอำเภอ';
+        listSelectOption = this.optionUserData.province[this.indexProvince].ampher;
+        keyOption = 'ampher_th';
+        indexSelect = this.indexAmpher;
+      }
+      this.navCtrl.push('ListSelectOptionPage', { action: action, title: title, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
+    }
+  
+    selectOptionCallback = (_params) => {
+      return new Promise(resolve => {
+        if (_params.action == 'level') {
+          this.indexLevel = _params.indexSelect;
+          resolve();
+        } else if (_params.action == 'province') {
+          if (this.indexProvince != _params.indexSelect) {
+            this.indexAmpher = 0;
+          }
+          this.indexProvince = _params.indexSelect;
+          resolve();
+        } else if (_params.action == 'ampher') {
+          this.indexAmpher = _params.indexSelect;
+          resolve();
+        } else {
+          resolve();
+        }
+      });
+    }
 
   addArea() {
     console.log(this.optionUserData.province[this.indexProvince].province_th);
