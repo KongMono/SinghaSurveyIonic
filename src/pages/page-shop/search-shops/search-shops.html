@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons left>
-      <button ion-button icon-only (click)="backPage()">
+      <button ion-button icon-only (click)="backPage()" tappable>
         <ion-icon class="icon-size" name="_icon-back"></ion-icon>
       </button>
     </ion-buttons>
@@ -23,7 +23,7 @@
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list">
-            <button ion-item (click)="selectOption('province')">
+            <button ion-item (click)="selectOption('province')" tappable>
               {{ optionCustomer.province[indexProvince].province_th }}
             </button>
           </ion-list>
@@ -41,7 +41,7 @@
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list">
-            <button ion-item (click)="selectOption('ampher')">
+            <button ion-item (click)="selectOption('ampher')" tappable>
               {{ optionCustomer.province[indexProvince].ampher[indexAmpher].ampher_th }}
             </button>
           </ion-list>
@@ -59,7 +59,7 @@
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list">
-            <button ion-item (click)="selectOption('tumbol')">
+            <button ion-item (click)="selectOption('tumbol')" tappable>
               {{ optionCustomer.province[indexProvince].ampher[indexAmpher].tumbol[indexTumbol].tumbol_th }}
             </button>
           </ion-list>
@@ -84,7 +84,7 @@
   <div class="box-list-search">
     <ion-list no-lines *ngIf="customersListData">
       <button ion-item detail-none class="box-customer" style="border-bottom: 1px solid #dedede;" *ngFor="let customer of customersListData"
-        (tap)="onClick(customer)" (press)="onLongPress(customer)">
+        (tap)="onClick(customer)" (press)="onLongPress(customer)" tappable>
       <ion-thumbnail item-start class="box-project-type">
         <div class="wrap-project-type" [ngClass]="{'bg-color-yellow': (customer.status_plan == '3'), 'bg-color-blue': (customer.status_plan == '2'), 'bg-color-red': (customer.status_plan == '1'), 'bg-color-gray': (customer.status_plan == '0')}">
           <div class="type-name">
