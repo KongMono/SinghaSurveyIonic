@@ -173,7 +173,7 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('freezer')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let freezer of customerDetailData.freezer; let i = index" (click)="actionSheetInList('freezer', i)" tappable>
+      <ion-row *ngFor="let freezer of customerDetailData.freezer; let i = index" (click)="actionSheetInList('freezer', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.freezer.length-1 == i)}" tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -201,7 +201,7 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('pg')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let pg of customerDetailData.pg; let i = index" (click)="actionSheetInList('pg', i)" tappable>
+      <ion-row *ngFor="let pg of customerDetailData.pg; let i = index" (click)="actionSheetInList('pg', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.pg.length-1 == i)}" tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -229,7 +229,7 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('contacts')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let contacts of customerDetailData.contacts; let i = index" (click)="actionSheetInList('contacts', i)" tappable>
+      <ion-row *ngFor="let contacts of customerDetailData.contacts; let i = index" (click)="actionSheetInList('contacts', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.contacts.length-1 == i)}" tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -273,7 +273,7 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('channels')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let channels of customerDetail.channels; let i = index" (click)="actionSheetInList('channels', i)" tappable>
+      <ion-row *ngFor="let channels of customerDetail.channels; let i = index" (click)="actionSheetInList('channels', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.channels.length-1 == i)}" tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -301,7 +301,7 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('callcard')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let callcard of customerDetailData.callcard; let i = index" (click)="actionSheetInList('callcard', i)" tappable>
+      <ion-row *ngFor="let callcard of customerDetailData.callcard; let i = index" (click)="actionSheetInList('callcard', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.callcard.length-1 == i)}" tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">

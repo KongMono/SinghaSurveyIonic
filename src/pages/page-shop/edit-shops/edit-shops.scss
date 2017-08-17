@@ -101,6 +101,13 @@ page-edit-shops {
             font-size: 22px;
             color: $singha-survey-color-primary;
         }
+        .hide-line-last-item {
+            .item {
+                .item-inner {
+                    border-bottom: initial;
+                }
+            }
+        }
         .row-full-size {
             width: 100%;
             .col-sub {
