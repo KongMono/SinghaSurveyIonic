@@ -17,6 +17,7 @@ import { AppUtilService } from "../../app/app.util";
 
 export class ListSelectOptionPage {
     action: any;
+    title: any;
     option: any;
     key: any;
     indexSelect: any;
@@ -28,6 +29,7 @@ export class ListSelectOptionPage {
         public service: SinghaSurveyService,
         public util: AppUtilService) {
         this.action = navParams.get('action');
+        this.title = navParams.get('title');
         this.option = navParams.get('option');
         this.key = navParams.get('key');
         this.indexSelect = navParams.get('indexSelect');

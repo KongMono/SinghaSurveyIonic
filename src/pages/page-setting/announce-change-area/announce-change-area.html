@@ -54,11 +54,11 @@
           <p>Level</p>
         </ion-col>
         <ion-col>
-          <ion-item>
-            <ion-select *ngIf="optionUserData" interface="popover" [(ngModel)]="indexLevel" class="wrap-select">
-              <ion-option *ngFor="let level of optionUserData.level; let i = index" [value]="i">{{level.level_name}}</ion-option>
-            </ion-select>
-          </ion-item>
+          <ion-list class="wrap-list" *ngIf="optionUserData">
+            <button ion-item (click)="selectOption('level')" tappable>
+              {{ optionUserData.level[indexLevel].level_name }}
+            </button>
+          </ion-list>
         </ion-col>
       </ion-row>
       <ion-row class="line-top-row">
@@ -74,11 +74,11 @@
           <p>จังหวัด</p>
         </ion-col>
         <ion-col>
-          <ion-item>
-            <ion-select *ngIf="optionUserData" interface="popover" [(ngModel)]="indexProvince" (ngModelChange)="indexAmpher = 0" class="wrap-select">
-              <ion-option *ngFor="let province of optionUserData.province; let i = index" [value]="i">{{province.province_th}}</ion-option>
-            </ion-select>
-          </ion-item>
+          <ion-list class="wrap-list" *ngIf="optionUserData">
+            <button ion-item (click)="selectOption('province')" tappable>
+              {{ optionUserData.province[indexProvince].province_th }}
+            </button>
+          </ion-list>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -86,11 +86,11 @@
           <p>อำเภอ</p>
         </ion-col>
         <ion-col>
-          <ion-item>
-            <ion-select *ngIf="optionUserData" interface="popover" [(ngModel)]="indexAmpher" class="wrap-select">
-              <ion-option *ngFor="let ampher of optionUserData.province[indexProvince].ampher; let i = index" [value]="i">{{ampher.ampher_th}}</ion-option>
-            </ion-select>
-          </ion-item>
+          <ion-list class="wrap-list" *ngIf="optionUserData">
+            <button ion-item (click)="selectOption('ampher')" tappable>
+              {{ optionUserData.province[indexProvince].ampher[indexAmpher].ampher_th }}
+            </button>
+          </ion-list>
         </ion-col>
       </ion-row>
       <span style="margin-top: 14px; font-weight: bold;">รายการพื้นที่รับผิดชอบ</span>

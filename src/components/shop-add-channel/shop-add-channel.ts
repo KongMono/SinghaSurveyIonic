@@ -48,21 +48,24 @@ export class ShopAddChannel {
   }
 
   selectOption(action) {
-    let listSelectOption, keyOption, indexSelect;
+    let title, listSelectOption, keyOption, indexSelect;
     if (action == 'customer_group') {
+      title = 'เลือกกลุ่มร้านค้า';
       listSelectOption = this.optionChannelCustomer.customer_group;
       keyOption = 'name';
       indexSelect = this.indexCustomerGroup;
     } else if (action == 'customer_channel') {
+      title = 'เลือกตัวแทน/ค้าส่ง';
       listSelectOption = this.optionChannelCustomer.customer_group[this.indexCustomerGroup].customer_channel;
       keyOption = 'name';
       indexSelect = this.indexCustomerChannel;
     } else if (action == 'product_category') {
+      title = 'เลือกประเภทสินค้า';
       listSelectOption = this.optionChannelCustomer.product_category;
       keyOption = 'name';
       indexSelect = this.indexProductCategory;
     }
-    this.navCtrl.push('ListSelectOptionPage', { action: action, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
+    this.navCtrl.push('ListSelectOptionPage', { action: action, title: title, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
   }
 
   selectOptionCallback = (_params) => {
