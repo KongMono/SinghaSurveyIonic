@@ -223,7 +223,7 @@ export class SinghaSurveyService {
             image: imageBase64
         }
 
-        return this.Api.call(service.url, service.method, service.param);
+        return this.Api.callformMultipart(service.url, service.method, service.param);
     }
 
     uploadImageCustomerCallcard(imageBase64) {
@@ -234,7 +234,7 @@ export class SinghaSurveyService {
             image: imageBase64
         }
 
-        return this.Api.call(service.url, service.method, service.param);
+        return this.Api.callformMultipart(service.url, service.method, service.param);
     }
 
     createCustomer(
