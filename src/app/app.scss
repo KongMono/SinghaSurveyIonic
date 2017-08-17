@@ -138,25 +138,27 @@ ion-loading {
 .tabs-ios .tab-button-icon {
     color: $singha-survey-color-inactive;
 }
-
 .tabs-md .tab-button-icon {
     color: $singha-survey-color-inactive;
 }
-
 .tabs-wp .tab-button-icon {
     color: $singha-survey-color-inactive;
 }
-
 .tabs-ios .tab-button[aria-selected=true] .tab-button-icon {
     color: $singha-survey-color-primary;
 }
-
 .tabs-md .tab-button[aria-selected=true] .tab-button-icon {
     color: $singha-survey-color-primary;
 }
-
 .tabs-wp .tab-button[aria-selected=true] .tab-button-icon {
     color: $singha-survey-color-primary;
+}
+
+.item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+.item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+    border-bottom-color: #dedede !important;
+    -webkit-box-shadow: inset 0 -1px 0 0 transparent !important;
+    box-shadow: inset 0 -1px 0 0 transparent !important;
 }
 
 // <color name="colorPrimary">#455A64</color>
