@@ -12,7 +12,7 @@
   </div>
 
   <ion-list class="autocomplete-box" *ngIf="searchText.length >= 3 && list.length != 0">
-    <ion-item *ngFor="let ls of list" (click)="selectCustomerList(ls.customers_id)" tappable class="item-autocomplete">
+    <ion-item *ngFor="let ls of list" (click)="selectCustomerList(ls.customer_id)" tappable class="item-autocomplete">
       {{ls.name}}
     </ion-item>
   </ion-list>

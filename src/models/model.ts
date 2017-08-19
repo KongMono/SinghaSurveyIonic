@@ -264,3 +264,40 @@ interface VisitCycleDataVisit {
   name: string;
   total: number;
 }
+
+interface VisitCustomerDetailModel {
+  id: string;
+  latitude: string;
+  longitude: string;
+  customer_id: string;
+  customer_name: string;
+  remark: string;
+  updated_at: string;
+  created_at: string;
+  visit_date: string;
+  equipment: any[];
+  images?: any;
+  note: any[];
+  activities: any[];
+  order: Order[];
+  sale: Sale;
+  receipt: Boonrawd[];
+}
+
+interface Sale {
+  boonrawd: Boonrawd[];
+  rival: Boonrawd[];
+}
+
+interface Boonrawd {
+  year: string;
+  month: string;
+  status: boolean;
+  value: any[];
+}
+
+interface Order {
+  year: string;
+  month: string;
+  value: any[];
+}

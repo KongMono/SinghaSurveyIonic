@@ -1,0 +1,154 @@
+page-edit-visit {
+    .title {
+        text-align: center;
+        .toolbar-title {
+            font-size: 16px;
+        }
+    }
+    .icon-size {
+        font-size: 20px !important;
+    }
+    .box-map {
+        width: 100%;
+        height: 40%;
+    }
+    .box-detail-shop {
+        padding: 16px;
+        .text-title {
+            font-size: 16px;
+        }
+        .required {
+            color: $singha-survey-color-red;
+            margin-left: 2px;
+        }
+        .button-reload-location {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 14px;
+            margin: auto 0 auto auto;
+            padding: 0;
+            font-size: 22px;
+            color: $singha-survey-color-primary;
+        }
+        .wrap-col {
+            max-width: 75%;
+            margin: 0 0 0 auto;
+        }
+        .wrap-length {
+            position: relative;
+            .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
+            .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
+                border-bottom-color: #dedede;
+                -webkit-box-shadow: inset 0 -1px 0 0 transparent;
+                box-shadow: inset 0 -1px 0 0 transparent;
+            }
+            .text-length {
+                position: absolute;
+                right: 5px;
+                z-index: 1;
+                color: $singha-survey-color-gray-text-all;
+                font-size: 12px;
+            }
+        }
+        .wrap-input {
+            input {
+                margin: 5px 8px;
+                line-height: 32px;
+            }
+            textarea {
+                margin: 5px 8px;
+                overflow: visible;
+            }
+        }
+        .wrap-select {
+            max-width: 100%;
+            width: 100%;
+            padding-left: 8px;
+            padding-right: 8px;
+        }
+        .wrap-list {
+            margin: 0;
+            .item {
+                .item-inner {
+                    border-bottom: 1px solid #dedede !important;
+                    .input-wrapper {
+                        .label {
+                            margin: 13px 8px;
+                        }
+                    }
+                }
+            }
+        }
+        .line-top-row {
+            border-top: 1px solid #dedede;
+        }
+        .button-add-input {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 14px;
+            margin: auto 0 auto auto;
+            padding: 0;
+            font-size: 22px;
+            color: $singha-survey-color-primary;
+        }
+        .hide-line-last-item {
+            .item {
+                .item-inner {
+                    border-bottom: initial;
+                }
+            }
+        }
+        .row-full-size {
+            width: 100%;
+            .col-sub {
+                padding-left: 12px;
+                padding-right: 12px;
+                .text-title-sub {
+                    font-size: 12px;
+                }
+                .text-value-sub {
+                    font-size: 12px;
+                    color: $singha-survey-color-gray-text-all;
+                    white-space: normal;
+                }
+            }
+        }
+        .image-shop {
+            // width: 30%;
+            // max-height: 100%;
+            // height: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+        .item-calendar {
+            z-index: 1;
+            background-color: transparent;
+        }
+        .button-calendar {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 14px;
+            margin: auto 0 auto auto;
+            padding: 0;
+            z-index: 0;
+            font-size: 22px;
+            color: $singha-survey-color-primary;
+        }
+        .button-edit {
+            width: 100%;
+            background-color: $singha-survey-color-gray-3;
+            color: $singha-survey-color-primaryDark;
+        }
+        .button-cancel {
+            width: 100%;
+            background-color: $singha-survey-color-gray-3;
+            color: $singha-survey-color-primaryDark;
+        }
+    }
+}

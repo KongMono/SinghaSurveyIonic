@@ -73,6 +73,7 @@ export class CallApi {
             return this.http.get(url, options)
                 .map(res => res.json())
                 .subscribe(data => {
+                    console.log("data resolve", data);
                     resolve(data);
                 }, error => {
                     reject(error);
@@ -93,6 +94,7 @@ export class CallApi {
             this.http.post(url, body, options)
                 .map(res => res.json())
                 .subscribe(data => {
+                    console.log("data resolve", data);
                     resolve(data);
                 }, error => {
                     reject(error);
@@ -113,6 +115,7 @@ export class CallApi {
             this.http.post(url, formData)
                 .map(res => res.json())
                 .subscribe(data => {
+                    console.log("data resolve", data);
                     resolve(data);
                 }, error => {
                     reject(error);
@@ -137,6 +140,7 @@ export class CallApi {
             this.http.post(url, formData, options)
                 .map(res => res.json())
                 .subscribe(data => {
+                    console.log("data resolve", data);
                     resolve(data);
                 }, error => {
                     reject(error);

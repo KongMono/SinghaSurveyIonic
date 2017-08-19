@@ -167,4 +167,14 @@ export class TabVisitAndRecord {
         console.log(error);
       });
   }
+
+  onClick(visit_id: any) {
+    console.log("onClick");
+    console.log("visit_id", visit_id);
+
+    this.app.getRootNav().push('EditVisitPage', {
+      data: visit_id
+    });
+  }
+
 }

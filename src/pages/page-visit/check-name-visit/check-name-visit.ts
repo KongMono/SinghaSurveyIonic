@@ -62,14 +62,14 @@ export class CheckNameVisitPage {
 
   callCustomersChecked(customers_id) {
     this.util.showLoading();
-    this.service.customersChecked(customers_id)
+    this.service.visitCustomersChecked(customers_id)
       .then(
       (result) => {
         console.log(result);
         this.util.hideLoading();
         this.viewCtrl.dismiss();
         this.app.getRootNav().push('EditVisitPage', {
-          data: customers_id
+          data: result.visit_id
         });
       }, error => {
         this.util.hideLoading();

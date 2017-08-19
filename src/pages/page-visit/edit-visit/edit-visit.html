@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="backPage()" tappable>
+          <ion-icon class="icon-size" name="_icon-back"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title class="title" *ngIf="visitCustomerDetail">{{visitCustomerDetail.customer_name}}</ion-title>
+    <ion-buttons right>
+      <button icon-only style="background-color:#455A64">
+          <ion-icon class="icon-size"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="customerDetailData">
+  <div class="box-detail-shop">
+    <span class="text-title">แก้ไขข้อมูลการเข้าเยี่ยม</span>
+    <ion-grid>
+      <ion-row>
+        <ion-col col-3>
+          <p>วันที่ก่อตั้ง</p>
+        </ion-col>
+        <ion-col>
+          <ion-item class="item-calendar">
+            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="customerDetailData.founder_date"></ion-datetime>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    
+      <ion-row>
+        <ion-col col-6 style="padding-left: 0;">
+          <button ion-button class="button-edit" (click)="save()" tappable>แก้ไข</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button class="button-cancel" (click)="backPage()" tappable>ยกเลิก</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

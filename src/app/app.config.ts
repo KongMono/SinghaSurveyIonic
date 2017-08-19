@@ -20,7 +20,7 @@ export const AppConfig: IAppConfig = {
   isLogged: null,
   pin_logged: null,
   userInfo: null,
-  isBuildDevice: true,
+  isBuildDevice: false,
   isProduction: false,
 
   endpoint: 'http://128.199.72.29/index.php',
@@ -248,7 +248,14 @@ export const AppConfig: IAppConfig = {
         images: "",
         callcard: ""
       }
+    },
+    visitCustomerDetail: {
+      url: "/v2/visit/row/format/json",
+      method: "GET",
+      param: {
+        user_id: "",
+        visit_id: ""
+      }
     }
-
   }
 }
