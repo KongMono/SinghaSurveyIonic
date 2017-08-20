@@ -262,7 +262,12 @@ export class TabShop {
           icon: '_icon-trash',
           text: 'ลบ',
           handler: () => {
-            console.log('Trash clicked');
+            this.service.deleteCustomer(customer.customer_id)
+              .then((result) => {
+                this.util.hideLoading();
+                this.util.showAlertDialog(result.msg);
+                this.callCustomerList();
+              });
           }
         }
       ]

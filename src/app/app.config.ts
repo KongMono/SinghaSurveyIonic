@@ -256,6 +256,14 @@ export const AppConfig: IAppConfig = {
         user_id: "",
         visit_id: ""
       }
+    },
+    deleteCustomer: {
+      url: "/v2/customers/deleted/format/json",
+      method: "POST",
+      param: {
+        user_id: "",
+        customer_id: ""
+      }
     }
   }
 }

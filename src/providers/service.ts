@@ -238,6 +238,19 @@ export class SinghaSurveyService {
         return this.Api.call(service.url, service.method, service.param);
     }
 
+    deleteCustomer(customer_id) {
+        let service = this.config.service.deleteCustomer;
+
+        service.param = {
+            user_id: this.config.userInfo.username,
+            customer_id: customer_id
+        }
+
+        return this.Api.callform(service.url, service.method, service.param);
+    }
+
+
+
     uploadImageCustomer(imageBase64) {
         let service = this.config.service.uploadImageCustomer;
 

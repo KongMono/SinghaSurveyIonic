@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { LoadingController } from "ionic-angular";
+import { LoadingController, AlertController } from "ionic-angular";
 import { ConfigApp, IAppConfig } from "./app.config";
 import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
@@ -7,11 +7,12 @@ import { Dialogs } from '@ionic-native/dialogs';
 
 @Injectable()
 export class AppUtilService {
-    private dialogs: Dialogs;
+    public dialogs: Dialogs;
     loading: any;
     constructor(
         private loadingCtrl: LoadingController,
         public storage: Storage,
+        private alertCtrl: AlertController,
         @Inject(ConfigApp) private config: IAppConfig) {
 
     }
@@ -73,9 +74,19 @@ export class AppUtilService {
     }
 
     public showAlertDialog(text) {
-        this.dialogs.alert(text)
-            .then(() => console.log('Dialog dismissed'))
-            .catch(e => console.log('Error displaying dialog', e));
+        if (this.config.isBuildDevice) {
+            this.dialogs.alert(text)
+                .then(() => console.log('Dialog dismissed'))
+                .catch(e => console.log('Error displaying dialog', e));
+        } else {
+            let alert = this.alertCtrl.create({
+                title: 'Singha Survey',
+                subTitle: text,
+                buttons: ['ตกลง']
+            });
+            alert.present();
+        }
+
     }
 
 
