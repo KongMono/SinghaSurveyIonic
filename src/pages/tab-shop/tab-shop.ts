@@ -206,8 +206,6 @@ export class TabShop {
   }
 
   onClick(customer: any) {
-    console.log("onClick");
-    console.log("customer_id", customer.customer_id);
     if (this.actionSheet) {
       this.actionSheet.dismiss();
     }
@@ -235,8 +233,6 @@ export class TabShop {
   }
 
   onLongPress(customer: any) {
-    console.log("onLongPress");
-    console.log(customer);
     if (this.actionSheet) {
       this.actionSheet.dismiss();
     }
@@ -246,18 +242,20 @@ export class TabShop {
           icon: '_icon-map',
           text: 'แผนที่',
           handler: () => {
-            console.log('Map clicked');
             this.app.getRootNav().push('ViewMapPage', {
-              data: customer
+              data: {
+                title: customer.name,
+                latitude: customer.latitude,
+                longitude: customer.longitude
+              }
             });
           }
         }, {
           icon: '_icon-visit',
           text: 'แก้ไข',
           handler: () => {
-            console.log('Edit clicked');
             this.app.getRootNav().push('EditShopsPage', {
-              data: customer
+              data: customer.customer_id
             });
           }
         }, {

@@ -5,11 +5,21 @@
         <ion-icon class="icon-size" name="_icon-back"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title class="title"></ion-title>
+    <ion-title class="title">แผนที่</ion-title>
+    <ion-buttons right>
+      <button icon-only style="background-color:#455A64">
+        <ion-icon class="icon-size"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
-  <div #map id="map" style="height:100%;"></div>
+  <sebm-google-map id="map" [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom" style="height: 100%">
+    <sebm-google-map-marker [latitude]="map.lat" [longitude]="map.lng">
+      <sebm-google-map-info-window>
+        <strong>{{title}}</strong>
+      </sebm-google-map-info-window>
+    </sebm-google-map-marker>
+  </sebm-google-map>
 </ion-content>
