@@ -1,14 +1,18 @@
-import { AppUtilService } from './../../app/app.util';
 import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { IAppConfig, ConfigApp } from './../../app/app.config';
+import { CallApi } from './../../providers/call-api';
+import { SinghaSurveyService } from './../../providers/service';
+import { AppUtilService } from './../../app/app.util';
 import { ActionSheetController, AlertController, App } from 'ionic-angular';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
-import { Camera } from '@ionic-native/camera';
+import { Camera, CameraOptions } from '@ionic-native/camera';
 
 @Component({
   selector: 'shop-add-call-card',
   templateUrl: 'shop-add-call-card.html',
   providers: [
+    CallApi,
+    SinghaSurveyService,
     AppUtilService,
     Camera,
     PhotoViewer]
@@ -30,6 +34,7 @@ export class ShopAddCallCard {
 
   constructor(
     public app: App,
+    public service: SinghaSurveyService,
     public util: AppUtilService,
     public actionSheetCtrl: ActionSheetController,
     private camera: Camera,
@@ -54,7 +59,65 @@ export class ShopAddCallCard {
   }
 
   addImage() {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: 'ios-camera',
+          text: 'เปิดกล้อง',
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 100,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.PNG,
+              mediaType: this.camera.MediaType.PICTURE,
+              sourceType: 1
+            }
+            this.openCameraOrPhotoLibrary(options);
+          }
+        }, {
+          icon: 'ios-images',
+          text: 'เลือกอัลบั้ม',
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 100,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.PNG,
+              mediaType: this.camera.MediaType.PICTURE,
+              sourceType: 0
+            }
+            this.openCameraOrPhotoLibrary(options);
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 
+  openCameraOrPhotoLibrary(options) {
+    this.camera.getPicture(options).then((imageData) => {
+      this.setUploadImageCustomer(imageData);
+    }, (err) => {
+      console.error(err);
+    });
+    // let imageData = "/9j/4AAQSkZJRgABAQAASABIAAD/4QBYRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAACqADAAQAAAABAAAACwAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgACwAKAwERAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/dAAQAAv/aAAwDAQACEQMRAD8A8/r/ADXP+ogKAP/Q8/r/ADXP+ogKAP/Z";
+    // this.setUploadImageCustomer(imageData);
+  }
+
+  setUploadImageCustomer(imageBase64) {
+    this.util.showLoading();
+    this.service.uploadImageCustomer(imageBase64)
+      .then(result => {
+        this.util.hideLoading();
+        console.log("uploadImageCustomer", result);
+        this.updateAddImage(result);
+      }, error => {
+        this.util.hideLoading();
+        console.log(error);
+      });
+  }
+
+  updateAddImage(res) {
+    this.inputShopAddCallCardData.images.push(res.path);
   }
 
   getImagePath(images): string {
