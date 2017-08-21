@@ -78,9 +78,71 @@ export class AddShopsPage {
     });
   }
 
+
   backPage() {
-    this.app.getRootNav().pop();
+    this.app.getRootNav().pop({ animate: true, animation: 'transition', direction: 'back' });
   }
+
+
+  save() {
+
+    if (this.customerDetailData.province_id == ("0")) {
+      this.util.showAlertDialog("กรุณาเลือกจังหวัด");
+      return;
+    }
+
+    if (this.customerDetailData.ampher_id == ("0")) {
+      this.util.showAlertDialog("กรุณาเลือกอำเภอ");
+      return;
+    }
+
+    if (this.customerDetailData.tumbol_id == ("0")) {
+      this.util.showAlertDialog("กรุณาเลือกตำบล");
+      return;
+    }
+
+    if (this.customerDetailData.customer_group_id == ("0")) {
+      this.util.showAlertDialog("กรุณาเลือกกลุ่มร้านค้า");
+      return;
+    }
+
+    if (this.customerDetailData.customer_type_id == ("0")) {
+      this.util.showAlertDialog("กรุณาเลือกประเภทร้านค้า");
+      return;
+    }
+
+    if (this.customerDetailData.project_type_id == ("0")) {
+      this.util.showAlertDialog("กรุณาเลือกโครงการ");
+      return;
+    }
+
+    if (this.util.isEmpty(this.customerDetailData.name)) {
+      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      return;
+    }
+
+    if (this.util.isEmpty(this.customerDetailData.address)) {
+      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      return;
+    }
+
+    if (this.util.isEmpty(this.customerDetailData.postcode) || this.customerDetailData.postcode.length != 5) {
+      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      return;
+    }
+
+    if (this.util.isEmpty(this.customerDetailData.tax_number) || this.customerDetailData.tax_number.length != 13) {
+      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      return;
+    }
+
+    if (!this.customerDetailData.images) {
+      this.customerDetailData.images = [];
+    }
+
+    // this.callServiceCreateCustomer();
+  }
+
 
   callServiceCreateCustomer() {
     this.util.showLoading();

@@ -22,10 +22,9 @@ export class TabShop {
   actionSheet: any;
   showCheckNameDialog: boolean = true;
   customersCycleData: CustomersCycleModel;
+
   filterData = {
-    sortArea: true,
-    sortPlan: false,
-    order: 1
+    order: "1"
   }
 
   constructor(
@@ -69,45 +68,44 @@ export class TabShop {
       });
   }
 
-  filter() {
+  filter(result: CustomerFilterModel) {
     let alert = this.alertCtrl.create({
       cssClass: 'override-alret-filter'
     });
-    alert.addInput({
-      type: 'radio',
-      label: 'ตามพื้นที่',
-      value: '1',
-      checked: this.filterData.sortArea,
-      handler: data => {
-        if (this.filterData.order != data.value) {
-          this.filterData.sortArea = true;
-          this.filterData.sortPlan = false;
-          this.filterData.order = data.value;
-          this.callCustomerList();
+
+    for (let entry of result.select) {
+      alert.addInput({
+        type: 'radio',
+        label: entry.name,
+        value: entry.id,
+        checked: entry.id == this.filterData.order,
+        handler: data => {
+          if (this.filterData.order != data.value) {
+            this.filterData.order = data.value;
+            this.callCustomerList();
+          }
+          alert.dismiss();
         }
-        alert.dismiss();
-      }
-    });
-    alert.addInput({
-      type: 'radio',
-      label: 'ตามแผน',
-      value: '2',
-      checked: this.filterData.sortPlan,
-      handler: data => {
-        if (this.filterData.order != data.value) {
-          this.filterData.sortArea = false;
-          this.filterData.sortPlan = true;
-          this.filterData.order = data.value;
-          this.callCustomerList();
-        }
-        alert.dismiss();
-      }
-    });
+      });
+    }
     alert.present();
   }
 
   searchShop() {
-    this.app.getRootNav().push('SearchShopsPage');
+    this.app.getRootNav().push('SearchShopsPage', {}, { animate: true, animation: 'transition', direction: 'forward' });
+  }
+
+  calloptionCustomerFilter() {
+    this.util.showLoading();
+    this.service.optionCustomerFilter()
+      .then(
+      (result: CustomerFilterModel) => {
+        this.util.hideLoading();
+        this.filter(result);
+      }, error => {
+        this.util.hideLoading();
+        console.log(error);
+      });
   }
 
   callRefreshCustomerList() {
@@ -209,6 +207,7 @@ export class TabShop {
     if (this.actionSheet) {
       this.actionSheet.dismiss();
     }
+
     this.actionSheet = this.actionSheetCtrl.create({
       buttons: [
         {
@@ -216,9 +215,11 @@ export class TabShop {
           text: 'รายละเอียด',
           handler: () => {
             console.log('Infomation clicked');
-            this.app.getRootNav().push('EditShopsPage', {
-              data: customer.customer_id
-            });
+            setTimeout(() => {
+              this.app.getRootNav().push('EditShopsPage', {
+                data: customer.customer_id
+              }, { animate: true, animation: 'transition', direction: 'forward' });
+            }, 2000);
           }
         }, {
           icon: '_icon-visit',
@@ -248,7 +249,7 @@ export class TabShop {
                 latitude: customer.latitude,
                 longitude: customer.longitude
               }
-            });
+            }, { animate: true, animation: 'transition', direction: 'forward' });
           }
         }, {
           icon: '_icon-visit',
@@ -256,7 +257,7 @@ export class TabShop {
           handler: () => {
             this.app.getRootNav().push('EditShopsPage', {
               data: customer.customer_id
-            });
+            }, { animate: true, animation: 'transition', direction: 'forward' });
           }
         }, {
           icon: '_icon-trash',

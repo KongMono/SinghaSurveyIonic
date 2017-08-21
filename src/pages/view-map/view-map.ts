@@ -50,7 +50,7 @@ export class ViewMapPage {
   }
 
   backPage() {
-    this.app.getRootNav().pop();
+    this.app.getRootNav().pop({ animate: true, animation: 'transition', direction: 'back' });
   }
 
 }

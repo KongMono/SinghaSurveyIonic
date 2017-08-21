@@ -249,7 +249,15 @@ export class SinghaSurveyService {
         return this.Api.callform(service.url, service.method, service.param);
     }
 
+    optionCustomerFilter() {
+        let service = this.config.service.optionCustomerFilter;
 
+        service.param = {
+            user_id: this.config.userInfo.username
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
 
     uploadImageCustomer(imageBase64) {
         let service = this.config.service.uploadImageCustomer;

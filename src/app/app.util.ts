@@ -57,7 +57,7 @@ export class AppUtilService {
     public showLoading() {
         this.loading = this.loadingCtrl.create({
             spinner: 'crescent',
-            showBackdrop: true
+            showBackdrop: false
         });
         this.loading.present();
     }
@@ -86,8 +86,5 @@ export class AppUtilService {
             });
             alert.present();
         }
-
     }
-
-
 }

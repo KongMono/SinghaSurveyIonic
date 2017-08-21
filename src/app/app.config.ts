@@ -157,6 +157,13 @@ export const AppConfig: IAppConfig = {
         customer_id: ""
       }
     },
+    optionCustomerFilter: {
+      url: "/v2/options/customer_filter/format/json",
+      method: "GET",
+      param: {
+        user_id: ""
+      }
+    },
     optionUser: {
       url: "/v2/user/option/format/json",
       method: "GET",

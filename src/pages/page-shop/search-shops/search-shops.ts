@@ -34,7 +34,7 @@ export class SearchShopsPage {
     }
 
     backPage() {
-        this.app.getRootNav().pop();
+        this.app.getRootNav().pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 
     ionViewDidLoad() {

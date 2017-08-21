@@ -64,6 +64,15 @@ interface Customer {
   name: string;
 }
 
+interface CustomerFilterModel {
+  select: Select[];
+}
+
+interface Select {
+  id: string;
+  name: string;
+}
+
 interface ProfileModel {
   data: ProfileData;
 }
