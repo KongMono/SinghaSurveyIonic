@@ -23,7 +23,7 @@ export class AnnounceChangeAreaPage {
   indexLevel = 0;
   profileData: any;
   selectArea = [];
-
+  date_change: string;
   constructor(
     public app: App,
     public navCtrl: NavController,
@@ -206,15 +206,22 @@ export class AnnounceChangeAreaPage {
   }
 
   save() {
-
+    if (this.selectArea.length > 0) {
+      this.updateUser();
+    }
   }
 
   updateUser() {
     this.util.showLoading();
-    this.service.updateUser("", "", "", "")
+    this.service.updateUser(
+      this.optionUserData.level[this.indexLevel].level_id,
+      this.profileData.mobile,
+      this.date_change,
+      JSON.stringify(this.selectArea))
       .then(
-      (result: OptionUserModel) => {
+      (result) => {
         this.util.hideLoading();
+        this.util.showAlertDialog(result.msg);
         this.backPage();
       }, error => {
         this.util.hideLoading();

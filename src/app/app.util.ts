@@ -4,6 +4,7 @@ import { ConfigApp, IAppConfig } from "./app.config";
 import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
 import { Dialogs } from '@ionic-native/dialogs';
+import { ToastController } from 'ionic-angular';
 
 @Injectable()
 export class AppUtilService {
@@ -13,6 +14,7 @@ export class AppUtilService {
         private loadingCtrl: LoadingController,
         public storage: Storage,
         private alertCtrl: AlertController,
+        private toastCtrl: ToastController,
         @Inject(ConfigApp) private config: IAppConfig) {
 
     }
@@ -79,12 +81,17 @@ export class AppUtilService {
                 .then(() => console.log('Dialog dismissed'))
                 .catch(e => console.log('Error displaying dialog', e));
         } else {
-            let alert = this.alertCtrl.create({
-                title: 'Singha Survey',
-                subTitle: text,
-                buttons: ['ตกลง']
+            let toast = this.toastCtrl.create({
+                message: text,
+                duration: 3000,
+                position: 'bottom'
             });
-            alert.present();
+
+            toast.onDidDismiss(() => {
+                console.log('Dismissed toast');
+            });
+
+            toast.present();
         }
     }
 }
