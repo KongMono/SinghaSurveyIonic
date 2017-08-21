@@ -66,7 +66,7 @@
           <p>เลือกพื้นที่</p>
         </ion-col>
         <ion-col>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addArea()"></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addArea()" tappable></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -95,14 +95,14 @@
       </ion-row>
       <span style="margin-top: 14px; font-weight: bold;">รายการพื้นที่รับผิดชอบ</span>
       <div *ngIf="selectArea.length > 0">
-        <div *ngFor="let area of selectArea">
-          <p>{{area.province.province_th}}</p>
-          <p *ngFor="let ampher of area.province.ampher" style="font-size: 12px;">- {{ampher.ampher_th}}</p>
+        <div *ngFor="let area of selectArea; let indexProvince = index">
+          <p (click)="actionSheetSelectArea('province', indexProvince, 0)" tappable>{{area.province.province_th}}</p>
+          <p *ngFor="let ampher of area.province.ampher; let indexAmpher = index" style="font-size: 12px;" (click)="actionSheetSelectArea('ampher', indexProvince, indexAmpher)" tappable>- {{ampher.ampher_th}}</p>
         </div>
       </div>
       <ion-row>
         <ion-col col-12>
-          <button ion-button class="button-save" (click)="save()">บันทึก</button>
+          <button ion-button class="button-save" (click)="save()" tappable>บันทึก</button>
         </ion-col>
       </ion-row>
     </ion-grid>

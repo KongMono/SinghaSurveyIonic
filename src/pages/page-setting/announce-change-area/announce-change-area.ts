@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { NavController, IonicPage, NavParams, App } from 'ionic-angular';
+import { NavController, IonicPage, NavParams, App, ActionSheetController } from 'ionic-angular';
 import { CallApi } from "../../../providers/call-api";
 import { SinghaSurveyService } from "../../../providers/service";
 import { AppUtilService } from "../../../app/app.util";
@@ -29,7 +29,8 @@ export class AnnounceChangeAreaPage {
     public navCtrl: NavController,
     public navParams: NavParams,
     public service: SinghaSurveyService,
-    public util: AppUtilService) {
+    public util: AppUtilService,
+    public actionSheetCtrl: ActionSheetController) {
     this.profileData = navParams.get('data');
     console.log(this.profileData);
   }
@@ -140,7 +141,7 @@ export class AnnounceChangeAreaPage {
               let has_ampher_all = selectArea[0].province.ampher.filter(objProvince =>
                 objProvince.ampher_id == "0"
               );
-  
+
               if (has_ampher_all[0]) {
                 this.util.showAlertDialog("คุณได้เลือกอำเภอทั้งหมดแล้ว กรุณาลบแล้วเลือกใหม่");
               } else {
@@ -180,6 +181,28 @@ export class AnnounceChangeAreaPage {
       this.selectArea.push(area);
     }
     console.log(this.selectArea);
+  }
+
+  actionSheetSelectArea(action, indexProvince, indexAmpher) {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: '_icon-delete_file',
+          text: 'ลบ',
+          handler: () => {
+            if (action == 'province') {
+              this.selectArea.splice(indexProvince, 1);
+            } else if (action == 'ampher') {
+              this.selectArea[indexProvince].province.ampher.splice(indexAmpher, 1);
+              if (this.selectArea[indexProvince].province.ampher.length == 0) {
+                this.selectArea.splice(indexProvince, 1);
+              }
+            }
+          }
+        }
+      ]
+    });
+    actionSheet.present();
   }
 
   save() {
