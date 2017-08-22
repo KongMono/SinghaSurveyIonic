@@ -22,7 +22,19 @@ export class AddShopsPage {
   latlong: string;
   customerName: string;
   inputEditShopData = {};
+  optionChannelCustomer: optionChannelCustomerModel;
+  optionCustomer: optionCustomerModel;
   customerDetailData: CustomerDetailModel;
+  indexProvince = 0;
+  indexAmpher = 0;
+  indexTumbol = 0;
+  indexCustomerGroup = 0;
+  indexCustomerType = 0;
+  indexProjectType = 0;
+  customerDetail = {
+    channels: []
+  }
+  indexStatus = 0;
   constructor(
     public app: App,
     public navCtrl: NavController,
@@ -37,8 +49,6 @@ export class AddShopsPage {
 
   ionViewDidLoad() {
     this.geolocation.getCurrentPosition().then((resp) => {
-      // resp.coords.latitude
-      // resp.coords.longitude
       this.setLatLong(resp.coords.latitude, resp.coords.longitude);
     }).catch((error) => {
       console.log('Error getting location', error);
@@ -46,11 +56,12 @@ export class AddShopsPage {
 
     let watch = this.geolocation.watchPosition();
     watch.subscribe((data) => {
-      // data can be a set of coordinates, or an error (if an error occurred).
-      // data.coords.latitude
-      // data.coords.longitude
+
     });
+
+    this.getOptionCustomer();
   }
+
 
   setLatLong(lat, long) {
     if (this.customerDetailData.latitude) {
@@ -68,50 +79,66 @@ export class AddShopsPage {
     this.map = { lat: parseFloat(lat), lng: parseFloat(long), zoom: 15 };
   }
 
+  getOptionCustomer() {
+    this.util.showLoading();
+    this.service.optionCustomer()
+      .then(
+      (result: optionCustomerModel) => {
+        this.optionCustomer = result;
+        this.getOptionChannelCustomer();
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  getOptionChannelCustomer() {
+    this.service.optionChannelCustomer("0")
+      .then(
+      (result: optionChannelCustomerModel) => {
+        this.optionChannelCustomer = result;
+      }, error => {
+        console.log(error);
+      });
+  }
+
   reloadLocation() {
     let watch = this.geolocation.watchPosition();
     watch.subscribe((data) => {
       this.setLatLong(data.coords.latitude, data.coords.longitude)
-      // data can be a set of coordinates, or an error (if an error occurred).
-      // data.coords.latitude
-      // data.coords.longitude
     });
   }
 
-
   backPage() {
-    this.app.getRootNav().pop({ animate: true, animation: 'transition', direction: 'back' });
+    this.app.getRootNav().pop();
   }
 
-
   save() {
-
-    if (this.customerDetailData.province_id == ("0")) {
+    if (this.optionCustomer.province[this.indexProvince].province_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกจังหวัด");
       return;
     }
 
-    if (this.customerDetailData.ampher_id == ("0")) {
+    if (this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].ampher_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกอำเภอ");
       return;
     }
 
-    if (this.customerDetailData.tumbol_id == ("0")) {
+    if (this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].tumbol[this.indexTumbol].tumbol_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกตำบล");
       return;
     }
 
-    if (this.customerDetailData.customer_group_id == ("0")) {
+    if (this.optionCustomer.customer_group[this.indexCustomerGroup].customer_group_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกกลุ่มร้านค้า");
       return;
     }
 
-    if (this.customerDetailData.customer_type_id == ("0")) {
+    if (this.optionCustomer.customer_group[this.indexCustomerGroup].customer_type[this.indexCustomerType].customer_type_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกประเภทร้านค้า");
       return;
     }
 
-    if (this.customerDetailData.project_type_id == ("0")) {
+    if (this.optionCustomer.customer_group[this.indexCustomerGroup].project_type[this.indexProjectType].project_type_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกโครงการ");
       return;
     }
@@ -152,27 +179,27 @@ export class AddShopsPage {
       this.customerDetailData.latitude,
       this.customerDetailData.longitude,
       this.customerDetailData.address,
-      this.customerDetailData.province_id,
-      this.customerDetailData.ampher_id,
-      this.customerDetailData.tumbol_id,
+      this.optionCustomer.province[this.indexProvince].province_id,
+      this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].ampher_id,
+      this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].tumbol[this.indexTumbol].tumbol_id,
       this.customerDetailData.postcode,
       this.customerDetailData.tax_number,
-      this.customerDetailData.customer_group_id,
-      this.customerDetailData.customer_type_id,
+      this.optionCustomer.customer_group[this.indexCustomerGroup].customer_group_id,
+      this.optionCustomer.customer_group[this.indexCustomerGroup].customer_type[this.indexCustomerType].customer_type_id,
       this.customerDetailData.seats,
-      this.customerDetailData.project_type_id,
+      this.optionCustomer.customer_group[this.indexCustomerGroup].project_type[this.indexProjectType].project_type_id,
       this.customerDetailData.founder_date,
-      this.customerDetailData.status,
+      this.optionCustomer.status[this.indexStatus].status_id,
       this.customerDetailData.remark,
       JSON.stringify(this.customerDetailData.contacts),
       JSON.stringify(this.customerDetailData.channels),
       JSON.stringify(this.customerDetailData.freezer),
       JSON.stringify(this.customerDetailData.pg),
       JSON.stringify(this.customerDetailData.images),
-      JSON.stringify(this.customerDetailData.callcard)
-    )
+      JSON.stringify(this.customerDetailData.callcard))
       .then(result => {
         this.util.hideLoading();
+        this.util.showAlertDialog(result.msg);
         this.backPage();
       }, error => {
         this.util.hideLoading();

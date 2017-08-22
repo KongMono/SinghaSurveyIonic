@@ -406,32 +406,32 @@ export class EditShopsPage {
 
   save() {
 
-    if (this.customerDetailData.province_id == ("0")) {
+    if (this.optionCustomer.province[this.indexProvince].province_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกจังหวัด");
       return;
     }
 
-    if (this.customerDetailData.ampher_id == ("0")) {
+    if (this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].ampher_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกอำเภอ");
       return;
     }
 
-    if (this.customerDetailData.tumbol_id == ("0")) {
+    if (this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].tumbol[this.indexTumbol].tumbol_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกตำบล");
       return;
     }
 
-    if (this.customerDetailData.customer_group_id == ("0")) {
+    if (this.optionCustomer.customer_group[this.indexCustomerGroup].customer_group_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกกลุ่มร้านค้า");
       return;
     }
 
-    if (this.customerDetailData.customer_type_id == ("0")) {
+    if (this.optionCustomer.customer_group[this.indexCustomerGroup].customer_type[this.indexCustomerType].customer_type_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกประเภทร้านค้า");
       return;
     }
 
-    if (this.customerDetailData.project_type_id == ("0")) {
+    if (this.optionCustomer.customer_group[this.indexCustomerGroup].project_type[this.indexProjectType].project_type_id == ("0")) {
       this.util.showAlertDialog("กรุณาเลือกโครงการ");
       return;
     }
@@ -622,6 +622,7 @@ export class EditShopsPage {
       JSON.stringify(this.customerDetailData.callcard))
       .then(result => {
         this.util.hideLoading();
+        this.util.showAlertDialog(result.msg);
         this.backPage();
       }, error => {
         this.util.hideLoading();

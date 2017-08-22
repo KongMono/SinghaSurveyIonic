@@ -218,7 +218,7 @@ export class TabShop {
             setTimeout(() => {
               this.app.getRootNav().push('EditShopsPage', {
                 data: customer.customer_id
-              }, { animate: true, animation: 'transition', direction: 'forward' });
+              });
             }, 2000);
           }
         }, {
@@ -257,7 +257,7 @@ export class TabShop {
           handler: () => {
             this.app.getRootNav().push('EditShopsPage', {
               data: customer.customer_id
-            }, { animate: true, animation: 'transition', direction: 'forward' });
+            });
           }
         }, {
           icon: '_icon-trash',
