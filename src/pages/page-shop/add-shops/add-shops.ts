@@ -1,10 +1,14 @@
 import { Component, Inject } from '@angular/core';
-import { NavController, IonicPage, NavParams, App } from 'ionic-angular';
+import { NavController, IonicPage, NavParams, App, ModalController, ActionSheetController, AlertController } from 'ionic-angular';
 import { CallApi } from "../../../providers/call-api";
 import { SinghaSurveyService } from "../../../providers/service";
 import { AppUtilService } from "../../../app/app.util";
 import { ConfigApp, IAppConfig } from "../../../app/app.config";
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
+import { PhotoViewer } from '@ionic-native/photo-viewer';
+import { Http, Headers, Response, RequestOptions } from '@angular/http';
+
 
 @IonicPage()
 @Component({
@@ -13,15 +17,15 @@ import { Geolocation } from '@ionic-native/geolocation';
   providers: [
     CallApi,
     SinghaSurveyService,
-    AppUtilService]
+    AppUtilService,
+    Camera,
+    PhotoViewer]
 })
 
 export class AddShopsPage {
-  map: any = { lat: 13.7, lng: 100.5, zoom: 15 };
-  customer = [];
-  latlong: string;
   customerName: string;
-  inputEditShopData = {};
+  map: any = { lat: 13.7, lng: 100.5, zoom: 15 };
+  latlong: string;
   optionChannelCustomer: optionChannelCustomerModel;
   optionCustomer: optionCustomerModel;
   customerDetailData: CustomerDetailModel;
@@ -37,17 +41,25 @@ export class AddShopsPage {
   indexStatus = 0;
   constructor(
     public app: App,
+    private http: Http,
     public navCtrl: NavController,
-    public navParams: NavParams,
     private geolocation: Geolocation,
+    public navParams: NavParams,
     public service: SinghaSurveyService,
     public util: AppUtilService,
+    public modalCtrl: ModalController,
+    public actionSheetCtrl: ActionSheetController,
+    private camera: Camera,
+    private alertCtrl: AlertController,
+    private photoViewer: PhotoViewer,
     @Inject(ConfigApp) private config: IAppConfig) {
-
     this.customerName = this.navParams.get('data');
   }
 
   ionViewDidLoad() {
+    this.customerDetailData.name = this.customerName;
+    console.log(this.customerDetailData);
+
     this.geolocation.getCurrentPosition().then((resp) => {
       this.setLatLong(resp.coords.latitude, resp.coords.longitude);
     }).catch((error) => {
@@ -87,6 +99,7 @@ export class AddShopsPage {
         this.optionCustomer = result;
         this.getOptionChannelCustomer();
       }, error => {
+        this.util.hideLoading();
         console.log(error);
       });
   }
@@ -95,8 +108,10 @@ export class AddShopsPage {
     this.service.optionChannelCustomer("0")
       .then(
       (result: optionChannelCustomerModel) => {
+        this.util.hideLoading();
         this.optionChannelCustomer = result;
       }, error => {
+        this.util.hideLoading();
         console.log(error);
       });
   }
