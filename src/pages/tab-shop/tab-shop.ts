@@ -219,7 +219,7 @@ export class TabShop {
               this.app.getRootNav().push('EditShopsPage', {
                 data: customer.customer_id
               });
-            }, 2000);
+            }, 0);
           }
         }, {
           icon: '_icon-visit',

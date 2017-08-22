@@ -183,8 +183,7 @@ export class ShopAddCallCard {
   }
 
   save() {
-    // if (this.inputShopAddCallCardData.start_date && this.inputShopAddCallCardData.end_date && this.inputShopAddCallCardData.value && this.inputShopAddCallCardData.spst_no && this.inputShopAddCallCardData.prq_no && this.inputShopAddCallCardData.images) {
-    if (this.inputShopAddCallCardData.start_date && this.inputShopAddCallCardData.end_date && this.inputShopAddCallCardData.value && this.inputShopAddCallCardData.spst_no && this.inputShopAddCallCardData.prq_no || this.inputShopAddCallCardData.images) {
+    if (this.inputShopAddCallCardData.start_date && this.inputShopAddCallCardData.end_date && this.inputShopAddCallCardData.value && this.inputShopAddCallCardData.spst_no && this.inputShopAddCallCardData.prq_no && this.inputShopAddCallCardData.images) {
       if (this.index != null || this.index != undefined) {
         this.data.callcard[this.index].start_date = this.inputShopAddCallCardData.start_date;
         this.data.callcard[this.index].end_date = this.inputShopAddCallCardData.end_date;
