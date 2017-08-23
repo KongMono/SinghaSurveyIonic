@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { Platform } from 'ionic-angular';
+import { Platform, Config } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AppUtilService } from './app.util';
@@ -17,6 +17,7 @@ export class MyApp {
     statusBar: StatusBar,
     splashScreen: SplashScreen,
     public util: AppUtilService,
+    config: Config,
     @Inject(ConfigApp) private configApp: IAppConfig) {
 
     /**
@@ -44,6 +45,10 @@ export class MyApp {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       // statusBar.styleDefault();
+      config.set('scrollPadding', false)
+      config.set('scrollAssist', false)
+      config.set('autoFocusAssist', false)
+
       statusBar.overlaysWebView(false);
       statusBar.backgroundColorByHexString('#455A64');
       splashScreen.hide();

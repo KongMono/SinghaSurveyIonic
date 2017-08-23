@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ViewChild } from '@angular/core';
 import { NavController, IonicPage, NavParams, App } from 'ionic-angular';
 import { ConfigApp, IAppConfig } from "../../app/app.config";
 import { CallApi } from "../../providers/call-api";
@@ -21,28 +21,27 @@ export class PinLoginPage {
     pin3: '',
     pin4: ''
   }
+  @ViewChild('inputPasscode') inputPasscode ;
 
   constructor(public app: App,
     public navCtrl: NavController,
     public navParams: NavParams,
-    private keyboard: Keyboard,
     public service: SinghaSurveyService,
     public util: AppUtilService,
     @Inject(ConfigApp) private config: IAppConfig) {
 
   }
 
-  ionViewWillEnter() {
-
-  }
-
   ionViewDidLoad() {
-    this.keyboard.show();
-    this.focusInputPasscode((<HTMLInputElement>window.document.getElementById('inputPasscode')));
+    setTimeout(() => {
+      this.inputPasscode.setFocus();
+    },800); //a least 150ms.
   }
 
-  focusInputPasscode(inputPasscode: HTMLInputElement) {
-    inputPasscode.focus();
+  focusInputPasscode() {
+    setTimeout(() => {
+      this.inputPasscode.setFocus();
+    },250); //a least 150ms.
   }
 
   setPasscode(e) {

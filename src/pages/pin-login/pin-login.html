@@ -8,7 +8,7 @@
   <p class="text-set-pin">กรุณาใส่รหัส 4 หลัก</p>
   <div class="input-box">
     <div class=wrap-pin (click)="focusInputPasscode(inputPasscode)">
-      <input type="tel" maxLength="4" pattern="[0-9]*" class="input-pin" [(ngModel)]="inputPinLoginData.passcode" (ngModelChange)="setPasscode($event)" #inputPasscode id="inputPasscode">
+      <ion-input #inputPasscode type="tel" maxLength="4" pattern="[0-9]*" class="input-pin" [(ngModel)]="inputPinLoginData.passcode" (ngModelChange)="setPasscode($event)"></ion-input>
       <div class=pin>
         <div class=select-pin [hidden]="!inputPinLoginData.pin1"></div>
       </div>

@@ -45,7 +45,7 @@ export class SetpinPage {
   createPasscode() {
     if ((this.inputSetPinData.passcodeLength == '4' && this.inputSetPinData.confirmPasscodeLength == '4') && (this.inputSetPinData.passcode == this.inputSetPinData.confirmPasscode)) {
       this.util.setPin(this.inputSetPinData.passcode);
-      this.navCtrl.push('PinLoginPage', {}, {animate:true,animation:'transition',duration:1000,direction:'forward'}); //forward: right to left
+      this.navCtrl.push('PinLoginPage'); //forward: right to left
       // this.navCtrl.push('PinLoginPage', {}, {animate:true,animation:'transition',duration:1000,direction:'back'}); //back: left to right
     }
   }

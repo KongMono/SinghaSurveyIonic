@@ -3,12 +3,10 @@ import { LoadingController, AlertController } from "ionic-angular";
 import { ConfigApp, IAppConfig } from "./app.config";
 import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
-import { Dialogs } from '@ionic-native/dialogs';
 import { ToastController } from 'ionic-angular';
 
 @Injectable()
 export class AppUtilService {
-    public dialogs: Dialogs;
     loading: any;
     constructor(
         private loadingCtrl: LoadingController,
@@ -76,11 +74,6 @@ export class AppUtilService {
     }
 
     public showAlertDialog(text) {
-        if (this.config.isBuildDevice) {
-            this.dialogs.alert(text)
-                .then(() => console.log('Dialog dismissed'))
-                .catch(e => console.log('Error displaying dialog', e));
-        } else {
             let toast = this.toastCtrl.create({
                 message: text,
                 duration: 3000,
@@ -90,8 +83,6 @@ export class AppUtilService {
             toast.onDidDismiss(() => {
                 console.log('Dismissed toast');
             });
-
             toast.present();
-        }
     }
 }
