@@ -28,7 +28,34 @@ export class AddShopsPage {
   latlong: string;
   optionChannelCustomer: optionChannelCustomerModel;
   optionCustomer: optionCustomerModel;
-  customerDetailData: CustomerDetailModel;
+  customerDetailData: CustomerDetailModel = {
+    customer_id: "",
+    name: "",
+    latitude: "",
+    longitude: "",
+    address: "",
+    province_id: "",
+    ampher_id: "",
+    tumbol_id: "",
+    postcode: "",
+    tax_number: "",
+    customer_group_id: "",
+    customer_type_id: "",
+    seats: "",
+    project_type_id: "",
+    founder_date: "",
+    status: "",
+    remark: "",
+    user_last_updated: "",
+    updated_at: "",
+    created_at: "",
+    contacts: [],
+    channels: [],
+    pg: [],
+    freezer: [],
+    callcard: [],
+    images: []
+  };
   indexProvince = 0;
   indexAmpher = 0;
   indexTumbol = 0;
@@ -57,6 +84,7 @@ export class AddShopsPage {
   }
 
   ionViewDidLoad() {
+
     this.customerDetailData.name = this.customerName;
     console.log(this.customerDetailData);
 
@@ -68,7 +96,7 @@ export class AddShopsPage {
 
     let watch = this.geolocation.watchPosition();
     watch.subscribe((data) => {
-
+      this.setLatLong(data.coords.latitude, data.coords.longitude);
     });
 
     this.getOptionCustomer();
@@ -76,18 +104,11 @@ export class AddShopsPage {
 
 
   setLatLong(lat, long) {
-    if (this.customerDetailData.latitude) {
-      lat = this.customerDetailData.latitude;
-    } else {
-      lat = 0.0;
-    }
+    this.customerDetailData.latitude = lat;
+    this.customerDetailData.longitude = long;
 
-    if (this.customerDetailData.longitude) {
-      long = this.customerDetailData.longitude;
-    } else {
-      long = 0.0;
-    }
     this.latlong = lat + "," + long;
+    console.log("latlong", this.latlong);
     this.map = { lat: parseFloat(lat), lng: parseFloat(long), zoom: 15 };
   }
 
@@ -98,6 +119,7 @@ export class AddShopsPage {
       (result: optionCustomerModel) => {
         this.optionCustomer = result;
         this.getOptionChannelCustomer();
+
       }, error => {
         this.util.hideLoading();
         console.log(error);

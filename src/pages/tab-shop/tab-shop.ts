@@ -225,12 +225,28 @@ export class TabShop {
           icon: '_icon-visit',
           text: 'เข้าเยี่ยม',
           handler: () => {
-            console.log('Visit clicked');
+           this.callCustomersChecked(customer.customer_id);
           }
         }
       ]
     });
     this.actionSheet.present();
+  }
+
+  callCustomersChecked(customers_id) {
+    this.util.showLoading();
+    this.service.visitCustomersChecked(customers_id)
+      .then(
+      (result) => {
+        console.log(result);
+        this.util.hideLoading();
+        this.app.getRootNav().push('EditVisitPage', {
+          data: result.visit_id
+        });
+      }, error => {
+        this.util.hideLoading();
+        console.log(error);
+      });
   }
 
   onLongPress(customer: any) {
