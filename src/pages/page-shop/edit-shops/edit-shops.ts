@@ -91,17 +91,8 @@ export class EditShopsPage {
   }
 
   refreshLatLong(lat, long) {
-    if (this.customerDetailData.latitude) {
-      lat = this.customerDetailData.latitude;
-    } else {
-      lat = 0.0;
-    }
-
-    if (this.customerDetailData.longitude) {
-      long = this.customerDetailData.longitude;
-    } else {
-      long = 0.0;
-    }
+    this.customerDetailData.latitude = lat;
+    this.customerDetailData.longitude = long;
     this.latlong = lat + "," + long;
     this.map = { lat: parseFloat(lat), lng: parseFloat(long), zoom: 15 };
   }
@@ -225,22 +216,9 @@ export class EditShopsPage {
   }
 
   popupInput(action, index) {
-    this.navCtrl.push('PopupInput', { action: action, data: this.customerDetailData, option: this.optionChannelCustomer, index: index, callback: this.popupInputCallback }, { animate: true, animation: 'transition', direction: 'forward' });
-
-    // let modal = this.modalCtrl.create('PopupInput', { action: action, data: this.customerDetailData, option: [this.optionChannelCustomer], index: index }, {
-    //   cssClass: 'override-modal-popup-input'
-    // });
-    // modal.present();
-
-    // modal.onDidDismiss(data => {
-    //   console.log(data);
-    //   if (data) {
-    //     this.customerDetailData = data;
-    //     if (action == 'channels') {
-    //       this.setCustomerDetailDataChannels();
-    //     }
-    //   }
-    // });
+    this.navCtrl.push('PopupInput', 
+    { action: action, data: this.customerDetailData, option: this.optionChannelCustomer, index: index, callback: this.popupInputCallback }, 
+      { animate: true, animation: 'transition', direction: 'forward' });
   }
 
   popupInputCallback = (_params) => {
@@ -456,10 +434,6 @@ export class EditShopsPage {
       return;
     }
 
-    if (!this.customerDetailData.images) {
-      this.customerDetailData.images = [];
-    }
-
     this.callServiceUpdateCustomer();
   }
 
@@ -532,6 +506,9 @@ export class EditShopsPage {
       (result: CustomerDetailModel) => {
         this.util.hideLoading();
         this.customerDetailData = result;
+        if (!this.customerDetailData.images) {
+          this.customerDetailData.images = [];
+        }
         console.log("customerDetailData", this.customerDetailData);
         this.setIndexProvince();
         this.setIndexCustomerGroup();
