@@ -14,24 +14,182 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="customerDetailData">
-  <div class="box-detail-shop">
+<ion-content>
+  <div class="box-detail-visit" *ngIf="visitCustomerDetail">
     <span class="text-title">แก้ไขข้อมูลการเข้าเยี่ยม</span>
     <ion-grid>
       <ion-row>
         <ion-col col-3>
-          <p>วันที่ก่อตั้ง</p>
+          <p>วันที่เข้าเยี่ยม</p>
         </ion-col>
         <ion-col>
           <ion-item class="item-calendar">
-            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="customerDetailData.founder_date"></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="visitCustomerDetail.visit_date" disabled></ion-datetime>
           </ion-item>
+          <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
         </ion-col>
       </ion-row>
-    
+      <ion-row class="line-top-row">
+        <ion-col class="col-title">
+          <p>รายการกิจกรรม</p>
+        </ion-col>
+        <ion-col class="col-title">
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('activities')" tappable></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let activities of visitCustomerDetail.activities; let i = index" (click)="actionSheetInList('activities', i)"
+        [ngClass]="{'hide-line-last-item': (visitCustomerDetail.activities.length-1 == i)}" tappable>
+        <ion-item class="item-title">
+          <ion-row class="row-full-size">
+            <ion-col class="col-sub">
+              <span class="text-title-sub">กิจกรรม</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col class="col-sub">
+              <span class="text-value-sub">{{activities.name}}</span>
+            </ion-col>
+          </ion-row>
+        </ion-item>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <p class="text-title-retroact">ยอดสั่งซื้อย้อนหลัง 3 เดือนจากปัจจุบัน</p>
+        <ion-row class="row-full-size row-title" *ngFor="let order of visitCustomerDetail.order">
+          <span class="text-sub-title">ปี {{order.year}} เดือน {{order.month}}</span>
+          <ion-row class="row-full-size" *ngFor="let value of order.value; let i = index" (click)="actionSheetInList('order', i)" [ngClass]="{'hide-line-last-item': (order.value.length-1 == i)}"
+            tappable>
+            <ion-item class="item-sub-title">
+              <ion-row class="row-full-size">
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">ขาย</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">ซื้อ</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">stock</span>
+                </ion-col>
+              </ion-row>
+              <ion-row class="row-full-size">
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.qty}}</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.buy}}</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.stock}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-row>
+        </ion-row>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <p class="text-title-retroact">ยอดขายสินค้าบุญรอดย้อนหลัง 3 เดือนจากปัจจุบัน</p>
+        <ion-row class="row-full-size row-title" *ngFor="let boonrawd of visitCustomerDetail.sale.boonrawd">
+          <span class="text-sub-title">ปี {{boonrawd.year}} เดือน {{boonrawd.month}}</span>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" (click)="popupInput('activities')" tappable></ion-icon>
+          <ion-row class="row-full-size" *ngFor="let value of boonrawd.value; let i = index" (click)="actionSheetInList('boonrawd', i)"
+            [ngClass]="{'hide-line-last-item': (boonrawd.value.length-1 == i)}" tappable>
+            <ion-item class="item-sub-title">
+              <ion-row class="row-full-size">
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">ขาย</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">ซื้อ</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">stock</span>
+                </ion-col>
+              </ion-row>
+              <ion-row class="row-full-size">
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.qty}}</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.buy}}</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.stock}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-row>
+        </ion-row>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <p class="text-title-retroact">ยอดขายสินค้าคู่แข่งย้อนหลัง 3 เดือนจากปัจจุบัน</p>
+        <ion-row class="row-full-size row-title" *ngFor="let rival of visitCustomerDetail.sale.rival">
+          <span class="text-sub-title">ปี {{rival.year}} เดือน {{rival.month}}</span>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" (click)="popupInput('activities')" tappable></ion-icon>
+          <ion-row class="row-full-size" *ngFor="let value of rival.value; let i = index" (click)="actionSheetInList('rival', i)"
+            [ngClass]="{'hide-line-last-item': (rival.value.length-1 == i)}" tappable>
+            <ion-item class="item-sub-title">
+              <ion-row class="row-full-size">
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">ขาย</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">ซื้อ</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">stock</span>
+                </ion-col>
+              </ion-row>
+              <ion-row class="row-full-size">
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.qty}}</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.buy}}</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.stock}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-row>
+        </ion-row>
+      </ion-row>
+      <ion-row class="line-top-row">
+        <p class="text-title-retroact">แสดงแนบรูปใบเสร็จย้อนหลัง 3 เดือนจากปัจจุบัน</p>
+        <ion-row class="row-full-size row-title" *ngFor="let receipt of visitCustomerDetail.receipt">
+          <span class="text-sub-title">ปี {{receipt.year}} เดือน {{receipt.month}}</span>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" (click)="popupInput('activities')" tappable></ion-icon>
+          <ion-row class="row-full-size" *ngFor="let value of receipt.value; let i = index" (click)="actionSheetInList('receipt', i)"
+            [ngClass]="{'hide-line-last-item': (receipt.value.length-1 == i)}" tappable>
+            <!-- <ion-item class="item-sub-title">
+              <ion-row class="row-full-size">
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">ขาย</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">ซื้อ</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-title-sub">stock</span>
+                </ion-col>
+              </ion-row>
+              <ion-row class="row-full-size">
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.qty}}</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.buy}}</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub">
+                  <span class="text-value-sub">{{value.stock}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-item> -->
+          </ion-row>
+        </ion-row>
+      </ion-row>
       <ion-row>
         <ion-col col-6 style="padding-left: 0;">
-          <button ion-button class="button-edit" (click)="save()" tappable>แก้ไข</button>
+          <button ion-button class="button-edit" (click)="save()" tappable>บันทึก</button>
         </ion-col>
         <ion-col col-6>
           <button ion-button class="button-cancel" (click)="backPage()" tappable>ยกเลิก</button>

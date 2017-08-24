@@ -14,8 +14,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="customerDetailData">
-  <div class="box-map">
+<ion-content>
+  <div class="box-map" *ngIf="customerDetailData">
     <sebm-google-map id="map" [latitude]="map.lat" [longitude]="map.lng" [zoom]="map.zoom">
       <sebm-google-map-marker [latitude]="map.lat" [longitude]="map.lng">
         <sebm-google-map-info-window>
@@ -23,7 +23,7 @@
       </sebm-google-map-marker>
     </sebm-google-map>
   </div>
-  <div class="box-detail-shop">
+  <div class="box-detail-shop" *ngIf="customerDetailData">
     <span class="text-title">ข้อมูลร้านค้า</span>
     <ion-grid>
       <ion-row>
