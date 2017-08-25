@@ -150,6 +150,101 @@ interface CustomerDetailModel {
   images?: any;
 }
 
+interface optionsVisitSaleModel {
+  boonrawd: Boonrawd[];
+  rival: Boonrawd[];
+}
+interface Boonrawd {
+  product_id: string;
+  product_name: string;
+}
+
+interface optionsSaleModel {
+  product_group: Productgroup[];
+  promotion: Promotion[];
+}
+
+interface visitActivityDetail {
+  visit_activity_id: string;
+  venue_type: string;
+  venue_name: string;
+  vendor_id: string;
+  tradition_type_id: string;
+  activity_name: string;
+  start_date: string;
+  end_date: string;
+  activity_master_id: string;
+  activity_id: string;
+  pg: any[];
+  sales: any[];
+  equipment: any[];
+  images?: any;
+  sale_images?: any;
+}
+
+interface optionsActivityModel {
+  vendor: Vendor[];
+  tradition_type: Traditiontype[];
+}
+
+interface Traditiontype {
+  tradition_type_id: string;
+  tradition_name: string;
+  activity_master: Activitymaster[];
+}
+
+interface Activitymaster {
+  activity_master_id: string;
+  activity_master_name: string;
+  activity: Activity[];
+}
+
+interface Activity {
+  activity_id: string;
+  activity_name: string;
+}
+
+interface Vendor {
+  vendor_id: string;
+  name: string;
+}
+
+interface Promotion {
+  promotion_id: string;
+  name: string;
+}
+
+interface Productgroup {
+  product_group_id: string;
+  name: string;
+  product: Product[];
+}
+
+interface Product {
+  product_id: string;
+  name: string;
+}
+
+interface optionEquipmentModel {
+  data: Datum[];
+}
+
+interface Datum {
+  product_vendor_id: string;
+  name: string;
+  product_group: Productgroup[];
+}
+
+interface Productgroup {
+  product_group_id: string;
+  name: string;
+  product: Product[];
+}
+
+interface Product {
+  product_id: string;
+  name: string;
+}
 interface OptionSearchCustomerModel {
   province: Province[];
 }

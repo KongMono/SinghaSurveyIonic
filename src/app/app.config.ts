@@ -256,6 +256,42 @@ export const AppConfig: IAppConfig = {
         callcard: ""
       }
     },
+    optionVisitSale: {
+      url: "/v2/options/visit_sale/format/json",
+      method: "GET",
+      param: {
+        user_id: ""
+      }
+    },
+    optionEquipment: {
+      url: "/v2/options/equipment/format/json",
+      method: "GET",
+      param: {
+        user_id: ""
+      }
+    },
+    optionSale: {
+      url: "/v2/options/sale/format/json",
+      method: "GET",
+      param: {
+        user_id: ""
+      }
+    },
+    optionActivity: {
+      url: "/v2/options/activity/format/json",
+      method: "GET",
+      param: {
+        user_id: ""
+      }
+    },
+    visitActivityDetail: {
+      url: "/v2/visit/activity_row/format/json",
+      method: "GET",
+      param: {
+        user_id: "",
+        activity_id: ""
+      }
+    },
     visitCustomerDetail: {
       url: "/v2/visit/row/format/json",
       method: "GET",

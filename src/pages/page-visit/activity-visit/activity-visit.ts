@@ -11,8 +11,8 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 
 @IonicPage()
 @Component({
-  selector: 'page-edit-visit',
-  templateUrl: 'edit-visit.html',
+  selector: 'page-activity-visit',
+  templateUrl: 'activity-visit.html',
   providers: [
     CallApi,
     SinghaSurveyService,
@@ -21,10 +21,8 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
     PhotoViewer]
 })
 
-export class EditVisitPage {
-  map: any = { lat: 13.7, lng: 100.5, zoom: 15 };
-  visit_id: any;
-  visitCustomerDetail: VisitCustomerDetailModel;
+export class ActivityVisitPage {
+  activity_id: any;
   constructor(
     public app: App,
     private http: Http,
@@ -39,49 +37,52 @@ export class EditVisitPage {
     private alertCtrl: AlertController,
     private photoViewer: PhotoViewer,
     @Inject(ConfigApp) private config: IAppConfig) {
-    this.visit_id = navParams.get('data');
-    console.log(this.visit_id);
+    this.activity_id = navParams.get('data');
   }
 
   ionViewDidLoad() {
-    this.callGetOptionVisitSale();
+    this.callGetOptionActivity();
   }
 
   backPage() {
     this.app.getRootNav().pop();
   }
 
-  callGetVisitCustomerDetail(visit_id) {
-    this.service.visitCustomerDetail(visit_id)
-      .then((result: VisitCustomerDetailModel) => {
-        this.visitCustomerDetail = result;
-        this.util.hideLoading();
-      }, error => {
-        this.util.hideLoading();
-        console.log(error);
-      });
-  }
-
-  callGetOptionVisitSale() {
+  callGetOptionActivity() {
     this.util.showLoading();
-    this.service.optionVisitSale()
-      .then((result: optionsVisitSaleModel) => {
-        this.callGetOptionEquipment();
+    this.service.optionActivity()
+      .then((result: optionsActivityModel) => {
+        this.callGetOptionSale();
       }, error => {
         this.util.hideLoading();
         console.log(error);
       });
   }
 
-  callGetOptionEquipment() {
-    this.service.optionEquipment()
-      .then((result: optionEquipmentModel) => {
-        this.callGetVisitCustomerDetail(this.visit_id);
+  callGetOptionSale() {
+    this.util.showLoading();
+    this.service.optionSale()
+      .then((result: optionsSaleModel) => {
+
+        if (this.activity_id != "") {
+          this.callGetVisitActivityDetail();
+        }
+
       }, error => {
         this.util.hideLoading();
         console.log(error);
       });
   }
 
+  callGetVisitActivityDetail() {
+    this.util.showLoading();
+    this.service.visitActivityDetail(this.activity_id)
+      .then((result: visitActivityDetail) => {
+
+      }, error => {
+        this.util.hideLoading();
+        console.log(error);
+      });
+  }
 
 }

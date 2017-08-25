@@ -259,6 +259,59 @@ export class SinghaSurveyService {
         return this.Api.call(service.url, service.method, service.param);
     }
 
+
+    optionVisitSale() {
+        let service = this.config.service.optionVisitSale;
+
+        service.param = {
+            user_id: this.config.userInfo.username
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+
+    optionEquipment() {
+        let service = this.config.service.optionEquipment;
+
+        service.param = {
+            user_id: this.config.userInfo.username
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+    optionSale() {
+        let service = this.config.service.optionSale;
+
+        service.param = {
+            user_id: this.config.userInfo.username
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+    optionActivity() {
+        let service = this.config.service.optionActivity;
+
+        service.param = {
+            user_id: this.config.userInfo.username
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+    visitActivityDetail(activity_id) {
+        let service = this.config.service.visitActivityDetail;
+
+        service.param = {
+            user_id: this.config.userInfo.username,
+            activity_id: activity_id
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
     uploadImageCustomer(imageBase64) {
         let service = this.config.service.uploadImageCustomer;
 
