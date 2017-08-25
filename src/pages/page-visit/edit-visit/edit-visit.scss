@@ -136,9 +136,17 @@ page-edit-visit {
                 //     }
                 // }
             }
+            .text-title-product {
+                margin-left: 12px;
+                font-size: 14px;
+                color: $singha-survey-color-gray-text-all;
+            }
             .col-sub {
                 padding-left: 12px;
                 padding-right: 12px;
+                &.value-row {
+                    padding-right: 0;
+                }
                 .text-title-sub {
                     font-size: 14px;
                 }
