@@ -154,6 +154,9 @@ page-edit-visit {
                     font-size: 14px;
                     color: $singha-survey-color-gray-text-all;
                     white-space: normal;
+                    &.value-row {
+                        margin-left: 10px;
+                    }
                 }
             }
         }
