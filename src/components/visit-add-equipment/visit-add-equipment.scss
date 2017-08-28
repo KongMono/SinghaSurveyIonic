@@ -1,0 +1,27 @@
+visit-add-equipment {
+    .wrap-list {
+        margin: 0;
+        .item {
+            .item-inner {
+                border-bottom: 1px solid #dedede !important;
+                .input-wrapper {
+                    .label {
+                        margin: 13px 8px;
+                    }
+                }
+            }
+        }
+    }
+    .wrap-input {
+        input {
+            margin: 5px 8px;
+            line-height: 32px;
+        }
+    }
+    .button-save {
+        margin: auto;
+        display: flex;
+        background-color: $singha-survey-color-gray-3;
+        color: $singha-survey-color-primaryDark;
+    }
+}

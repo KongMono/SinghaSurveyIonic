@@ -5,7 +5,7 @@
           <ion-icon class="icon-size" name="_icon-back"></ion-icon>
         </button>
     </ion-buttons>
-    <ion-title class="title" *ngIf="visitCustomerDetail">{{visitCustomerDetail.customer_name}}</ion-title>
+    <ion-title class="title" *ngIf="visitCustomerDetailData">{{visitCustomerDetailData.customer_name}}</ion-title>
     <ion-buttons right>
       <button icon-only style="background-color:#455A64">
           <ion-icon class="icon-size"></ion-icon>
@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="box-detail-visit" *ngIf="visitCustomerDetail">
+  <div class="box-detail-visit" *ngIf="visitCustomerDetailData">
     <span class="text-title">แก้ไขข้อมูลการเข้าเยี่ยม</span>
     <ion-grid>
       <ion-row>
@@ -24,7 +24,7 @@
         </ion-col>
         <ion-col>
           <ion-item class="item-calendar">
-            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="visitCustomerDetail.visit_date" disabled></ion-datetime>
+            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="visitCustomerDetailData.visit_date" disabled></ion-datetime>
           </ion-item>
           <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
         </ion-col>
@@ -37,8 +37,8 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('activities')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let activities of visitCustomerDetail.activities; let i = index" (click)="actionSheetInList('activities', i)"
-        [ngClass]="{'hide-line-last-item': (visitCustomerDetail.activities.length-1 == i)}" tappable>
+      <ion-row *ngFor="let activities of visitCustomerDetailData.activities; let i = index" (click)="actionSheetInList('activities', i)"
+        [ngClass]="{'hide-line-last-item': (visitCustomerDetailData.activities.length-1 == i)}" tappable>
         <ion-item class="item-title">
           <ion-row class="row-full-size">
             <ion-col class="col-sub">
@@ -54,12 +54,34 @@
       </ion-row>
       <ion-row class="line-top-row">
         <p class="text-title-retroact">ยอดสั่งซื้อย้อนหลัง 3 เดือนจากปัจจุบัน</p>
-        <ion-row class="row-full-size row-title" *ngFor="let order of visitCustomerDetail.order">
+        <ion-row class="row-full-size row-title" *ngFor="let order of visitCustomerDetailData.order">
           <span class="text-sub-title">ปี {{order.year}} เดือน {{order.month}}</span>
           <ion-row class="row-full-size" *ngFor="let value of order.value; let i = index" (click)="actionSheetInList('order', i)" [ngClass]="{'hide-line-last-item': (order.value.length-1 == i)}"
             tappable>
             <ion-item class="item-sub-title">
-              <span class="text-title-product">{{value.product_id}}</span>
+              <ion-row class="row-full-size">
+                <ion-col col-4 class="col-sub value-row">
+                  <span class="text-title-sub">{{value.name}}</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub value-row">
+                  <span class="text-title-sub">ขาย</span>
+                </ion-col>
+                <ion-col col-4 class="col-sub value-row">
+                  <span class="text-value-sub">{{value.qty}}</span>
+                </ion-col>
+              </ion-row>
+            </ion-item>
+          </ion-row>
+        </ion-row>
+      </ion-row>
+      <!-- <ion-row class="line-top-row">
+        <p class="text-title-retroact">ยอดสั่งซื้อย้อนหลัง 3 เดือนจากปัจจุบัน</p>
+        <ion-row class="row-full-size row-title" *ngFor="let order of visitCustomerDetailData.order; let indexOrder = index">
+          <span class="text-sub-title">ปี {{order.year}} เดือน {{order.month}}</span>
+          <ion-row class="row-full-size" *ngFor="let value of visitCustomerDetail.order[indexOrder].value; let i = index" (click)="actionSheetInList('order', i)" [ngClass]="{'hide-line-last-item': (order.value.length-1 == i)}"
+            tappable>
+            <ion-item class="item-sub-title">
+              <span class="text-title-product">{{value.product.product_name}}</span>
               <ion-row class="row-full-size">
                 <ion-col col-2 class="col-sub value-row">
                   <span class="text-title-sub">ขาย</span>
@@ -83,17 +105,17 @@
             </ion-item>
           </ion-row>
         </ion-row>
-      </ion-row>
+      </ion-row> -->
       <ion-row class="line-top-row">
         <p class="text-title-retroact">ยอดขายสินค้าบุญรอดย้อนหลัง 3 เดือนจากปัจจุบัน</p>
-        <ion-row class="row-full-size row-title" *ngFor="let boonrawd of visitCustomerDetail.sale.boonrawd">
+        <ion-row class="row-full-size row-title" *ngFor="let boonrawd of visitCustomerDetailData.sale.boonrawd; let indexBoonrawd = index">
           <span class="text-sub-title">ปี {{boonrawd.year}} เดือน {{boonrawd.month}}</span>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="boonrawd.status" (click)="popupInput('activities')"
+          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="boonrawd.status" (click)="popupInput('boonrawd')"
             tappable></ion-icon>
-          <ion-row class="row-full-size" *ngFor="let value of boonrawd.value; let i = index" (click)="actionSheetInList('boonrawd', i)"
+          <ion-row class="row-full-size" *ngFor="let value of visitCustomerDetail.boonrawd[indexBoonrawd].value; let i = index" (click)="actionSheetInList('boonrawd', i)"
             [ngClass]="{'hide-line-last-item': (boonrawd.value.length-1 == i)}" tappable>
             <ion-item class="item-sub-title">
-              <span class="text-title-product">{{value.product_id}}</span>
+              <span class="text-title-product">{{value.product.product_name}}</span>
               <ion-row class="row-full-size">
                 <ion-col col-2 class="col-sub value-row">
                   <span class="text-title-sub">ขาย</span>
@@ -120,14 +142,14 @@
       </ion-row>
       <ion-row class="line-top-row">
         <p class="text-title-retroact">ยอดขายสินค้าคู่แข่งย้อนหลัง 3 เดือนจากปัจจุบัน</p>
-        <ion-row class="row-full-size row-title" *ngFor="let rival of visitCustomerDetail.sale.rival">
+        <ion-row class="row-full-size row-title" *ngFor="let rival of visitCustomerDetailData.sale.rival; let indexRival = index">
           <span class="text-sub-title">ปี {{rival.year}} เดือน {{rival.month}}</span>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="rival.status" (click)="popupInput('activities')"
+          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="rival.status" (click)="popupInput('rival')"
             tappable></ion-icon>
-          <ion-row class="row-full-size" *ngFor="let value of rival.value; let i = index" (click)="actionSheetInList('rival', i)" [ngClass]="{'hide-line-last-item': (rival.value.length-1 == i)}"
+          <ion-row class="row-full-size" *ngFor="let value of visitCustomerDetail.rival[indexRival].value; let i = index" (click)="actionSheetInList('rival', i)" [ngClass]="{'hide-line-last-item': (rival.value.length-1 == i)}"
             tappable>
             <ion-item class="item-sub-title">
-              <span class="text-title-product">{{value.product_id}}</span>
+              <span class="text-title-product">{{value.product.product_name}}</span>
               <ion-row class="row-full-size">
                 <ion-col col-2 class="col-sub value-row">
                   <span class="text-title-sub">ขาย</span>
@@ -154,36 +176,17 @@
       </ion-row>
       <ion-row class="line-top-row">
         <p class="text-title-retroact">แสดงแนบรูปใบเสร็จย้อนหลัง 3 เดือนจากปัจจุบัน</p>
-        <ion-row class="row-full-size row-title" *ngFor="let receipt of visitCustomerDetail.receipt">
+        <ion-row class="row-full-size row-title" *ngFor="let receipt of visitCustomerDetailData.receipt">
           <span class="text-sub-title">ปี {{receipt.year}} เดือน {{receipt.month}}</span>
           <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="receipt.status" (click)="popupInput('activities')"
             tappable></ion-icon>
-          <ion-row class="row-full-size" *ngFor="let value of receipt.value; let i = index" (click)="actionSheetInList('receipt', i)"
-            [ngClass]="{'hide-line-last-item': (receipt.value.length-1 == i)}" tappable>
-            <!-- <ion-item class="item-sub-title">
-              <ion-row class="row-full-size">
-                <ion-col col-4 class="col-sub">
-                  <span class="text-title-sub">ขาย</span>
-                </ion-col>
-                <ion-col col-4 class="col-sub">
-                  <span class="text-title-sub">ซื้อ</span>
-                </ion-col>
-                <ion-col col-4 class="col-sub">
-                  <span class="text-title-sub">stock</span>
-                </ion-col>
-              </ion-row>
-              <ion-row class="row-full-size">
-                <ion-col col-4 class="col-sub">
-                  <span class="text-value-sub">{{value.qty}}</span>
-                </ion-col>
-                <ion-col col-4 class="col-sub">
-                  <span class="text-value-sub">{{value.buy}}</span>
-                </ion-col>
-                <ion-col col-4 class="col-sub">
-                  <span class="text-value-sub">{{value.stock}}</span>
-                </ion-col>
-              </ion-row>
-            </ion-item> -->
+          <ion-row *ngIf="receipt.value.length > 0" style="height: 80px;">
+            <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
+              <div style="display: flex">
+                <img *ngFor="let images of receipt.value; let i = index" [src]="getImagePath(images)" (click)="viewImage(i)" height="80px"
+                  width="auto" style="margin: 0 10px;" tappable/>
+              </div>
+            </ion-scroll>
           </ion-row>
         </ion-row>
       </ion-row>
@@ -196,7 +199,7 @@
         </ion-col>
       </ion-row>
       <ion-row *ngFor="let equipment of visitCustomerDetail.equipment; let i = index" (click)="actionSheetInList('equipment', i)"
-        [ngClass]="{'hide-line-last-item': (visitCustomerDetail.equipment.length-1 == i)}" tappable>
+        [ngClass]="{'hide-line-last-item': (visitCustomerDetailData.equipment.length-1 == i)}" tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -208,10 +211,10 @@
           </ion-row>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
-              <span class="text-value-sub">{{equipment.product_vendor_id}}</span>
+              <span class="text-value-sub">{{equipment.product_vendor.name}}</span>
             </ion-col>
             <ion-col col-6 class="col-sub">
-              <span class="text-value-sub">{{equipment.product_id}}</span>
+              <span class="text-value-sub">{{equipment.product_group.name}}</span>
             </ion-col>
           </ion-row>
           <ion-row class="row-full-size">
@@ -224,7 +227,7 @@
           </ion-row>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
-              <span class="text-value-sub">{{equipment.product_group_id}}</span>
+              <span class="text-value-sub">{{equipment.product.name}}</span>
             </ion-col>
             <ion-col col-6 class="col-sub">
               <span class="text-value-sub">{{equipment.qty}}</span>
@@ -240,26 +243,14 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('images')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <!-- <ion-row *ngFor="let images of visitCustomerDetail.images; let i = index" (click)="actionSheetInList('images', i)" [ngClass]="{'hide-line-last-item': (visitCustomerDetail.images.length-1 == i)}" tappable>
-        <ion-item>
-          <ion-row class="row-full-size">
-            <ion-col col-6 class="col-sub">
-              <span class="text-title-sub">บริษัท</span>
-            </ion-col>
-            <ion-col col-6 class="col-sub">
-              <span class="text-title-sub">ยี่ห้อ</span>
-            </ion-col>
-          </ion-row>
-          <ion-row class="row-full-size">
-            <ion-col col-6 class="col-sub">
-              <span class="text-value-sub">{{equipment.product_vendor_id}}</span>
-            </ion-col>
-            <ion-col col-6 class="col-sub">
-              <span class="text-value-sub">{{equipment.product_id}}</span>
-            </ion-col>
-          </ion-row>
-        </ion-item>
-      </ion-row> -->
+      <ion-row *ngIf="visitCustomerDetailData.images.length > 0" style="height: 80px;">
+        <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
+          <div style="display: flex">
+            <img *ngFor="let images of visitCustomerDetailData.images; let i = index" [src]="getImagePath(images)" (click)="viewImage(i)"
+              height="80px" width="auto" style="margin: 0 10px;" tappable/>
+          </div>
+        </ion-scroll>
+      </ion-row>
       <ion-row class="line-top-row">
         <ion-col>
           <p>หัวข้อติดตาม</p>
@@ -268,7 +259,7 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('note')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let note of visitCustomerDetail.note; let i = index" (click)="actionSheetInList('note', i)" [ngClass]="{'hide-line-last-item': (visitCustomerDetail.note.length-1 == i)}"
+      <ion-row *ngFor="let note of visitCustomerDetailData.note; let i = index" (click)="actionSheetInList('note', i)" [ngClass]="{'hide-line-last-item': (visitCustomerDetailData.note.length-1 == i)}"
         tappable>
         <ion-item>
           <ion-row class="row-full-size">
@@ -320,7 +311,7 @@
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-input type="text" placeholder="หมายเหตุ" class="wrap-input" [(ngModel)]="visitCustomerDetail.remark"></ion-input>
+            <ion-input type="text" placeholder="หมายเหตุ" class="wrap-input" [(ngModel)]="visitCustomerDetailData.remark"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>

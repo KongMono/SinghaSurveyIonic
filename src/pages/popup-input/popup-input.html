@@ -20,4 +20,7 @@
     <shop-add-contact *ngIf="action == 'contacts'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-contact>
     <shop-add-freezer *ngIf="action == 'freezer'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-freezer>
     <shop-add-pg *ngIf="action == 'pg'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-pg>
+    <visit-add-equipment *ngIf="action == 'equipment'" [customerDetailDataInput]="data" [option]="option" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></visit-add-equipment>
+    <visit-add-note *ngIf="action == 'note'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></visit-add-note>
+    <visit-add-retroact *ngIf="action == 'boonrawd' || action == 'rival'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></visit-add-retroact>
 </ion-content>

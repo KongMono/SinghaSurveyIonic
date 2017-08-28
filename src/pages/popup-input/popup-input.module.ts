@@ -6,6 +6,9 @@ import { ShopAddChannel } from './../../components/shop-add-channel/shop-add-cha
 import { ShopAddContact } from './../../components/shop-add-contact/shop-add-contact';
 import { ShopAddFreezer } from './../../components/shop-add-freezer/shop-add-freezer';
 import { ShopAddPG } from './../../components/shop-add-pg/shop-add-pg';
+import { VisitAddEquipment } from './../../components/visit-add-equipment/visit-add-equipment';
+import { VisitAddNote } from './../../components/visit-add-note/visit-add-note';
+import { VisitAddRetroact } from './../../components/visit-add-retroact/visit-add-retroact';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,10 @@ import { ShopAddPG } from './../../components/shop-add-pg/shop-add-pg';
     ShopAddChannel,
     ShopAddContact,
     ShopAddFreezer,
-    ShopAddPG
+    ShopAddPG,
+    VisitAddEquipment,
+    VisitAddNote,
+    VisitAddRetroact
   ],
   imports: [
     IonicPageModule.forChild(PopupInput),
