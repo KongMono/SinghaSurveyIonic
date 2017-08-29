@@ -20,7 +20,7 @@ export const AppConfig: IAppConfig = {
   isLogged: null,
   pin_logged: null,
   userInfo: null,
-  isBuildDevice: true,
+  isBuildDevice: false,
   isProduction: false,
 
   endpoint: 'http://128.199.72.29/index.php',
@@ -107,6 +107,16 @@ export const AppConfig: IAppConfig = {
         province_id: "",
         ampher_id: "",
         tumbol_id: ""
+      }
+    },
+    searchVisitCustomer: {
+      url: "/v2/visit/list/format/json",
+      method: "GET",
+      param: {
+        user_id: "",
+        search: "",
+        start_date: "",
+        end_date: ""
       }
     },
     profile: {

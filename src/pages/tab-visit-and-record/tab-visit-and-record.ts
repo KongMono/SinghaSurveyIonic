@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, ModalController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, App, ModalController, ActionSheetController } from 'ionic-angular';
 import { CallApi } from './../../providers/call-api';
 import { SinghaSurveyService } from './../../providers/service';
 import { AppUtilService } from './../../app/app.util';
@@ -9,7 +9,9 @@ import { ConfigApp, IAppConfig } from './../../app/app.config';
 @Component({
   selector: 'page-tab-visit-and-record',
   templateUrl: 'tab-visit-and-record.html',
-  providers: [CallApi, SinghaSurveyService]
+  providers: [
+    CallApi, 
+    SinghaSurveyService]
 })
 
 export class TabVisitAndRecord {
@@ -19,6 +21,7 @@ export class TabVisitAndRecord {
   infiniteScroll: any;
   visitCycleData: VisitCycleModel;
   customersVisitList = [];
+  actionSheet: any;
   showCheckNameDialog: boolean = true;
 
   constructor(
@@ -27,6 +30,7 @@ export class TabVisitAndRecord {
     public navParams: NavParams,
     public service: SinghaSurveyService,
     public util: AppUtilService,
+    public actionSheetCtrl: ActionSheetController,
     public modalCtrl: ModalController,
     @Inject(ConfigApp) private config: IAppConfig) {
 
@@ -169,12 +173,41 @@ export class TabVisitAndRecord {
   }
 
   onClick(visit_id: any) {
-    console.log("onClick");
-    console.log("visit_id", visit_id);
-
     this.app.getRootNav().push('EditVisitPage', {
       data: visit_id
     });
+  }
+
+  onLongPress(visit: any) {
+    if (this.actionSheet) {
+      this.actionSheet.dismiss();
+    }
+    this.actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: '_icon-map',
+          text: 'แผนที่',
+          handler: () => {
+            this.app.getRootNav().push('ViewMapPage', {
+              data: {
+                title: visit.customer_name,
+                latitude: visit.latitude,
+                longitude: visit.longitude
+              }
+            }, { animate: true, animation: 'transition', direction: 'forward' });
+          }
+        }, {
+          icon: '_icon-visit',
+          text: 'แก้ไข',
+          handler: () => {
+            this.app.getRootNav().push('EditVisitPage', {
+              data: visit.visit_id
+            });
+          }
+        }
+      ]
+    });
+    this.actionSheet.present();
   }
 
 }

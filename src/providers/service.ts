@@ -97,6 +97,20 @@ export class SinghaSurveyService {
         return this.Api.call(service.url, service.method, service.param);
     }
 
+    searchVisitCustomer(search: string, start_date: string, end_date: string) {
+        let service = this.config.service.searchVisitCustomer;
+
+        service.param = {
+            user_id: this.config.userInfo.username,
+            search: search,
+            start_date: start_date,
+            end_date: end_date
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+
     customerDetail(customer_id: string) {
         let service = this.config.service.customerDetail;
 
