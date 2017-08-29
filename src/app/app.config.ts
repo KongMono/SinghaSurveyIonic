@@ -20,7 +20,7 @@ export const AppConfig: IAppConfig = {
   isLogged: null,
   pin_logged: null,
   userInfo: null,
-  isBuildDevice: false,
+  isBuildDevice: true,
   isProduction: false,
 
   endpoint: 'http://128.199.72.29/index.php',
@@ -292,6 +292,47 @@ export const AppConfig: IAppConfig = {
         activity_id: ""
       }
     },
+    updateVisitCustomer: {
+      url: "/v2/visit/updated/format/json",
+      method: "POST",
+      param: {
+        user_id: "",
+        visit_id: "",
+        latitude: "",
+        longitude: "",
+        customer_id: "",
+        remark: "",
+        activities: "",
+        sale: "",
+        receipt: "",
+        equipment: "",
+        images: "",
+        note: ""
+      }
+    },
+    updateVisitActivity: {
+      url: "/v2/visit/create_activity/format/json",
+      method: "POST",
+      param: {
+        user_id: "",
+        visit_activity_id: "",
+        venue_type: "",
+        venue_name: "",
+        vendor_id: "",
+        tradition_type_id: "",
+        activity_master_id: "",
+        activity_id: "",
+        activity_name: "",
+        start_date: "",
+        end_date: "",
+        pg: "",
+        sales: "",
+        equipment: "",
+        sale_images: "",
+        images: ""
+      }
+    },
+
     visitCustomerDetail: {
       url: "/v2/visit/row/format/json",
       method: "GET",
