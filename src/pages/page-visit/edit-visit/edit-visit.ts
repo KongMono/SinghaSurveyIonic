@@ -109,7 +109,7 @@ export class EditVisitPage {
     this.setVisitCustomerDetailDataRival();
     this.setVisitCustomerDetailDataEquipment();
   }
-  
+
   // setVisitCustomerDetailDataOrder() {
   //   for (var i = 0; i < this.visitCustomerDetailData.order.length; i++) {
   //     if (this.visitCustomerDetailData.order[i].value.length > 0) {
@@ -136,12 +136,12 @@ export class EditVisitPage {
   //     }
   //   }
   // }
-  
+
   setVisitCustomerDetailDataBoonrawd() {
     for (var i = 0; i < this.visitCustomerDetailData.sale.boonrawd.length; i++) {
       if (this.visitCustomerDetailData.sale.boonrawd[i].value.length > 0) {
+        this.visitCustomerDetail.boonrawd[i].value = [];
         for (var j = 0; j < this.visitCustomerDetailData.sale.boonrawd[i].value.length; j++) {
-          // this.visitCustomerDetail.sale.boonrawd[j].value = [];
           for (var indexProduct = 0; indexProduct < this.optionsVisitSale.boonrawd.length; indexProduct++) {
             if (this.optionsVisitSale.boonrawd[indexProduct].product_id == this.visitCustomerDetailData.sale.boonrawd[i].value[j].product_id) {
               let boonrawd = {
@@ -163,12 +163,12 @@ export class EditVisitPage {
       }
     }
   }
-  
+
   setVisitCustomerDetailDataRival() {
     for (var i = 0; i < this.visitCustomerDetailData.sale.rival.length; i++) {
       if (this.visitCustomerDetailData.sale.rival[i].value.length > 0) {
+        this.visitCustomerDetail.rival[i].value = [];
         for (var j = 0; j < this.visitCustomerDetailData.sale.rival[i].value.length; j++) {
-          // this.visitCustomerDetail.sale.rival[j].value = [];
           for (var indexProduct = 0; indexProduct < this.optionsVisitSale.rival.length; indexProduct++) {
             if (this.optionsVisitSale.rival[indexProduct].product_id == this.visitCustomerDetailData.sale.rival[i].value[j].product_id) {
               let rival = {
@@ -227,46 +227,20 @@ export class EditVisitPage {
     }
   }
 
-  // public setCustomerDetailDataChannels() {
-  //   if (this.customerDetailData.channels.length > 0) {
-  //     this.customerDetail.channels = [];
-  //     for (var i = 0; i < this.customerDetailData.channels.length; i++) {
-  //       for (var indexCustomerGroup = 0; indexCustomerGroup < this.optionChannelCustomer.customer_group.length; indexCustomerGroup++) {
-  //         if (this.optionChannelCustomer.customer_group[indexCustomerGroup].customer_group_id == this.customerDetailData.channels[i].customer_group_id) {
-  //           for (var indexCustomerChannel = 0; indexCustomerChannel < this.optionChannelCustomer.customer_group.length; indexCustomerChannel++) {
-  //             if (this.optionChannelCustomer.customer_group[indexCustomerGroup].customer_channel[indexCustomerChannel].id == this.customerDetailData.channels[i].channel_id) {
-  //               let channels = {
-  //                 customer_group: {
-  //                   customer_group_id: this.optionChannelCustomer.customer_group[indexCustomerGroup].customer_group_id,
-  //                   name: this.optionChannelCustomer.customer_group[indexCustomerGroup].name
-  //                 },
-  //                 customer_channel: {
-  //                   id: this.optionChannelCustomer.customer_group[indexCustomerGroup].customer_channel[indexCustomerChannel].id,
-  //                   name: this.optionChannelCustomer.customer_group[indexCustomerGroup].customer_channel[indexCustomerChannel].name
-  //                 },
-  //                 product_category: {
-  //                   product_category_id: '',
-  //                   name: ''
-  //                 }
-  //               }
-  //               this.customerDetail.channels.push(channels);
-  //             }
-  //           }
-  //         }
-  //       }
-  //       for (var indexProductCategory = 0; indexProductCategory < this.optionChannelCustomer.product_category.length; indexProductCategory++) {
-  //         if (this.optionChannelCustomer.product_category[indexProductCategory].product_category_id == this.customerDetailData.channels[i].product_category_id) {
-  //           this.customerDetail.channels[this.customerDetail.channels.length - 1].product_category.product_category_id = this.optionChannelCustomer.product_category[indexProductCategory].product_category_id;
-  //           this.customerDetail.channels[this.customerDetail.channels.length - 1].product_category.name = this.optionChannelCustomer.product_category[indexProductCategory].name;
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
-
-  popupInput(action, index) {
+  popupInput(action, indexValue, indexPath) {
     let option;
-    if (action == 'equipment') {
+    let index = indexValue;
+    if (action == 'boonrawd' || action == 'rival') {
+      if (action == 'boonrawd') {
+        option = this.optionsVisitSale.boonrawd;
+      } else if (action == 'rival') {
+        option = this.optionsVisitSale.rival;
+      }
+      index = {
+        indexPath: indexPath,
+        indexValue: indexValue
+      }
+    } else if (action == 'equipment') {
       option = this.optionEquipment;
     }
     this.navCtrl.push('PopupInput',
@@ -279,13 +253,174 @@ export class EditVisitPage {
       console.log(_params);
       if (_params.data) {
         this.visitCustomerDetailData = _params.data;
-        // if (_params.action == 'channels') {
-        //   this.setCustomerDetailDataChannels();
-        // }
+        if (_params.action == 'boonrawd') {
+          this.setVisitCustomerDetailDataBoonrawd();
+        } else if (_params.action == 'rival') {
+          this.setVisitCustomerDetailDataRival();
+        } else if (_params.action == 'equipment') {
+          this.setVisitCustomerDetailDataEquipment();
+        }
         resolve();
       } else {
         resolve();
       }
     });
+  }
+
+  actionSheetInList(action, index, indexPath) {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: '_icon-edit',
+          text: 'แก้ไข',
+          handler: () => {
+            this.popupInput(action, index, indexPath);
+          }
+        }, {
+          icon: '_icon-delete_file',
+          text: 'ลบ',
+          handler: () => {
+            this.removeDataInList(action, index, indexPath);
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  removeDataInList(action, index, indexPath) {
+    if (action == 'boonrawd' || action == 'rival') {
+      this.visitCustomerDetailData.sale[action][indexPath].value.splice(index, 1);
+      this.visitCustomerDetail[action][indexPath].value.splice(index, 1);
+    } else {
+      this.visitCustomerDetailData[action].splice(index, 1);
+      if (action == 'equipment') {
+        this.visitCustomerDetail[action].splice(index, 1);
+      }
+    }
+  }
+
+  addImage() {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: 'ios-camera',
+          text: 'เปิดกล้อง',
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 100,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.PNG,
+              mediaType: this.camera.MediaType.PICTURE,
+              sourceType: 1
+            }
+            this.openCameraOrPhotoLibrary(options);
+          }
+        }, {
+          icon: 'ios-images',
+          text: 'เลือกอัลบั้ม',
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 100,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.PNG,
+              mediaType: this.camera.MediaType.PICTURE,
+              sourceType: 0
+            }
+            this.openCameraOrPhotoLibrary(options);
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  openCameraOrPhotoLibrary(options) {
+    this.camera.getPicture(options).then((imageData) => {
+      this.setUploadImage(imageData);
+    }, (err) => {
+      console.error(err);
+    });
+    // let imageData = "/9j/4AAQSkZJRgABAQAASABIAAD/4QBYRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAACqADAAQAAAABAAAACwAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgACwAKAwERAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/dAAQAAv/aAAwDAQACEQMRAD8A8/r/ADXP+ogKAP/Q8/r/ADXP+ogKAP/Z";
+    // this.setUploadImageCustomer(imageData);
+  }
+
+  setUploadImage(imageBase64) {
+    // this.util.showLoading();
+    // this.service.uploadImageCustomer(imageBase64)
+    //   .then(result => {
+    //     this.util.hideLoading();
+    //     console.log("uploadImageCustomer", result);
+    //     this.updateAddImage(result);
+    //   }, error => {
+    //     this.util.hideLoading();
+    //     console.log(error);
+    //   });
+  }
+
+  updateAddImage(res) {
+    this.visitCustomerDetailData.images.push(res.path);
+  }
+
+  getImagePath(images): string {
+    let endpoint
+    if (this.config.isProduction) {
+      endpoint = this.config.endpoint_production;
+    } else {
+      endpoint = this.config.endpointUpload;
+    }
+    return endpoint + images;
+  }
+
+  viewImage(index) {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: 'ios-image',
+          text: 'ดูรูป',
+          handler: () => {
+            this.app.navPop().then(() => {
+              let endpoint
+              if (this.config.isProduction) {
+                endpoint = this.config.endpoint_production;
+              } else {
+                endpoint = this.config.endpointUpload;
+              }
+              this.photoViewer.show(endpoint + this.visitCustomerDetailData.images[index]);
+            });
+          }
+        }, {
+          icon: '_icon-trash',
+          text: 'ลบ',
+          handler: () => {
+            this.app.navPop().then(() => {
+              this.confirmRemoveImage(index);
+            });
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  confirmRemoveImage(index) {
+    let alert = this.alertCtrl.create({
+      title: 'ต้องการลบรูปภาพ?',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'ตกลง',
+          handler: () => {
+            this.visitCustomerDetailData.images.splice(index, 1);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 }

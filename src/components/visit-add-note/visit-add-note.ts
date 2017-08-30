@@ -19,17 +19,21 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 })
 
 export class VisitAddNote {
-  @Input('customerDetailDataInput') data;
+  @Input('data') data;
   @Input('index') index;
-  @Output() customerDetailDataOutput = new EventEmitter();
-  inputShopAddCallCardData = {
+  @Output() callbackData = new EventEmitter();
+  inputVisitAddNoteData = {
     title: '',
     detail: '',
     start_date: '',
     howto: '',
     end_date: '',
-    status: '',
+    status: '1',
     images: []
+  }
+  status = {
+    progress: true,
+    complete: false,
   }
   endPoint = 'http://128.199.72.29/';
 
@@ -49,14 +53,42 @@ export class VisitAddNote {
     console.log(this.data);
     console.log(this.index);
 
-    // if (this.index || this.index == 0) {
-    //   this.inputShopAddCallCardData.start_date = this.data.callcard[this.index].start_date;
-    //   this.inputShopAddCallCardData.end_date = this.data.callcard[this.index].end_date;
-    //   this.inputShopAddCallCardData.value = this.data.callcard[this.index].value;
-    //   this.inputShopAddCallCardData.spst_no = this.data.callcard[this.index].spst_no;
-    //   this.inputShopAddCallCardData.prq_no = this.data.callcard[this.index].prq_no;
-    //   this.inputShopAddCallCardData.images = this.data.callcard[this.index].images;
-    // }
+    if (this.index || this.index == 0) {
+      this.inputVisitAddNoteData.title = this.data.note[this.index].title;
+      this.inputVisitAddNoteData.detail = this.data.note[this.index].detail;
+      this.inputVisitAddNoteData.start_date = this.data.note[this.index].start_date;
+      this.inputVisitAddNoteData.howto = this.data.note[this.index].howto;
+      this.inputVisitAddNoteData.end_date = this.data.note[this.index].end_date;
+      this.inputVisitAddNoteData.status = this.data.note[this.index].status;
+      if (this.inputVisitAddNoteData.status == '1') {
+        this.status.progress = true;
+        this.status.complete = false;
+      } else if (this.inputVisitAddNoteData.status == '2') {
+        this.status.progress = false;
+        this.status.complete = true;
+      }
+      this.inputVisitAddNoteData.images = this.data.note[this.index].images;
+    }
+  }
+
+  changeStatus(action) {
+    if (action == 'progress') {
+      if (this.status.progress) {
+        this.status.complete = false;
+        this.inputVisitAddNoteData.status = '1';
+      } else if (!this.status.progress) {
+        this.status.complete = true;
+        this.inputVisitAddNoteData.status = '2';
+      }
+    } else if (action == 'complete') {
+      if (this.status.complete) {
+        this.status.progress = false;
+        this.inputVisitAddNoteData.status = '2';
+      } else if (!this.status.complete) {
+        this.status.progress = true;
+        this.inputVisitAddNoteData.status = '1';
+      }
+    }
   }
 
   addImage() {
@@ -118,7 +150,7 @@ export class VisitAddNote {
   }
 
   updateAddImage(res) {
-    this.inputShopAddCallCardData.images.push(res.path);
+    this.inputVisitAddNoteData.images.push(res.path);
   }
 
   getImagePath(images): string {
@@ -145,7 +177,7 @@ export class VisitAddNote {
               } else {
                 endpoint = this.config.endpointUpload;
               }
-              this.photoViewer.show(endpoint + this.inputShopAddCallCardData.images[index]);
+              this.photoViewer.show(endpoint + this.inputVisitAddNoteData.images[index]);
             });
           }
         }, {
@@ -175,7 +207,7 @@ export class VisitAddNote {
         {
           text: 'ตกลง',
           handler: () => {
-            this.inputShopAddCallCardData.images.splice(index, 1);
+            this.inputVisitAddNoteData.images.splice(index, 1);
           }
         }
       ]
@@ -184,26 +216,28 @@ export class VisitAddNote {
   }
 
   save() {
-    // if (this.inputShopAddCallCardData.start_date && this.inputShopAddCallCardData.end_date && this.inputShopAddCallCardData.value && this.inputShopAddCallCardData.spst_no && this.inputShopAddCallCardData.prq_no && this.inputShopAddCallCardData.images) {
-    //   if (this.index != null || this.index != undefined) {
-    //     this.data.callcard[this.index].start_date = this.inputShopAddCallCardData.start_date;
-    //     this.data.callcard[this.index].end_date = this.inputShopAddCallCardData.end_date;
-    //     this.data.callcard[this.index].value = this.inputShopAddCallCardData.value;
-    //     this.data.callcard[this.index].spst_no = this.inputShopAddCallCardData.spst_no;
-    //     this.data.callcard[this.index].prq_no = this.inputShopAddCallCardData.prq_no;
-    //     this.data.callcard[this.index].images = this.inputShopAddCallCardData.images;
-    //   } else {
-    //     let callcard = {
-    //       start_date: this.inputShopAddCallCardData.start_date,
-    //       end_date: this.inputShopAddCallCardData.end_date,
-    //       value: this.inputShopAddCallCardData.value,
-    //       spst_no: this.inputShopAddCallCardData.spst_no,
-    //       prq_no: this.inputShopAddCallCardData.prq_no,
-    //       images: this.inputShopAddCallCardData.images
-    //     }
-    //     this.data.callcard.push(callcard);
-    //   }
-    // }
-    this.customerDetailDataOutput.emit(this.data);
+    if (this.inputVisitAddNoteData.title && this.inputVisitAddNoteData.detail && this.inputVisitAddNoteData.start_date && this.inputVisitAddNoteData.howto && this.inputVisitAddNoteData.end_date && this.inputVisitAddNoteData.status && this.inputVisitAddNoteData.images) {
+      if (this.index != null || this.index != undefined) {
+        this.data.note[this.index].title = this.inputVisitAddNoteData.title;
+        this.data.note[this.index].detail = this.inputVisitAddNoteData.detail;
+        this.data.note[this.index].start_date = this.inputVisitAddNoteData.start_date;
+        this.data.note[this.index].howto = this.inputVisitAddNoteData.howto;
+        this.data.note[this.index].end_date = this.inputVisitAddNoteData.end_date;
+        this.data.note[this.index].status = this.inputVisitAddNoteData.status;
+        this.data.note[this.index].images = this.inputVisitAddNoteData.images;
+      } else {
+        let note = {
+          title: this.inputVisitAddNoteData.title,
+          detail: this.inputVisitAddNoteData.detail,
+          start_date: this.inputVisitAddNoteData.start_date,
+          howto: this.inputVisitAddNoteData.howto,
+          end_date: this.inputVisitAddNoteData.end_date,
+          status: this.inputVisitAddNoteData.status,
+          images: this.inputVisitAddNoteData.images
+        }
+        this.data.note.push(note);
+      }
+    }
+    this.callbackData.emit(this.data);
   }
 }

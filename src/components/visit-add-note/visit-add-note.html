@@ -6,7 +6,7 @@
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-input type="text" placeholder="หัวข้อ" class="wrap-input" [(ngModel)]="inputShopAddCallCardData.title"></ion-input>
+          <ion-input type="text" placeholder="หัวข้อ" class="wrap-input" [(ngModel)]="inputVisitAddNoteData.title"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -16,7 +16,7 @@
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-input type="text" placeholder="รายละเอียด" class="wrap-input" [(ngModel)]="inputShopAddCallCardData.detail"></ion-input>
+          <ion-input type="text" placeholder="รายละเอียด" class="wrap-input" [(ngModel)]="inputVisitAddNoteData.detail"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -26,7 +26,7 @@
       </ion-col>
       <ion-col col-9>
         <ion-item class="item-calendar">
-          <ion-datetime class="input-date" displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="inputShopAddCallCardData.start_date"></ion-datetime>
+          <ion-datetime class="input-date" displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="inputVisitAddNoteData.start_date"></ion-datetime>
         </ion-item>
         <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
       </ion-col>
@@ -37,7 +37,7 @@
       </ion-col>
       <ion-col>
         <ion-item>
-          <ion-input type="text" placeholder="วิธีจัดการ" class="wrap-input" [(ngModel)]="inputShopAddCallCardData.howto"></ion-input>
+          <ion-input type="text" placeholder="วิธีจัดการ" class="wrap-input" [(ngModel)]="inputVisitAddNoteData.howto"></ion-input>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -47,7 +47,7 @@
       </ion-col>
       <ion-col col-9>
         <ion-item class="item-calendar">
-          <ion-datetime class="input-date" displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="inputShopAddCallCardData.end_date"></ion-datetime>
+          <ion-datetime class="input-date" displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="inputVisitAddNoteData.end_date"></ion-datetime>
         </ion-item>
         <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
       </ion-col>
@@ -59,13 +59,13 @@
       <ion-col col-4>
         <ion-item class="item-checkbox">
           <ion-label>ดำเนินการ</ion-label>
-          <ion-checkbox [(ngModel)]="inputShopAddCallCardData.status"></ion-checkbox>
+          <ion-checkbox checked="status.progress" [(ngModel)]="status.progress" (ngModelChange)="changeStatus('progress')"></ion-checkbox>
         </ion-item>
       </ion-col>
       <ion-col col-4>
         <ion-item class="item-checkbox">
           <ion-label>แล้วเสร็จ</ion-label>
-          <ion-checkbox [(ngModel)]="inputShopAddCallCardData.status"></ion-checkbox>
+          <ion-checkbox checked="status.complete" [(ngModel)]="status.complete" (ngModelChange)="changeStatus('complete')"></ion-checkbox>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -82,11 +82,11 @@
          <img class="image-shop" [src]="endPoint + inputShopAddCallCardData.images">
       </ion-col>
     </ion-row> -->
-    <ion-row *ngIf="inputShopAddCallCardData.images.length > 0" style="height: 80px;">
+    <ion-row *ngIf="inputVisitAddNoteData.images.length > 0" style="height: 80px;">
       <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
         <div style="display: flex">
           <!-- <img class="image-shop" src="assets/img/login_logo.png"> -->
-          <img *ngFor="let images of inputShopAddCallCardData.images; let i = index" [src]="getImagePath(images)" (click)="viewImage(i)"
+          <img *ngFor="let images of inputVisitAddNoteData.images; let i = index" [src]="getImagePath(images)" (click)="viewImage(i)"
             height="80px" width="auto" style="margin: 0 10px;" tappable/>
         </div>
       </ion-scroll>

@@ -56,8 +56,7 @@
         <p class="text-title-retroact">ยอดสั่งซื้อย้อนหลัง 3 เดือนจากปัจจุบัน</p>
         <ion-row class="row-full-size row-title" *ngFor="let order of visitCustomerDetailData.order">
           <span class="text-sub-title">ปี {{order.year}} เดือน {{order.month}}</span>
-          <ion-row class="row-full-size" *ngFor="let value of order.value; let i = index" (click)="actionSheetInList('order', i)" [ngClass]="{'hide-line-last-item': (order.value.length-1 == i)}"
-            tappable>
+          <ion-row class="row-full-size" *ngFor="let value of order.value; let i = index" [ngClass]="{'hide-line-last-item': (order.value.length-1 == i)}" tappable>
             <ion-item class="item-sub-title">
               <ion-row class="row-full-size">
                 <ion-col col-4 class="col-sub value-row">
@@ -110,9 +109,9 @@
         <p class="text-title-retroact">ยอดขายสินค้าบุญรอดย้อนหลัง 3 เดือนจากปัจจุบัน</p>
         <ion-row class="row-full-size row-title" *ngFor="let boonrawd of visitCustomerDetailData.sale.boonrawd; let indexBoonrawd = index">
           <span class="text-sub-title">ปี {{boonrawd.year}} เดือน {{boonrawd.month}}</span>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="boonrawd.status" (click)="popupInput('boonrawd')"
+          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="boonrawd.status" (click)="popupInput('boonrawd', null, indexBoonrawd)"
             tappable></ion-icon>
-          <ion-row class="row-full-size" *ngFor="let value of visitCustomerDetail.boonrawd[indexBoonrawd].value; let i = index" (click)="actionSheetInList('boonrawd', i)"
+          <ion-row class="row-full-size" *ngFor="let value of visitCustomerDetail.boonrawd[indexBoonrawd].value; let i = index" (click)="actionSheetInList('boonrawd', i, indexBoonrawd)"
             [ngClass]="{'hide-line-last-item': (boonrawd.value.length-1 == i)}" tappable>
             <ion-item class="item-sub-title">
               <span class="text-title-product">{{value.product.product_name}}</span>
@@ -144,9 +143,9 @@
         <p class="text-title-retroact">ยอดขายสินค้าคู่แข่งย้อนหลัง 3 เดือนจากปัจจุบัน</p>
         <ion-row class="row-full-size row-title" *ngFor="let rival of visitCustomerDetailData.sale.rival; let indexRival = index">
           <span class="text-sub-title">ปี {{rival.year}} เดือน {{rival.month}}</span>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="rival.status" (click)="popupInput('rival')"
+          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="rival.status" (click)="popupInput('rival', null, indexRival)"
             tappable></ion-icon>
-          <ion-row class="row-full-size" *ngFor="let value of visitCustomerDetail.rival[indexRival].value; let i = index" (click)="actionSheetInList('rival', i)" [ngClass]="{'hide-line-last-item': (rival.value.length-1 == i)}"
+          <ion-row class="row-full-size" *ngFor="let value of visitCustomerDetail.rival[indexRival].value; let i = index" (click)="actionSheetInList('rival', i, indexRival)" [ngClass]="{'hide-line-last-item': (rival.value.length-1 == i)}"
             tappable>
             <ion-item class="item-sub-title">
               <span class="text-title-product">{{value.product.product_name}}</span>
@@ -178,7 +177,7 @@
         <p class="text-title-retroact">แสดงแนบรูปใบเสร็จย้อนหลัง 3 เดือนจากปัจจุบัน</p>
         <ion-row class="row-full-size row-title" *ngFor="let receipt of visitCustomerDetailData.receipt">
           <span class="text-sub-title">ปี {{receipt.year}} เดือน {{receipt.month}}</span>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="receipt.status" (click)="popupInput('activities')"
+          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="receipt.status" (click)="addImage()"
             tappable></ion-icon>
           <ion-row *ngIf="receipt.value.length > 0" style="height: 80px;">
             <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
@@ -198,7 +197,7 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('equipment')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let equipment of visitCustomerDetail.equipment; let i = index" (click)="actionSheetInList('equipment', i)"
+      <ion-row *ngFor="let equipment of visitCustomerDetail.equipment; let i = index" (click)="actionSheetInList('equipment', i, null)"
         [ngClass]="{'hide-line-last-item': (visitCustomerDetailData.equipment.length-1 == i)}" tappable>
         <ion-item>
           <ion-row class="row-full-size">
@@ -240,7 +239,7 @@
           <p>รูปอุปกรณ์ส่งเสริมการขาย</p>
         </ion-col>
         <ion-col>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('images')" tappable></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addImage()" tappable></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="visitCustomerDetailData.images.length > 0" style="height: 80px;">
@@ -259,7 +258,7 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('note')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let note of visitCustomerDetailData.note; let i = index" (click)="actionSheetInList('note', i)" [ngClass]="{'hide-line-last-item': (visitCustomerDetailData.note.length-1 == i)}"
+      <ion-row *ngFor="let note of visitCustomerDetailData.note; let i = index" (click)="actionSheetInList('note', i, null)" [ngClass]="{'hide-line-last-item': (visitCustomerDetailData.note.length-1 == i)}"
         tappable>
         <ion-item>
           <ion-row class="row-full-size">
@@ -275,7 +274,8 @@
               <span class="text-value-sub">{{note.title}}</span>
             </ion-col>
             <ion-col col-6 class="col-sub">
-              <span class="text-value-sub">{{note.status}}</span>
+              <span *ngIf="note.status == 1" class="text-value-sub">ดำเนินการ</span>
+              <span *ngIf="note.status == 2" class="text-value-sub">แล้วเสร็จ</span>
             </ion-col>
           </ion-row>
           <ion-row class="row-full-size">
