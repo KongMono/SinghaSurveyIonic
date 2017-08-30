@@ -19,7 +19,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list no-lines>
+  <ion-list no-lines class="wrap-list-visit-and-record">
     <button ion-item detail-none class="box-visit-and-record" style="border-bottom: 1px solid #dedede;" *ngFor="let visit of visitListData" (tap)="onClick(visit.visit_id)" (press)="onLongPress(visit)" tappable>
       <ion-thumbnail item-start class="box-project-type">
         <div class="wrap-project-type">

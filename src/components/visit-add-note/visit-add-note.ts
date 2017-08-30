@@ -216,7 +216,8 @@ export class VisitAddNote {
   }
 
   save() {
-    if (this.inputVisitAddNoteData.title && this.inputVisitAddNoteData.detail && this.inputVisitAddNoteData.start_date && this.inputVisitAddNoteData.howto && this.inputVisitAddNoteData.end_date && this.inputVisitAddNoteData.status && this.inputVisitAddNoteData.images) {
+    if (this.inputVisitAddNoteData.title && this.inputVisitAddNoteData.detail && this.inputVisitAddNoteData.start_date && this.inputVisitAddNoteData.howto && this.inputVisitAddNoteData.end_date && this.inputVisitAddNoteData.status) {
+    // if (this.inputVisitAddNoteData.title && this.inputVisitAddNoteData.detail && this.inputVisitAddNoteData.start_date && this.inputVisitAddNoteData.howto && this.inputVisitAddNoteData.end_date && this.inputVisitAddNoteData.status && this.inputVisitAddNoteData.images.length > 0) {
       if (this.index != null || this.index != undefined) {
         this.data.note[this.index].title = this.inputVisitAddNoteData.title;
         this.data.note[this.index].detail = this.inputVisitAddNoteData.detail;

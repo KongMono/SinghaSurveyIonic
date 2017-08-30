@@ -8,77 +8,81 @@ page-tab-visit-and-record {
     .icon-size {
         font-size: 20px !important;
     }
-    .box-visit-and-record {
-        .box-project-type {
-            min-width: auto;
-            min-height: auto;
-            .wrap-project-type {
-                width: 50px;
-                height: 50px;
-                display: flex;
-                border-radius: 5px;
-                background-color: gray;
-                .type-name {
-                    margin: auto;
-                    font-size: 28px;
-                    color: $singha-survey-color-white;
+    .wrap-list-visit-and-record {
+        margin: 0;
+        .box-visit-and-record {
+            .box-project-type {
+                min-width: auto;
+                min-height: auto;
+                margin: auto 16px auto 0;
+                .wrap-project-type {
+                    width: 50px;
+                    height: 50px;
+                    display: flex;
+                    border-radius: 5px;
+                    background-color: gray;
+                    .type-name {
+                        margin: auto;
+                        font-size: 28px;
+                        color: $singha-survey-color-white;
+                    }
                 }
             }
-        }
-        .text-created-date {
-            font-size: 16px;
-            color: $singha-survey-color-gray-text;
-        }
-        .text-name {
-            font-size: 12px;
-            color: $singha-survey-color-text;
-            white-space: initial;
-        }
-        .text-group-name {
-            font-size: 12px;
-            color: $singha-survey-color-text;
-            white-space: initial;
-        }
-        .text-address {
-            font-size: 12px;
-            color: $singha-survey-color-gray-text-all;
-            white-space: initial;
-        }
-        .wrap-end {
-            .wrap-end-top {
-                .icon-sale {
-                    font-size: 24px;
-                    color: $singha-survey-color-inactive;
-                }
-                .icon-sale-active {
-                    font-size: 24px;
-                    color: $singha-survey-color-accent;
-                }
-                .icon-activity {
-                    font-size: 24px;
-                    color: $singha-survey-color-inactive;
-                }
-                .icon-activity-active {
-                    font-size: 24px;
-                    color: $singha-survey-color-accent;
-                }
+            .text-created-date {
+                font-size: 16px;
+                color: $singha-survey-color-gray-text;
             }
-            .wrap-end-bottom {
-                .icon-premium {
-                    font-size: 24px;
-                    color: $singha-survey-color-inactive;
+            .text-name {
+                font-size: 12px;
+                color: $singha-survey-color-text;
+                white-space: initial;
+            }
+            .text-group-name {
+                font-size: 12px;
+                color: $singha-survey-color-text;
+                white-space: initial;
+            }
+            .text-address {
+                font-size: 12px;
+                color: $singha-survey-color-gray-text-all;
+                white-space: initial;
+            }
+            .wrap-end {
+                .wrap-end-top {
+                    .icon-sale {
+                        font-size: 24px;
+                        color: $singha-survey-color-inactive;
+                    }
+                    .icon-sale-active {
+                        font-size: 24px;
+                        color: $singha-survey-color-accent;
+                    }
+                    .icon-activity {
+                        font-size: 24px;
+                        color: $singha-survey-color-inactive;
+                    }
+                    .icon-activity-active {
+                        font-size: 24px;
+                        color: $singha-survey-color-accent;
+                    }
                 }
-                .icon-premium-active {
-                    font-size: 24px;
-                    color: $singha-survey-color-accent;
-                }
-                .icon-tracking {
-                    font-size: 24px;
-                    color: $singha-survey-color-inactive;
-                }
-                .icon-tracking-active {
-                    font-size: 24px;
-                    color: $singha-survey-color-accent;
+                .wrap-end-bottom {
+                    .icon-premium {
+                        font-size: 24px;
+                        color: $singha-survey-color-inactive;
+                    }
+                    .icon-premium-active {
+                        font-size: 24px;
+                        color: $singha-survey-color-accent;
+                    }
+                    .icon-tracking {
+                        font-size: 24px;
+                        color: $singha-survey-color-inactive;
+                    }
+                    .icon-tracking-active {
+                        font-size: 24px;
+                        color: $singha-survey-color-accent;
+                    }
                 }
             }
         }
