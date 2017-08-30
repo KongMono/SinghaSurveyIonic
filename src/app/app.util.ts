@@ -4,6 +4,7 @@ import { ConfigApp, IAppConfig } from "./app.config";
 import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
 import { ToastController } from 'ionic-angular';
+import { AppVersion } from '@ionic-native/app-version';
 
 @Injectable()
 export class AppUtilService {
@@ -13,6 +14,7 @@ export class AppUtilService {
         public storage: Storage,
         private alertCtrl: AlertController,
         private toastCtrl: ToastController,
+        private appVersion: AppVersion,
         @Inject(ConfigApp) private config: IAppConfig) {
 
     }
@@ -23,6 +25,8 @@ export class AppUtilService {
         ls.push(this.storage.get('userinfo'));
         ls.push(this.storage.get('logged'));
         ls.push(this.storage.get('pin_logged'));
+
+        this.setVersion();
 
         return ls;
     }
@@ -66,6 +70,13 @@ export class AppUtilService {
         this.loading.dismissAll();
     }
 
+    public setVersion() {
+        this.config.versionApp = this.appVersion.getVersionNumber();
+        this.config.versionBuild = this.appVersion.getVersionCode();
+        console.log(this.config.versionApp);
+        console.log(this.config.versionBuild);
+    }
+
     public setFormatDateYearBE(date, formatDate) {
         moment.locale('th');
         let yearBE = moment(date, 'YYYY-MM-DD').year() + 543;
@@ -74,15 +85,15 @@ export class AppUtilService {
     }
 
     public showAlertDialog(text) {
-            let toast = this.toastCtrl.create({
-                message: text,
-                duration: 3000,
-                position: 'bottom'
-            });
+        let toast = this.toastCtrl.create({
+            message: text,
+            duration: 3000,
+            position: 'bottom'
+        });
 
-            toast.onDidDismiss(() => {
-                console.log('Dismissed toast');
-            });
-            toast.present();
+        toast.onDidDismiss(() => {
+            console.log('Dismissed toast');
+        });
+        toast.present();
     }
 }

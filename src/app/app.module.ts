@@ -8,6 +8,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { Geolocation } from '@ionic-native/geolocation';
 import { AgmCoreModule } from 'angular2-google-maps/core';
 import { GoogleMapsAPIWrapper } from 'angular2-google-maps/core/services/google-maps-api-wrapper';
+import { AppVersion } from '@ionic-native/app-version';
 
 import { MyApp } from './app.component';
 import { ConfigApp, AppConfig } from './app.config';
@@ -32,6 +33,7 @@ import { ConfigApp, AppConfig } from './app.config';
     MyApp
   ],
   providers: [
+    AppVersion,
     GoogleMapsAPIWrapper,
     Geolocation,
     StatusBar,

@@ -7,13 +7,15 @@ export interface IAppConfig {
   pin_logged: any;
   userInfo: any;
 
+  versionApp: any;
+  versionBuild: any;
+
   isBuildDevice: boolean;
   isProduction: boolean;
   endpoint: string;
   endpointUpload: string;
   endpoint_production: string;
   service: any;
-
 }
 
 export const AppConfig: IAppConfig = {
@@ -22,6 +24,8 @@ export const AppConfig: IAppConfig = {
   userInfo: null,
   isBuildDevice: false,
   isProduction: false,
+  versionApp: null,
+  versionBuild: null,
 
   endpoint: 'http://128.199.72.29/index.php',
   endpointUpload: 'http://128.199.72.29/',
