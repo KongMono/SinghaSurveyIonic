@@ -423,4 +423,33 @@ export class EditVisitPage {
     });
     alert.present();
   }
+
+  save() {
+    this.callServiceUpdateVisitCustomer();
+  }
+
+  callServiceUpdateVisitCustomer() {
+    this.util.showLoading();
+    this.service.updateVisitCustomer(
+      this.config.userInfo.username,
+      this.visitCustomerDetailData.id,
+      this.visitCustomerDetailData.latitude,
+      this.visitCustomerDetailData.longitude,
+      this.visitCustomerDetailData.customer_id,
+      this.visitCustomerDetailData.remark,
+      JSON.stringify(this.visitCustomerDetailData.activities),
+      JSON.stringify(this.visitCustomerDetailData.sale),
+      JSON.stringify(this.visitCustomerDetailData.receipt),
+      JSON.stringify(this.visitCustomerDetailData.equipment),
+      JSON.stringify(this.visitCustomerDetailData.images),
+      JSON.stringify(this.visitCustomerDetailData.note))
+      .then(result => {
+        this.util.hideLoading();
+        this.util.showAlertDialog(result.msg);
+        this.backPage();
+      }, error => {
+        this.util.hideLoading();
+        console.log(error.message);
+      });
+  }
 }

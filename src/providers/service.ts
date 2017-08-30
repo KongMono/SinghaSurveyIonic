@@ -97,6 +97,20 @@ export class SinghaSurveyService {
         return this.Api.call(service.url, service.method, service.param);
     }
 
+    searchVisitCustomer(search: string, start_date: string, end_date: string) {
+        let service = this.config.service.searchVisitCustomer;
+
+        service.param = {
+            user_id: this.config.userInfo.username,
+            search: search,
+            start_date: start_date,
+            end_date: end_date
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+
     customerDetail(customer_id: string) {
         let service = this.config.service.customerDetail;
 
@@ -332,6 +346,81 @@ export class SinghaSurveyService {
 
         return this.Api.callformMultipart(service.url, service.method, service.param);
     }
+
+    updateVisitActivity(
+        user_id,
+        visit_activity_id,
+        venue_type,
+        venue_name,
+        vendor_id,
+        tradition_type_id,
+        activity_master_id,
+        activity_id,
+        activity_name,
+        start_date,
+        end_date,
+        pg,
+        sales,
+        equipment,
+        sale_images,
+        images) {
+
+        let service = this.config.service.updateVisitActivity;
+
+        service.param = {
+            user_id: user_id,
+            visit_activity_id: visit_activity_id,
+            venue_type: venue_type,
+            venue_name: venue_name,
+            vendor_id: vendor_id,
+            tradition_type_id: tradition_type_id,
+            activity_master_id: activity_master_id,
+            activity_id: activity_id,
+            activity_name: activity_name,
+            start_date: start_date,
+            end_date: end_date,
+            pg: pg,
+            sales: sales,
+            equipment: equipment,
+            sale_images: sale_images,
+            images: images
+        }
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+    updateVisitCustomer(
+        user_id,
+        visit_id,
+        latitude,
+        longitude,
+        customer_id,
+        remark,
+        activities,
+        sale,
+        receipt,
+        equipment,
+        images,
+        note) {
+
+        let service = this.config.service.updateVisitCustomer;
+
+        service.param = {
+            user_id: user_id,
+            visit_id: visit_id,
+            latitude: latitude,
+            longitude: longitude,
+            customer_id: customer_id,
+            remark: remark,
+            activities: activities,
+            sale: sale,
+            receipt: receipt,
+            equipment: equipment,
+            images: images,
+            note: note
+        }
+        return this.Api.callform(service.url, service.method, service.param);
+    }
+
 
     createCustomer(
         user_id,

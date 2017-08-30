@@ -109,6 +109,16 @@ export const AppConfig: IAppConfig = {
         tumbol_id: ""
       }
     },
+    searchVisitCustomer: {
+      url: "/v2/visit/list/format/json",
+      method: "GET",
+      param: {
+        user_id: "",
+        search: "",
+        start_date: "",
+        end_date: ""
+      }
+    },
     profile: {
       url: "/v2/user/profile/format/json",
       method: "GET",
@@ -292,6 +302,47 @@ export const AppConfig: IAppConfig = {
         activity_id: ""
       }
     },
+    updateVisitCustomer: {
+      url: "/v2/visit/updated/format/json",
+      method: "POST",
+      param: {
+        user_id: "",
+        visit_id: "",
+        latitude: "",
+        longitude: "",
+        customer_id: "",
+        remark: "",
+        activities: "",
+        sale: "",
+        receipt: "",
+        equipment: "",
+        images: "",
+        note: ""
+      }
+    },
+    updateVisitActivity: {
+      url: "/v2/visit/create_activity/format/json",
+      method: "POST",
+      param: {
+        user_id: "",
+        visit_activity_id: "",
+        venue_type: "",
+        venue_name: "",
+        vendor_id: "",
+        tradition_type_id: "",
+        activity_master_id: "",
+        activity_id: "",
+        activity_name: "",
+        start_date: "",
+        end_date: "",
+        pg: "",
+        sales: "",
+        equipment: "",
+        sale_images: "",
+        images: ""
+      }
+    },
+
     visitCustomerDetail: {
       url: "/v2/visit/row/format/json",
       method: "GET",
