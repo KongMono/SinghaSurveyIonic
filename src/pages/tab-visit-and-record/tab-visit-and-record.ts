@@ -17,7 +17,7 @@ import { ConfigApp, IAppConfig } from './../../app/app.config';
 export class TabVisitAndRecord {
   visitListData = []
   offset: number = 0;
-  limit: number = 20;
+  limit: number = 10;
   infiniteScroll: any;
   visitCycleData: VisitCycleModel;
   customersVisitList = [];

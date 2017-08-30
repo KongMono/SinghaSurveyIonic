@@ -15,7 +15,7 @@ import { ConfigApp, IAppConfig } from './../../app/app.config';
 export class TabManageVisit {
   scheduleListData = []
   offset: number = 0;
-  limit: number = 20;
+  limit: number = 10;
   infiniteScroll: any;
 
   constructor(public navCtrl: NavController,

@@ -16,7 +16,7 @@ export class TabShop {
   customersListData = [];
   customersList = [];
   offset: number = 0;
-  limit: number = 20;
+  limit: number = 10;
   refresher: Refresher;
   infiniteScroll: any;
   actionSheet: any;
