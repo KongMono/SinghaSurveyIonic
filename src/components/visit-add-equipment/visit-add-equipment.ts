@@ -71,20 +71,20 @@ export class VisitAddEquipment {
 
   selectOptionCallback = (_params) => {
     return new Promise(resolve => {
-      if (_params.action == 'customer_group') {
+      if (_params.action == 'product_vendor') {
         if (this.indexProductVendor != _params.indexSelect) {
           this.indexProductGroup = 0;
           this.indexProduct = 0;
         }
         this.indexProductVendor = _params.indexSelect;
         resolve();
-      } else if (_params.action == 'customer_channel') {
+      } else if (_params.action == 'product_group') {
         if (this.indexProductGroup != _params.indexSelect) {
           this.indexProduct = 0;
         }
         this.indexProductGroup = _params.indexSelect;
         resolve();
-      } else if (_params.action == 'product_category') {
+      } else if (_params.action == 'product') {
         this.indexProduct = _params.indexSelect;
         resolve();
       } else {
