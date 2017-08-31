@@ -53,6 +53,7 @@ export class PinLoginPage {
     if (this.inputPinLoginData.passcode.length == 4) {
       setTimeout(() => {
         if (this.inputPinLoginData.passcode == this.config.pin_logged) {
+          this.util.setVersion();
           this.navCtrl.setRoot('Tabs');
         } else {
           this.inputPinLoginData.passcode = '';

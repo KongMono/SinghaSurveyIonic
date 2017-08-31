@@ -33,7 +33,7 @@ export class TabSetting {
     public plt: Platform,
     public util: AppUtilService,
     public service: SinghaSurveyService,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    @Inject(ConfigApp) public config: IAppConfig) {
     this.plt.ready().then(() => {
 
     })

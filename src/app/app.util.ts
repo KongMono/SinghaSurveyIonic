@@ -21,13 +21,9 @@ export class AppUtilService {
 
     public loadData(): any {
         let ls = [];
-
         ls.push(this.storage.get('userinfo'));
         ls.push(this.storage.get('logged'));
         ls.push(this.storage.get('pin_logged'));
-
-        this.setVersion();
-
         return ls;
     }
 
@@ -71,10 +67,18 @@ export class AppUtilService {
     }
 
     public setVersion() {
-        this.config.versionApp = this.appVersion.getVersionNumber();
-        this.config.versionBuild = this.appVersion.getVersionCode();
-        console.log(this.config.versionApp);
-        console.log(this.config.versionBuild);
+        this.appVersion.getVersionNumber().then(resVerNum => {
+            this.config.versionApp = resVerNum;
+            this.appVersion.getVersionCode().then(resVerCode => {
+                this.config.versionBuild = resVerCode;
+                console.log(this.config.versionApp);
+                console.log(this.config.versionBuild);
+            }, error => {
+                console.log(error);
+            });
+        }, error => {
+            console.log(error);
+        });
     }
 
     public setFormatDateYearBE(date, formatDate) {
