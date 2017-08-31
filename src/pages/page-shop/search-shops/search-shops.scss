@@ -124,6 +124,17 @@ page-search-shops {
                     }
                 }
             }
+            .box-data-null {
+                position: absolute;
+                height: calc(100% - 278px);
+                bottom: 0;
+                right: 0;
+                left: 0;
+                display: flex;
+                .text-null {
+                    margin: auto;
+                }
+            }
         }
     }
 }

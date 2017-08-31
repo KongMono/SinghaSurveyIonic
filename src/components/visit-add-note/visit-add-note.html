@@ -56,17 +56,21 @@
       <ion-col col-3>
         <p>สถานะ</p>
       </ion-col>
-      <ion-col col-4>
-        <ion-item class="item-checkbox">
-          <ion-label>ดำเนินการ</ion-label>
-          <ion-checkbox checked="status.progress" [(ngModel)]="status.progress" (ngModelChange)="changeStatus('progress')"></ion-checkbox>
-        </ion-item>
-      </ion-col>
-      <ion-col col-4>
-        <ion-item class="item-checkbox">
-          <ion-label>แล้วเสร็จ</ion-label>
-          <ion-checkbox checked="status.complete" [(ngModel)]="status.complete" (ngModelChange)="changeStatus('complete')"></ion-checkbox>
-        </ion-item>
+      <ion-col col-9>
+        <ion-row>
+          <ion-col col-6 class="wrap-col">
+            <ion-item class="item-checkbox">
+              <ion-label>ดำเนินการ</ion-label>
+              <ion-checkbox checked="status.progress" [(ngModel)]="status.progress" (ngModelChange)="changeStatus('progress')"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+          <ion-col col-6 class="wrap-col">
+            <ion-item class="item-checkbox">
+              <ion-label>แล้วเสร็จ</ion-label>
+              <ion-checkbox checked="status.complete" [(ngModel)]="status.complete" (ngModelChange)="changeStatus('complete')"></ion-checkbox>
+            </ion-item>
+          </ion-col>
+        </ion-row>
       </ion-col>
     </ion-row>
     <ion-row>

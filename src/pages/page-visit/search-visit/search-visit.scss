@@ -47,7 +47,6 @@ page-search-visit {
         }
     }
     .wrap-list-visit-and-record {
-        margin: 0;
         height: calc(100% - 142px);
         overflow-y: scroll;
         .box-visit-and-record {
@@ -125,6 +124,17 @@ page-search-visit {
                     }
                 }
             }
+        }
+    }
+    .box-data-null {
+        position: absolute;
+        height: calc(100% - 142px);
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        .text-null {
+            margin: auto;
         }
     }
 }

@@ -40,9 +40,10 @@
     </ion-row>
   </ion-grid>
 
-  <ion-list no-lines class="wrap-list-visit-and-record">
-    <button ion-item detail-none class="box-visit-and-record" style="border-bottom: 1px solid #dedede;" *ngFor="let visit of customersVisitList"
-      (tap)="onClick(visit.visit_id)" (press)="onLongPress(visit)" tappable>
+  <div *ngIf="customersVisitList.length > 0" class="wrap-list-visit-and-record">
+    <ion-list no-lines>
+      <button ion-item detail-none class="box-visit-and-record" style="border-bottom: 1px solid #dedede;" *ngFor="let visit of customersVisitList"
+        (tap)="onClick(visit.visit_id)" (press)="onLongPress(visit)" tappable>
         <ion-thumbnail item-start class="box-project-type">
           <div class="wrap-project-type">
             <div class="type-name">
@@ -65,7 +66,11 @@
           </div>
         </div>
       </button>
-  </ion-list>
+    </ion-list>
+  </div>
+  <div *ngIf="customersVisitList.length == 0" class="box-data-null">
+    <span class="text-null">ไม่มีข้อมูล</span>
+  </div>
 
   <ion-fab right bottom>
     <button ion-fab color="accent" (click)="searchVisit()" tappable>
