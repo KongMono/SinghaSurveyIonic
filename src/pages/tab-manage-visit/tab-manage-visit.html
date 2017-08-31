@@ -9,24 +9,29 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list no-lines>
-    <button ion-item detail-none class="box-manage-visit" style="border-bottom: 1px solid #dedede;" *ngFor="let schedule of scheduleListData">
-      <p class="text-name">รอบ {{schedule.name}}</p>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-6 class="wrap-start-date">
-            <ion-row class="title-start-date">เริ่มต้น</ion-row>
-            <ion-row class="text-start-date">{{schedule.start_date}}</ion-row>
-          </ion-col>
-          <ion-col col-6 class="wrap-end-date">
-            <ion-row class="title-end-date">สิ้นสุด</ion-row>
-            <ion-row class="text-end-date">{{schedule.end_date}}</ion-row>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </button>
-    
-  </ion-list>
+  <div *ngIf="scheduleListData.length > 0">
+    <ion-list no-lines>
+      <button ion-item detail-none class="box-manage-visit" style="border-bottom: 1px solid #dedede;" *ngFor="let schedule of scheduleListData">
+        <p class="text-name">รอบ {{schedule.name}}</p>
+        <ion-grid>
+          <ion-row>
+            <ion-col col-6 class="wrap-start-date">
+              <ion-row class="title-start-date">เริ่มต้น</ion-row>
+              <ion-row class="text-start-date">{{schedule.start_date}}</ion-row>
+            </ion-col>
+            <ion-col col-6 class="wrap-end-date">
+              <ion-row class="title-end-date">สิ้นสุด</ion-row>
+              <ion-row class="text-end-date">{{schedule.end_date}}</ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </button>
+    </ion-list>
+  </div>
+  <div *ngIf="scheduleListData.length == 0 && !waitData" class="box-data-null">
+    <span class="text-null">ไม่มีข้อมูล</span>
+  </div>
+
   <ion-fab right bottom>
     <button ion-fab color="accent">
       <ion-icon name="_icon-plus"></ion-icon>

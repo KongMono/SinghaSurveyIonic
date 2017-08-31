@@ -17,6 +17,7 @@ export class TabManageVisit {
   offset: number = 0;
   limit: number = 10;
   infiniteScroll: any;
+  waitData: boolean = false;
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -36,12 +37,16 @@ export class TabManageVisit {
 
   calScheduleList() {
     this.offset = 0;
+    this.waitData = true;
     this.util.showLoading();
     this.service.scheduleList(this.limit, this.offset)
       .then(
       (result: ScheduleListModel) => {
         this.util.hideLoading();
         this.scheduleListData = result.data;
+        setTimeout(() => {
+          this.waitData = false;
+        }, 800);
 
         if (this.infiniteScroll) {
           if (result.data.length === 0) {
@@ -54,6 +59,9 @@ export class TabManageVisit {
         this.changeFormatDate();
       }, error => {
         this.util.hideLoading();
+        setTimeout(() => {
+          this.waitData = false;
+        }, 800);
         console.log(error);
       });
   }
@@ -61,6 +69,7 @@ export class TabManageVisit {
   pullRefresh(refresher) {
     this.offset = 0;
     this.scheduleListData = [];
+    this.waitData = true;
     this.service.scheduleList(this.limit, this.offset)
       .then(
       (result: ScheduleListModel) => {
@@ -76,8 +85,14 @@ export class TabManageVisit {
 
         this.changeFormatDate();
         refresher.complete();
+        setTimeout(() => {
+          this.waitData = false;
+        }, 300);
       }, error => {
         refresher.complete();
+        setTimeout(() => {
+          this.waitData = false;
+        }, 300);
         console.log(error);
       });
   }

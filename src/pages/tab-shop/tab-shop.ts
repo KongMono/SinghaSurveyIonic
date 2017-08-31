@@ -22,10 +22,10 @@ export class TabShop {
   actionSheet: any;
   showCheckNameDialog: boolean = true;
   customersCycleData: CustomersCycleModel;
-
   filterData = {
     order: "1"
   }
+  waitData: boolean = false;
 
   constructor(
     public app: App,
@@ -46,6 +46,7 @@ export class TabShop {
 
   pullRefresh(refresher) {
     this.offset = 0;
+    this.waitData = true;
     this.refresher = refresher;
     this.callRefreshCustomerList();
   }
@@ -125,9 +126,15 @@ export class TabShop {
 
         if (this.refresher) {
           this.refresher.complete();
+          setTimeout(() => {
+            this.waitData = false;
+          }, 300);
         }
       }, error => {
         this.refresher.complete();
+        setTimeout(() => {
+          this.waitData = false;
+        }, 300);
         console.log(error);
       });
   }
@@ -135,12 +142,16 @@ export class TabShop {
   callCustomerList() {
     this.offset = 0;
     this.customersListData = [];
+    this.waitData = true;
     this.util.showLoading();
     this.service.customersList(this.limit, this.offset, this.filterData.order)
       .then(
       (result: CustomersListModel) => {
         this.util.hideLoading();
         this.customersListData = result.data;
+        setTimeout(() => {
+          this.waitData = false;
+        }, 800);
 
         if (this.infiniteScroll) {
           if (result.data.length === 0) {
@@ -152,6 +163,9 @@ export class TabShop {
 
       }, error => {
         this.util.hideLoading();
+        setTimeout(() => {
+          this.waitData = false;
+        }, 800);
         console.log(error);
       });
   }

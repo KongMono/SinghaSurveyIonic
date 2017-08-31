@@ -29,8 +29,10 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list *ngIf="showCheckNameDialog" no-lines class="wrap-list-customer">
-    <button ion-item detail-none class="box-customer" style="border-bottom: 1px solid #dedede;" *ngFor="let customer of customersListData" (tap)="onClick(customer)" (press)="onLongPress(customer)" tappable>
+  <div *ngIf="customersListData.length > 0">
+    <ion-list *ngIf="showCheckNameDialog" no-lines class="wrap-list-customer">
+      <button ion-item detail-none class="box-customer" style="border-bottom: 1px solid #dedede;" *ngFor="let customer of customersListData"
+        (tap)="onClick(customer)" (press)="onLongPress(customer)" tappable>
       <ion-thumbnail item-start class="box-project-type">
         <div class="wrap-project-type" [ngClass]="{'bg-color-yellow': (customer.status_plan == '3'), 'bg-color-blue': (customer.status_plan == '2'), 'bg-color-red': (customer.status_plan == '1'), 'bg-color-gray': (customer.status_plan == '0')}">
           <div class="type-name">
@@ -51,7 +53,11 @@
         </div>
       </div>
     </button>
-  </ion-list>
+    </ion-list>
+  </div>
+  <div *ngIf="customersListData.length == 0 && !waitData" class="box-data-null">
+    <span class="text-null">ไม่มีข้อมูล</span>
+  </div>
 
   <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
     <ion-infinite-scroll-content>

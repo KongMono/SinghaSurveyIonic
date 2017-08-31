@@ -87,6 +87,17 @@ page-tab-shop {
             }
         }
     }
+    .box-data-null {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        display: flex;
+        .text-null {
+            margin: auto;
+        }
+    }
 }
 
 .override-alret-filter {

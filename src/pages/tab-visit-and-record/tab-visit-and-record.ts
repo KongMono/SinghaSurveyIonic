@@ -23,6 +23,7 @@ export class TabVisitAndRecord {
   customersVisitList = [];
   actionSheet: any;
   showCheckNameDialog: boolean = true;
+  waitData: boolean = false;
 
   constructor(
     public app: App,
@@ -63,12 +64,16 @@ export class TabVisitAndRecord {
   }
 
   calVisitList() {
+    this.waitData = true;
     this.util.showLoading();
     this.service.visitList(this.limit, this.offset)
       .then(
       (result: VisitListModel) => {
         this.util.hideLoading();
         this.visitListData = result.data;
+        setTimeout(() => {
+          this.waitData = false;
+        }, 800);
 
         if (this.infiniteScroll) {
           if (result.data.length === 0) {
@@ -82,6 +87,9 @@ export class TabVisitAndRecord {
         this.changeFormatDate();
       }, error => {
         this.util.hideLoading();
+        setTimeout(() => {
+          this.waitData = false;
+        }, 800);
         console.log(error);
       });
   }
@@ -89,6 +97,7 @@ export class TabVisitAndRecord {
   pullRefresh(refresher) {
     this.offset = 0;
     this.visitListData = [];
+    this.waitData = true;
     this.service.visitList(this.limit, this.offset)
       .then(
       (result: VisitListModel) => {
@@ -104,8 +113,14 @@ export class TabVisitAndRecord {
 
         this.changeFormatDate();
         refresher.complete();
+        setTimeout(() => {
+          this.waitData = false;
+        }, 300);
       }, error => {
         refresher.complete();
+        setTimeout(() => {
+          this.waitData = false;
+        }, 300);
         console.log(error);
       });
   }
