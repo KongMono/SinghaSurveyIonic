@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.singha.singhasurvey" version="1.0.0" ios-CFBundleVersion="1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>SinghaSurvey-ionic</name>
+<widget id="com.singha.singhasurvey" ios-CFBundleVersion="1" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>Singha Survey</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
@@ -42,8 +42,6 @@
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
     </platform>
     <platform name="ios">
-        <allow-intent href="itms:*" />
-        <allow-intent href="itms-apps:*" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
         <icon height="40" src="resources/ios/icon/icon-40.png" width="40" />
@@ -85,5 +83,9 @@
     <plugin name="com-sarriaroman-photoviewer" spec="~1.1.10" />
     <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
+    <plugin name="cordova-fabric-plugin" spec="~1.1.9">
+        <variable name="FABRIC_API_KEY" value="b12da4f35ea0cf5d667b9d85e7704abcc57d0607" />
+        <variable name="FABRIC_API_SECRET" value="3cb7c9663057fa61733af706d4832f4d64effc531f8be04709ae526964c6060d" />
+    </plugin>
     <engine name="ios" spec="~4.3.1" />
 </widget>
