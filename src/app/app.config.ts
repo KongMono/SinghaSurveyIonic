@@ -362,6 +362,12 @@ export const AppConfig: IAppConfig = {
         user_id: "",
         customer_id: ""
       }
+    },
+    checkVersion: {
+      url: "/v2/version/ios/format/json",
+      method: "GET",
+      param: {
+      }
     }
   }
 }

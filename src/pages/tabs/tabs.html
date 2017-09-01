@@ -1,3 +1,3 @@
-<ion-tabs tabsPlacement="bottom">
+<ion-tabs #Tabs (ionChange)="onTabsChange()" tabsPlacement="bottom">
   <ion-tab *ngFor="let tab of tabs" tabIcon="{{tab.icon}}" root="{{tab.root}}" tappable></ion-tab>
 </ion-tabs>

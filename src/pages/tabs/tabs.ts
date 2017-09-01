@@ -1,16 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { CallApi } from "../../providers/call-api";
+import { SinghaSurveyService } from "../../providers/service";
+import { AppUtilService } from "../../app/app.util";
 
 @IonicPage()
 @Component({
   selector: 'page-tabs',
-  templateUrl: 'tabs.html'
+  templateUrl: 'tabs.html',
+  providers: [
+    CallApi,
+    SinghaSurveyService,
+    AppUtilService]
 })
 
 export class Tabs {
   tabs: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  @ViewChild('Tabs') tabsRef;
+
+  constructor(public navCtrl: NavController,
+    public navParams: NavParams,
+    public service: SinghaSurveyService,
+    public util: AppUtilService) {
     this.tabs = [
       {
         'icon': '_icon-dashboard',
@@ -30,4 +42,19 @@ export class Tabs {
       }
     ]
   }
+
+  onTabsChange() {
+    var tab_index = this.tabsRef.getSelected().index;
+    // this.callCheckVersion();
+  }
+
+  callCheckVersion() {
+    this.service.checkVersion()
+      .then(result => {
+        this.util.showAlertDialog(result);
+      }, error => {
+        console.log(error.message);
+      });
+  }
+
 }

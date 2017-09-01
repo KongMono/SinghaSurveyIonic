@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams, App, Refresher, AlertController, ActionSheetController, ModalController } from 'ionic-angular';
+import { Component, Inject, ViewChild, NgZone } from '@angular/core';
+import { IonicPage, NavController, NavParams, App, Refresher, AlertController, ActionSheetController, ModalController, Content } from 'ionic-angular';
 import { SinghaSurveyService } from "../../providers/service";
 import { CallApi } from "../../providers/call-api";
 import { ConfigApp, IAppConfig } from "../../app/app.config";
@@ -26,7 +26,7 @@ export class TabShop {
     order: "1"
   }
   waitData: boolean = false;
-
+  public scrollAmount = 0;
   constructor(
     public app: App,
     public navCtrl: NavController,
@@ -36,12 +36,17 @@ export class TabShop {
     public alertCtrl: AlertController,
     public actionSheetCtrl: ActionSheetController,
     public modalCtrl: ModalController,
+    public zone: NgZone,
     @Inject(ConfigApp) private config: IAppConfig) {
 
   }
 
-  ionViewWillEnter() {
+  scrollHandler(event) {
+   
+  }
 
+  scrollEndHandler(event) {
+   
   }
 
   pullRefresh(refresher) {
@@ -239,7 +244,7 @@ export class TabShop {
           icon: '_icon-visit',
           text: 'เข้าเยี่ยม',
           handler: () => {
-           this.callCustomersChecked(customer.customer_id);
+            this.callCustomersChecked(customer.customer_id);
           }
         }
       ]

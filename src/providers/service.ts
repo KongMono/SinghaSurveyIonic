@@ -347,6 +347,11 @@ export class SinghaSurveyService {
         return this.Api.callformMultipart(service.url, service.method, service.param);
     }
 
+    checkVersion() {
+        let service = this.config.service.checkVersion;
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
     updateVisitActivity(
         user_id,
         visit_activity_id,
