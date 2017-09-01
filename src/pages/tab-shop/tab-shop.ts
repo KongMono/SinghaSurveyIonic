@@ -26,6 +26,9 @@ export class TabShop {
     order: "1"
   }
   waitData: boolean = false;
+  fabShow: any = 'up';
+  fab: boolean = true;
+
   public scrollAmount = 0;
   constructor(
     public app: App,
@@ -42,11 +45,12 @@ export class TabShop {
   }
 
   scrollHandler(event) {
-   
-  }
-
-  scrollEndHandler(event) {
-   
+    console.log(event.directionY);
+    if (event.directionY == 'up') {
+      this.fabShow = 'show-fab';
+    } else if (event.directionY == 'down') {
+      this.fabShow = 'hide-fab';
+    }
   }
 
   pullRefresh(refresher) {

@@ -24,7 +24,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content (ionScroll)="scrollHandler($event)" (ionScrollEnd)="scrollEndHandler($event)">
+<ion-content (ionScroll)="scrollHandler($event)">
   <ion-refresher (ionRefresh)="pullRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -59,14 +59,19 @@
     <span class="text-null">ไม่มีข้อมูล</span>
   </div>
 
-  <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
+  <!-- <ion-infinite-scroll (ionInfinite)="doInfinite($event)" threshold="100px">
     <ion-infinite-scroll-content>
     </ion-infinite-scroll-content>
-  </ion-infinite-scroll>
+  </ion-infinite-scroll> -->
 
-  <ion-fab right bottom>
-    <button ion-fab color="accent" (click)="addShop()" tappable>
-      <ion-icon name="_icon-plus"></ion-icon>
-    </button>
-  </ion-fab>
+  <div [ngClass]="fabShow">
+    <!-- <ion-fab right bottom class="fab" [hidden]="fab"> -->
+    <ion-fab right bottom>
+    <!-- <ion-fab right bottom [ngClass]="{'hide-fab': (fabShow == 'down')}"> -->
+    <!-- <ion-fab right bottom *ngIf="fabShow == 'up'"> -->
+      <button ion-fab color="accent" (click)="addShop()" tappable>
+        <ion-icon name="_icon-plus"></ion-icon>
+      </button>
+    </ion-fab>
+  </div>
 </ion-content>

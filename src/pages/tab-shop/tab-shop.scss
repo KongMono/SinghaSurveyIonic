@@ -98,6 +98,12 @@ page-tab-shop {
             margin: auto;
         }
     }
+    .show-fab {
+        display: inherit;
+    }
+    .hide-fab {
+        display: none;
+    }
 }
 
 .override-alret-filter {
