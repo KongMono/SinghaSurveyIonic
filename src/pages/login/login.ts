@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { NavController, IonicPage, NavParams } from 'ionic-angular';
+import { NavController, IonicPage, NavParams, ModalController } from 'ionic-angular';
 import { ConfigApp, IAppConfig } from "../../app/app.config";
 import { CallApi } from "../../providers/call-api";
 import { SinghaSurveyService } from "../../providers/service";
@@ -24,7 +24,8 @@ export class LoginPage {
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
     public service: SinghaSurveyService,
-    public util: AppUtilService) {
+    public util: AppUtilService,
+    public modalCtrl: ModalController) {
   }
 
   callLogin() {
@@ -52,6 +53,7 @@ export class LoginPage {
       (result: ForgotModel) => {
         console.log(result);
         this.util.hideLoading();
+        this.util.showAlertDialog(result.msg);
       }, error => {
         this.util.hideLoading();
         console.log(error);
@@ -60,7 +62,17 @@ export class LoginPage {
 
 
   forgetPassword() {
+    let modal = this.modalCtrl.create('ForgetPasswordInput', {}, {
+      cssClass: 'override-modal-forget-password-input'
+    });
+    modal.present();
 
+    modal.onDidDismiss(username => {
+      console.log(username);
+      if (username) {
+        this.callForgot(username);
+      }
+    });
   }
 
 
