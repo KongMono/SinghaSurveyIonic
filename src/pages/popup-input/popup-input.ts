@@ -19,10 +19,10 @@ export class PopupInput {
     this.data = navParams.get('data');
     this.option = navParams.get('option');
     this.index = navParams.get('index');
-    console.log(this.action);
-    console.log(this.data);
-    console.log(this.option);
-    console.log(this.index);
+    // console.log(this.action);
+    // console.log(this.data);
+    // console.log(this.option);
+    // console.log(this.index);
     this.callback = this.navParams.get("callback")
   }
 
