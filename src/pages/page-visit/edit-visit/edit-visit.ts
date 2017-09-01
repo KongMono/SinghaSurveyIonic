@@ -33,8 +33,20 @@ export class EditVisitPage {
     }],
     boonrawd: [{
       value: []
+    },
+    {
+      value: []
+    },
+    {
+      value: []
     }],
     rival: [{
+      value: []
+    },
+    {
+      value: []
+    },
+    {
       value: []
     }],
     equipment: []
