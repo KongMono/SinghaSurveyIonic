@@ -66,9 +66,9 @@ export class ShopAddCallCard {
           text: 'เปิดกล้อง',
           handler: () => {
             const options: CameraOptions = {
-              quality: 100,
+              quality: 50,
               destinationType: this.camera.DestinationType.DATA_URL,
-              encodingType: this.camera.EncodingType.PNG,
+              encodingType: this.camera.EncodingType.JPEG,
               mediaType: this.camera.MediaType.PICTURE,
               sourceType: 1
             }
@@ -79,9 +79,9 @@ export class ShopAddCallCard {
           text: 'เลือกอัลบั้ม',
           handler: () => {
             const options: CameraOptions = {
-              quality: 100,
+              quality: 50,
               destinationType: this.camera.DestinationType.DATA_URL,
-              encodingType: this.camera.EncodingType.PNG,
+              encodingType: this.camera.EncodingType.JPEG,
               mediaType: this.camera.MediaType.PICTURE,
               sourceType: 0
             }
@@ -105,7 +105,7 @@ export class ShopAddCallCard {
 
   setUploadImageCustomer(imageBase64) {
     this.util.showLoading();
-    this.service.uploadImageCustomer(imageBase64)
+    this.service.uploadImageCustomerCallcard(imageBase64)
       .then(result => {
         this.util.hideLoading();
         console.log("uploadImageCustomer", result);

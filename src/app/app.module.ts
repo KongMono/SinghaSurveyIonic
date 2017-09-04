@@ -12,6 +12,7 @@ import { AppVersion } from '@ionic-native/app-version';
 
 import { MyApp } from './app.component';
 import { ConfigApp, AppConfig } from './app.config';
+import { SSVErrorHandler } from "./app.errorhandler";
 @NgModule({
   declarations: [
     MyApp
@@ -39,7 +40,7 @@ import { ConfigApp, AppConfig } from './app.config';
     StatusBar,
     SplashScreen,
     { provide: ConfigApp, useValue: AppConfig },
-    { provide: ErrorHandler, useClass: IonicErrorHandler }
+    { provide: ErrorHandler, useClass: SSVErrorHandler }
   ],
 
 })
