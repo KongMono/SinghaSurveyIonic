@@ -21,6 +21,7 @@ export class SearchVisitPage {
   endDate: string;
   actionSheet: any;
   startDate: string;
+  actionScroll: any = 'up';
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -29,6 +30,19 @@ export class SearchVisitPage {
     public actionSheetCtrl: ActionSheetController,
     public app: App,
     @Inject(ConfigApp) private config: IAppConfig) {
+  }
+
+  ionViewDidLoad() {
+    setInterval(() => {
+      // call interval fix binding actionScroll hide fab
+    });
+  }
+
+  scrollHandler(event) {
+    if (this.actionScroll != event.directionY) {
+      this.actionScroll = event.directionY;
+      console.log(this.actionScroll);
+    }
   }
 
   backPage() {
@@ -52,7 +66,7 @@ export class SearchVisitPage {
       name = this.keyName
     }
     this.util.showLoading();
-    this.service.searchVisitCustomer(name,this.startDate,this.endDate)
+    this.service.searchVisitCustomer(name, this.startDate, this.endDate)
       .then(
       (result: visitCustomersListModel) => {
         this.util.hideLoading();

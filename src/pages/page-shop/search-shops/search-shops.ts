@@ -23,6 +23,7 @@ export class SearchShopsPage {
     customersListData = [];
     actionSheet: any;
     optionCustomer: OptionSearchCustomerModel;
+    actionScroll: any = 'up';
 
     constructor(
         public app: App,
@@ -39,6 +40,17 @@ export class SearchShopsPage {
 
     ionViewDidLoad() {
         this.callgetOptionSearch();
+
+        setInterval(() => {
+            // call interval fix binding actionScroll hide fab
+        });
+    }
+
+    scrollHandler(event) {
+        if (this.actionScroll != event.directionY) {
+            this.actionScroll = event.directionY;
+            console.log(this.actionScroll);
+        }
     }
 
     callgetOptionSearch() {

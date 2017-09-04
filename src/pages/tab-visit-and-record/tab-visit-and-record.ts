@@ -10,7 +10,7 @@ import { ConfigApp, IAppConfig } from './../../app/app.config';
   selector: 'page-tab-visit-and-record',
   templateUrl: 'tab-visit-and-record.html',
   providers: [
-    CallApi, 
+    CallApi,
     SinghaSurveyService]
 })
 
@@ -24,6 +24,7 @@ export class TabVisitAndRecord {
   actionSheet: any;
   showCheckNameDialog: boolean = true;
   waitData: boolean = false;
+  actionScroll: any = 'up';
 
   constructor(
     public app: App,
@@ -47,6 +48,17 @@ export class TabVisitAndRecord {
 
   ionViewDidLoad() {
     this.calVisitList();
+
+    setInterval(() => {
+      // call interval fix binding actionScroll hide fab
+    });
+  }
+
+  scrollHandler(event) {
+    if (this.actionScroll != event.directionY) {
+      this.actionScroll = event.directionY;
+      // console.log(this.actionScroll);
+    }
   }
 
   overviewVisit() {

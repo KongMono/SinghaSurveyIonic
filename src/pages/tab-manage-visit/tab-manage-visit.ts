@@ -18,6 +18,7 @@ export class TabManageVisit {
   limit: number = 10;
   infiniteScroll: any;
   waitData: boolean = false;
+  actionScroll: any = 'up';
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,6 +34,17 @@ export class TabManageVisit {
 
   ionViewDidLoad() {
     this.calScheduleList();
+
+    setInterval(() => {
+      // call interval fix binding actionScroll hide fab
+    });
+  }
+
+  scrollHandler(event) {
+    if (this.actionScroll != event.directionY) {
+      this.actionScroll = event.directionY;
+      // console.log(this.actionScroll);
+    }
   }
 
   calScheduleList() {

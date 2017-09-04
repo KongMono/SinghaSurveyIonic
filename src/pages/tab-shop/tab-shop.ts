@@ -26,8 +26,7 @@ export class TabShop {
     order: "1"
   }
   waitData: boolean = false;
-  fabShow: any = 'up';
-  fab: boolean = true;
+  actionScroll: any = 'up';
 
   public scrollAmount = 0;
   constructor(
@@ -45,11 +44,9 @@ export class TabShop {
   }
 
   scrollHandler(event) {
-    console.log(event.directionY);
-    if (event.directionY == 'up') {
-      this.fabShow = 'show-fab';
-    } else if (event.directionY == 'down') {
-      this.fabShow = 'hide-fab';
+    if (this.actionScroll != event.directionY) {
+      this.actionScroll = event.directionY;
+      // console.log(this.actionScroll);
     }
   }
 
@@ -62,6 +59,10 @@ export class TabShop {
 
   ionViewDidLoad() {
     this.callCustomerList();
+
+    setInterval(() => {
+      // call interval fix binding actionScroll hide fab
+    });
   }
 
   overviewShop() {

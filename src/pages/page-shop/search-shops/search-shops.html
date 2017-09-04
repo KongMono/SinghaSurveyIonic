@@ -81,7 +81,7 @@
       </ion-row>
     </ion-grid>
   </div>
-  <div *ngIf="customersListData.length > 0" class="box-list-search">
+  <div *ngIf="customersListData.length > 0" class="box-list-search" (ionScroll)="scrollHandler($event)">
     <ion-list no-lines>
       <button ion-item detail-none class="box-customer" style="border-bottom: 1px solid #dedede;" *ngFor="let customer of customersListData"
         (tap)="onClick(customer)" (press)="onLongPress(customer)" tappable>
@@ -111,7 +111,7 @@
     <span class="text-null">ไม่มีข้อมูล</span>
   </div>
 
-  <ion-fab right bottom>
+  <ion-fab right bottom class="animated bounceInUp" [ngClass]="{'hide-fab': (actionScroll == 'down')}">
     <button ion-fab color="accent" (click)="SearchShop()" tappable>
       <ion-icon name="_icon-search"></ion-icon>
     </button>

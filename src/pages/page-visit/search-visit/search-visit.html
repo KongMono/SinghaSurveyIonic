@@ -40,7 +40,7 @@
     </ion-row>
   </ion-grid>
 
-  <div *ngIf="customersVisitList.length > 0" class="wrap-list-visit-and-record">
+  <div *ngIf="customersVisitList.length > 0" class="wrap-list-visit-and-record" (ionScroll)="scrollHandler($event)">
     <ion-list no-lines>
       <button ion-item detail-none class="box-visit-and-record" style="border-bottom: 1px solid #dedede;" *ngFor="let visit of customersVisitList"
         (tap)="onClick(visit.visit_id)" (press)="onLongPress(visit)" tappable>
@@ -72,7 +72,7 @@
     <span class="text-null">ไม่มีข้อมูล</span>
   </div>
 
-  <ion-fab right bottom>
+  <ion-fab right bottom class="animated bounceInUp" [ngClass]="{'hide-fab': (actionScroll == 'down')}">
     <button ion-fab color="accent" (click)="searchVisit()" tappable>
       <ion-icon name="_icon-search"></ion-icon>
     </button>

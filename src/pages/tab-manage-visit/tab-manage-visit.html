@@ -4,7 +4,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content (ionScroll)="scrollHandler($event)">
   <ion-refresher (ionRefresh)="pullRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
@@ -32,7 +32,7 @@
     <span class="text-null">ไม่มีข้อมูล</span>
   </div>
 
-  <ion-fab right bottom>
+  <ion-fab right bottom class="animated bounceInUp" [ngClass]="{'hide-fab': (actionScroll == 'down')}">
     <button ion-fab color="accent">
       <ion-icon name="_icon-plus"></ion-icon>
     </button>
