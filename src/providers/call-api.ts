@@ -44,23 +44,6 @@ export class CallApi {
 
     }
 
-    private callformMultipart(url: string, method: string, param: any) {
-
-        if (this.config.isBuildDevice && this.config.isProduction) {
-            url = this.config.endpoint_production + url;
-        } else if (this.config.isBuildDevice && !this.config.isProduction) {
-            url = this.config.endpoint + url;
-        }
-
-        console.log("url", url);
-        console.log("params", param);
-
-        return this._post_form_multipart(url, param);
-
-    }
-
-
-
     private _get(url: string, param: any) {
 
         return new Promise((resolve, reject) => {
@@ -113,31 +96,6 @@ export class CallApi {
             }
 
             this.http.post(url, formData)
-                .map(res => res.json())
-                .subscribe(data => {
-                    console.log("data resolve", data);
-                    resolve(data);
-                }, error => {
-                    reject(error);
-                });
-
-        });
-    }
-
-    private _post_form_multipart(url: string, param: any) {
-
-        return new Promise((resolve, reject) => {
-
-            let headers = new Headers({ 'Content-Type': 'multipart/form-data' });
-            let options = new RequestOptions({ headers: headers });
-
-            let formData = new FormData();
-
-            for (let dataKey in param) {
-                formData.append(dataKey, param[dataKey]);
-            }
-
-            this.http.post(url, formData, options)
                 .map(res => res.json())
                 .subscribe(data => {
                     console.log("data resolve", data);

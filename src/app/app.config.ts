@@ -22,7 +22,7 @@ export const AppConfig: IAppConfig = {
   isLogged: null,
   pin_logged: null,
   userInfo: null,
-  isBuildDevice: false,
+  isBuildDevice: true,
   isProduction: false,
   versionApp: null,
   versionBuild: null,
@@ -85,6 +85,12 @@ export const AppConfig: IAppConfig = {
       method: "POST",
       param: {}
     },
+    uploadImageVisitCustomer: {
+      url: "/v2/visit/image64/format/json",
+      method: "POST",
+      param: {}
+    },
+
     customersCheck: {
       url: "/v2/customers/check/format/json",
       method: "POST",

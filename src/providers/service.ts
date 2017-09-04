@@ -333,7 +333,7 @@ export class SinghaSurveyService {
             image: imageBase64
         }
 
-        return this.Api.callformMultipart(service.url, service.method, service.param);
+        return this.Api.callform(service.url, service.method, service.param);
     }
 
     uploadImageCustomerCallcard(imageBase64) {
@@ -344,7 +344,40 @@ export class SinghaSurveyService {
             image: imageBase64
         }
 
-        return this.Api.callformMultipart(service.url, service.method, service.param);
+        return this.Api.callform(service.url, service.method, service.param);
+    }
+    
+    uploadImageVisitCustomerSale(imageBase64) {
+        let service = this.config.service.uploadImageVisitCustomer;
+
+        service.param = {
+            type: "sale",
+            image: imageBase64
+        }
+
+        return this.Api.callform(service.url, service.method, service.param);
+    }
+
+    uploadImageVisitCustomerNote(imageBase64) {
+        let service = this.config.service.uploadImageVisitCustomer;
+
+        service.param = {
+            type: "note",
+            image: imageBase64
+        }
+
+        return this.Api.callform(service.url, service.method, service.param);
+    }
+
+    uploadImageVisitCustomerActivity(imageBase64) {
+        let service = this.config.service.uploadImageVisitCustomer;
+
+        service.param = {
+            type: "activity",
+            image: imageBase64
+        }
+
+        return this.Api.callform(service.url, service.method, service.param);
     }
 
     checkVersion() {
