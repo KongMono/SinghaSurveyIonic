@@ -27,13 +27,13 @@
             <ion-col col-6 class="wrap-col">
               <ion-item class="item-checkbox">
                 <ion-label>ในสถานที่</ion-label>
-                <ion-checkbox checked="status.progress"></ion-checkbox>
+                <ion-checkbox checked="venue.internalPlace" [(ngModel)]="venue.internalPlace" (ngModelChange)="changeVenue('internalPlace')"></ion-checkbox>
               </ion-item>
             </ion-col>
             <ion-col col-6 class="wrap-col">
               <ion-item class="item-checkbox">
                 <ion-label>นอกสถานที่</ion-label>
-                <ion-checkbox checked="status.complete"></ion-checkbox>
+                <ion-checkbox checked="venue.externalPlace" [(ngModel)]="venue.externalPlace" (ngModelChange)="changeVenue('externalPlace')"></ion-checkbox>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -45,7 +45,7 @@
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list" *ngIf="optionsActivity">
-            <button ion-item (click)="selectOption('customer_group')" tappable>
+            <button ion-item (click)="selectOption('vendor')" tappable>
               {{ optionsActivity.vendor[indexVendor].name }}
             </button>
           </ion-list>
@@ -57,7 +57,7 @@
         </ion-col>
         <ion-col class="wrap-col">
           <ion-list class="wrap-list" *ngIf="optionsActivity">
-            <button ion-item (click)="selectOption('customer_type')" tappable>
+            <button ion-item (click)="selectOption('tradition_type')" tappable>
               {{ optionsActivity.tradition_type[indexTraditionType].tradition_name }}
             </button>
           </ion-list>
@@ -69,7 +69,7 @@
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list" *ngIf="optionsActivity">
-            <button ion-item (click)="selectOption('customer_group')" tappable>
+            <button ion-item (click)="selectOption('activity_master')" tappable>
               {{ optionsActivity.tradition_type[indexTraditionType].activity_master[indexActivityMaster].activity_master_name }}
             </button>
           </ion-list>
@@ -81,8 +81,8 @@
         </ion-col>
         <ion-col class="wrap-col">
           <ion-list class="wrap-list" *ngIf="optionsActivity">
-            <button ion-item (click)="selectOption('customer_type')" tappable>
-                {{ optionsActivity.tradition_type[indexTraditionType].activity_master[indexActivityMaster].activity[indexActivity].activity_name }}
+            <button ion-item (click)="selectOption('activity')" tappable>
+              {{ optionsActivity.tradition_type[indexTraditionType].activity_master[indexActivityMaster].activity[indexActivity].activity_name }}
             </button>
           </ion-list>
         </ion-col>

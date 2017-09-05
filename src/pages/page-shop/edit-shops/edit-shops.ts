@@ -512,6 +512,7 @@ export class EditShopsPage {
         console.log("customerDetailData", this.customerDetailData);
         this.setIndexProvince();
         this.setIndexCustomerGroup();
+        this.setIndexStatus();
         this.setLatLong();
         this.setCustomerDetailDataChannels();
       }, error => {

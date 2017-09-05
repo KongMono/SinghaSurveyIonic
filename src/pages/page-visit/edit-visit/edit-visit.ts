@@ -257,7 +257,28 @@ export class EditVisitPage {
   }
 
   actionSheetInActivityList(index) {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: '_icon-edit',
+          text: 'แก้ไข',
+          handler: () => {
+            this.activities(index);
+          }
+        }, {
+          icon: '_icon-delete_file',
+          text: 'ลบ',
+          handler: () => {
+            this.removeDataInActivityList(index);
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
 
+  removeDataInActivityList(index) {
+    this.visitCustomerDetailData.activities.splice(index, 1);
   }
 
   popupInput(action, indexValue, indexPath) {

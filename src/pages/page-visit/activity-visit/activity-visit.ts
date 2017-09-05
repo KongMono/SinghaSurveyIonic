@@ -45,6 +45,10 @@ export class ActivityVisitPage {
     images: [],
     sale_images: []
   };
+  venue = {
+    internalPlace: false,
+    externalPlace: false,
+  }
   indexVendor = 0;
   indexTraditionType = 0;
   indexActivityMaster = 0;
@@ -90,6 +94,7 @@ export class ActivityVisitPage {
     this.util.showLoading();
     this.service.optionActivity()
       .then((result: optionsActivityModel) => {
+        this.optionsActivity = result;
         this.callGetOptionSale();
       }, error => {
         this.util.hideLoading();
@@ -100,6 +105,7 @@ export class ActivityVisitPage {
   callGetOptionSale() {
     this.service.optionSale()
       .then((result: optionsSaleModel) => {
+        this.optionsSale = result;
         if (this.index != null || this.index != undefined) {
           this.callGetVisitActivityDetail();
         } else {
@@ -114,11 +120,139 @@ export class ActivityVisitPage {
   callGetVisitActivityDetail() {
     this.service.visitActivityDetail(this.data[this.index].id)
       .then((result: visitActivityDetailModel) => {
+        this.visitActivityDetailData = result;
+        if (this.visitActivityDetailData.venue_type == '1') {
+          this.venue.internalPlace = true;
+          this.venue.externalPlace = false;
+        } else if (this.visitActivityDetailData.venue_type == '2') {
+          this.venue.internalPlace = false;
+          this.venue.externalPlace = true;
+        }
+
+        this.setIndexVendor();
+        this.setIndexTraditionType();
+
+        if (!this.visitActivityDetailData.images) {
+          this.visitActivityDetailData.images = [];
+        }
+
+        if (!this.visitActivityDetailData.sale_images) {
+          this.visitActivityDetailData.sale_images = [];
+        }
         this.util.hideLoading();
       }, error => {
         this.util.hideLoading();
         console.log(error);
       });
+  }
+
+  setIndexVendor() {
+    for (var i = 0; i < this.optionsActivity.vendor.length; i++) {
+      if (this.optionsActivity.vendor[i].vendor_id == this.visitActivityDetailData.vendor_id) {
+        return this.indexVendor = i;
+      }
+    }
+  }
+
+  setIndexTraditionType() {
+    for (var i = 0; i < this.optionsActivity.tradition_type.length; i++) {
+      if (this.optionsActivity.tradition_type[i].tradition_type_id == this.visitActivityDetailData.tradition_type_id) {
+        this.indexTraditionType = i;
+        this.setIndexActivityMaster(this.indexTraditionType);
+        return
+      }
+    }
+  }
+
+  setIndexActivityMaster(indexTraditionType) {
+    for (var i = 0; i < this.optionsActivity.tradition_type[indexTraditionType].activity_master.length; i++) {
+      if (this.optionsActivity.tradition_type[indexTraditionType].activity_master[i].activity_master_id == this.visitActivityDetailData.activity_master_id) {
+        this.indexActivityMaster = i;
+        this.setIndexActivity(indexTraditionType, this.indexActivityMaster);
+        return
+      }
+    }
+  }
+
+  setIndexActivity(indexTraditionType, indexActivityMaster) {
+    for (var i = 0; i < this.optionsActivity.tradition_type[indexTraditionType].activity_master[indexActivityMaster].activity.length; i++) {
+      if (this.optionsActivity.tradition_type[indexTraditionType].activity_master[indexActivityMaster].activity[i].activity_id == this.visitActivityDetailData.activity_id) {
+        return this.indexActivity = i;
+      }
+    }
+  }
+
+  changeVenue(action) {
+    if (action == 'internalPlace') {
+      if (this.venue.internalPlace) {
+        this.venue.externalPlace = false;
+        this.visitActivityDetailData.venue_type = '1';
+      } else if (!this.venue.internalPlace) {
+        this.venue.externalPlace = true;
+        this.visitActivityDetailData.venue_type = '2';
+      }
+    } else if (action == 'externalPlace') {
+      if (this.venue.externalPlace) {
+        this.venue.internalPlace = false;
+        this.visitActivityDetailData.venue_type = '2';
+      } else if (!this.venue.externalPlace) {
+        this.venue.internalPlace = true;
+        this.visitActivityDetailData.venue_type = '1';
+      }
+    }
+  }
+
+  selectOption(action) {
+    let title, listSelectOption, keyOption, indexSelect;
+    if (action == 'vendor') {
+      title = 'เลือกบริษัท';
+      listSelectOption = this.optionsActivity.vendor;
+      keyOption = 'name';
+      indexSelect = this.indexVendor;
+    } else if (action == 'tradition_type') {
+      title = 'เลือกประเภท';
+      listSelectOption = this.optionsActivity.tradition_type;
+      keyOption = 'tradition_name';
+      indexSelect = this.indexTraditionType;
+    } else if (action == 'activity_master') {
+      title = 'ตัวเลือก';
+      listSelectOption = this.optionsActivity.tradition_type[this.indexTraditionType].activity_master;
+      keyOption = 'activity_master_name';
+      indexSelect = this.indexActivityMaster;
+    } else if (action == 'activity') {
+      title = 'ตัวเลือก';
+      listSelectOption = this.optionsActivity.tradition_type[this.indexTraditionType].activity_master[this.indexActivityMaster].activity;
+      keyOption = 'activity_name';
+      indexSelect = this.indexActivity;
+    }
+    this.navCtrl.push('ListSelectOptionPage', { action: action, title: title, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
+  }
+
+  selectOptionCallback = (_params) => {
+    return new Promise(resolve => {
+      if (_params.action == 'vendor') {
+        this.indexVendor = _params.indexSelect;
+        resolve();
+      } else if (_params.action == 'tradition_type') {
+        if (this.indexTraditionType != _params.indexSelect) {
+          this.indexActivityMaster = 0;
+          this.indexActivity = 0;
+        }
+        this.indexTraditionType = _params.indexSelect;
+        resolve();
+      } else if (_params.action == 'activity_master') {
+        if (this.indexActivityMaster != _params.indexSelect) {
+          this.indexActivity = 0;
+        }
+        this.indexActivityMaster = _params.indexSelect;
+        resolve();
+      } else if (_params.action == 'activity') {
+        this.indexActivity = _params.indexSelect;
+        resolve();
+      } else {
+        resolve();
+      }
+    });
   }
 
   save() {
