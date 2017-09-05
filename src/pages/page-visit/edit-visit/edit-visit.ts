@@ -239,6 +239,27 @@ export class EditVisitPage {
     }
   }
 
+  activities(index) {
+    this.navCtrl.push('ActivityVisitPage', { data: this.visitCustomerDetailData.activities, optionEquipment: this.optionEquipment, index: index, callback: this.activitiesCallback },
+      { animate: true, animation: 'transition', direction: 'forward' });
+  }
+
+  activitiesCallback = (_params) => {
+    return new Promise(resolve => {
+      console.log(_params);
+      if (_params) {
+        this.visitCustomerDetailData.activities = _params;
+        resolve();
+      } else {
+        resolve();
+      }
+    });
+  }
+
+  actionSheetInActivityList(index) {
+
+  }
+
   popupInput(action, indexValue, indexPath) {
     let option;
     let index = indexValue;

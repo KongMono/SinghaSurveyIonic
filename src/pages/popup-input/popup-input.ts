@@ -31,7 +31,7 @@ export class PopupInput {
   }
 
   backPage() {
-    this.navCtrl.pop({animate:true,animation:'transition',direction:'back'});
+    this.navCtrl.pop({animate: true, animation: 'transition', direction: 'back'});
   }
 
   reciveDataFromInput(data) {

@@ -84,6 +84,15 @@ page-activity-visit {
         .line-top-row {
             border-top: 1px solid #dedede;
         }
+        .item-checkbox {
+            .checkbox {
+                margin: 9px 4px !important;
+            }
+            .item-inner {
+                padding-right: 0 !important;
+                border-bottom: none !important;
+            }
+        }
         .button-add-input {
             position: absolute;
             top: 0;

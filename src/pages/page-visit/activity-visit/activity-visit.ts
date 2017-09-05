@@ -22,7 +22,39 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 })
 
 export class ActivityVisitPage {
-  activity_id: any;
+  data: any;
+  optionEquipment: optionEquipmentModel;
+  index: any;
+  callback: any;
+  optionsActivity: optionsActivityModel;
+  optionsSale: optionsSaleModel;
+  visitActivityDetailData: visitActivityDetailModel = {
+    visit_activity_id: '',
+    venue_type: '',
+    venue_name: '',
+    vendor_id: '',
+    tradition_type_id: '',
+    activity_name: '',
+    start_date: '',
+    end_date: '',
+    activity_master_id: '',
+    activity_id: '',
+    pg: [],
+    sales: [],
+    equipment: [],
+    images: [],
+    sale_images: []
+  };
+  indexVendor = 0;
+  indexTraditionType = 0;
+  indexActivityMaster = 0;
+  indexActivity = 0;
+  visitActivityDetail = {
+    pg: [],
+    sales: [],
+    equipment: []
+  };
+
   constructor(
     public app: App,
     private http: Http,
@@ -37,7 +69,13 @@ export class ActivityVisitPage {
     private alertCtrl: AlertController,
     private photoViewer: PhotoViewer,
     @Inject(ConfigApp) private config: IAppConfig) {
-    this.activity_id = navParams.get('data');
+    this.data = navParams.get('data');
+    this.optionEquipment = navParams.get('optionEquipment');
+    this.index = navParams.get('index');
+    console.log(this.data);
+    console.log(this.optionEquipment);
+    console.log(this.index);
+    this.callback = this.navParams.get("callback")
   }
 
   ionViewDidLoad() {
@@ -45,7 +83,7 @@ export class ActivityVisitPage {
   }
 
   backPage() {
-    this.app.getRootNav().pop();
+    this.navCtrl.pop({ animate: true, animation: 'transition', direction: 'back' });
   }
 
   callGetOptionActivity() {
@@ -60,14 +98,13 @@ export class ActivityVisitPage {
   }
 
   callGetOptionSale() {
-    this.util.showLoading();
     this.service.optionSale()
       .then((result: optionsSaleModel) => {
-
-        if (this.activity_id != "") {
+        if (this.index != null || this.index != undefined) {
           this.callGetVisitActivityDetail();
+        } else {
+          this.util.hideLoading();
         }
-
       }, error => {
         this.util.hideLoading();
         console.log(error);
@@ -75,14 +112,24 @@ export class ActivityVisitPage {
   }
 
   callGetVisitActivityDetail() {
-    this.util.showLoading();
-    this.service.visitActivityDetail(this.activity_id)
-      .then((result: visitActivityDetail) => {
-
+    this.service.visitActivityDetail(this.data[this.index].id)
+      .then((result: visitActivityDetailModel) => {
+        this.util.hideLoading();
       }, error => {
         this.util.hideLoading();
         console.log(error);
       });
   }
 
+  save() {
+    // let dataCallback = {
+    //   action: this.action,
+    //   data: data
+    // }
+    this.callback(this.data).then(() => {
+      this.backPage();
+    }, error => {
+
+    });
+  }
 }

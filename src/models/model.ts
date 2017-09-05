@@ -164,7 +164,7 @@ interface optionsSaleModel {
   promotion: Promotion[];
 }
 
-interface visitActivityDetail {
+interface visitActivityDetailModel {
   visit_activity_id: string;
   venue_type: string;
   venue_name: string;

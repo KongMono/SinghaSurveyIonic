@@ -34,10 +34,10 @@
           <p>รายการกิจกรรม</p>
         </ion-col>
         <ion-col class="col-title">
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('activities')" tappable></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="activities(null)" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let activities of visitCustomerDetailData.activities; let i = index" (click)="actionSheetInList('activities', i)"
+      <ion-row *ngFor="let activities of visitCustomerDetailData.activities; let i = index" (click)="actionSheetInActivityList(i)"
         [ngClass]="{'hide-line-last-item': (visitCustomerDetailData.activities.length-1 == i)}" tappable>
         <ion-item class="item-title">
           <ion-row class="row-full-size">
