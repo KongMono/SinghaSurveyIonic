@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, App } from 'ionic-angular';
 import { CallApi } from './../../providers/call-api';
 import { SinghaSurveyService } from './../../providers/service';
 import { AppUtilService } from './../../app/app.util';
@@ -19,11 +19,15 @@ export class TabManageVisit {
   infiniteScroll: any;
   waitData: boolean = false;
   actionScroll: any = 'up';
+  actionSheet: any;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public app: App,
+    public navCtrl: NavController,
     public navParams: NavParams,
     public service: SinghaSurveyService,
     public util: AppUtilService,
+    public actionSheetCtrl: ActionSheetController,
     @Inject(ConfigApp) private config: IAppConfig) {
 
   }
@@ -144,5 +148,67 @@ export class TabManageVisit {
       scheduleListData[i].end_date = this.util.setFormatDateYearBE(scheduleListData[i].created_date, 'D MMM YYYY');
     }
     return scheduleListData;
+  }
+
+  onClick(schedule: any) {
+    this.app.getRootNav().push('ViewSchedulePage', {
+      data: {
+        schedule_id: schedule.schedule_id,
+        title: schedule.name
+      }
+    }, { animate: true, animation: 'transition', direction: 'forward' });
+  }
+
+  onLongPress(schedule: any) {
+    if (this.actionSheet) {
+      this.actionSheet.dismiss();
+    }
+
+    let buttons = [
+      {
+        icon: '_icon-map',
+        text: 'ปฎิทิน',
+        handler: () => {
+          this.app.getRootNav().push('ViewSchedulePage', {
+            data: {
+              schedule_id: schedule.schedule_id,
+              title: schedule.name
+            }
+          }, { animate: true, animation: 'transition', direction: 'forward' });
+        }
+      }, {
+        icon: '_icon-visit',
+        text: 'แก้ไข',
+        handler: () => {
+          this.app.getRootNav().push('EditSchedulePage', {
+            data: {
+              schedule_id: schedule.schedule_id,
+              isEdit: true
+            }
+          });
+        }
+      }
+    ]
+
+    if (schedule.can_delete != "0") {
+      buttons.push({
+        icon: '_icon-trash',
+        text: 'ลบ',
+        handler: () => {
+          this.service.deleteCustomer(schedule.customer_id)
+            .then((result) => {
+              this.util.hideLoading();
+              this.util.showAlertDialog(result.msg);
+              // this.callCustomerList();
+            });
+        }
+      });
+    }
+
+    this.actionSheet = this.actionSheetCtrl.create({
+      buttons
+    });
+
+    this.actionSheet.present();
   }
 }

@@ -45,13 +45,14 @@ export class Tabs {
 
   onTabsChange() {
     var tab_index = this.tabsRef.getSelected().index;
-    // this.callCheckVersion();
+    this.callCheckVersion();
   }
 
   callCheckVersion() {
     this.service.checkVersion()
       .then(result => {
-        this.util.showAlertDialog(result);
+        // result.data[0].value  -> versioncode
+        // this.util.showAlertDialog(result.data[0].value);
       }, error => {
         console.log(error.message);
       });

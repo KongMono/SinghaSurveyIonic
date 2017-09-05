@@ -22,5 +22,8 @@
   "compileOnSave": false,
   "atom": {
     "rewriteTsconfig": false
-  }
+  },
+  "files": [
+    "plugins/cordova-fabric-plugin/typings/cordova-fabric-plugin.d.ts"
+  ]
 }
