@@ -11,7 +11,7 @@
 
   <div *ngIf="scheduleListData.length > 0">
     <ion-list no-lines>
-      <button ion-item detail-none class="box-manage-visit" style="border-bottom: 1px solid #dedede;" *ngFor="let schedule of scheduleListData">
+      <button ion-item detail-none class="box-manage-visit" style="border-bottom: 1px solid #dedede;" *ngFor="let schedule of scheduleListData"  (tap)="onClick(schedule)" (press)="onLongPress(schedule)" tappable>
         <p class="text-name">รอบ {{schedule.name}}</p>
         <ion-grid>
           <ion-row>

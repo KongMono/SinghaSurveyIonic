@@ -6,7 +6,7 @@ export class SSVErrorHandler extends IonicErrorHandler {
     handleError(err: any): void {
 
         super.handleError(err);
-        fabric.Crashlytics.sendNonFatalCrash(err);
+        // (window).Crashlytics.sendNonFatalCrash(err);
     }
 
 }
