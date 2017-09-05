@@ -369,6 +369,47 @@ export const AppConfig: IAppConfig = {
         customer_id: ""
       }
     },
+    deleteSchedule: {
+      url: "/v2/schedule/deleted/format/json",
+      method: "POST",
+      param: {
+        user_id: "",
+        schedule_id: ""
+      }
+    },
+    updatedSchedule: {
+      url: "/v2/schedule/updated/format/json",
+      method: "POST",
+      param: {
+        user_id: "",
+        schedule_id: "",
+        cycle_id: "",
+        plan: ""
+      }
+    },
+    getScheduleCycleList: {
+      url: "/v2/schedule/cycle/format/json",
+      method: "GET",
+      param: {
+        user_id: ""
+      }
+    },
+    createdSchedule: {
+      url: "/v2/schedule/created/format/json",
+      method: "POST",
+      param: {
+        user_id: "",
+        cycle_id: ""
+      }
+    },
+    getScheduleView: {
+      url: "/v2/schedule/cal/format/json",
+      method: "GET",
+      param: {
+        user_id: "",
+        schedule_id: ""
+      }
+    },
     checkVersion: {
       url: "/v2/version/ios/format/json",
       method: "GET",

@@ -65,6 +65,13 @@ export class TabShop {
     });
   }
 
+  checkFab() {
+    if (this.actionScroll == 'down')
+      return 'animated bounceOutDown'
+    else 
+      return 'animated bounceInUp'
+  }
+
   overviewShop() {
     this.util.showLoading();
     this.service.customersCycle()

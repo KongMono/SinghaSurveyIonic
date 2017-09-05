@@ -39,7 +39,7 @@ export class TabManageVisit {
   }
 
   ionViewDidLoad() {
-    this.calScheduleList();
+    this.callScheduleList();
 
     setInterval(() => {
       // call interval fix binding actionScroll hide fab
@@ -49,11 +49,10 @@ export class TabManageVisit {
   scrollHandler(event) {
     if (this.actionScroll != event.directionY) {
       this.actionScroll = event.directionY;
-      // console.log(this.actionScroll);
     }
   }
 
-  calScheduleList() {
+  callScheduleList() {
     this.offset = 0;
     this.waitData = true;
     this.util.showLoading();
@@ -154,7 +153,7 @@ export class TabManageVisit {
 
   addSchedule() {
     this.util.showLoading();
-    this.service.customersCheck()
+    this.service.getScheduleCycleList()
       .then(
       (result: customersCheckModel) => {
         this.util.hideLoading();
@@ -223,11 +222,11 @@ export class TabManageVisit {
         icon: '_icon-trash',
         text: 'ลบ',
         handler: () => {
-          this.service.deleteCustomer(schedule.customer_id)
+          this.service.deleteSchedule(schedule.schedule_id)
             .then((result) => {
               this.util.hideLoading();
               this.util.showAlertDialog(result.msg);
-              // this.callCustomerList();
+              this.callScheduleList();
             });
         }
       });

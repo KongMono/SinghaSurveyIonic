@@ -346,7 +346,7 @@ export class SinghaSurveyService {
 
         return this.Api.callform(service.url, service.method, service.param);
     }
-    
+
     uploadImageVisitCustomerSale(imageBase64) {
         let service = this.config.service.uploadImageVisitCustomer;
 
@@ -572,5 +572,61 @@ export class SinghaSurveyService {
         }
 
         return this.Api.callform(service.url, service.method, service.param);
+    }
+
+    deleteSchedule(schedule_id) {
+        let service = this.config.service.deleteSchedule;
+
+        service.param = {
+            user_id: this.config.userInfo.username,
+            schedule_id: schedule_id
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+    updatedSchedule(schedule_id, cycle_id, plan) {
+        let service = this.config.service.updatedSchedule;
+
+        service.param = {
+            user_id: this.config.userInfo.username,
+            schedule_id: schedule_id,
+            cycle_id: cycle_id,
+            plan: plan
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+    getScheduleCycleList() {
+        let service = this.config.service.getScheduleCycleList;
+
+        service.param = {
+            user_id: this.config.userInfo.username
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+    createdSchedule(cycle_id) {
+        let service = this.config.service.createdSchedule;
+
+        service.param = {
+            user_id: this.config.userInfo.username,
+            cycle_id: cycle_id
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
+    getScheduleView(schedule_id) {
+        let service = this.config.service.getScheduleView;
+
+        service.param = {
+            user_id: this.config.userInfo.username,
+            schedule_id: schedule_id
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
     }
 }

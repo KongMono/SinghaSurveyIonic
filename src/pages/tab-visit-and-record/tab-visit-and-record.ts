@@ -172,6 +172,13 @@ export class TabVisitAndRecord {
     return visitListData;
   }
 
+  checkFab() {
+    if (this.actionScroll == 'down')
+      return 'animated bounceOutDown'
+    else 
+      return 'animated bounceInUp'
+  }
+
 
   checkNameVisit() {
     this.util.showLoading();
