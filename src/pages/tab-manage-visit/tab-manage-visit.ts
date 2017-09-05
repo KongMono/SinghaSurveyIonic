@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { IonicPage, NavController, NavParams, ActionSheetController, App } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ActionSheetController, App, ModalController } from 'ionic-angular';
 import { CallApi } from './../../providers/call-api';
 import { SinghaSurveyService } from './../../providers/service';
 import { AppUtilService } from './../../app/app.util';
@@ -20,6 +20,7 @@ export class TabManageVisit {
   waitData: boolean = false;
   actionScroll: any = 'up';
   actionSheet: any;
+  showCheckNameDialog: boolean = true;
 
   constructor(
     public app: App,
@@ -28,6 +29,7 @@ export class TabManageVisit {
     public service: SinghaSurveyService,
     public util: AppUtilService,
     public actionSheetCtrl: ActionSheetController,
+    public modalCtrl: ModalController,
     @Inject(ConfigApp) private config: IAppConfig) {
 
   }
@@ -148,6 +150,32 @@ export class TabManageVisit {
       scheduleListData[i].end_date = this.util.setFormatDateYearBE(scheduleListData[i].created_date, 'D MMM YYYY');
     }
     return scheduleListData;
+  }
+
+  addSchedule() {
+    this.util.showLoading();
+    this.service.customersCheck()
+      .then(
+      (result: customersCheckModel) => {
+        this.util.hideLoading();
+        this.showCheckNameDialog = false;
+        // this.customersList = result.customers;
+        let modal = this.modalCtrl.create('SelectNameSchedulePage', { data: null }, {
+          cssClass: 'override-modal-add-schedule',
+          enterAnimation: '',
+          leaveAnimation: ''
+        });
+
+        modal.onDidDismiss(data => {
+          this.showCheckNameDialog = true;
+        });
+
+        modal.present();
+
+
+      }, error => {
+        console.log(error);
+      });
   }
 
   onClick(schedule: any) {
