@@ -23,4 +23,5 @@
     <visit-add-equipment *ngIf="action == 'equipment'" [data]="data" [option]="option" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-add-equipment>
     <visit-add-note *ngIf="action == 'note'" [data]="data" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-add-note>
     <visit-add-retroact *ngIf="action == 'boonrawd' || action == 'rival'" [action]="action" [data]="data" [option]="option" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-add-retroact>
+    <activity-visit-add-sales *ngIf="action == 'sales'" [data]="data" [option]="option" [index]="index" (callbackData)="reciveDataFromInput($event)"></activity-visit-add-sales>
 </ion-content>

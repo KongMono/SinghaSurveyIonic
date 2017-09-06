@@ -54,7 +54,6 @@ export class ActivityVisitPage {
   indexActivityMaster = 0;
   indexActivity = 0;
   visitActivityDetail = {
-    pg: [],
     sales: [],
     equipment: []
   };
@@ -131,6 +130,7 @@ export class ActivityVisitPage {
 
         this.setIndexVendor();
         this.setIndexTraditionType();
+        this.setVisitActivityDetailDataEquipment();
 
         if (!this.visitActivityDetailData.images) {
           this.visitActivityDetailData.images = [];
@@ -178,6 +178,42 @@ export class ActivityVisitPage {
     for (var i = 0; i < this.optionsActivity.tradition_type[indexTraditionType].activity_master[indexActivityMaster].activity.length; i++) {
       if (this.optionsActivity.tradition_type[indexTraditionType].activity_master[indexActivityMaster].activity[i].activity_id == this.visitActivityDetailData.activity_id) {
         return this.indexActivity = i;
+      }
+    }
+  }
+
+  setVisitActivityDetailDataEquipment() {
+    if (this.visitActivityDetailData.equipment.length > 0) {
+      this.visitActivityDetail.equipment = [];
+      for (var i = 0; i < this.visitActivityDetailData.equipment.length; i++) {
+        for (var indexProductVendor = 0; indexProductVendor < this.optionEquipment.data.length; indexProductVendor++) {
+          if (this.optionEquipment.data[indexProductVendor].product_vendor_id == this.visitActivityDetailData.equipment[i].product_vendor_id) {
+            for (var indexProductGroup = 0; indexProductGroup < this.optionEquipment.data[indexProductVendor].product_group.length; indexProductGroup++) {
+              if (this.optionEquipment.data[indexProductVendor].product_group[indexProductGroup].product_group_id == this.visitActivityDetailData.equipment[i].product_group_id) {
+                for (var indexProduct = 0; indexProduct < this.optionEquipment.data[indexProductVendor].product_group[indexProductGroup].product.length; indexProduct++) {
+                  if (this.optionEquipment.data[indexProductVendor].product_group[indexProductGroup].product[indexProduct].product_id == this.visitActivityDetailData.equipment[i].product_id) {
+                    let equipment = {
+                      product_vendor: {
+                        product_vendor_id: this.optionEquipment.data[indexProductVendor].product_vendor_id,
+                        name: this.optionEquipment.data[indexProductVendor].name
+                      },
+                      product_group: {
+                        product_group_id: this.optionEquipment.data[indexProductVendor].product_group[indexProductGroup].product_group_id,
+                        name: this.optionEquipment.data[indexProductVendor].product_group[indexProductGroup].name
+                      },
+                      product: {
+                        product_id: this.optionEquipment.data[indexProductVendor].product_group[indexProductGroup].product[indexProduct].product_id,
+                        name: this.optionEquipment.data[indexProductVendor].product_group[indexProductGroup].product[indexProduct].name
+                      },
+                      qty: this.visitActivityDetailData.equipment[i].qty
+                    }
+                    this.visitActivityDetail.equipment.push(equipment);
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -253,6 +289,199 @@ export class ActivityVisitPage {
         resolve();
       }
     });
+  }
+
+  popupInput(action, index) {
+    let option;
+    if (action == 'equipment') {
+      option = this.optionEquipment;
+    } else if (action == 'sales') {
+      option = this.optionsSale;
+    }
+    this.navCtrl.push('PopupInput',
+      { action: action, data: this.visitActivityDetailData, option: option, index: index, callback: this.popupInputCallback },
+      { animate: true, animation: 'transition', direction: 'forward' });
+  }
+
+  popupInputCallback = (_params) => {
+    return new Promise(resolve => {
+      console.log(_params);
+      if (_params.data) {
+        this.visitActivityDetailData = _params.data;
+        if (_params.action == 'equipment') {
+          this.setVisitActivityDetailDataEquipment();
+        }
+        resolve();
+      } else {
+        resolve();
+      }
+    });
+  }
+
+  actionSheetInList(action, index) {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: '_icon-edit',
+          text: 'แก้ไข',
+          handler: () => {
+            this.popupInput(action, index);
+          }
+        }, {
+          icon: '_icon-delete_file',
+          text: 'ลบ',
+          handler: () => {
+            this.removeDataInList(action, index);
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  removeDataInList(action, index) {
+    this.visitActivityDetailData[action].splice(index, 1);
+    if (action == 'equipment') {
+      this.visitActivityDetail[action].splice(index, 1);
+    }
+  }
+
+  addImage(action) {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: 'ios-camera',
+          text: 'เปิดกล้อง',
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 50,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              mediaType: this.camera.MediaType.PICTURE,
+              sourceType: 1
+            }
+            this.openCameraOrPhotoLibrary(action, options);
+          }
+        }, {
+          icon: 'ios-images',
+          text: 'เลือกอัลบั้ม',
+          handler: () => {
+            const options: CameraOptions = {
+              quality: 50,
+              destinationType: this.camera.DestinationType.DATA_URL,
+              encodingType: this.camera.EncodingType.JPEG,
+              mediaType: this.camera.MediaType.PICTURE,
+              sourceType: 0
+            }
+            this.openCameraOrPhotoLibrary(action, options);
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  openCameraOrPhotoLibrary(action, options) {
+    this.camera.getPicture(options).then((imageData) => {
+      this.setUploadImage(action, imageData);
+    }, (err) => {
+      console.error(err);
+    });
+  }
+
+  setUploadImage(action, imageBase64) {
+    this.util.showLoading();
+    if (action == 'tool') {
+      this.service.uploadImageVisitCustomerTool(imageBase64)
+        .then(result => {
+          this.util.hideLoading();
+          console.log("uploadImageVisitCustomerTool", result);
+          this.visitActivityDetailData.sale_images.push(result.path);
+        }, error => {
+          this.util.hideLoading();
+          console.log(error);
+        });
+    } else if (action == 'activity') {
+      this.service.uploadImageVisitCustomerActivity(imageBase64)
+        .then(result => {
+          this.util.hideLoading();
+          console.log("uploadImageVisitCustomerActivity", result);
+          this.visitActivityDetailData.images.push(result.path);
+        }, error => {
+          this.util.hideLoading();
+          console.log(error);
+        });
+    }
+  }
+
+  getImagePath(images): string {
+    let endpoint
+    if (this.config.isProduction) {
+      endpoint = this.config.endpoint_production;
+    } else {
+      endpoint = this.config.endpointUpload;
+    }
+    return endpoint + images;
+  }
+
+  viewImage(action, index) {
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: 'ios-image',
+          text: 'ดูรูป',
+          handler: () => {
+            this.app.navPop().then(() => {
+              let endpoint
+              if (this.config.isProduction) {
+                endpoint = this.config.endpoint_production;
+              } else {
+                endpoint = this.config.endpointUpload;
+              }
+              if (action == 'tool') {
+                this.photoViewer.show(endpoint + this.visitActivityDetailData.sale_images[index]);
+              } else if (action == 'activity') {
+                this.photoViewer.show(endpoint + this.visitActivityDetailData.images[index]);
+              }
+            });
+          }
+        }, {
+          icon: '_icon-trash',
+          text: 'ลบ',
+          handler: () => {
+            this.app.navPop().then(() => {
+              this.confirmRemoveImage(action, index);
+            });
+          }
+        }
+      ]
+    });
+    actionSheet.present();
+  }
+
+  confirmRemoveImage(action, index) {
+    let alert = this.alertCtrl.create({
+      title: 'ต้องการลบรูปภาพ?',
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          handler: () => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'ตกลง',
+          handler: () => {
+            if (action == 'tool') {
+              this.visitActivityDetailData.sale_images.splice(index, 1);
+            } else if (action == 'activity') {
+              this.visitActivityDetailData.images.splice(index, 1);
+            }
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   save() {

@@ -15,7 +15,7 @@
 </ion-header>
 
 <ion-content>
-  <div class="box-detail-visit" *ngIf="visitActivityDetailData">
+  <div class="box-detail-activity" *ngIf="visitActivityDetailData">
     <span class="text-title">เพิ่มกิจกรรม</span>
     <ion-grid>
       <ion-row>
@@ -127,7 +127,7 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('pg')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let pg of visitActivityDetail.pg; let i = index" (click)="actionSheetInList('pg', i)" [ngClass]="{'hide-line-last-item': (visitActivityDetailData.pg.length-1 == i)}"
+      <ion-row *ngFor="let pg of visitActivityDetailData.pg; let i = index" (click)="actionSheetInList('pg', i)" [ngClass]="{'hide-line-last-item': (visitActivityDetailData.pg.length-1 == i)}"
         tappable>
         <ion-item>
           <ion-row class="row-full-size">
@@ -156,7 +156,7 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('sales')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let sales of visitActivityDetail.sales; let i = index" (click)="actionSheetInList('sales', i, null)" [ngClass]="{'hide-line-last-item': (visitActivityDetailData.sales.length-1 == i)}"
+      <ion-row *ngFor="let sales of visitActivityDetail.sales; let i = index" (click)="actionSheetInList('sales', i)" [ngClass]="{'hide-line-last-item': (visitActivityDetailData.sales.length-1 == i)}"
         tappable>
         <ion-item>
           <ion-row class="row-full-size">
@@ -211,7 +211,7 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('equipment')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let equipment of visitActivityDetail.equipment; let i = index" (click)="actionSheetInList('equipment', i, null)"
+      <ion-row *ngFor="let equipment of visitActivityDetail.equipment; let i = index" (click)="actionSheetInList('equipment', i)"
         [ngClass]="{'hide-line-last-item': (visitActivityDetailData.equipment.length-1 == i)}" tappable>
         <ion-item>
           <ion-row class="row-full-size">
@@ -253,13 +253,13 @@
           <p>รูปอุปกรณ์ส่งเสริมการขาย</p>
         </ion-col>
         <ion-col>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addImage()" tappable></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addImage('tool')" tappable></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="visitActivityDetailData.sale_images.length > 0" style="height: 80px;">
         <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
           <div style="display: flex">
-            <img *ngFor="let saleImages of visitActivityDetailData.sale_images; let i = index" [src]="getImagePath(saleImages)" (click)="viewImage(i)"
+            <img *ngFor="let saleImages of visitActivityDetailData.sale_images; let i = index" [src]="getImagePath(saleImages)" (click)="viewImage('tool', i)"
               height="80px" width="auto" style="margin: 0 10px;" tappable/>
           </div>
         </ion-scroll>
@@ -269,16 +269,24 @@
           <p>รูปกิจกรรม</p>
         </ion-col>
         <ion-col>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addImage()" tappable></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addImage('activity')" tappable></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row *ngIf="visitActivityDetailData.images.length > 0" style="height: 80px;">
         <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
           <div style="display: flex">
-            <img *ngFor="let images of visitActivityDetailData.images; let i = index" [src]="getImagePath(images)" (click)="viewImage(i)"
+            <img *ngFor="let images of visitActivityDetailData.images; let i = index" [src]="getImagePath(images)" (click)="viewImage('activity', i)"
               height="80px" width="auto" style="margin: 0 10px;" tappable/>
           </div>
         </ion-scroll>
+      </ion-row>
+      <ion-row>
+        <ion-col col-6 style="padding-left: 0;">
+          <button ion-button class="button-save" (click)="save()" tappable>บันทึก</button>
+        </ion-col>
+        <ion-col col-6>
+          <button ion-button class="button-cancel" (click)="backPage()" tappable>ยกเลิก</button>
+        </ion-col>
       </ion-row>
     </ion-grid>
   </div>

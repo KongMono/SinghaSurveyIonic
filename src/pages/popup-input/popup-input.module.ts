@@ -9,6 +9,7 @@ import { ShopAddPG } from './../../components/shop-add-pg/shop-add-pg';
 import { VisitAddEquipment } from './../../components/visit-add-equipment/visit-add-equipment';
 import { VisitAddNote } from './../../components/visit-add-note/visit-add-note';
 import { VisitAddRetroact } from './../../components/visit-add-retroact/visit-add-retroact';
+import { ActivityVisitAddSales } from './../../components/activity-visit-add-sales/activity-visit-add-sales';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { VisitAddRetroact } from './../../components/visit-add-retroact/visit-ad
     ShopAddPG,
     VisitAddEquipment,
     VisitAddNote,
-    VisitAddRetroact
+    VisitAddRetroact,
+    ActivityVisitAddSales
   ],
   imports: [
     IonicPageModule.forChild(PopupInput),

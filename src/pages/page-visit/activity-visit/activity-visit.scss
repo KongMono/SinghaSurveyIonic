@@ -8,11 +8,7 @@ page-activity-visit {
     .icon-size {
         font-size: 20px !important;
     }
-    .box-map {
-        width: 100%;
-        height: 40%;
-    }
-    .box-detail-visit {
+    .box-detail-activity {
         padding: 16px;
         .text-title {
             font-size: 16px;
@@ -36,37 +32,11 @@ page-activity-visit {
             max-width: 75%;
             margin: 0 0 0 auto;
         }
-        .wrap-length {
-            position: relative;
-            .item-input.ng-valid.item-input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner,
-            .item-input.ng-valid.input-has-value:not(.input-has-focus):not(.item-input-has-focus) .item-inner {
-                border-bottom-color: #dedede;
-                -webkit-box-shadow: inset 0 -1px 0 0 transparent;
-                box-shadow: inset 0 -1px 0 0 transparent;
-            }
-            .text-length {
-                position: absolute;
-                right: 5px;
-                z-index: 1;
-                color: $singha-survey-color-gray-text-all;
-                font-size: 12px;
-            }
-        }
         .wrap-input {
             input {
                 margin: 5px 8px;
                 line-height: 32px;
             }
-            textarea {
-                margin: 5px 8px;
-                overflow: visible;
-            }
-        }
-        .wrap-select {
-            max-width: 100%;
-            width: 100%;
-            padding-left: 8px;
-            padding-right: 8px;
         }
         .wrap-list {
             margin: 0;
@@ -104,30 +74,12 @@ page-activity-visit {
             font-size: 22px;
             color: $singha-survey-color-primary;
         }
-        .button-add-input-retroact {
-            margin: 0 0 0 5px;
-            padding: 0;
-            font-size: 20px;
-            color: $singha-survey-color-primary;
-        }
         .hide-line-last-item {
             .item {
                 .item-inner {
                     border-bottom: initial;
                 }
             }
-        }
-        .col-title {
-            padding: 0;
-        }
-        .item-title{
-            padding: 0;
-        }
-        .text-title-retroact {
-            margin-bottom: 26px;
-        }
-        .row-title {
-            padding-left: 16px;
         }
         .row-full-size {
             width: 100%;
@@ -137,13 +89,6 @@ page-activity-visit {
             }
             .item-sub-title {
                 padding: 0;
-                // .item-inner {
-                //     .input-wrapper {
-                //         .label {
-                //             margin: 0;
-                //         }
-                //     }
-                // }
             }
             .col-sub {
                 padding-left: 12px;
@@ -157,13 +102,6 @@ page-activity-visit {
                     white-space: normal;
                 }
             }
-        }
-        .image-shop {
-            // width: 30%;
-            // max-height: 100%;
-            // height: auto;
-            max-width: 100%;
-            max-height: 100%;
         }
         .item-calendar {
             z-index: 1;
@@ -181,7 +119,7 @@ page-activity-visit {
             font-size: 22px;
             color: $singha-survey-color-primary;
         }
-        .button-edit {
+        .button-save {
             width: 100%;
             background-color: $singha-survey-color-gray-3;
             color: $singha-survey-color-primaryDark;

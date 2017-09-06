@@ -354,7 +354,7 @@ export class EditVisitPage {
     }
   }
 
-  addImage() {
+  addImage(action, indexMonth) {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [
         {
@@ -368,7 +368,7 @@ export class EditVisitPage {
               mediaType: this.camera.MediaType.PICTURE,
               sourceType: 1
             }
-            this.openCameraOrPhotoLibrary(options);
+            this.openCameraOrPhotoLibrary(action, indexMonth, options);
           }
         }, {
           icon: 'ios-images',
@@ -381,7 +381,7 @@ export class EditVisitPage {
               mediaType: this.camera.MediaType.PICTURE,
               sourceType: 0
             }
-            this.openCameraOrPhotoLibrary(options);
+            this.openCameraOrPhotoLibrary(action, indexMonth, options);
           }
         }
       ]
@@ -389,14 +389,33 @@ export class EditVisitPage {
     actionSheet.present();
   }
 
-  openCameraOrPhotoLibrary(options) {
+  openCameraOrPhotoLibrary(action, indexMonth, options) {
     this.camera.getPicture(options).then((imageData) => {
-      this.setUploadImage(imageData);
+      if (action == 'receipt') {
+        this.setUploadImageReceipt(indexMonth, imageData);
+      } else if (action == 'tool') {
+        this.setUploadImage(imageData);
+      }
     }, (err) => {
       console.error(err);
     });
-    // let imageData = "/9j/4AAQSkZJRgABAQAASABIAAD/4QBYRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAACqADAAQAAAABAAAACwAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgACwAKAwERAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMAAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/bAEMBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAf/dAAQAAv/aAAwDAQACEQMRAD8A8/r/ADXP+ogKAP/Q8/r/ADXP+ogKAP/Z";
-    // this.setUploadImageCustomer(imageData);
+  }
+
+  setUploadImageReceipt(indexMonth, imageBase64) {
+    this.util.showLoading();
+    this.service.uploadImageVisitCustomerVisit(imageBase64)
+      .then(result => {
+        this.util.hideLoading();
+        console.log("uploadImageVisitCustomerVisit", result);
+        this.updateAddImageReceipt(indexMonth, result);
+      }, error => {
+        this.util.hideLoading();
+        console.log(error);
+      });
+  }
+
+  updateAddImageReceipt(indexMonth, res) {
+    this.visitCustomerDetailData.receipt[indexMonth].value.push(res.path);
   }
 
   setUploadImage(imageBase64) {
@@ -426,7 +445,7 @@ export class EditVisitPage {
     return endpoint + images;
   }
 
-  viewImage(index) {
+  viewImage(action, indexMonth, index) {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [
         {
@@ -440,7 +459,11 @@ export class EditVisitPage {
               } else {
                 endpoint = this.config.endpointUpload;
               }
-              this.photoViewer.show(endpoint + this.visitCustomerDetailData.images[index]);
+              if (action == 'receipt') {
+                this.photoViewer.show(endpoint + this.visitCustomerDetailData.receipt[indexMonth].value[index]);
+              } else if (action == 'tool') {
+                this.photoViewer.show(endpoint + this.visitCustomerDetailData.images[index]);
+              }
             });
           }
         }, {
@@ -448,7 +471,7 @@ export class EditVisitPage {
           text: 'ลบ',
           handler: () => {
             this.app.navPop().then(() => {
-              this.confirmRemoveImage(index);
+              this.confirmRemoveImage(action, indexMonth, index);
             });
           }
         }
@@ -457,7 +480,7 @@ export class EditVisitPage {
     actionSheet.present();
   }
 
-  confirmRemoveImage(index) {
+  confirmRemoveImage(action, indexMonth, index) {
     let alert = this.alertCtrl.create({
       title: 'ต้องการลบรูปภาพ?',
       buttons: [
@@ -470,7 +493,11 @@ export class EditVisitPage {
         {
           text: 'ตกลง',
           handler: () => {
-            this.visitCustomerDetailData.images.splice(index, 1);
+            if (action == 'receipt') {
+              this.visitCustomerDetailData.receipt[indexMonth].value.splice(index, 1);
+            } else if (action == 'tool') {
+              this.visitCustomerDetailData.images.splice(index, 1);
+            }
           }
         }
       ]
