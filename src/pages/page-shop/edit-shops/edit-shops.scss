@@ -59,6 +59,11 @@ page-edit-shops {
             }
         }
         .wrap-input {
+            &.location {
+                input {
+                    padding-right: 15px;
+                }
+            }
             input {
                 margin: 5px 8px;
                 line-height: 32px;
