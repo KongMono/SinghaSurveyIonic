@@ -27,8 +27,8 @@ export const AppConfig: IAppConfig = {
   versionApp: null,
   versionBuild: null,
 
-  endpoint: 'http://128.199.72.29/index.php',
-  endpointUpload: 'http://128.199.72.29/',
+  endpoint: ' http://ssv.devcode.in',
+  endpointUpload: ' http://ssv.devcode.in/',
   endpoint_production: 'https://ssv.boonrawd.co.th',
   service: {
     customersList: {
