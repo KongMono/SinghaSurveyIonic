@@ -10,7 +10,7 @@
   </ion-refresher>
 
   <div *ngIf="scheduleListData.length > 0">
-    <ion-list no-lines>
+    <ion-list *ngIf="showCheckNameDialog" no-lines>
       <button ion-item detail-none class="box-manage-visit" style="border-bottom: 1px solid #dedede;" *ngFor="let schedule of scheduleListData"  (tap)="onClick(schedule)" (press)="onLongPress(schedule)" tappable>
         <p class="text-name">รอบ {{schedule.name}}</p>
         <ion-grid>
@@ -32,7 +32,7 @@
     <span class="text-null">ไม่มีข้อมูล</span>
   </div>
 
-  <ion-fab right bottom class="animated bounceInUp" [ngClass]="{'hide-fab': (actionScroll == 'down')}">
+  <ion-fab right bottom [ngClass]="checkFab()">
     <button ion-fab color="accent" (click)="addSchedule()" tappable>
       <ion-icon name="_icon-plus"></ion-icon>
     </button>

@@ -4,7 +4,7 @@
   "proxies": [
     {
       "path": "/v2",
-      "proxyUrl": "http://128.199.72.29/index.php/v2"
+      "proxyUrl": "http://ssv.devcode.in/v2"
     }
   ],
   "type": "ionic-angular",

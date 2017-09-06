@@ -14,6 +14,7 @@ import { ConfigApp, IAppConfig } from './../../app/app.config';
 
 export class TabManageVisit {
   scheduleListData = []
+  scheduleCycleList = [];
   offset: number = 0;
   limit: number = 10;
   infiniteScroll: any;
@@ -155,11 +156,11 @@ export class TabManageVisit {
     this.util.showLoading();
     this.service.getScheduleCycleList()
       .then(
-      (result: customersCheckModel) => {
+      (result: scheduleCycleListModel) => {
         this.util.hideLoading();
         this.showCheckNameDialog = false;
-        // this.customersList = result.customers;
-        let modal = this.modalCtrl.create('SelectNameSchedulePage', { data: null }, {
+        this.scheduleCycleList = result.data;
+        let modal = this.modalCtrl.create('SelectNameSchedulePage', { data: this.scheduleCycleList }, {
           cssClass: 'override-modal-add-schedule',
           enterAnimation: '',
           leaveAnimation: ''
@@ -184,6 +185,13 @@ export class TabManageVisit {
         title: schedule.name
       }
     }, { animate: true, animation: 'transition', direction: 'forward' });
+  }
+
+  checkFab() {
+    if (this.actionScroll == 'down')
+      return 'animated bounceOutDown'
+    else 
+      return 'animated bounceInUp'
   }
 
   onLongPress(schedule: any) {

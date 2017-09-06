@@ -159,6 +159,16 @@ interface Boonrawd {
   product_name: string;
 }
 
+interface scheduleCycleListModel {
+  data: Datum[];
+}
+
+interface Datum {
+  cycle_id: string;
+  name: string;
+  start_date: string;
+  end_date: string;
+}
 interface optionsSaleModel {
   product_group: Productgroup[];
   promotion: Promotion[];
