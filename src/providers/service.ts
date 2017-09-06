@@ -347,6 +347,29 @@ export class SinghaSurveyService {
         return this.Api.callform(service.url, service.method, service.param);
     }
 
+    // Activity
+    uploadImageVisitCustomerTool(imageBase64) {
+        let service = this.config.service.uploadImageVisitCustomer;
+
+        service.param = {
+            image: imageBase64
+        }
+
+        return this.Api.callform(service.url, service.method, service.param);
+    }
+
+    // visit
+    uploadImageVisitCustomerVisit(imageBase64) {
+        let service = this.config.service.uploadImageVisitCustomer;
+
+        service.param = {
+            type: "visit",
+            image: imageBase64
+        }
+        return this.Api.callform(service.url, service.method, service.param);
+    }
+
+    // visit
     uploadImageVisitCustomerSale(imageBase64) {
         let service = this.config.service.uploadImageVisitCustomer;
 
@@ -358,6 +381,7 @@ export class SinghaSurveyService {
         return this.Api.callform(service.url, service.method, service.param);
     }
 
+    // visit
     uploadImageVisitCustomerNote(imageBase64) {
         let service = this.config.service.uploadImageVisitCustomer;
 
@@ -369,6 +393,7 @@ export class SinghaSurveyService {
         return this.Api.callform(service.url, service.method, service.param);
     }
 
+    // Activity
     uploadImageVisitCustomerActivity(imageBase64) {
         let service = this.config.service.uploadImageVisitCustomer;
 
