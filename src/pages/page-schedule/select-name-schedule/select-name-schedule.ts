@@ -23,6 +23,8 @@ export class SelectNameSchedulePage {
   searchControl: FormControl;
   searching: any = false;
   cycle_id;
+  indexSelect: any = 0;
+
   constructor(
     public app: App,
     public navCtrl: NavController,
@@ -34,6 +36,7 @@ export class SelectNameSchedulePage {
 
   ionViewDidLoad() {
     this.list = this.navParams.get('data');
+    this.cycle_id = this.list[0].cycle_id;
   }
 
   setFilteredItems() {
@@ -50,7 +53,8 @@ export class SelectNameSchedulePage {
     this.callCreatedSchedule();
   }
 
-  selectScheduleList(cycle_id) {
+  selectScheduleList(indexSelect, cycle_id) {
+    this.indexSelect = indexSelect;
     this.cycle_id = cycle_id;
   }
 

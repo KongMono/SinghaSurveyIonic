@@ -1,14 +1,14 @@
-<ion-content class="wrap-check-name-shop">
-  <p class="text-check-name-shop">
+<ion-content class="wrap-select-name-schedule">
+  <p class="text-select-name-schedule">
     เลือกรอบ
     <ion-icon name="_icon-close" ion-button class="button-close" (click)="close()" tappable></ion-icon>
   </p>
-  <ion-list class="autocomplete-box" *ngIf="list.length != 0">
-    <ion-item *ngFor="let ls of list" (click)="selectScheduleList(ls.cycle_id)" tappable class="item-autocomplete">
-      {{ls.name}}
+  <ion-list class="list-box" *ngIf="list.length != 0">
+    <ion-item class="item-list" *ngFor="let ls of list; let i = index" (click)="selectScheduleList(i, ls.cycle_id)" tappable>
+      <span [ngClass]="{'hightlight-selected': (i == indexSelect)}">{{ls.name}}</span>
     </ion-item>
   </ion-list>
   <div class="button-box">
-    <button ion-button class="button-search" (click)="submit()">เลือก</button>
+    <button ion-button class="button-select" (click)="submit()">เลือก</button>
   </div>
 </ion-content>

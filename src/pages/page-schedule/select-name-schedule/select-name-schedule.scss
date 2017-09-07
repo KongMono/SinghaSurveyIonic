@@ -4,9 +4,9 @@ page-select-name-schedule {
         text-align: center;
         padding: 10px;
     }
-    .wrap-check-name-shop {
+    .wrap-select-name-schedule {
         border-radius: 5px;
-        .text-check-name-shop {
+        .text-select-name-schedule {
             text-align: center;
             color: $singha-survey-color-text;
             margin: 5% 0;
@@ -17,29 +17,19 @@ page-select-name-schedule {
                 color: $singha-survey-color-primary;
             }
         }
-        .search-input-box {
-            padding: 3% 8%;
-            .searchbar-input-container {
-                input {
-                    border: 1px solid gray;
-                    box-shadow: initial;
-                    font-size: 14px;
-                }
-                .searchbar-clear-icon {
-                    display: none;
-                }
-            }
-        }
-        .autocomplete-box {
+        .list-box {
             height: 65%;
             max-height: 65%;
             overflow-y: scroll;
             padding: 0 8%;
             ion-list {
-                .item-autocomplete {
+                .item-list {
                     font-size: 14px;
                 }
             }
+        }
+        .hightlight-selected {
+            color: #455A64;
         }
         .button-box {
             position: absolute;
@@ -49,7 +39,7 @@ page-select-name-schedule {
             left: 0;
             text-align: center;
             margin-bottom: 10%;
-            .button-search {
+            .button-select {
                 background-color: $singha-survey-color-white;
                 color: $singha-survey-color-gray-text-all;
             }

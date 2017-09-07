@@ -174,6 +174,7 @@ export class TabManageVisit {
 
         modal.onDidDismiss(data => {
           this.showCheckNameDialog = true;
+          this.callScheduleList();
         });
 
         modal.present();
