@@ -16,7 +16,8 @@
 
 <ion-content>
   <div class="box-detail-activity" *ngIf="visitActivityDetailData">
-    <span class="text-title">เพิ่มกิจกรรม</span>
+    <span class="text-title" *ngIf="index == null || index == undefined">เพิ่มกิจกรรม</span>
+    <span class="text-title" *ngIf="index != null || index != undefined">แก้ไขกิจกรรม</span>
     <ion-grid>
       <ion-row>
         <ion-col col-3>
@@ -37,6 +38,13 @@
               </ion-item>
             </ion-col>
           </ion-row>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngIf="venue.externalPlace">
+        <ion-col offset-3>
+          <ion-item>
+            <ion-input type="text" placeholder="ชื่อสถานที่" class="wrap-input" [(ngModel)]="visitActivityDetailData.venue_name"></ion-input>
+          </ion-item>
         </ion-col>
       </ion-row>
       <ion-row>
