@@ -24,7 +24,6 @@ export class ViewSchedulePage {
         public app: App,
         private http: Http,
         public navCtrl: NavController,
-        private geolocation: Geolocation,
         public navParams: NavParams,
         public service: SinghaSurveyService,
         public util: AppUtilService,
