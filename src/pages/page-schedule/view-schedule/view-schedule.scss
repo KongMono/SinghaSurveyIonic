@@ -1,5 +1,4 @@
 page-view-schedule {
-   
     .title {
         text-align: center;
         .toolbar-title {
@@ -8,5 +7,41 @@ page-view-schedule {
     }
     .icon-size {
         font-size: 20px !important;
+    }
+    .text-month {
+        text-align: center;
+        color: $singha-survey-color-white;
+        background-color: $singha-survey-color-primary;
+        margin: 0;
+        padding: 14px;
+    }
+    .monthview-container {
+        height: calc(100% - 44px) !important;
+    }
+    .slides {
+        background-color: $singha-survey-color-primary;
+    }
+    .swiper-slide {
+        font-size: 14px;
+    }
+    .table-bordered {
+        border: none !important;
+    }
+    th, td {
+        border: none !important;
+        color: $singha-survey-color-white;
+    }
+    .text-muted {
+        color: $singha-survey-color-primaryDark !important;
+    }
+    .monthview-current {
+        border-radius: 15px;
+        color: $singha-survey-color-primaryDark !important;
+        background-color: $singha-survey-color-inactive !important;
+    }
+    .monthview-selected {
+        border-radius: 15px;
+        color: $singha-survey-color-white !important;
+        background-color: $singha-survey-color-primaryDark !important;
     }
 }

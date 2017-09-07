@@ -5,7 +5,7 @@
           <ion-icon class="icon-size" name="_icon-back"></ion-icon>
         </button>
         </ion-buttons>
-        <ion-title class="title"></ion-title>
+        <ion-title class="title">ViewSchedulePage</ion-title>
         <ion-buttons right>
             <button icon-only style="background-color:#455A64">
           <ion-icon class="icon-size"></ion-icon>
@@ -15,4 +15,14 @@
 </ion-header>
 
 <ion-content>
+    <p class="text-month">{{viewTitle}}</p>
+    <calendar [eventSource]="eventSource"
+        [calendarMode]="calendar.mode"
+        [currentDate]="calendar.currentDate"
+        (onCurrentDateChanged)="onCurrentDateChanged($event)"
+        (onEventSelected)="onEventSelected($event)"
+        (onTitleChanged)="onViewTitleChanged($event)"
+        (onTimeSelected)="onTimeSelected($event)"
+        step="30">
+    </calendar>
 </ion-content>
