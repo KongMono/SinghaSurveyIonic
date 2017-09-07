@@ -276,6 +276,7 @@ export class EditShopsPage {
               destinationType: this.camera.DestinationType.DATA_URL,
               encodingType: this.camera.EncodingType.JPEG,
               mediaType: this.camera.MediaType.PICTURE,
+              correctOrientation: true,
               sourceType: 1
             }
             this.openCameraOrPhotoLibrary(options);
@@ -289,6 +290,7 @@ export class EditShopsPage {
               destinationType: this.camera.DestinationType.DATA_URL,
               encodingType: this.camera.EncodingType.JPEG,
               mediaType: this.camera.MediaType.PICTURE,
+              correctOrientation: true,
               sourceType: 0
             }
             this.openCameraOrPhotoLibrary(options);

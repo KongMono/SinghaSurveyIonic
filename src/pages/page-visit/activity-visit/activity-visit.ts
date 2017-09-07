@@ -298,12 +298,12 @@ export class ActivityVisitPage {
       keyOption = 'tradition_name';
       indexSelect = this.indexTraditionType;
     } else if (action == 'activity_master') {
-      title = 'ตัวเลือก';
+      title = 'เลือกกลุ่มกิจกรรม';
       listSelectOption = this.optionsActivity.tradition_type[this.indexTraditionType].activity_master;
       keyOption = 'activity_master_name';
       indexSelect = this.indexActivityMaster;
     } else if (action == 'activity') {
-      title = 'ตัวเลือก';
+      title = 'เลือกกิจกรรม';
       listSelectOption = this.optionsActivity.tradition_type[this.indexTraditionType].activity_master[this.indexActivityMaster].activity;
       keyOption = 'activity_name';
       indexSelect = this.indexActivity;
@@ -410,6 +410,7 @@ export class ActivityVisitPage {
               destinationType: this.camera.DestinationType.DATA_URL,
               encodingType: this.camera.EncodingType.JPEG,
               mediaType: this.camera.MediaType.PICTURE,
+              correctOrientation: true,
               sourceType: 1
             }
             this.openCameraOrPhotoLibrary(action, options);
@@ -423,6 +424,7 @@ export class ActivityVisitPage {
               destinationType: this.camera.DestinationType.DATA_URL,
               encodingType: this.camera.EncodingType.JPEG,
               mediaType: this.camera.MediaType.PICTURE,
+              correctOrientation: true,
               sourceType: 0
             }
             this.openCameraOrPhotoLibrary(action, options);
@@ -537,22 +539,6 @@ export class ActivityVisitPage {
   }
 
   save() {
-
-    if (this.visitActivityDetailData.tradition_type_id == ("0")) {
-      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
-      return;
-    }
-
-    if (this.visitActivityDetailData.vendor_id == ("0")) {
-      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
-      return;
-    }
-
-    if (this.visitActivityDetailData.activity_name == "") {
-      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
-      return;
-    }
-
     if (this.visitActivityDetailData.venue_type == '') {
       this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
       return;
@@ -564,6 +550,21 @@ export class ActivityVisitPage {
         return;
       }
     }
+
+    if (this.optionsActivity.vendor[this.indexVendor].vendor_id == ("0")) {
+      this.util.showAlertDialog("กรุณาเลือกบริษัท");
+      return;
+    }
+
+    if (this.optionsActivity.tradition_type[this.indexTraditionType].tradition_type_id == ("0")) {
+      this.util.showAlertDialog("กรุณาเลือกประเภท");
+      return;
+    }
+
+    if (this.visitActivityDetailData.activity_name == "") {
+      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+    }
+
     this.callApiUpdate();
   }
 
@@ -571,28 +572,33 @@ export class ActivityVisitPage {
     this.util.showLoading();
     this.service.updateVisitActivity(
       this.config.userInfo.username,
-      this.visitActivityDetailData.activity_id,
+      this.visitActivityDetailData.visit_activity_id,
       this.visitActivityDetailData.venue_type,
       this.visitActivityDetailData.venue_name,
-      this.visitActivityDetailData.vendor_id,
-      this.visitActivityDetailData.tradition_type_id,
-      this.visitActivityDetailData.activity_master_id,
-      this.visitActivityDetailData.activity_id,
+      this.optionsActivity.vendor[this.indexVendor].vendor_id,
+      this.optionsActivity.tradition_type[this.indexTraditionType].tradition_type_id,
+      this.optionsActivity.tradition_type[this.indexTraditionType].activity_master[this.indexActivityMaster].activity_master_id,
+      this.optionsActivity.tradition_type[this.indexTraditionType].activity_master[this.indexActivityMaster].activity[this.indexActivity].activity_id,
       this.visitActivityDetailData.activity_name,
       this.visitActivityDetailData.start_date,
       this.visitActivityDetailData.end_date,
       JSON.stringify(this.visitActivityDetailData.pg),
       JSON.stringify(this.visitActivityDetailData.sales),
       JSON.stringify(this.visitActivityDetailData.equipment),
-      JSON.stringify(this.visitActivityDetailData.sale_images),
-      JSON.stringify(this.visitActivityDetailData.images))
+      JSON.stringify(this.visitActivityDetailData.images),
+      JSON.stringify(this.visitActivityDetailData.sale_images))
       .then(result => {
         this.util.hideLoading();
         this.util.showAlertDialog(result.msg);
 
-        let data = {
-          id: result.data.id,
-          name: result.data.name
+        if (this.index != null || this.index != undefined) {
+          this.data[this.index].name = result.data.name;
+        } else {
+          let activities = {
+            id: result.data.id,
+            name: result.data.name
+          }
+          this.data.push(activities);
         }
 
         this.callback(this.data).then(() => {
