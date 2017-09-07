@@ -82,6 +82,7 @@ export class ActivityVisitPage {
   }
 
   ionViewDidLoad() {
+
     this.callGetOptionActivity();
   }
 
@@ -534,14 +535,72 @@ export class ActivityVisitPage {
   }
 
   save() {
-    // let dataCallback = {
-    //   action: this.action,
-    //   data: data
-    // }
-    this.callback(this.data).then(() => {
-      this.backPage();
-    }, error => {
 
-    });
+    if (this.visitActivityDetailData.tradition_type_id == ("0")) {
+      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      return;
+    }
+
+    if (this.visitActivityDetailData.vendor_id == ("0")) {
+      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      return;
+    }
+
+    if (this.visitActivityDetailData.activity_name == "") {
+      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      return;
+    }
+
+    if (this.visitActivityDetailData.venue_type == '') {
+      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      return;
+    }
+
+    if (this.visitActivityDetailData.venue_type == "2") {
+      if (this.visitActivityDetailData.venue_name == "") {
+        this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+        return;
+      }
+    }
+    this.callApiUpdate();
+  }
+
+  callApiUpdate() {
+    this.util.showLoading();
+    this.service.updateVisitActivity(
+      this.config.userInfo.username,
+      this.visitActivityDetailData.activity_id,
+      this.visitActivityDetailData.venue_type,
+      this.visitActivityDetailData.venue_name,
+      this.visitActivityDetailData.vendor_id,
+      this.visitActivityDetailData.tradition_type_id,
+      this.visitActivityDetailData.activity_master_id,
+      this.visitActivityDetailData.activity_id,
+      this.visitActivityDetailData.activity_name,
+      this.visitActivityDetailData.start_date,
+      this.visitActivityDetailData.end_date,
+      JSON.stringify(this.visitActivityDetailData.pg),
+      JSON.stringify(this.visitActivityDetailData.sales),
+      JSON.stringify(this.visitActivityDetailData.equipment),
+      JSON.stringify(this.visitActivityDetailData.sale_images),
+      JSON.stringify(this.visitActivityDetailData.images))
+      .then(result => {
+        this.util.hideLoading();
+        this.util.showAlertDialog(result.msg);
+
+        let data = {
+          id: result.data.id,
+          name: result.data.name
+        }
+
+        this.callback(this.data).then(() => {
+          this.backPage();
+        }, error => {
+
+        });
+      }, error => {
+        this.util.hideLoading();
+        console.log(error.message);
+      });
   }
 }
