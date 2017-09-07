@@ -268,6 +268,7 @@ export class ActivityVisitPage {
       if (this.venue.internalPlace) {
         this.venue.externalPlace = false;
         this.visitActivityDetailData.venue_type = '1';
+        this.visitActivityDetailData.venue_name = '';
       } else if (!this.venue.internalPlace) {
         this.venue.externalPlace = true;
         this.visitActivityDetailData.venue_type = '2';
@@ -279,6 +280,7 @@ export class ActivityVisitPage {
       } else if (!this.venue.externalPlace) {
         this.venue.internalPlace = true;
         this.visitActivityDetailData.venue_type = '1';
+        this.visitActivityDetailData.venue_name = '';
       }
     }
   }

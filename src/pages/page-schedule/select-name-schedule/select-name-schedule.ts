@@ -30,28 +30,10 @@ export class SelectNameSchedulePage {
     public service: SinghaSurveyService,
     public util: AppUtilService,
     public viewCtrl: ViewController) {
-    this.searchControl = new FormControl();
-  }
-
-  search() {
-    this.viewCtrl.dismiss();
-
-    this.app.getRootNav().push('AddShopsPage', {
-      data: this.searchText
-    });
   }
 
   ionViewDidLoad() {
-    this.searchControl.valueChanges.debounceTime(700)
-      .subscribe(search => {
-        this.searching = false;
-        this.list = this.navParams.get('data');
-        this.setFilteredItems();
-      });
-  }
-
-  onSearchInput() {
-    this.searching = true;
+    this.list = this.navParams.get('data');
   }
 
   setFilteredItems() {
@@ -64,25 +46,25 @@ export class SelectNameSchedulePage {
     }
   }
 
-  selectCustomerList(customers_id) {
-    this.callCustomersChecked(customers_id);
+  selectScheduleList(customers_id) {
+    // this.callCustomersChecked(customers_id);
   }
 
   callCustomersChecked(customers_id) {
-    this.util.showLoading();
-    this.service.customersChecked(customers_id)
-      .then(
-      (result) => {
-        console.log(result);
-        this.util.hideLoading();
-        this.viewCtrl.dismiss();
-        this.app.getRootNav().push('EditShopsPage', {
-          data: customers_id
-        });
-      }, error => {
-        this.util.hideLoading();
-        console.log(error);
-      });
+    // this.util.showLoading();
+    // this.service.customersChecked(customers_id)
+    //   .then(
+    //   (result) => {
+    //     console.log(result);
+    //     this.util.hideLoading();
+    //     this.viewCtrl.dismiss();
+    //     this.app.getRootNav().push('EditShopsPage', {
+    //       data: customers_id
+    //     });
+    //   }, error => {
+    //     this.util.hideLoading();
+    //     console.log(error);
+    //   });
   }
 
   close() {
