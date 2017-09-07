@@ -22,7 +22,7 @@ export class SelectNameSchedulePage {
   list = [];
   searchControl: FormControl;
   searching: any = false;
-
+  cycle_id;
   constructor(
     public app: App,
     public navCtrl: NavController,
@@ -46,25 +46,30 @@ export class SelectNameSchedulePage {
     }
   }
 
-  selectScheduleList(customers_id) {
-    // this.callCustomersChecked(customers_id);
+  submit() {
+    this.callCreatedSchedule();
   }
 
-  callCustomersChecked(customers_id) {
-    // this.util.showLoading();
-    // this.service.customersChecked(customers_id)
-    //   .then(
-    //   (result) => {
-    //     console.log(result);
-    //     this.util.hideLoading();
-    //     this.viewCtrl.dismiss();
-    //     this.app.getRootNav().push('EditShopsPage', {
-    //       data: customers_id
-    //     });
-    //   }, error => {
-    //     this.util.hideLoading();
-    //     console.log(error);
-    //   });
+  selectScheduleList(cycle_id) {
+    this.cycle_id = cycle_id;
+  }
+
+  callCreatedSchedule() {
+    this.util.showLoading();
+    this.service.createdSchedule(this.cycle_id)
+      .then((result) => {
+        this.util.hideLoading();
+        this.viewCtrl.dismiss();
+        this.app.getRootNav().push('EditSchedulePage', {
+          data: {
+            schedule_id: result.data.schedule_id,
+            isEdit: false
+          }
+        });
+      }, error => {
+        this.util.hideLoading();
+        console.log(error);
+      });
   }
 
   close() {

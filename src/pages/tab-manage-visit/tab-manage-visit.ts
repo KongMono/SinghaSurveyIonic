@@ -158,6 +158,12 @@ export class TabManageVisit {
       .then(
       (result: scheduleCycleListModel) => {
         this.util.hideLoading();
+
+        if (result.data.length == 0) {
+          this.util.showAlertDialog("ไม่มีข้อมูลรอบ");
+          return;
+        }
+
         this.showCheckNameDialog = false;
         this.scheduleCycleList = result.data;
         let modal = this.modalCtrl.create('SelectNameSchedulePage', { data: this.scheduleCycleList }, {
@@ -171,8 +177,6 @@ export class TabManageVisit {
         });
 
         modal.present();
-
-
       }, error => {
         console.log(error);
       });
@@ -190,7 +194,7 @@ export class TabManageVisit {
   checkFab() {
     if (this.actionScroll == 'down')
       return 'animated bounceOutDown'
-    else 
+    else
       return 'animated bounceInUp'
   }
 
