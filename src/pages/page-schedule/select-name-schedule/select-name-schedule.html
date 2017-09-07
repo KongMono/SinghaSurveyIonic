@@ -8,7 +8,7 @@
       {{ls.name}}
     </ion-item>
   </ion-list>
-  <p *ngIf="list.length == 0" class="text-check-name-shop">
-    ไม่มีข้อมูล
-  </p>
+  <div class="button-box">
+    <button ion-button class="button-search" (click)="submit()">เลือก</button>
+  </div>
 </ion-content>

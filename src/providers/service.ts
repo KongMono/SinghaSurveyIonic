@@ -641,7 +641,7 @@ export class SinghaSurveyService {
             cycle_id: cycle_id
         }
 
-        return this.Api.call(service.url, service.method, service.param);
+        return this.Api.callform(service.url, service.method, service.param);
     }
 
     getScheduleView(schedule_id) {
