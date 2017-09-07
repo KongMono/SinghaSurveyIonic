@@ -46,102 +46,106 @@ export class ActivityVisitAddSales {
 
     this.optionsSale = this.option;
     if (this.index || this.index == 0) {
-      // this.setIndexProductVendor();
-      // this.inputVisitAddEquipmentData.qty = this.data.equipment[this.index].qty;
+      this.setIndexProductGroup();
+      this.setIndexPromotion();
+      this.inputActivityVisitAddSalesData.unit_qty = this.data.sales[this.index].unit_qty;
+      this.inputActivityVisitAddSalesData.subunit_qty = this.data.sales[this.index].subunit_qty;
+      this.inputActivityVisitAddSalesData.unit_price = this.data.sales[this.index].unit_price;
+      this.inputActivityVisitAddSalesData.subunit_price = this.data.sales[this.index].subunit_price;
     }
   }
 
-  // selectOption(action) {
-  //   let title, listSelectOption, keyOption, indexSelect;
-  //   if (action == 'product_vendor') {
-  //     title = 'เลือกบริษัท';
-  //     listSelectOption = this.optionEquipment.data;
-  //     keyOption = 'name';
-  //     indexSelect = this.indexProductVendor;
-  //   } else if (action == 'product_group') {
-  //     title = 'เลือกยี่ห้อ';
-  //     listSelectOption = this.optionEquipment.data[this.indexProductVendor].product_group;
-  //     keyOption = 'name';
-  //     indexSelect = this.indexProductGroup;
-  //   } else if (action == 'product') {
-  //     title = 'เลือกประเภท';
-  //     listSelectOption = this.optionEquipment.data[this.indexProductVendor].product_group[this.indexProductGroup].product;
-  //     keyOption = 'name';
-  //     indexSelect = this.indexProduct;
-  //   }
-  //   this.navCtrl.push('ListSelectOptionPage', { action: action, title: title, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
-  // }
+  selectOption(action) {
+    let title, listSelectOption, keyOption, indexSelect;
+    if (action == 'product_group') {
+      title = 'เลือกยี่ห้อ';
+      listSelectOption = this.optionsSale.product_group;
+      keyOption = 'name';
+      indexSelect = this.indexProductGroup;
+    } else if (action == 'product') {
+      title = 'เลือกสินค้า';
+      listSelectOption = this.optionsSale.product_group[this.indexProductGroup].product;
+      keyOption = 'name';
+      indexSelect = this.indexProduct;
+    } else if (action == 'promotion') {
+      title = 'เลือกโปรโมชั่น';
+      listSelectOption = this.optionsSale.promotion;
+      keyOption = 'name';
+      indexSelect = this.indexPromotion;
+    }
+    this.navCtrl.push('ListSelectOptionPage', { action: action, title: title, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
+  }
 
-  // selectOptionCallback = (_params) => {
-  //   return new Promise(resolve => {
-  //     if (_params.action == 'product_vendor') {
-  //       if (this.indexProductVendor != _params.indexSelect) {
-  //         this.indexProductGroup = 0;
-  //         this.indexProduct = 0;
-  //       }
-  //       this.indexProductVendor = _params.indexSelect;
-  //       resolve();
-  //     } else if (_params.action == 'product_group') {
-  //       if (this.indexProductGroup != _params.indexSelect) {
-  //         this.indexProduct = 0;
-  //       }
-  //       this.indexProductGroup = _params.indexSelect;
-  //       resolve();
-  //     } else if (_params.action == 'product') {
-  //       this.indexProduct = _params.indexSelect;
-  //       resolve();
-  //     } else {
-  //       resolve();
-  //     }
-  //   });
-  // }
+  selectOptionCallback = (_params) => {
+    return new Promise(resolve => {
+      if (_params.action == 'product_group') {
+        if (this.indexProductGroup != _params.indexSelect) {
+          this.indexProduct = 0;
+        }
+        this.indexProductGroup = _params.indexSelect;
+        resolve();
+      } else if (_params.action == 'product') {
+        this.indexProduct = _params.indexSelect;
+        resolve();
+      } else if (_params.action == 'promotion') {
+        this.indexPromotion = _params.indexSelect;
+        resolve();
+      } else {
+        resolve();
+      }
+    });
+  }
 
-  // setIndexProductVendor() {
-  //   for (var i = 0; i < this.optionEquipment.data.length; i++) {
-  //     if (this.optionEquipment.data[i].product_vendor_id == this.data.equipment[this.index].product_vendor_id) {
-  //       this.indexProductVendor = i;
-  //       this.setIndexProductGroup(this.indexProductVendor);
-  //       return
-  //     }
-  //   }
-  // }
+  setIndexProductGroup() {
+    for (var i = 0; i < this.optionsSale.product_group.length; i++) {
+      if (this.optionsSale.product_group[i].product_group_id == this.data.sales[this.index].product_group_id) {
+        this.indexProductGroup = i;
+        this.setIndexProduct(this.indexProductGroup);
+        return
+      }
+    }
+  }
 
-  // setIndexProductGroup(indexProductVendor) {
-  //   for (var i = 0; i < this.optionEquipment.data[indexProductVendor].product_group.length; i++) {
-  //     if (this.optionEquipment.data[indexProductVendor].product_group[i].product_group_id == this.data.equipment[this.index].product_group_id) {
-  //       this.indexProductGroup = i;
-  //       this.setIndexProduct(indexProductVendor, this.indexProductGroup);
-  //       return
-  //     }
-  //   }
-  // }
+  setIndexProduct(indexProductGroup) {
+    for (var i = 0; i < this.optionsSale.product_group[indexProductGroup].product.length; i++) {
+      if (this.optionsSale.product_group[indexProductGroup].product[i].product_id == this.data.sales[this.index].product_id) {
+        return this.indexProduct = i;
+      }
+    }
+  }
 
-  // setIndexProduct(indexProductVendor, indexProductGroup) {
-  //   for (var i = 0; i < this.optionEquipment.data[indexProductVendor].product_group[indexProductGroup].product.length; i++) {
-  //     if (this.optionEquipment.data[indexProductVendor].product_group[indexProductGroup].product[i].product_id == this.data.equipment[this.index].product_id) {
-  //       return this.indexProduct = i;
-  //     }
-  //   }
-  // }
+  setIndexPromotion() {
+    for (var i = 0; i < this.optionsSale.promotion.length; i++) {
+      if (this.optionsSale.promotion[i].promotion_id == this.data.sales[this.index].promotion_id) {
+        return this.indexPromotion = i;
+      }
+    }
+  }
 
-  // save() {
-  //   if (this.indexProductVendor && this.indexProductGroup && this.indexProduct && this.inputVisitAddEquipmentData.qty) {
-  //     if (this.index != null || this.index != undefined) {
-  //       this.data.equipment[this.index].product_vendor_id = this.optionEquipment.data[this.indexProductVendor].product_vendor_id;
-  //       this.data.equipment[this.index].product_group_id = this.optionEquipment.data[this.indexProductVendor].product_group[this.indexProductGroup].product_group_id;
-  //       this.data.equipment[this.index].product_id = this.optionEquipment.data[this.indexProductVendor].product_group[this.indexProductGroup].product[this.indexProduct].product_id,
-  //       this.data.equipment[this.index].qty = this.inputVisitAddEquipmentData.qty;
-  //     } else {
-  //       let equipment = {
-  //         product_vendor_id: this.optionEquipment.data[this.indexProductVendor].product_vendor_id,
-  //         product_group_id: this.optionEquipment.data[this.indexProductVendor].product_group[this.indexProductGroup].product_group_id,
-  //         product_id: this.optionEquipment.data[this.indexProductVendor].product_group[this.indexProductGroup].product[this.indexProduct].product_id,
-  //         qty: this.inputVisitAddEquipmentData.qty,
-  //         customer_channel_id: 0
-  //       }
-  //       this.data.equipment.push(equipment);
-  //     }
-  //   }
-  //   this.callbackData.emit(this.data);
-  // }
+  save() {
+    if (this.indexProductGroup && this.indexProduct && this.inputActivityVisitAddSalesData.unit_qty && this.inputActivityVisitAddSalesData.subunit_qty && this.inputActivityVisitAddSalesData.unit_price && this.inputActivityVisitAddSalesData.subunit_price && this.indexPromotion) {
+      if (this.index != null || this.index != undefined) {
+        this.data.sales[this.index].product_group_id = this.optionsSale.product_group[this.indexProductGroup].product_group_id;
+        this.data.sales[this.index].product_id = this.optionsSale.product_group[this.indexProductGroup].product[this.indexProduct].product_id,
+        this.data.sales[this.index].unit_qty = this.inputActivityVisitAddSalesData.unit_qty;
+        this.data.sales[this.index].subunit_qty = this.inputActivityVisitAddSalesData.subunit_qty;
+        this.data.sales[this.index].unit_price = this.inputActivityVisitAddSalesData.unit_price;
+        this.data.sales[this.index].subunit_price = this.inputActivityVisitAddSalesData.subunit_price;
+        this.data.sales[this.index].promotion_id = this.optionsSale.promotion[this.indexPromotion].promotion_id;
+      } else {
+        let sales = {
+          product_group_id: this.optionsSale.product_group[this.indexProductGroup].product_group_id,
+          product_id: this.optionsSale.product_group[this.indexProductGroup].product[this.indexProduct].product_id,
+          unit_qty: this.inputActivityVisitAddSalesData.unit_qty,
+          subunit_qty: this.inputActivityVisitAddSalesData.subunit_qty,
+          unit_price: this.inputActivityVisitAddSalesData.unit_price,
+          subunit_price: this.inputActivityVisitAddSalesData.subunit_price,
+          promotion_id: this.optionsSale.promotion[this.indexPromotion].promotion_id,
+          sale_id: 0
+        }
+        this.data.sales.push(sales);
+      }
+    }
+    this.callbackData.emit(this.data);
+  }
 }

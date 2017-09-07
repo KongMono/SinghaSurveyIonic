@@ -130,6 +130,7 @@ export class ActivityVisitPage {
 
         this.setIndexVendor();
         this.setIndexTraditionType();
+        this.setVisitActivityDetailDataSales();
         this.setVisitActivityDetailDataEquipment();
 
         if (!this.visitActivityDetailData.images) {
@@ -178,6 +179,49 @@ export class ActivityVisitPage {
     for (var i = 0; i < this.optionsActivity.tradition_type[indexTraditionType].activity_master[indexActivityMaster].activity.length; i++) {
       if (this.optionsActivity.tradition_type[indexTraditionType].activity_master[indexActivityMaster].activity[i].activity_id == this.visitActivityDetailData.activity_id) {
         return this.indexActivity = i;
+      }
+    }
+  }
+
+  setVisitActivityDetailDataSales() {
+    if (this.visitActivityDetailData.sales.length > 0) {
+      this.visitActivityDetail.sales = [];
+      for (var i = 0; i < this.visitActivityDetailData.sales.length; i++) {
+        for (var indexProductGroup = 0; indexProductGroup < this.optionsSale.product_group.length; indexProductGroup++) {
+          if (this.optionsSale.product_group[indexProductGroup].product_group_id == this.visitActivityDetailData.sales[i].product_group_id) {
+            for (var indexProduct = 0; indexProduct < this.optionsSale.product_group[indexProductGroup].product.length; indexProduct++) {
+              if (this.optionsSale.product_group[indexProductGroup].product[indexProduct].product_id == this.visitActivityDetailData.sales[i].product_id) {
+                let sales = {
+                  product_group: {
+                    product_group_id: this.optionsSale.product_group[indexProductGroup].product_group_id,
+                    name: this.optionsSale.product_group[indexProductGroup].name
+                  },
+                  product: {
+                    product_id: this.optionsSale.product_group[indexProductGroup].product[indexProduct].product_id,
+                    name: this.optionsSale.product_group[indexProductGroup].product[indexProduct].name
+                  },
+                  unit_qty: this.visitActivityDetailData.sales[i].unit_qty,
+                  subunit_qty: this.visitActivityDetailData.sales[i].subunit_qty,
+                  unit_price: this.visitActivityDetailData.sales[i].unit_price,
+                  subunit_price: this.visitActivityDetailData.sales[i].subunit_price,
+                  promotion: {
+                    promotion_id: '',
+                    name: ''
+                  }
+                }
+                this.visitActivityDetail.sales.push(sales);
+                indexProduct = this.optionsSale.product_group[indexProductGroup].product.length;
+              }
+            }
+            indexProductGroup = this.optionsSale.product_group.length;
+          }
+        }
+        for (var indexPromotion = 0; indexPromotion < this.optionsSale.promotion.length; indexPromotion++) {
+          if (this.optionsSale.promotion[indexPromotion].promotion_id == this.visitActivityDetailData.sales[i].promotion_id) {
+            this.visitActivityDetail.sales[this.visitActivityDetail.sales.length - 1].promotion.promotion_id = this.optionsSale.promotion[indexPromotion].promotion_id;
+            this.visitActivityDetail.sales[this.visitActivityDetail.sales.length - 1].promotion.name = this.optionsSale.promotion[indexPromotion].name;
+          }
+        }
       }
     }
   }
@@ -293,10 +337,10 @@ export class ActivityVisitPage {
 
   popupInput(action, index) {
     let option;
-    if (action == 'equipment') {
-      option = this.optionEquipment;
-    } else if (action == 'sales') {
+    if (action == 'sales') {
       option = this.optionsSale;
+    } else if (action == 'equipment') {
+      option = this.optionEquipment;
     }
     this.navCtrl.push('PopupInput',
       { action: action, data: this.visitActivityDetailData, option: option, index: index, callback: this.popupInputCallback },
@@ -308,7 +352,10 @@ export class ActivityVisitPage {
       console.log(_params);
       if (_params.data) {
         this.visitActivityDetailData = _params.data;
-        if (_params.action == 'equipment') {
+        if (_params.action == 'sales') {
+          this.setVisitActivityDetailDataSales();
+        }
+        else if (_params.action == 'equipment') {
           this.setVisitActivityDetailDataEquipment();
         }
         resolve();
@@ -341,7 +388,9 @@ export class ActivityVisitPage {
 
   removeDataInList(action, index) {
     this.visitActivityDetailData[action].splice(index, 1);
-    if (action == 'equipment') {
+    if (action == 'sales') {
+      this.visitActivityDetail[action].splice(index, 1);
+    } else if (action == 'equipment') {
       this.visitActivityDetail[action].splice(index, 1);
     }
   }

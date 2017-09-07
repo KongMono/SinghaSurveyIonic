@@ -42,6 +42,7 @@ export class ShopAddPG {
         let pg = {
           name: this.inputShopAddPGData.name,
           tel: this.inputShopAddPGData.tel
+          // pg_id: ''
         }
         this.data.pg.push(pg);
       }

@@ -134,7 +134,7 @@ export class VisitAddEquipment {
           product_group_id: this.optionEquipment.data[this.indexProductVendor].product_group[this.indexProductGroup].product_group_id,
           product_id: this.optionEquipment.data[this.indexProductVendor].product_group[this.indexProductGroup].product[this.indexProduct].product_id,
           qty: this.inputVisitAddEquipmentData.qty,
-          customer_channel_id: 0
+          equipment_id: 0
         }
         this.data.equipment.push(equipment);
       }
