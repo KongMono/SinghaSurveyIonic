@@ -19,7 +19,7 @@ import { CallApi } from "../../../providers/call-api";
 export class ViewSchedulePage {
     schedule_id: any;
     latlong: string;
-    
+
     eventSource;
     viewTitle;
     isToday: boolean;
@@ -43,6 +43,7 @@ export class ViewSchedulePage {
     }
 
     ionViewDidLoad() {
+        this.callGetScheduleView();
     }
 
     backPage() {
@@ -68,7 +69,7 @@ export class ViewSchedulePage {
         console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' +
             (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
     }
-    onCurrentDateChanged(event:Date) {
+    onCurrentDateChanged(event: Date) {
         var today = new Date();
         today.setHours(0, 0, 0, 0);
         event.setHours(0, 0, 0, 0);
@@ -113,9 +114,20 @@ export class ViewSchedulePage {
     onRangeChanged(ev) {
         console.log('range changed: startTime: ' + ev.startTime + ', endTime: ' + ev.endTime);
     }
-    markDisabled = (date:Date) => {
+    markDisabled = (date: Date) => {
         var current = new Date();
         current.setHours(0, 0, 0);
         return date < current;
-    };
+    }
+
+    callGetScheduleView() {
+        this.util.showLoading();
+        this.service.getScheduleView(this.schedule_id)
+            .then((result: scheduleViewModel) => {
+                this.util.hideLoading();
+            }, error => {
+                this.util.hideLoading();
+                console.log(error.message);
+            });
+    }
 }

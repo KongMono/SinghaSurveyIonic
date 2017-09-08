@@ -159,6 +159,38 @@ interface Boonrawd {
   product_name: string;
 }
 
+interface scheduleViewModel {
+  schedule_id: string;
+  cycle_id: string;
+  start_date: string;
+  end_date: string;
+  title: string;
+  summary: Summary[];
+  calendar: Calendar[];
+}
+
+interface Calendar {
+  date: string;
+  value: Value[];
+  customer: Customer[];
+}
+
+interface Customer {
+  name: string;
+  status: string;
+}
+
+interface Value {
+  title: string;
+  total: number;
+}
+
+interface Summary {
+  title: string;
+  total: string;
+  percent: number;
+}
+
 interface scheduleCycleListModel {
   data: Datum[];
 }
