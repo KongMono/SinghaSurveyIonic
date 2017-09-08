@@ -206,7 +206,7 @@ export class TabManageVisit {
 
     let buttons = [
       {
-        icon: '_icon-map',
+        icon: '_icon-overtime',
         text: 'ปฎิทิน',
         handler: () => {
           this.app.getRootNav().push('ViewSchedulePage', {
