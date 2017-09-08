@@ -17,7 +17,7 @@ import { CallApi } from "../../../providers/call-api";
 })
 
 export class ViewSchedulePage {
-    schedule_id: any;
+    data: any;
     latlong: string;
 
     eventSource;
@@ -38,8 +38,8 @@ export class ViewSchedulePage {
         public modalCtrl: ModalController,
         public actionSheetCtrl: ActionSheetController,
         private alertCtrl: AlertController) {
-        this.schedule_id = navParams.get('data');
-        console.log(this.schedule_id);
+        this.data = navParams.get('data');
+        console.log(this.data.schedule_id);
     }
 
     ionViewDidLoad() {
@@ -122,7 +122,7 @@ export class ViewSchedulePage {
 
     callGetScheduleView() {
         this.util.showLoading();
-        this.service.getScheduleView(this.schedule_id)
+        this.service.getScheduleView(this.data.schedule_id)
             .then((result: scheduleViewModel) => {
                 this.util.hideLoading();
             }, error => {
