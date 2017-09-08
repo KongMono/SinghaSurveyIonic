@@ -36,7 +36,7 @@ export class EditSchedulePage {
 
 
     ionViewDidLoad() {
-        this.callGetScheduleDetailList();
+        this.callGetOptionSchedule();
     }
 
 
@@ -44,8 +44,18 @@ export class EditSchedulePage {
         this.app.getRootNav().pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 
-    callGetScheduleDetailList() {
+
+    callGetOptionSchedule() {
         this.util.showLoading();
+        this.service.getOptionSchedule(this.data.schedule_id)
+            .then((result: OptionScheduleModel) => {
+                this.callGetScheduleDetailList();
+            }, error => {
+                this.util.hideLoading();
+                console.log(error.message);
+            });
+    }
+    callGetScheduleDetailList() {
         this.service.getScheduleDetailList(this.data.schedule_id)
             .then((result: ScheduleDetailListModel) => {
                 this.util.hideLoading();

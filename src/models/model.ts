@@ -200,6 +200,32 @@ interface ScheduleDetailListModel {
   plan: Plan[];
 }
 
+interface OptionScheduleModel {
+  province: Province[];
+  customer: Customer[];
+}
+
+interface Customer {
+  customer_id: string;
+  customer_name: string;
+  province_id: string;
+  ampher_id: string;
+  total_master: number;
+  total_plan: number;
+  balance: number;
+}
+
+interface Province {
+  province_id: string;
+  province_th: string;
+  ampher: Ampher[];
+}
+
+interface Ampher {
+  ampher_id: string;
+  ampher_th: string;
+}
+
 interface Plan {
   plan_id: string;
   customer_id: string;
