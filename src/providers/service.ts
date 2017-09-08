@@ -654,4 +654,16 @@ export class SinghaSurveyService {
 
         return this.Api.call(service.url, service.method, service.param);
     }
+
+    getScheduleDetailList(schedule_id) {
+        let service = this.config.service.getScheduleDetailList;
+
+        service.param = {
+            user_id: this.config.userInfo.username,
+            schedule_id: schedule_id
+        }
+
+        return this.Api.call(service.url, service.method, service.param);
+    }
+
 }

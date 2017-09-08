@@ -17,7 +17,7 @@ import { CallApi } from "../../../providers/call-api";
 })
 
 export class EditSchedulePage {
-    schedule_id: any;
+    data: any;
     latlong: string;
 
     constructor(
@@ -30,16 +30,28 @@ export class EditSchedulePage {
         public modalCtrl: ModalController,
         public actionSheetCtrl: ActionSheetController,
         private alertCtrl: AlertController) {
-        this.schedule_id = navParams.get('data');
-        console.log(this.schedule_id);
+        this.data = navParams.get('data');
+        console.log(this.data.schedule_id);
     }
 
 
     ionViewDidLoad() {
+        this.callGetScheduleDetailList();
     }
 
 
     backPage() {
         this.app.getRootNav().pop({ animate: true, animation: 'transition', direction: 'back' });
+    }
+
+    callGetScheduleDetailList() {
+        this.util.showLoading();
+        this.service.getScheduleDetailList(this.data.schedule_id)
+            .then((result: ScheduleDetailListModel) => {
+                this.util.hideLoading();
+            }, error => {
+                this.util.hideLoading();
+                console.log(error.message);
+            });
     }
 }

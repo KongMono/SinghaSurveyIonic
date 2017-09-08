@@ -410,6 +410,14 @@ export const AppConfig: IAppConfig = {
         schedule_id: ""
       }
     },
+    getScheduleDetailList: {
+      url: "v2/schedule/row/format/json",
+      method: "GET",
+      param: {
+        user_id: "",
+        schedule_id: ""
+      }
+    },
     checkVersion: {
       url: "/v2/version/ios/format/json",
       method: "GET",

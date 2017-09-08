@@ -191,6 +191,22 @@ interface Summary {
   percent: number;
 }
 
+interface ScheduleDetailListModel {
+  schedule_id: string;
+  cycle_id: string;
+  start_date: string;
+  end_date: string;
+  name: string;
+  plan: Plan[];
+}
+
+interface Plan {
+  plan_id: string;
+  customer_id: string;
+  customer_name: string;
+  date: string;
+  can_delete: string;
+}
 interface scheduleCycleListModel {
   data: Datum[];
 }

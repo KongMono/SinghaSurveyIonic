@@ -189,7 +189,7 @@ export class TabManageVisit {
         schedule_id: schedule.schedule_id,
         title: schedule.name
       }
-    }, { animate: true, animation: 'transition', direction: 'forward' });
+    });
   }
 
   checkFab() {
@@ -214,7 +214,7 @@ export class TabManageVisit {
               schedule_id: schedule.schedule_id,
               title: schedule.name
             }
-          }, { animate: true, animation: 'transition', direction: 'forward' });
+          });
         }
       }, {
         icon: '_icon-visit',
