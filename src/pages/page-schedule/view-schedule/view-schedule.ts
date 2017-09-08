@@ -1,10 +1,11 @@
+import { AppConfig } from './../../../app/app.config';
 import { Component, Inject } from '@angular/core';
 import { NavController, IonicPage, NavParams, App, ModalController, ActionSheetController, AlertController } from 'ionic-angular';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { AppUtilService } from "../../../app/app.util";
 import { SinghaSurveyService } from "../../../providers/service";
 import { CallApi } from "../../../providers/call-api";
-
+import * as moment from 'moment';
 
 @IonicPage()
 @Component({
@@ -19,6 +20,8 @@ import { CallApi } from "../../../providers/call-api";
 export class ViewSchedulePage {
     data: any;
     latlong: string;
+    scheduleView: scheduleViewModel;
+    scheduleCalendar: any;
 
     eventSource;
     viewTitle;
@@ -50,8 +53,43 @@ export class ViewSchedulePage {
         this.app.getRootNav().pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 
-    loadEvents() {
-        this.eventSource = this.createRandomEvents();
+    overviewSchedule() {
+        this.scheduleCalendar = '';
+    }
+
+    callGetScheduleView() {
+        this.util.showLoading();
+        this.service.getScheduleView(this.data.schedule_id)
+            .then((result: scheduleViewModel) => {
+                this.scheduleView = result;
+                this.loadEvents(this.scheduleView);
+                setTimeout(() => {
+                    this.overviewSchedule();
+                }, 100);
+                this.util.hideLoading();
+            }, error => {
+                this.util.hideLoading();
+                console.log(error.message);
+            });
+    }
+
+    loadEvents(scheduleView) {
+        // this.eventSource = this.createRandomEvents();
+        this.eventSource = [];
+        for (var i = 0; i < scheduleView.calendar.length; i++) {
+            this.createEvents(scheduleView.calendar[i].date);
+        }
+    }
+    createEvents(dateValue) {
+        var setDate = new Date(dateValue);
+        console.log(date);
+        var date = new Date(setDate.getUTCFullYear(), setDate.getUTCMonth(), setDate.getUTCDate() + 1);
+        this.eventSource.push({
+            title: '',
+            startTime: date,
+            endTime: date,
+            allDay: true
+        });
     }
     onViewTitleChanged(title) {
         this.viewTitle = title;
@@ -68,6 +106,17 @@ export class ViewSchedulePage {
     onTimeSelected(ev) {
         console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' +
             (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
+
+        this.scheduleCalendar = '';
+        let dateSelect = moment(ev.selectedTime).format('YYYY-MM-DD');
+        for (var i = 0; i < this.scheduleView.calendar.length; i++) {
+            if (this.scheduleView.calendar[i].date == dateSelect) {
+                this.scheduleCalendar = this.scheduleView.calendar[i];
+                // bug cannot replace scheduleCalendar.date
+                this.scheduleCalendar.newFormatDate = this.util.setFormatDateYearBE(this.scheduleView.calendar[i].date, 'D MMM YYYY');
+                return
+            }
+        }
     }
     onCurrentDateChanged(event: Date) {
         var today = new Date();
@@ -118,16 +167,5 @@ export class ViewSchedulePage {
         var current = new Date();
         current.setHours(0, 0, 0);
         return date < current;
-    }
-
-    callGetScheduleView() {
-        this.util.showLoading();
-        this.service.getScheduleView(this.data.schedule_id)
-            .then((result: scheduleViewModel) => {
-                this.util.hideLoading();
-            }, error => {
-                this.util.hideLoading();
-                console.log(error.message);
-            });
     }
 }

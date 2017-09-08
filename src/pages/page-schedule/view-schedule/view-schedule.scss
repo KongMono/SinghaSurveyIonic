@@ -9,27 +9,31 @@ page-view-schedule {
         font-size: 20px !important;
     }
     .text-month {
+        font-size: 12px;
         text-align: center;
         color: $singha-survey-color-white;
         background-color: $singha-survey-color-primary;
         margin: 0;
-        padding: 14px;
+        padding-top: 8px;
     }
     .monthview-container {
-        height: calc(100% - 44px) !important;
+        // height: calc(100% - 44px) !important;
+        height: 211px !important;
     }
     .slides {
         background-color: $singha-survey-color-primary;
     }
     .swiper-slide {
-        font-size: 14px;
+        font-size: 10px;
     }
     .table-bordered {
         border: none !important;
     }
-    th, td {
+    th,
+    td {
         border: none !important;
-        color: $singha-survey-color-white;
+        line-height: 14px !important;
+        color: $singha-survey-color-white !important;
     }
     .text-muted {
         color: $singha-survey-color-primaryDark !important;
@@ -40,8 +44,105 @@ page-view-schedule {
         background-color: $singha-survey-color-inactive !important;
     }
     .monthview-selected {
-        border-radius: 15px;
+        border-radius: 15px; // border-radius: 50%;
+        // min-width: 36px;
+        // display: inline-flex !important;
+        // padding-right: calc(100% - 80%) !important;
+        // padding-left: calc(100% - 76%) !important;
+        // border-radius: 50%;
+        // min-width: 36px;
+        // max-width: 36px;
+        // display: inline-flex !important;
+        // padding-right: initial !important;
+        // padding-left: calc(100% - 79%) !important;
         color: $singha-survey-color-white !important;
         background-color: $singha-survey-color-primaryDark !important;
+    }
+    .monthview-primary-with-event {
+        border-radius: 15px;
+        color: $singha-survey-color-white !important;
+        background-color: $singha-survey-color-accent !important;
+    }
+    .monthview-secondary-with-event {
+        border-radius: 15px;
+        color: $singha-survey-color-white !important;
+        background-color: $singha-survey-color-accent !important;
+    }
+    .event-detail-container {
+        display: none;
+    }
+    .box-schedule {
+        height: calc(100% - 236px);
+        overflow-y: scroll;
+        .wrap-card {
+            position: relative;
+            padding: 16px;
+            .wrap-round-progress {
+                float: right;
+            }
+            .box-percent {
+                width: 50px;
+                height: 50px;
+                background-color: $singha-survey-color-primary;
+                border-radius: 50%;
+                align-items: center;
+                display: flex;
+                position: absolute;
+                right: 21px;
+                margin-top: 5px;
+                .text-percent {
+                    color: $singha-survey-color-white;
+                    font-size: 18px;
+                    margin: auto;
+                }
+            }
+            .text-name {
+                color: $singha-survey-color-primaryDark;
+            }
+            .text-total {
+                color: $singha-survey-color-primaryDark;
+                margin-top: 16px;
+            }
+        }
+        .box-schedule-calendar {
+            padding: 0 10px;
+            .text-title-date {
+                margin-bottom: 5px;
+            }
+            .wrap-grid {
+                padding: 0;
+                .col {
+                    padding: 5px 0;
+                }
+            }
+            .text-title-status {
+                margin-bottom: 0;
+            }
+            .wrap-item {
+                padding-left: 0;
+                .row-full-size {
+                    width: 100%;
+                    .col-sub {
+                        padding-left: 12px;
+                        padding-right: 12px;
+                        .text-title-sub {
+                            font-size: 14px;
+                        }
+                        .text-value-sub {
+                            font-size: 14px;
+                            color: $singha-survey-color-gray-text-all;
+                            white-space: normal;
+                        }
+                    }
+                }
+            }
+            .hide-line-last-item {
+                .item {
+                    .item-inner {
+                        border-bottom: initial;
+                    }
+                }
+            }
+        }
     }
 }

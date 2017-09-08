@@ -2,27 +2,73 @@
     <ion-toolbar color="primary">
         <ion-buttons left>
             <button ion-button icon-only (click)="backPage()" tappable>
-          <ion-icon class="icon-size" name="_icon-back"></ion-icon>
-        </button>
+                <ion-icon class="icon-size" name="_icon-back"></ion-icon>
+            </button>
         </ion-buttons>
-        <ion-title class="title">ViewSchedulePage</ion-title>
+        <ion-title *ngIf="scheduleView" class="title">{{scheduleView.title}}</ion-title>
         <ion-buttons right>
-            <button icon-only style="background-color:#455A64">
-          <ion-icon class="icon-size"></ion-icon>
-        </button>
+            <button ion-button icon-only (click)="overviewSchedule()" tappable>
+                <ion-icon class="icon-size" name="_icon-overview"></ion-icon>
+            </button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <p class="text-month">{{viewTitle}}</p>
-    <calendar [eventSource]="eventSource"
-        [calendarMode]="calendar.mode"
-        [currentDate]="calendar.currentDate"
-        (onCurrentDateChanged)="onCurrentDateChanged($event)"
-        (onEventSelected)="onEventSelected($event)"
-        (onTitleChanged)="onViewTitleChanged($event)"
-        (onTimeSelected)="onTimeSelected($event)"
-        step="30">
+    <p *ngIf="scheduleView" class="text-month">{{viewTitle}}</p>
+    <calendar *ngIf="scheduleView" [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+        (onCurrentDateChanged)="onCurrentDateChanged($event)" (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)"
+        (onTimeSelected)="onTimeSelected($event)" step="30">
     </calendar>
+
+    <div *ngIf="scheduleView" class="box-schedule">
+        <div *ngIf="!scheduleCalendar">
+            <ion-card class="wrap-card" *ngFor="let summary of scheduleView.summary">
+                <round-progress [current]="summary.percent" [max]="'100'" [animationDelay]="800" [duration]="3000" [color]="'#45ccce'" [background]="'transparent'"
+                    [radius]="30" [stroke]="5" class="wrap-round-progress"></round-progress>
+                <div class="box-percent">
+                    <span class="text-percent">{{summary.percent}}%</span>
+                </div>
+                <p class="text-name">{{summary.title}}</p>
+                <p class="text-total">{{summary.total}}</p>
+            </ion-card>
+        </div>
+
+        <div *ngIf="scheduleCalendar" class="box-schedule-calendar">
+            <p class="text-title-date">แผนการเข้าเยี่ยม ของ {{scheduleCalendar.newFormatDate}}</p>
+            <ion-grid class="wrap-grid">
+                <ion-row *ngFor="let value of scheduleCalendar.value">
+                    <ion-col col-6>
+                        {{value.title}}
+                    </ion-col>
+                    <ion-col col-6>
+                        {{value.total}} ร้าน
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+            <p class="text-title-status">สถานะการเข้าเยี่ยม</p>
+            <ion-grid class="wrap-grid">
+                <ion-row *ngFor="let customer of scheduleCalendar.customer; let i = index" [ngClass]="{'hide-line-last-item': (scheduleCalendar.customer.length-1 == i)}">
+                    <ion-item class="wrap-item">
+                        <ion-row class="row-full-size">
+                            <ion-col col-6 class="col-sub">
+                                <span class="text-title-sub">ชื่อร้าน</span>
+                            </ion-col>
+                            <ion-col col-6 class="col-sub">
+                                <span class="text-title-sub">สถานะ</span>
+                            </ion-col>
+                        </ion-row>
+                        <ion-row class="row-full-size">
+                            <ion-col col-6 class="col-sub">
+                                <span class="text-value-sub">{{customer.name}}</span>
+                            </ion-col>
+                            <ion-col col-6 class="col-sub">
+                                <span class="text-value-sub">{{customer.status}}</span>
+                            </ion-col>
+                        </ion-row>
+                    </ion-item>
+                </ion-row>
+            </ion-grid>
+        </div>
+    </div>
 </ion-content>

@@ -1,8 +1,8 @@
 <ion-content class="wrap-overview-shop">
-  <p class="text-overview-shop">
-    {{ customersCycleData.name }}
+  <p class="text-overview-shop" style="display: inline-flex;">
     <ion-icon name="_icon-close" ion-button class="button-close" (click)="close()" tappable></ion-icon>
   </p>
+  <p class="text-overview-shop">{{ customersCycleData.name }}</p>
 
   <ion-card class="wrap-card" *ngFor="let visit of customersCycleData.visit">
     <round-progress [current]="visit.percent" [max]="'100'" [color]="'#45ccce'" [background]="'transparent'" [radius]="30" [stroke]="5" class="wrap-round-progress"></round-progress>
