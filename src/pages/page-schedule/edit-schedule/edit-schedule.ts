@@ -75,19 +75,26 @@ export class EditSchedulePage {
     }
 
     plan() {
-        this.navCtrl.push('PlanSchedulePage', { data: this.scheduleDetailList, optionSchedule: this.optionSchedule, callback: this.planCallback },
+        this.navCtrl.push('PlanSchedulePage', { data: this.scheduleDetailList.plan, optionSchedule: this.optionSchedule, callback: this.planCallback },
             { animate: true, animation: 'transition', direction: 'forward' });
     }
 
     planCallback = (_params) => {
         return new Promise(resolve => {
             console.log(_params);
-            if (this.scheduleDetailList.plan.length != _params.plan.length) {
-                resolve();
-                this.callUpdatedSchedule();
+            if (_params) {
+                this.scheduleDetailList.plan = _params;
+              this.callUpdatedSchedule();
+              resolve();
             } else {
-                resolve();
+              resolve();
             }
+            // if (this.scheduleDetailList.plan.length != _params.plan.length) {
+            //     resolve();
+            //     this.callUpdatedSchedule();
+            // } else {
+            //     resolve();
+            // }
         });
     }
 

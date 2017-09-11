@@ -25,50 +25,13 @@ export class PlanSchedulePage {
   indexCustomer = 0;
   date: any;
   plan = [];
-  // customer
-  // :
-  // Array(3)
-  // 0
-  // :
-  // ampher_id
-  // :
-  // "6"
-  // balance
-  // :
-  // 4
-  // customer_id
-  // :
-  // "14530"
-  // customer_name
-  // :
-  // "เจ แอนด์ เจ"
-  // province_id
-  // :
-  // "11"
-  // total_master
-  // :
-  // 4
-  // total_plan
-  // :
-  // 0
-
-  // province
-  // :
-  // Array(3)
-  // 0
-  // :
-  // ampher
-  // :
-  // Array(1)
-  // 0
-  // :
-  // ampher_id
-  // :
-  // "0"
-  // ampher_th
-  // :
-  // "ทั้งหมด"
-
+  // balance: ,
+  // customer_id: ,
+  // customer_name: ,
+  // province_id: ,
+  // ampher_id: ,
+  //   total_master: ,
+  //   total_plan: 
   constructor(
     private http: Http,
     public navCtrl: NavController,
@@ -110,7 +73,7 @@ export class PlanSchedulePage {
       keyOption = 'customer_name';
       indexSelect = this.indexCustomer;
     }
-    this.navCtrl.push('ListSelectOptionPage', { action: action, title: title, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
+    this.navCtrl.push('ListSelectOptionSchedulePage', { action: action, title: title, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
   }
 
   selectOptionCallback = (_params) => {
@@ -149,9 +112,168 @@ export class PlanSchedulePage {
   // }
 
   addPlan() {
+    //   if (str_province_id.equalsIgnoreCase("0") && str_ampher_id.equalsIgnoreCase("0")) {
+    //     customerFiler.addAll(customerAll);
+
+    // } else if (str_ampher_id.equalsIgnoreCase("0")) {
+    //     customerFiler.addAll(customerAll);
+    // } else {
+    //     for (int i = 0; i < customerAll.size(); i++) {
+    //         if (customerAll.get(i).getProvince_id().equalsIgnoreCase(str_province_id) && customerAll.get(i).getAmpher_id().equalsIgnoreCase(str_ampher_id)) {
+    //             ls.add(customerAll.get(i));
+    //         }
+    //     }
+    //     customerFiler.addAll(ls);
+    // }
+
+    if ((this.indexCustomer != null || this.indexCustomer != undefined) && this.date) {
+      if (this.optionSchedule.customer[this.indexCustomer].balance > 0) {
+        if (this.plan.length > 0) {
+          console.log('#plan>0');
+          let dateDuplicate: boolean = false;
+          for (var i = 0; i < this.plan.length; i++) {
+            if (this.date != this.plan[i].date) {
+              console.log('#date!=');
+              if (this.data.length > 0) {
+                console.log('#=data>0');
+                for (var j = 0; j < this.data.length; j++) {
+                  if (this.date != this.data[j].date) {
+                    console.log('#=date!=');
+                    this.pushPlan();
+                    return;
+                  } else {
+                    console.log('#=date=');
+                    if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.data[j].customer_id) {
+                      console.log('#=customer!=');
+                      this.pushPlan();
+                      return;
+                    } else {
+                      console.log('#=customer=');
+                      dateDuplicate = true;
+                    }
+                  }
+                }
+                // if (dateDuplicate) {
+                //   this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
+                // }
+              } else {
+                console.log('#=data<0');
+                this.pushPlan();
+                return;
+              }
+            } else {
+              console.log('#date=');
+              if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.plan[i].customer_id) {
+                console.log('#customer!=');
+                if (this.data.length > 0) {
+                  for (var j = 0; j < this.data.length; j++) {
+                    if (this.date != this.data[j].date) {
+                      this.pushPlan();
+                      return;
+                    } else {
+                      if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.data[j].customer_id) {
+                        this.pushPlan();
+                        return;
+                      } else {
+                        dateDuplicate = true;
+                      }
+                    }
+                  }
+                  // if (dateDuplicate) {
+                  //   this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
+                  // }
+                } else {
+                  this.pushPlan();
+                  return;
+                }
+              } else {
+                console.log('#customer=');
+                dateDuplicate = true;
+              }
+            }
+          }
+          if (dateDuplicate) {
+            this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
+          }
+        } else if (this.data.length > 0) {
+          console.log('#data>0');
+          let dateDuplicate: boolean = false;
+          for (var i = 0; i < this.data.length; i++) {
+            if (this.date != this.data[i].date) {
+              console.log('#date!=');
+              // if (this.plan.length > 0) {
+              //   for (var j = 0; j < this.plan.length; j++) {
+              //     if (this.date != this.plan[j].date) {
+              //       this.pushPlan();
+              //       return;
+              //     } else {
+              //       if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.plan[j].customer_id) {
+              //         this.pushPlan();
+              //         return;
+              //       } else {
+              //         dateDuplicate = true;
+              //       }
+              //     }
+              //   }
+              //   // if (dateDuplicate) {
+              //   //   this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
+              //   // }
+              // } else {
+                this.pushPlan();
+                return;
+              // }
+            } else {
+              console.log('#date=');
+              if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.data[i].customer_id) {
+                console.log('#customer!=');
+                // if (this.plan.length > 0) {
+                //   for (var j = 0; j < this.plan.length; j++) {
+                //     if (this.date != this.plan[j].date) {
+                //       this.pushPlan();
+                //       return;
+                //     } else {
+                //       if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.plan[j].customer_id) {
+                //         this.pushPlan();
+                //         return;
+                //       } else {
+                //         dateDuplicate = true;
+                //       }
+                //     }
+                //   }
+                //   // if (dateDuplicate) {
+                //   //   this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
+                //   // }
+                // } else {
+                  this.pushPlan();
+                  return;
+                // }
+              } else {
+                console.log('#customer=');
+                dateDuplicate = true;
+              }
+            }
+          }
+          if (dateDuplicate) {
+            this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
+          }
+        }
+      } else {
+        this.util.showAlertDialog('ครบจำนวนรอบ กรุณาเลือกใหม่');
+      }
+    } else if ((this.indexCustomer == null || this.indexCustomer == undefined) && this.date) {
+      this.util.showAlertDialog('ไม่มีร้านค้า กรุณาเลือกใหม่');
+    } else if ((this.indexCustomer != null || this.indexCustomer != undefined) && !this.date) {
+      this.util.showAlertDialog('กรุณาเลือกวันที่');
+    }
+  }
+
+  pushPlan() {
     let plan = {
-      date: this.date,
-      customer_name: this.optionSchedule.customer[this.indexCustomer].customer_name
+      plan_id: '',
+      can_delete: '1',
+      customer_id: this.optionSchedule.customer[this.indexCustomer].customer_id,
+      customer_name: this.optionSchedule.customer[this.indexCustomer].customer_name,
+      date: this.date
     }
     this.plan.push(plan);
   }
@@ -161,24 +283,12 @@ export class PlanSchedulePage {
   }
 
   save() {
-    this.callApiUpdate();
-  }
+    if (this.plan.length > 0) {
+      this.callback(this.data).then(() => {
+        this.backPage();
+      }, error => {
 
-  callApiUpdate() {
-    // this.util.showLoading();
-    // this.service.updateVisitActivity(
-
-    //   .then(result => {
-    //     this.util.hideLoading();
-    //     this.util.showAlertDialog(result.msg);
-    //     this.callback(null).then(() => {
-    //       this.backPage();
-    //     }, error => {
-
-    //     });
-    //   }, error => {
-    //     this.util.hideLoading();
-    //     console.log(error.message);
-    //   });
+      });
+    }
   }
 }

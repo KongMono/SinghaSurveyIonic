@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="backPage()">
+        <ion-icon class="icon-size" name="_icon-back"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title class="title">{{title}}</ion-title>
+    <ion-buttons right>
+      <button icon-only style="background-color:#455A64">
+        <ion-icon class="icon-size"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list inset>
+    <button ion-item detail-none *ngFor="let op of option; let i = index" (click)="itemSelected(i)">
+      <span [ngClass]="{'hightlight-selected': (i == indexSelect)}">{{ op[key] }} ({{op.total_plan}}/{{op.total_master}})</span>
+    </button>
+  </ion-list>
+</ion-content>
