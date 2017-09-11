@@ -82,12 +82,12 @@ export class EditSchedulePage {
     planCallback = (_params) => {
         return new Promise(resolve => {
             console.log(_params);
-            // if (this.scheduleDetailList.plan.length != _params.plan.length) {
-            this.callGetScheduleDetailList();
-            resolve();
-            // } else {
-            //     resolve();
-            // }
+            if (this.scheduleDetailList.plan.length != _params.plan.length) {
+                resolve();
+                this.callUpdatedSchedule();
+            } else {
+                resolve();
+            }
         });
     }
 
@@ -105,10 +105,29 @@ export class EditSchedulePage {
                 ]
             });
             actionSheet.present();
+        } else {
+            this.util.showAlertDialog("คุณไม่มีสิทธิ์ลบรายการนี้");
         }
     }
 
     removeDataInPlan(index) {
         this.scheduleDetailList.plan.splice(index, 1);
+        this.callUpdatedSchedule();
+    }
+
+    callUpdatedSchedule() {
+        this.util.showLoading();
+        this.service.updatedSchedule(
+            this.data.schedule_id,
+            this.scheduleDetailList.cycle_id,
+            JSON.stringify(this.scheduleDetailList.plan))
+            .then((result) => {
+                this.util.showAlertDialog(result.msg);
+                this.util.hideLoading();
+                this.callGetOptionSchedule();
+            }, error => {
+                this.util.hideLoading();
+                console.log(error.message);
+            });
     }
 }
