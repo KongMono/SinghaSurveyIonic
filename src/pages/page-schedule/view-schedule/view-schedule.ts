@@ -62,12 +62,12 @@ export class ViewSchedulePage {
         this.util.showLoading();
         this.service.getScheduleView(this.data.schedule_id)
             .then((result: scheduleViewModel) => {
+                this.util.hideLoading();
                 this.scheduleView = result;
                 this.loadEvents(this.scheduleView);
                 setTimeout(() => {
                     this.overviewSchedule();
                 }, 100);
-                this.util.hideLoading();
             }, error => {
                 this.util.hideLoading();
                 console.log(error.message);
@@ -127,17 +127,7 @@ export class ViewSchedulePage {
             }
         }
         if (noSchedule) {
-            // this.util.showAlertDialog('ไม่มีข้อมูล');
-
-            toast = this.toastCtrl.create({
-                message: 'ไม่มีข้อมูล',
-                duration: 3000,
-                position: 'bottom'
-            });
-            // toast.onDidDismiss(() => {
-            //     console.log('Dismissed toast');
-            // });
-            toast.present();
+            this.util.showAlertDialog('ไม่มีข้อมูล');
         }
     }
     onCurrentDateChanged(event: Date) {

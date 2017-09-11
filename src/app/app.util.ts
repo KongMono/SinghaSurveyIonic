@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { LoadingController, AlertController } from "ionic-angular";
+import { LoadingController } from "ionic-angular";
 import { ConfigApp, IAppConfig } from "./app.config";
 import { Storage } from '@ionic/storage';
 import * as moment from 'moment';
@@ -12,7 +12,6 @@ export class AppUtilService {
     constructor(
         private loadingCtrl: LoadingController,
         public storage: Storage,
-        private alertCtrl: AlertController,
         private toastCtrl: ToastController,
         private appVersion: AppVersion,
         @Inject(ConfigApp) private config: IAppConfig) {
@@ -89,15 +88,13 @@ export class AppUtilService {
     }
 
     public showAlertDialog(text) {
+
         let toast = this.toastCtrl.create({
             message: text,
-            duration: 3000,
+            duration: 1500,
             position: 'bottom'
         });
 
-        toast.onDidDismiss(() => {
-            console.log('Dismissed toast');
-        });
         toast.present();
     }
 }
