@@ -1,6 +1,6 @@
 import { AppConfig } from './../../../app/app.config';
 import { Component, Inject } from '@angular/core';
-import { NavController, IonicPage, NavParams, App, ModalController, ActionSheetController, AlertController } from 'ionic-angular';
+import { NavController, IonicPage, NavParams, App, ModalController, ActionSheetController, AlertController, ToastController } from 'ionic-angular';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
 import { AppUtilService } from "../../../app/app.util";
 import { SinghaSurveyService } from "../../../providers/service";
@@ -40,7 +40,8 @@ export class ViewSchedulePage {
         public util: AppUtilService,
         public modalCtrl: ModalController,
         public actionSheetCtrl: ActionSheetController,
-        private alertCtrl: AlertController) {
+        private alertCtrl: AlertController,
+        private toastCtrl: ToastController) {
         this.data = navParams.get('data');
         console.log(this.data.schedule_id);
     }
@@ -107,15 +108,36 @@ export class ViewSchedulePage {
         console.log('Selected time: ' + ev.selectedTime + ', hasEvents: ' +
             (ev.events !== undefined && ev.events.length !== 0) + ', disabled: ' + ev.disabled);
 
+        let noSchedule: boolean = true;
+        let toast;
+        console.log(toast);
+        if (toast) {
+            console.log('toast');
+            toast.dismiss();
+        }
         this.scheduleCalendar = '';
         let dateSelect = moment(ev.selectedTime).format('YYYY-MM-DD');
         for (var i = 0; i < this.scheduleView.calendar.length; i++) {
             if (this.scheduleView.calendar[i].date == dateSelect) {
+                noSchedule = false;
                 this.scheduleCalendar = this.scheduleView.calendar[i];
                 // bug cannot replace scheduleCalendar.date
                 this.scheduleCalendar.newFormatDate = this.util.setFormatDateYearBE(this.scheduleView.calendar[i].date, 'D MMM YYYY');
                 return
             }
+        }
+        if (noSchedule) {
+            // this.util.showAlertDialog('ไม่มีข้อมูล');
+
+            toast = this.toastCtrl.create({
+                message: 'ไม่มีข้อมูล',
+                duration: 3000,
+                position: 'bottom'
+            });
+            // toast.onDidDismiss(() => {
+            //     console.log('Dismissed toast');
+            // });
+            toast.present();
         }
     }
     onCurrentDateChanged(event: Date) {
