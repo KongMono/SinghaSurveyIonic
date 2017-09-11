@@ -1,0 +1,95 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons left>
+      <button ion-button icon-only (click)="backPage()" tappable>
+          <ion-icon class="icon-size" name="_icon-back"></ion-icon>
+        </button>
+    </ion-buttons>
+    <ion-title class="title">แผนการเข้าเยี่ยม</ion-title>
+    <ion-buttons right>
+      <button icon-only style="background-color:#455A64">
+          <ion-icon class="icon-size"></ion-icon>
+        </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="box-plan" *ngIf="optionSchedule">
+    <ion-grid>
+      <ion-row>
+        <ion-col col-auto style="padding-right: 0;">
+          <p>จังหวัด</p>
+        </ion-col>
+        <ion-col class="wrap-col">
+          <ion-list class="wrap-list">
+            <button ion-item (click)="selectOption('province')" tappable>
+              <span *ngIf="optionSchedule">{{ optionSchedule.province[indexProvince].province_th }}</span>
+            </button>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>อำเภอ</p>
+        </ion-col>
+        <ion-col>
+          <ion-list class="wrap-list">
+            <button ion-item (click)="selectOption('ampher')" tappable>
+              <span *ngIf="optionSchedule">{{ optionSchedule.province[indexProvince].ampher[indexAmpher].ampher_th }}</span>
+            </button>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>ร้านค้า</p>
+        </ion-col>
+        <ion-col>
+          <ion-list class="wrap-list">
+            <button ion-item (click)="selectOption('customer')" tappable>
+              <span *ngIf="optionSchedule">{{ optionSchedule.customer[indexCustomer].customer_name }}</span>
+            </button>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>วันที่</p>
+        </ion-col>
+        <ion-col>
+          <ion-item class="item-calendar">
+            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="date"></ion-datetime>
+          </ion-item>
+          <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p>แผนการเข้าเยี่ยม</p>
+        </ion-col>
+        <ion-col>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="addPlan()" tappable></ion-icon>
+        </ion-col>
+      </ion-row>
+      <ion-row *ngFor="let plan of plan; let i = index" (click)="removePlanInList(i)" [ngClass]="{'hide-line-last-item': (plan.length-1 == i)}"
+        tappable>
+        <ion-item class="wrap-item">
+            <ion-row class="row-full-size">
+                <ion-col col-6>
+                    <span class="text-value-sub">{{plan.date}}</span>
+                </ion-col>
+                <ion-col col-6>
+                    <span class="text-value-sub">{{plan.customer_name}}</span>
+                </ion-col>
+            </ion-row>
+        </ion-item>
+      </ion-row>
+      <ion-row>
+        <ion-col col-12>
+          <button ion-button class="button-save" (click)="save()" tappable>บันทึก</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

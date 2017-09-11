@@ -1,5 +1,4 @@
 page-edit-schedule {
-   
     .title {
         text-align: center;
         .toolbar-title {
@@ -8,5 +7,46 @@ page-edit-schedule {
     }
     .icon-size {
         font-size: 20px !important;
+    }
+    .text-title-plan {
+        margin-bottom: 0;
+    }
+    .line-top-row {
+        border-top: 1px solid #dedede;
+    }
+    .button-add-input {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 14px;
+        margin: auto 0 5px auto;
+        padding: 0;
+        font-size: 22px;
+        color: $singha-survey-color-primary;
+    }
+    .hide-line-last-item {
+        .item {
+            .item-inner {
+                border-bottom: initial;
+            }
+        }
+    }
+    .wrap-item {
+        padding-left: 8px;
+        .row-full-size {
+            width: 100%;
+            .col {
+                padding: 0;
+                .text-title-sub {
+                    font-size: 14px;
+                }
+                .text-value-sub {
+                    font-size: 14px;
+                    color: $singha-survey-color-gray-text-all;
+                    white-space: normal;
+                }
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@
           <ion-icon class="icon-size" name="_icon-back"></ion-icon>
         </button>
         </ion-buttons>
-        <ion-title class="title"></ion-title>
+        <ion-title class="title">แก้ไขบริหารการเข้าเยี่ยมร้านค้า</ion-title>
         <ion-buttons right>
             <button icon-only style="background-color:#455A64">
           <ion-icon class="icon-size"></ion-icon>
@@ -15,4 +15,43 @@
 </ion-header>
 
 <ion-content>
+    <ion-grid *ngIf="scheduleDetailList">
+        <ion-row>
+            <ion-col col-3>
+                รอบ
+            </ion-col>
+            <ion-col>
+                {{scheduleDetailList.name}}
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-3>
+                ระยะเวลา
+            </ion-col>
+            <ion-col>
+                {{scheduleDetailList.start_date}} - {{scheduleDetailList.end_date}}
+            </ion-col>
+        </ion-row>
+        <ion-row class="line-top-row">
+            <ion-col>
+                <p class="text-title-plan">แผนการเข้าเยี่ยม</p>
+            </ion-col>
+            <ion-col>
+                <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="plan()" tappable></ion-icon>
+            </ion-col>
+        </ion-row>
+        <ion-row *ngFor="let plan of scheduleDetailList.plan; let i = index" (click)="actionSheetInPlan(i)" [ngClass]="{'hide-line-last-item': (scheduleDetailList.plan.length-1 == i)}"
+            tappable>
+            <ion-item class="wrap-item">
+                <ion-row class="row-full-size">
+                    <ion-col col-6>
+                        <span class="text-value-sub">{{plan.date}}</span>
+                    </ion-col>
+                    <ion-col col-6>
+                        <span class="text-value-sub">{{plan.customer_name}}</span>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-row>
+    </ion-grid>
 </ion-content>

@@ -5,7 +5,6 @@ import { AppUtilService } from "../../../app/app.util";
 import { SinghaSurveyService } from "../../../providers/service";
 import { CallApi } from "../../../providers/call-api";
 
-
 @IonicPage()
 @Component({
     selector: 'page-edit-schedule',
@@ -19,6 +18,8 @@ import { CallApi } from "../../../providers/call-api";
 export class EditSchedulePage {
     data: any;
     latlong: string;
+    scheduleDetailList: ScheduleDetailListModel;
+    optionSchedule: OptionScheduleModel;
 
     constructor(
         public app: App,
@@ -34,21 +35,19 @@ export class EditSchedulePage {
         console.log(this.data.schedule_id);
     }
 
-
     ionViewDidLoad() {
         this.callGetOptionSchedule();
     }
-
 
     backPage() {
         this.app.getRootNav().pop({ animate: true, animation: 'transition', direction: 'back' });
     }
 
-
     callGetOptionSchedule() {
         this.util.showLoading();
         this.service.getOptionSchedule(this.data.schedule_id)
             .then((result: OptionScheduleModel) => {
+                this.optionSchedule = result;
                 this.callGetScheduleDetailList();
             }, error => {
                 this.util.hideLoading();
@@ -58,10 +57,58 @@ export class EditSchedulePage {
     callGetScheduleDetailList() {
         this.service.getScheduleDetailList(this.data.schedule_id)
             .then((result: ScheduleDetailListModel) => {
+                this.scheduleDetailList = result;
+                if (this.scheduleDetailList) {
+                    this.scheduleDetailList.start_date = this.util.setFormatDateYearBE(this.scheduleDetailList.start_date, 'D MMM YYYY');
+                    this.scheduleDetailList.end_date = this.util.setFormatDateYearBE(this.scheduleDetailList.end_date, 'D MMM YYYY');
+                    if (this.scheduleDetailList.plan) {
+                        for (var i = 0; i < this.scheduleDetailList.plan.length; i++) {
+                            this.scheduleDetailList.plan[i].date = this.util.setFormatDateYearBE(this.scheduleDetailList.plan[i].date, 'D MMM YYYY');
+                        }
+                    }
+                }
                 this.util.hideLoading();
             }, error => {
                 this.util.hideLoading();
                 console.log(error.message);
             });
+    }
+
+    plan() {
+        this.navCtrl.push('PlanSchedulePage', { data: this.scheduleDetailList, optionSchedule: this.optionSchedule, callback: this.planCallback },
+            { animate: true, animation: 'transition', direction: 'forward' });
+    }
+
+    planCallback = (_params) => {
+        return new Promise(resolve => {
+            console.log(_params);
+            // if (this.scheduleDetailList.plan.length != _params.plan.length) {
+            this.callGetScheduleDetailList();
+            resolve();
+            // } else {
+            //     resolve();
+            // }
+        });
+    }
+
+    actionSheetInPlan(index) {
+        if (this.scheduleDetailList.plan[index].can_delete == '1') {
+            let actionSheet = this.actionSheetCtrl.create({
+                buttons: [
+                    {
+                        icon: '_icon-delete_file',
+                        text: 'ลบ',
+                        handler: () => {
+                            this.removeDataInPlan(index);
+                        }
+                    }
+                ]
+            });
+            actionSheet.present();
+        }
+    }
+
+    removeDataInPlan(index) {
+        this.scheduleDetailList.plan.splice(index, 1);
     }
 }
