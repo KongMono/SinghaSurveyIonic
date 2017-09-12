@@ -231,6 +231,7 @@ export class VisitAddNote {
         this.data.note[this.index].images = this.inputVisitAddNoteData.images;
       } else {
         let note = {
+          note_id: '',
           title: this.inputVisitAddNoteData.title,
           detail: this.inputVisitAddNoteData.detail,
           start_date: this.inputVisitAddNoteData.start_date,

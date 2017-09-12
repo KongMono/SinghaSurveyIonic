@@ -56,7 +56,8 @@
         <p class="text-title-retroact">ยอดสั่งซื้อย้อนหลัง 3 เดือนจากปัจจุบัน</p>
         <ion-row class="row-full-size row-title" *ngFor="let order of visitCustomerDetailData.order">
           <span class="text-sub-title">ปี {{order.year}} เดือน {{order.month}}</span>
-          <ion-row class="row-full-size" *ngFor="let value of order.value; let i = index" [ngClass]="{'hide-line-last-item': (order.value.length-1 == i)}" tappable>
+          <ion-row class="row-full-size" *ngFor="let value of order.value; let i = index" [ngClass]="{'hide-line-last-item': (order.value.length-1 == i)}"
+            tappable>
             <ion-item class="item-sub-title">
               <ion-row class="row-full-size">
                 <ion-col col-4 class="col-sub value-row">
@@ -145,8 +146,8 @@
           <span class="text-sub-title">ปี {{rival.year}} เดือน {{rival.month}}</span>
           <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="rival.status" (click)="popupInput('rival', null, indexRival)"
             tappable></ion-icon>
-          <ion-row class="row-full-size" *ngFor="let value of visitCustomerDetail.rival[indexRival].value; let i = index" (click)="actionSheetInList('rival', i, indexRival)" [ngClass]="{'hide-line-last-item': (rival.value.length-1 == i)}"
-            tappable>
+          <ion-row class="row-full-size" *ngFor="let value of visitCustomerDetail.rival[indexRival].value; let i = index" (click)="actionSheetInList('rival', i, indexRival)"
+            [ngClass]="{'hide-line-last-item': (rival.value.length-1 == i)}" tappable>
             <ion-item class="item-sub-title">
               <span class="text-title-product">{{value.product.product_name}}</span>
               <ion-row class="row-full-size">
@@ -182,8 +183,8 @@
           <ion-row *ngIf="receipt.value.length > 0" style="height: 80px;">
             <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
               <div style="display: flex">
-                <img *ngFor="let images of receipt.value; let i = index" [src]="getImagePath(images)" (click)="viewImage('receipt', indexMonth, i)" height="80px"
-                  width="auto" style="margin: 0 10px;" tappable/>
+                <img *ngFor="let images of receipt.value; let i = index" [src]="getImagePath(images)" (click)="viewImage('receipt', indexMonth, i)"
+                  height="80px" width="auto" style="margin: 0 10px;" tappable/>
               </div>
             </ion-scroll>
           </ion-row>
@@ -306,8 +307,7 @@
           <ion-row *ngIf="note.images.length > 0" style="height: 80px;">
             <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
               <div style="display: flex">
-                <img *ngFor="let images of note.images" [src]="getImagePath(images)" (click)="viewImage('note', i, 0)"
-                  height="80px" width="auto" style="margin: 0 10px;" tappable/>
+                <img *ngFor="let images of note.images" [src]="getImagePath(images)" height="80px" width="auto" style="margin: 0 10px;" tappable/>
               </div>
             </ion-scroll>
           </ion-row>
