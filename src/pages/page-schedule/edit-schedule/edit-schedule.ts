@@ -91,12 +91,6 @@ export class EditSchedulePage {
             } else {
               resolve();
             }
-            // if (this.scheduleDetailList.plan.length != _params.plan.length) {
-            //     resolve();
-            //     this.callUpdatedSchedule();
-            // } else {
-            //     resolve();
-            // }
         });
     }
 

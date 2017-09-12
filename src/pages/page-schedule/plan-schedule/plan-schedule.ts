@@ -20,9 +20,11 @@ export class PlanSchedulePage {
   data: any;
   optionSchedule: OptionScheduleModel;
   callback: any;
+  optionScheduleCustomer = [];
   indexProvince = 0;
   indexAmpher = 0;
   indexCustomer = 0;
+  indexSelectCustomer = 0;
   date: any;
   plan = [];
 
@@ -42,7 +44,7 @@ export class PlanSchedulePage {
   }
 
   ionViewDidLoad() {
-
+    this.optionScheduleCustomer = this.optionSchedule.customer;
   }
 
   backPage() {
@@ -63,9 +65,9 @@ export class PlanSchedulePage {
       indexSelect = this.indexAmpher;
     } else if (action == 'customer') {
       title = 'เลือกร้านค้า';
-      listSelectOption = this.optionSchedule.customer;
+      listSelectOption = this.optionScheduleCustomer;
       keyOption = 'customer_name';
-      indexSelect = this.indexCustomer;
+      indexSelect = this.indexSelectCustomer;
     }
     this.navCtrl.push('ListSelectOptionSchedulePage', { action: action, title: title, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
   }
@@ -77,17 +79,41 @@ export class PlanSchedulePage {
           this.indexAmpher = 0;
         }
         this.indexProvince = _params.indexSelect;
+        this.filterOptionCustomer();
         resolve();
       } else if (_params.action == 'ampher') {
         this.indexAmpher = _params.indexSelect;
+        this.filterOptionCustomer();
         resolve();
       } else if (_params.action == 'customer') {
-        this.indexCustomer = _params.indexSelect;
+        this.indexSelectCustomer = _params.indexSelect;
+        for (var i = 0; i < this.optionSchedule.customer.length; i++) {
+          if (this.optionScheduleCustomer[this.indexSelectCustomer].customer_id == this.optionSchedule.customer[i].customer_id) {
+            this.indexCustomer = i;
+            i = this.optionSchedule.customer.length;
+          }
+        }
         resolve();
       } else {
         resolve();
       }
     });
+  }
+
+  filterOptionCustomer() {
+    this.optionScheduleCustomer = [];
+    if (this.indexProvince == 0 && this.indexAmpher == 0) {
+      this.optionScheduleCustomer = this.optionSchedule.customer;
+    } else if (this.indexAmpher == 0) {
+      this.optionScheduleCustomer = this.optionSchedule.customer;
+    } else {
+      for (var i = 0; i < this.optionSchedule.customer.length; i++) {
+        if ((this.optionSchedule.province[this.indexProvince].province_id == this.optionSchedule.customer[i].province_id) && (this.optionSchedule.province[this.indexProvince].ampher[this.indexAmpher].ampher_id == this.optionSchedule.customer[i].ampher_id)) {
+          this.optionScheduleCustomer.push(this.optionSchedule.customer[i]);
+        }
+      }
+    }
+    this.indexSelectCustomer = 0;
   }
 
   // actionSheetInList(index) {
@@ -106,20 +132,6 @@ export class PlanSchedulePage {
   // }
 
   addPlan() {
-    //   if (str_province_id.equalsIgnoreCase("0") && str_ampher_id.equalsIgnoreCase("0")) {
-    //     customerFiler.addAll(customerAll);
-
-    // } else if (str_ampher_id.equalsIgnoreCase("0")) {
-    //     customerFiler.addAll(customerAll);
-    // } else {
-    //     for (int i = 0; i < customerAll.size(); i++) {
-    //         if (customerAll.get(i).getProvince_id().equalsIgnoreCase(str_province_id) && customerAll.get(i).getAmpher_id().equalsIgnoreCase(str_ampher_id)) {
-    //             ls.add(customerAll.get(i));
-    //         }
-    //     }
-    //     customerFiler.addAll(ls);
-    // }
-
     if ((this.indexCustomer != null || this.indexCustomer != undefined) && this.date) {
       if (this.optionSchedule.customer[this.indexCustomer].balance > 0) {
         let pushPlan: boolean = true;
