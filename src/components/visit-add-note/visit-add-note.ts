@@ -152,7 +152,8 @@ export class VisitAddNote {
   }
 
   updateAddImage(res) {
-    this.inputVisitAddNoteData.images.push(res.path);
+    // this.inputVisitAddNoteData.images.push(res.path);
+    this.inputVisitAddNoteData.images[0] = res.path;
   }
 
   getImagePath(images): string {

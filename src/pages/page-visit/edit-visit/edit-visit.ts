@@ -447,7 +447,7 @@ export class EditVisitPage {
     return endpoint + images;
   }
 
-  viewImage(action, indexMonth, index) {
+  viewImage(action, index, subIndex) {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [
         {
@@ -462,9 +462,11 @@ export class EditVisitPage {
                 endpoint = this.config.endpointUpload;
               }
               if (action == 'receipt') {
-                this.photoViewer.show(endpoint + this.visitCustomerDetailData.receipt[indexMonth].value[index]);
+                this.photoViewer.show(endpoint + this.visitCustomerDetailData.receipt[index].value[subIndex]);
               } else if (action == 'tool') {
-                this.photoViewer.show(endpoint + this.visitCustomerDetailData.images[index]);
+                this.photoViewer.show(endpoint + this.visitCustomerDetailData.images[subIndex]);
+              } else if (action == 'note') {
+                this.photoViewer.show(endpoint + this.visitCustomerDetailData.note[index].images[subIndex]);
               }
             });
           }
@@ -473,7 +475,7 @@ export class EditVisitPage {
           text: 'ลบ',
           handler: () => {
             this.app.navPop().then(() => {
-              this.confirmRemoveImage(action, indexMonth, index);
+              this.confirmRemoveImage(action, index, subIndex);
             });
           }
         }
@@ -482,7 +484,7 @@ export class EditVisitPage {
     actionSheet.present();
   }
 
-  confirmRemoveImage(action, indexMonth, index) {
+  confirmRemoveImage(action, index, subIndex) {
     let alert = this.alertCtrl.create({
       title: 'ต้องการลบรูปภาพ?',
       buttons: [
@@ -496,9 +498,9 @@ export class EditVisitPage {
           text: 'ตกลง',
           handler: () => {
             if (action == 'receipt') {
-              this.visitCustomerDetailData.receipt[indexMonth].value.splice(index, 1);
+              this.visitCustomerDetailData.receipt[index].value.splice(subIndex, 1);
             } else if (action == 'tool') {
-              this.visitCustomerDetailData.images.splice(index, 1);
+              this.visitCustomerDetailData.images.splice(subIndex, 1);
             }
           }
         }
