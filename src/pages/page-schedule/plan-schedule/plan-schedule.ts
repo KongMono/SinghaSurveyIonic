@@ -25,13 +25,7 @@ export class PlanSchedulePage {
   indexCustomer = 0;
   date: any;
   plan = [];
-  // balance: ,
-  // customer_id: ,
-  // customer_name: ,
-  // province_id: ,
-  // ampher_id: ,
-  //   total_master: ,
-  //   total_plan: 
+
   constructor(
     private http: Http,
     public navCtrl: NavController,
@@ -128,134 +122,29 @@ export class PlanSchedulePage {
 
     if ((this.indexCustomer != null || this.indexCustomer != undefined) && this.date) {
       if (this.optionSchedule.customer[this.indexCustomer].balance > 0) {
+        let pushPlan: boolean = true;
         if (this.plan.length > 0) {
-          console.log('#plan>0');
-          let dateDuplicate: boolean = false;
           for (var i = 0; i < this.plan.length; i++) {
-            if (this.date != this.plan[i].date) {
-              console.log('#date!=');
-              if (this.data.length > 0) {
-                console.log('#=data>0');
-                for (var j = 0; j < this.data.length; j++) {
-                  if (this.date != this.data[j].date) {
-                    console.log('#=date!=');
-                    this.pushPlan();
-                    return;
-                  } else {
-                    console.log('#=date=');
-                    if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.data[j].customer_id) {
-                      console.log('#=customer!=');
-                      this.pushPlan();
-                      return;
-                    } else {
-                      console.log('#=customer=');
-                      dateDuplicate = true;
-                    }
-                  }
-                }
-                // if (dateDuplicate) {
-                //   this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
-                // }
-              } else {
-                console.log('#=data<0');
-                this.pushPlan();
-                return;
-              }
-            } else {
-              console.log('#date=');
-              if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.plan[i].customer_id) {
-                console.log('#customer!=');
-                if (this.data.length > 0) {
-                  for (var j = 0; j < this.data.length; j++) {
-                    if (this.date != this.data[j].date) {
-                      this.pushPlan();
-                      return;
-                    } else {
-                      if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.data[j].customer_id) {
-                        this.pushPlan();
-                        return;
-                      } else {
-                        dateDuplicate = true;
-                      }
-                    }
-                  }
-                  // if (dateDuplicate) {
-                  //   this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
-                  // }
-                } else {
-                  this.pushPlan();
-                  return;
-                }
-              } else {
-                console.log('#customer=');
-                dateDuplicate = true;
-              }
+            if ((this.optionSchedule.customer[this.indexCustomer].customer_id == this.plan[i].customer_id) && (this.date == this.plan[i].date)) {
+              pushPlan = false;
+              this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
+              i = this.plan.length;
             }
           }
-          if (dateDuplicate) {
-            this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
-          }
-        } else if (this.data.length > 0) {
-          console.log('#data>0');
-          let dateDuplicate: boolean = false;
+        }
+
+        if (this.data.length > 0 && pushPlan) {
           for (var i = 0; i < this.data.length; i++) {
-            if (this.date != this.data[i].date) {
-              console.log('#date!=');
-              // if (this.plan.length > 0) {
-              //   for (var j = 0; j < this.plan.length; j++) {
-              //     if (this.date != this.plan[j].date) {
-              //       this.pushPlan();
-              //       return;
-              //     } else {
-              //       if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.plan[j].customer_id) {
-              //         this.pushPlan();
-              //         return;
-              //       } else {
-              //         dateDuplicate = true;
-              //       }
-              //     }
-              //   }
-              //   // if (dateDuplicate) {
-              //   //   this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
-              //   // }
-              // } else {
-                this.pushPlan();
-                return;
-              // }
-            } else {
-              console.log('#date=');
-              if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.data[i].customer_id) {
-                console.log('#customer!=');
-                // if (this.plan.length > 0) {
-                //   for (var j = 0; j < this.plan.length; j++) {
-                //     if (this.date != this.plan[j].date) {
-                //       this.pushPlan();
-                //       return;
-                //     } else {
-                //       if (this.optionSchedule.customer[this.indexCustomer].customer_id != this.plan[j].customer_id) {
-                //         this.pushPlan();
-                //         return;
-                //       } else {
-                //         dateDuplicate = true;
-                //       }
-                //     }
-                //   }
-                //   // if (dateDuplicate) {
-                //   //   this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
-                //   // }
-                // } else {
-                  this.pushPlan();
-                  return;
-                // }
-              } else {
-                console.log('#customer=');
-                dateDuplicate = true;
-              }
+            if ((this.optionSchedule.customer[this.indexCustomer].customer_id == this.data[i].customer_id) && (this.date == this.data[i].date)) {
+              pushPlan = false;
+              this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
+              i = this.data.length;
             }
           }
-          if (dateDuplicate) {
-            this.util.showAlertDialog('วันที่ซ้ำ กรุณาเลือกใหม่');
-          }
+        }
+
+        if (pushPlan) {
+          this.pushPlan();
         }
       } else {
         this.util.showAlertDialog('ครบจำนวนรอบ กรุณาเลือกใหม่');
@@ -276,14 +165,26 @@ export class PlanSchedulePage {
       date: this.date
     }
     this.plan.push(plan);
+    this.optionSchedule.customer[this.indexCustomer].total_plan += 1;
+    this.optionSchedule.customer[this.indexCustomer].balance -= 1;
   }
 
   removePlanInList(index) {
-    this.plan.splice(index, 1);
+    for (var i = 0; i < this.optionSchedule.customer.length; i++) {
+      if (this.plan[index].customer_id == this.optionSchedule.customer[i].customer_id) {
+        this.plan.splice(index, 1);
+        this.optionSchedule.customer[i].total_plan -= 1;
+        this.optionSchedule.customer[i].balance += 1;
+        i = this.optionSchedule.customer.length;
+      }
+    }
   }
 
   save() {
     if (this.plan.length > 0) {
+      for (var i = 0; i < this.plan.length; i++) {
+        this.data.push(this.plan[i]);
+      }
       this.callback(this.data).then(() => {
         this.backPage();
       }, error => {

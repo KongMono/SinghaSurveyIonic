@@ -20,6 +20,7 @@ export class EditSchedulePage {
     latlong: string;
     scheduleDetailList: ScheduleDetailListModel;
     optionSchedule: OptionScheduleModel;
+    scheduleDetailListPlan: any = [];
 
     constructor(
         public app: App,
@@ -61,9 +62,10 @@ export class EditSchedulePage {
                 if (this.scheduleDetailList) {
                     this.scheduleDetailList.start_date = this.util.setFormatDateYearBE(this.scheduleDetailList.start_date, 'D MMM YYYY');
                     this.scheduleDetailList.end_date = this.util.setFormatDateYearBE(this.scheduleDetailList.end_date, 'D MMM YYYY');
-                    if (this.scheduleDetailList.plan) {
-                        for (var i = 0; i < this.scheduleDetailList.plan.length; i++) {
-                            this.scheduleDetailList.plan[i].date = this.util.setFormatDateYearBE(this.scheduleDetailList.plan[i].date, 'D MMM YYYY');
+                    this.scheduleDetailListPlan = this.scheduleDetailList.plan;
+                    if (this.scheduleDetailListPlan.length > 0) {
+                        for (var i = 0; i < this.scheduleDetailListPlan.length; i++) {
+                            this.scheduleDetailListPlan[i].date = this.util.setFormatDateYearBE(this.scheduleDetailListPlan[i].date, 'D MMM YYYY');
                         }
                     }
                 }
