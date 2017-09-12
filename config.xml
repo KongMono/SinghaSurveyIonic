@@ -88,4 +88,5 @@
         <variable name="FABRIC_API_SECRET" value="3cb7c9663057fa61733af706d4832f4d64effc531f8be04709ae526964c6060d" />
     </plugin>
     <engine name="ios" spec="~4.3.1" />
+    <plugin name="cordova-plugin-request-location-accuracy" spec="~2.2.2" />
 </widget>

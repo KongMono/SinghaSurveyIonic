@@ -4,6 +4,8 @@ import { ConfigApp, IAppConfig } from "../../app/app.config";
 import { CallApi } from "../../providers/call-api";
 import { SinghaSurveyService } from "../../providers/service";
 import { AppUtilService } from "../../app/app.util";
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @IonicPage()
 @Component({
@@ -18,19 +20,32 @@ import { AppUtilService } from "../../app/app.util";
 export class LoginPage {
   inputLoginData = {
     username: '002605',
-    password: 'boon555'
+    password: 'boon555',
+    lat: null,
+    long: null
   }
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    @Inject(ConfigApp) private config: IAppConfig,
+    private locationAccuracy: LocationAccuracy,
+    private geolocation: Geolocation,
+    public navCtrl: NavController,
     public navParams: NavParams,
     public service: SinghaSurveyService,
     public util: AppUtilService,
     public modalCtrl: ModalController) {
+
+    this.enableLocation();
+
   }
 
   callLogin() {
     this.util.showLoading();
-    this.service.login(this.inputLoginData.username, this.inputLoginData.password)
+    this.service.login(
+      this.inputLoginData.username,
+      this.inputLoginData.password,
+      this.inputLoginData.lat,
+      this.inputLoginData.long)
       .then(
       (result: LoginModel) => {
         console.log(result);
@@ -44,6 +59,31 @@ export class LoginPage {
         this.util.hideLoading();
         console.log(error);
       });
+  }
+
+  enableLocation() {
+
+    this.geolocation.getCurrentPosition()
+      .then((resp) => {
+        this.inputLoginData.lat = resp.coords.latitude;
+        this.inputLoginData.long = resp.coords.longitude;
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+
+
+    if (this.config.isBuildDevice) {
+      this.locationAccuracy.canRequest().then(
+        (canRequest: boolean) => {
+          if (canRequest) {
+            // the accuracy option will be ignored by iOS
+            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+              () => alert('Request successful'),
+              error => alert('Error requesting location permissions' + JSON.stringify(error))
+            );
+          }
+        });
+    }
   }
 
   callForgot(username) {

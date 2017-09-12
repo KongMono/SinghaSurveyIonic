@@ -8,6 +8,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
 import { Geolocation } from '@ionic-native/geolocation';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Http, Headers, Response, RequestOptions } from '@angular/http';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 
 @IonicPage()
 @Component({
@@ -52,6 +53,7 @@ export class EditVisitPage {
     equipment: []
   };
   constructor(
+    private locationAccuracy: LocationAccuracy,
     public app: App,
     private http: Http,
     public navCtrl: NavController,
@@ -85,6 +87,7 @@ export class EditVisitPage {
           this.visitCustomerDetailData.images = [];
         }
         this.setVisitCustomerDetailData();
+        this.enableLocation();
         this.util.hideLoading();
       }, error => {
         this.util.hideLoading();
@@ -116,38 +119,11 @@ export class EditVisitPage {
   }
 
   setVisitCustomerDetailData() {
-    // this.setVisitCustomerDetailDataOrder();
     this.setVisitCustomerDetailDataBoonrawd();
     this.setVisitCustomerDetailDataRival();
     this.setVisitCustomerDetailDataEquipment();
   }
 
-  // setVisitCustomerDetailDataOrder() {
-  //   for (var i = 0; i < this.visitCustomerDetailData.order.length; i++) {
-  //     if (this.visitCustomerDetailData.order[i].value.length > 0) {
-  //       for (var j = 0; j < this.visitCustomerDetailData.order[i].value.length; j++) {
-  //         // this.visitCustomerDetail.order[j].value = [];
-  //         for (var indexProduct = 0; indexProduct < this.optionsVisitSale.boonrawd.length; indexProduct++) {
-  //           if (this.optionsVisitSale.boonrawd[indexProduct].product_id == this.visitCustomerDetailData.order[i].value[j].product_id) {
-  //             let order = {
-  //               product: this.optionsVisitSale.boonrawd[indexProduct],
-  //               qty: this.visitCustomerDetailData.order[i].value[j].qty,
-  //               buy: this.visitCustomerDetailData.order[i].value[j].buy,
-  //               stock: this.visitCustomerDetailData.order[i].value[j].stock
-  //             }
-  //             this.visitCustomerDetail.order[i].value.push(order);
-  //             indexProduct = this.optionsVisitSale.boonrawd.length;
-  //           }
-  //         }
-  //       }
-  //     } else {
-  //       let order = {
-  //         value: []
-  //       }
-  //       this.visitCustomerDetail.order.push(order);
-  //     }
-  //   }
-  // }
 
   setVisitCustomerDetailDataBoonrawd() {
     for (var i = 0; i < this.visitCustomerDetailData.sale.boonrawd.length; i++) {
@@ -577,5 +553,30 @@ export class EditVisitPage {
         this.util.hideLoading();
         console.log(error.message);
       });
+  }
+
+  enableLocation() {
+
+    this.geolocation.getCurrentPosition()
+      .then((resp) => {
+        this.visitCustomerDetailData.latitude = resp.coords.latitude;
+        this.visitCustomerDetailData.longitude = resp.coords.longitude;
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
+
+
+    if (this.config.isBuildDevice) {
+      this.locationAccuracy.canRequest().then(
+        (canRequest: boolean) => {
+          if (canRequest) {
+            // the accuracy option will be ignored by iOS
+            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+              () => alert('Request successful'),
+              error => alert('Error requesting location permissions' + JSON.stringify(error))
+            );
+          }
+        });
+    }
   }
 }

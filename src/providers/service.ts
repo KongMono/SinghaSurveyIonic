@@ -26,14 +26,14 @@ export class SinghaSurveyService {
         return this.Api.call(service.url, service.method, service.param);
     }
 
-    login(userName: any, password: any) {
+    login(userName: any, password: any, lat: any, long: any) {
 
         let service = this.config.service.login;
         service.param = {
             username: userName,
             password: password,
-            lat: "12.3123123",
-            long: "213.313242",
+            lat: lat,
+            long: long,
             from: "IOS"
         };
         return this.Api.call(service.url, service.method, service.param);

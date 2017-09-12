@@ -1,8 +1,10 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, Inject } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { CallApi } from "../../providers/call-api";
 import { SinghaSurveyService } from "../../providers/service";
 import { AppUtilService } from "../../app/app.util";
+import { IAppConfig, ConfigApp } from '../../app/app.config';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
 
 @IonicPage()
 @Component({
@@ -19,7 +21,10 @@ export class Tabs {
 
   @ViewChild('Tabs') tabsRef;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    @Inject(ConfigApp) private config: IAppConfig,
+    private locationAccuracy: LocationAccuracy,
+    public navCtrl: NavController,
     public navParams: NavParams,
     public service: SinghaSurveyService,
     public util: AppUtilService) {
@@ -45,6 +50,7 @@ export class Tabs {
 
   onTabsChange() {
     var tab_index = this.tabsRef.getSelected().index;
+    this.enableLocation();
     this.callCheckVersion();
   }
 
@@ -56,6 +62,22 @@ export class Tabs {
       }, error => {
         console.log(error.message);
       });
+  }
+
+
+  enableLocation() {
+    if (this.config.isBuildDevice) {
+      this.locationAccuracy.canRequest().then(
+        (canRequest: boolean) => {
+          if (canRequest) {
+            // the accuracy option will be ignored by iOS
+            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+              () => alert('Request successful'),
+              error => alert('Error requesting location permissions' + JSON.stringify(error))
+            );
+          }
+        });
+    }
   }
 
 }
