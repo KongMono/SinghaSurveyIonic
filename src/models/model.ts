@@ -455,8 +455,8 @@ interface VisitCycleDataVisit {
 
 interface VisitCustomerDetailModel {
   id: string;
-  latitude: string;
-  longitude: string;
+  latitude: any;
+  longitude: any;
   customer_id: string;
   customer_name: string;
   remark: string;
