@@ -85,7 +85,7 @@ export class AppUtilService {
 
     public setMaxDate() {
         let date = new Date;
-        let maxDate = date.getFullYear() + 10;
+        let maxDate = date.getFullYear() + 2;
         this.config.maxDate =  maxDate;
     }
 
