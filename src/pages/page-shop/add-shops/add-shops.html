@@ -374,7 +374,7 @@
         </ion-col>
         <ion-col>
           <ion-item class="item-calendar">
-            <ion-datetime displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="customerDetailData.founder_date"></ion-datetime>
+            <ion-datetime displayFormat="D MMM YYYY" pickerFormat="D MMMM YYYY" max="{{config.maxDate}}" [(ngModel)]="customerDetailData.founder_date"></ion-datetime>
           </ion-item>
           <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
         </ion-col>

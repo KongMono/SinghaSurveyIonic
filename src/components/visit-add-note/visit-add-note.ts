@@ -45,7 +45,7 @@ export class VisitAddNote {
     private camera: Camera,
     private alertCtrl: AlertController,
     private photoViewer: PhotoViewer,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    @Inject(ConfigApp) public config: IAppConfig) {
 
   }
 

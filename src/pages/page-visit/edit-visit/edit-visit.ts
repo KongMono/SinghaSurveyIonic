@@ -66,7 +66,7 @@ export class EditVisitPage {
     private camera: Camera,
     private alertCtrl: AlertController,
     private photoViewer: PhotoViewer,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    @Inject(ConfigApp) public config: IAppConfig) {
     this.visit_id = navParams.get('data');
     console.log(this.visit_id);
   }

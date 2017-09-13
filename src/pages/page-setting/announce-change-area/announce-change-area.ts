@@ -30,7 +30,8 @@ export class AnnounceChangeAreaPage {
     public navParams: NavParams,
     public service: SinghaSurveyService,
     public util: AppUtilService,
-    public actionSheetCtrl: ActionSheetController) {
+    public actionSheetCtrl: ActionSheetController,
+    @Inject(ConfigApp) public config: IAppConfig) {
     this.profileData = navParams.get('data');
     console.log(this.profileData);
   }

@@ -26,7 +26,7 @@
       </ion-col>
       <ion-col col-9>
         <ion-item class="item-calendar">
-          <ion-datetime class="input-date" displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="inputVisitAddNoteData.start_date"></ion-datetime>
+          <ion-datetime class="input-date" displayFormat="D MMM YYYY" pickerFormat="D MMMM YYYY" max="{{config.maxDate}}" [(ngModel)]="inputVisitAddNoteData.start_date"></ion-datetime>
         </ion-item>
         <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
       </ion-col>
@@ -47,7 +47,7 @@
       </ion-col>
       <ion-col col-9>
         <ion-item class="item-calendar">
-          <ion-datetime class="input-date" displayFormat="YYYY-MM-DD" pickerFormat="D MMMM YYYY" [(ngModel)]="inputVisitAddNoteData.end_date"></ion-datetime>
+          <ion-datetime class="input-date" displayFormat="D MMM YYYY" pickerFormat="D MMMM YYYY" max="{{config.maxDate}}" [(ngModel)]="inputVisitAddNoteData.end_date"></ion-datetime>
         </ion-item>
         <ion-icon name="_icon-calendar" ion-button class="button-calendar"></ion-icon>
       </ion-col>

@@ -71,7 +71,7 @@ export class ActivityVisitPage {
     private camera: Camera,
     private alertCtrl: AlertController,
     private photoViewer: PhotoViewer,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    @Inject(ConfigApp) public config: IAppConfig) {
     this.data = navParams.get('data');
     this.optionEquipment = navParams.get('optionEquipment');
     this.index = navParams.get('index');

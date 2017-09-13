@@ -1,4 +1,5 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { IAppConfig, ConfigApp } from './../../app/app.config';
 
 @Component({
   selector: 'shop-add-contact',
@@ -17,7 +18,7 @@ export class ShopAddContact {
     birthdate: ''
   }
 
-  constructor() {
+  constructor(@Inject(ConfigApp) public config: IAppConfig) {
     this.inputShopAddContactData.telLength = this.inputShopAddContactData.tel.length.toString();
   }
 

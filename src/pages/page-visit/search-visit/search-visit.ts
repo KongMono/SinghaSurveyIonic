@@ -29,7 +29,7 @@ export class SearchVisitPage {
     public util: AppUtilService,
     public actionSheetCtrl: ActionSheetController,
     public app: App,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    @Inject(ConfigApp) public config: IAppConfig) {
   }
 
   ionViewDidLoad() {

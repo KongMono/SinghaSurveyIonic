@@ -79,7 +79,7 @@ export class AddShopsPage {
     private camera: Camera,
     private alertCtrl: AlertController,
     private photoViewer: PhotoViewer,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    @Inject(ConfigApp) public config: IAppConfig) {
     this.customerName = this.navParams.get('data');
   }
 
