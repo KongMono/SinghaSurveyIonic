@@ -23,6 +23,9 @@ export class AppUtilService {
         ls.push(this.storage.get('userinfo'));
         ls.push(this.storage.get('logged'));
         ls.push(this.storage.get('pin_logged'));
+
+        this.setMaxDate();
+        
         return ls;
     }
 
@@ -78,6 +81,12 @@ export class AppUtilService {
         }, error => {
             console.log(error);
         });
+    }
+
+    public setMaxDate() {
+        let date = new Date;
+        let maxDate = date.getFullYear() + 10;
+        this.config.maxDate =  maxDate;
     }
 
     public setFormatDateYearBE(date, formatDate) {

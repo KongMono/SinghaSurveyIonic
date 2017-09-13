@@ -28,6 +28,8 @@ import { SSVErrorHandler } from "./app.errorhandler";
     IonicStorageModule.forRoot(),
     IonicModule.forRoot(MyApp, {
       mode: "md",
+      monthNames: ['มกราคม', 'กุมภาพันธ์', 'มีนาคม', 'เมษายน', 'พฤษภาคม', 'มิถุนายน', 'กรกฎาคม', 'สิงหาคม', 'กันยายน', 'ตุลาคม', 'พฤศจิกายน', 'ธันวาคม'],
+      monthShortNames: ['ม.ค.', 'ก.พ.', 'มี.ค.', 'เม.ย.', 'พ.ค.', 'มิ.ย.', 'ก.ค.', 'ส.ค.', 'ก.ย.', 'ต.ค.', 'พ.ย.', 'ธ.ค.']
     })
   ],
   bootstrap: [IonicApp],

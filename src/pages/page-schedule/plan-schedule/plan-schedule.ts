@@ -35,7 +35,7 @@ export class PlanSchedulePage {
     public service: SinghaSurveyService,
     public util: AppUtilService,
     public actionSheetCtrl: ActionSheetController,
-    @Inject(ConfigApp) private config: IAppConfig) {
+    @Inject(ConfigApp) public config: IAppConfig) {
     this.data = navParams.get('data');
     this.optionSchedule = navParams.get('optionSchedule');
     console.log(this.data);

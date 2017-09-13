@@ -16,6 +16,8 @@ export interface IAppConfig {
   endpointUpload: string;
   endpoint_production: string;
   service: any;
+
+  maxDate: any;
 }
 
 export const AppConfig: IAppConfig = {
@@ -26,6 +28,7 @@ export const AppConfig: IAppConfig = {
   isProduction: false,
   versionApp: null,
   versionBuild: null,
+  maxDate: null,
 
   endpoint: 'http://ssv.devcode.in',
   endpointUpload: 'http://ssv.devcode.in/',
