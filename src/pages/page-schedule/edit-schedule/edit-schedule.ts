@@ -62,7 +62,7 @@ export class EditSchedulePage {
                 if (this.scheduleDetailList) {
                     this.scheduleDetailList.start_date = this.util.setFormatDateYearBE(this.scheduleDetailList.start_date, 'D MMM YYYY');
                     this.scheduleDetailList.end_date = this.util.setFormatDateYearBE(this.scheduleDetailList.end_date, 'D MMM YYYY');
-                    this.scheduleDetailListPlan = this.scheduleDetailList.plan;
+                    this.scheduleDetailListPlan = JSON.parse(JSON.stringify(this.scheduleDetailList.plan));
                     if (this.scheduleDetailListPlan.length > 0) {
                         for (var i = 0; i < this.scheduleDetailListPlan.length; i++) {
                             this.scheduleDetailListPlan[i].date = this.util.setFormatDateYearBE(this.scheduleDetailListPlan[i].date, 'D MMM YYYY');

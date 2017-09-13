@@ -40,7 +40,7 @@
                 <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="plan()" tappable></ion-icon>
             </ion-col>
         </ion-row>
-        <ion-row *ngFor="let plan of scheduleDetailList.plan; let i = index" (click)="actionSheetInPlan(i)" [ngClass]="{'hide-line-last-item': (scheduleDetailList.plan.length-1 == i)}"
+        <ion-row *ngFor="let plan of scheduleDetailListPlan; let i = index" (click)="actionSheetInPlan(i)" [ngClass]="{'hide-line-last-item': (scheduleDetailListPlan.length-1 == i)}"
             tappable>
             <ion-item class="wrap-item">
                 <ion-row class="row-full-size">
