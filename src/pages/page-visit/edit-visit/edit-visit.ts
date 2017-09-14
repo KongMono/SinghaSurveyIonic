@@ -309,9 +309,9 @@ export class EditVisitPage {
               this.app.navPop().then(() => {
                 let endpoint
                 if (this.config.isProduction) {
-                  endpoint = this.config.endpoint_production;
+                  endpoint = this.config.endpoint_view_image_production;
                 } else {
-                  endpoint = this.config.endpointUpload;
+                  endpoint = this.config.endpoint_view_image;
                 }
                 this.photoViewer.show(endpoint + this.visitCustomerDetailData.note[index].images[0]);
               });
@@ -459,9 +459,9 @@ export class EditVisitPage {
   getImagePath(images): string {
     let endpoint
     if (this.config.isProduction) {
-      endpoint = this.config.endpoint_production;
+      endpoint = this.config.endpoint_view_image_production;
     } else {
-      endpoint = this.config.endpointUpload;
+      endpoint = this.config.endpoint_view_image;
     }
     return endpoint + images;
   }
@@ -476,9 +476,9 @@ export class EditVisitPage {
             this.app.navPop().then(() => {
               let endpoint
               if (this.config.isProduction) {
-                endpoint = this.config.endpoint_production;
+                endpoint = this.config.endpoint_view_image_production;
               } else {
-                endpoint = this.config.endpointUpload;
+                endpoint = this.config.endpoint_view_image;
               }
               if (action == 'receipt') {
                 this.photoViewer.show(endpoint + this.visitCustomerDetailData.receipt[index].value[subIndex]);

@@ -471,9 +471,9 @@ export class ActivityVisitPage {
   getImagePath(images): string {
     let endpoint
     if (this.config.isProduction) {
-      endpoint = this.config.endpoint_production;
+      endpoint = this.config.endpoint_view_image_production;
     } else {
-      endpoint = this.config.endpointUpload;
+      endpoint = this.config.endpoint_view_image;
     }
     return endpoint + images;
   }
@@ -488,9 +488,9 @@ export class ActivityVisitPage {
             this.app.navPop().then(() => {
               let endpoint
               if (this.config.isProduction) {
-                endpoint = this.config.endpoint_production;
+                endpoint = this.config.endpoint_view_image_production;
               } else {
-                endpoint = this.config.endpointUpload;
+                endpoint = this.config.endpoint_view_image;
               }
               if (action == 'tool') {
                 this.photoViewer.show(endpoint + this.visitActivityDetailData.sale_images[index]);

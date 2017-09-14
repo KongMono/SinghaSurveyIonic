@@ -13,8 +13,9 @@ export interface IAppConfig {
   isBuildDevice: boolean;
   isProduction: boolean;
   endpoint: string;
-  endpointUpload: string;
+  endpoint_view_image: string;
   endpoint_production: string;
+  endpoint_view_image_production: string;
   service: any;
 
   maxDate: any;
@@ -31,8 +32,9 @@ export const AppConfig: IAppConfig = {
   maxDate: null,
 
   endpoint: 'http://ssv.devcode.in',
-  endpointUpload: 'http://ssv.devcode.in/',
+  endpoint_view_image: 'http://ssv.devcode.in/',
   endpoint_production: 'https://ssv.boonrawd.co.th',
+  endpoint_view_image_production: 'https://ssv.boonrawd.co.th/',
   service: {
     customersList: {
       url: "/v2/customers/list/format/json",

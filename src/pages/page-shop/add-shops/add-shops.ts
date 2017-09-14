@@ -385,9 +385,9 @@ export class AddShopsPage {
             this.app.navPop().then(() => {
               let endpoint
               if (this.config.isProduction) {
-                endpoint = this.config.endpoint_production;
+                endpoint = this.config.endpoint_view_image_production;
               } else {
-                endpoint = this.config.endpointUpload;
+                endpoint = this.config.endpoint_view_image;
               }
               this.photoViewer.show(endpoint + this.customerDetailData.images[index]);
             });
@@ -430,9 +430,9 @@ export class AddShopsPage {
   getImagePath(images): string {
     let endpoint
     if (this.config.isProduction) {
-      endpoint = this.config.endpoint_production;
+      endpoint = this.config.endpoint_view_image_production;
     } else {
-      endpoint = this.config.endpointUpload;
+      endpoint = this.config.endpoint_view_image;
     }
     return endpoint + images;
   }
