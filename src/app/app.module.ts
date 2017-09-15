@@ -10,6 +10,8 @@ import { AgmCoreModule } from 'angular2-google-maps/core';
 import { GoogleMapsAPIWrapper } from 'angular2-google-maps/core/services/google-maps-api-wrapper';
 import { AppVersion } from '@ionic-native/app-version';
 import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { LocationTracker } from './../providers/location-tracker';
+import { BackgroundGeolocation } from '@ionic-native/background-geolocation';
 
 import { MyApp } from './app.component';
 import { ConfigApp, AppConfig } from './app.config';
@@ -41,6 +43,8 @@ import { SSVErrorHandler } from "./app.errorhandler";
     AppVersion,
     GoogleMapsAPIWrapper,
     Geolocation,
+    LocationTracker,
+    BackgroundGeolocation,
     StatusBar,
     SplashScreen,
     { provide: ConfigApp, useValue: AppConfig },

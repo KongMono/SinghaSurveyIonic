@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams, Platform, App } from 'ionic-angula
 import { CallApi } from './../../providers/call-api';
 import { SinghaSurveyService } from './../../providers/service';
 import { AppUtilService } from "../../app/app.util";
+import { LocationTracker } from './../../providers/location-tracker';
 
 @IonicPage()
 @Component({
@@ -33,6 +34,7 @@ export class TabSetting {
     public plt: Platform,
     public util: AppUtilService,
     public service: SinghaSurveyService,
+    public locationTracker: LocationTracker,
     @Inject(ConfigApp) public config: IAppConfig) {
     this.plt.ready().then(() => {
 
@@ -62,7 +64,7 @@ export class TabSetting {
   }
 
   announceChangeArea() {
-    this.app.getRootNav().push('AnnounceChangeAreaPage', {data: this.profileData});
+    this.app.getRootNav().push('AnnounceChangeAreaPage', { data: this.profileData });
   }
 
   logout() {
@@ -74,5 +76,11 @@ export class TabSetting {
     }, 250);
   }
 
+  start() {
+    this.locationTracker.startTracking();
+  }
 
+  stop() {
+    this.locationTracker.stopTracking();
+  }
 }

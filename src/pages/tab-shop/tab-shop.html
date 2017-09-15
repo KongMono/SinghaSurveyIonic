@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-buttons left>
-      <button ion-button icon-only (click)="overviewShop()" tappable>
+      <button ion-button icon-only (tap)="overviewShop()" tappable>
         <ion-icon class="icon-size" name="_icon-overview"></ion-icon>
       </button>
     </ion-buttons>
@@ -12,12 +12,12 @@
     </ion-buttons>
     <ion-title class="title">ข้อมูลร้านค้า</ion-title>
     <ion-buttons right>
-      <button ion-button icon-only (click)="calloptionCustomerFilter()" tappable>
+      <button ion-button icon-only (tap)="calloptionCustomerFilter()" tappable>
         <ion-icon class="icon-size" name="_icon-filter"></ion-icon>
       </button>
     </ion-buttons>
     <ion-buttons right>
-      <button ion-button icon-only (click)="searchShop()" tappable>
+      <button ion-button icon-only (tap)="searchShop()" tappable>
         <ion-icon class="icon-size" name="_icon-search"></ion-icon>
       </button>
     </ion-buttons>
@@ -65,7 +65,7 @@
   </ion-infinite-scroll>
 
   <ion-fab right bottom [ngClass]="checkFab()">
-    <button ion-fab color="accent" (click)="addShop()" tappable>
+    <button ion-fab color="accent" (tap)="addShop()" tappable>
       <ion-icon name="_icon-plus"></ion-icon>
     </button>
   </ion-fab>

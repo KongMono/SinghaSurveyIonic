@@ -4,6 +4,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { AppUtilService } from './app.util';
 import { ConfigApp, IAppConfig } from "./app.config";
+import { LocationTracker } from './../providers/location-tracker';
 
 @Component({
   templateUrl: 'app.html',
@@ -18,6 +19,7 @@ export class MyApp {
     splashScreen: SplashScreen,
     public util: AppUtilService,
     config: Config,
+    public locationTracker: LocationTracker,
     @Inject(ConfigApp) private configApp: IAppConfig) {
 
     /**
@@ -52,6 +54,9 @@ export class MyApp {
       statusBar.overlaysWebView(false);
       statusBar.backgroundColorByHexString('#455A64');
       splashScreen.hide();
+      setInterval(() => {
+        this.locationTracker.startTracking();
+      },15000);
     });
   }
 }

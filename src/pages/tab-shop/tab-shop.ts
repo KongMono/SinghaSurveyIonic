@@ -57,6 +57,10 @@ export class TabShop {
     this.callRefreshCustomerList();
   }
 
+  ionViewWillEnter() {
+    this.actionScroll = 'up';
+  }
+
   ionViewDidLoad() {
     this.callCustomerList();
 
@@ -68,7 +72,7 @@ export class TabShop {
   checkFab() {
     if (this.actionScroll == 'down')
       return 'animated bounceOutDown'
-    else 
+    else
       return 'animated bounceInUp'
   }
 
