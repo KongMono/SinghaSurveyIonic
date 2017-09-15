@@ -21,7 +21,7 @@ export class PinLoginPage {
     pin3: '',
     pin4: ''
   }
-  @ViewChild('inputPasscode') inputPasscode ;
+  @ViewChild('inputPasscode') inputPasscode;
 
   constructor(public app: App,
     public navCtrl: NavController,
@@ -35,13 +35,13 @@ export class PinLoginPage {
   ionViewDidLoad() {
     setTimeout(() => {
       this.inputPasscode.setFocus();
-    },800); //a least 150ms.
+    }, 500); //a least 150ms.
   }
 
   focusInputPasscode() {
-    setTimeout(() => {
-      this.inputPasscode.setFocus();
-    },250); //a least 150ms.
+    // setTimeout(() => {
+    this.inputPasscode.setFocus();
+    // },250); //a least 150ms.
   }
 
   setPasscode(e) {
