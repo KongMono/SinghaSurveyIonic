@@ -1,31 +1,31 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { PopupInput } from './popup-input';
-import { ShopAddCallCard } from './../../components/shop-add-call-card/shop-add-call-card';
-import { ShopAddChannel } from './../../components/shop-add-channel/shop-add-channel';
-import { ShopAddContact } from './../../components/shop-add-contact/shop-add-contact';
-import { ShopAddFreezer } from './../../components/shop-add-freezer/shop-add-freezer';
-import { ShopAddPG } from './../../components/shop-add-pg/shop-add-pg';
-import { VisitAddEquipment } from './../../components/visit-add-equipment/visit-add-equipment';
-import { VisitAddNote } from './../../components/visit-add-note/visit-add-note';
-import { VisitAddRetroact } from './../../components/visit-add-retroact/visit-add-retroact';
-import { ActivityVisitAddSales } from './../../components/activity-visit-add-sales/activity-visit-add-sales';
+import { ShopAddCallCardModule } from './../../components/shop-add-call-card/shop-add-call-card.module';
+import { ShopAddChannelModule } from './../../components/shop-add-channel/shop-add-channel.module';
+import { ShopAddContactModule } from './../../components/shop-add-contact/shop-add-contact.module';
+import { ShopAddFreezerModule } from './../../components/shop-add-freezer/shop-add-freezer.module';
+import { ShopAddPGModule } from './../../components/shop-add-pg/shop-add-pg.module';
+import { VisitAddEquipmentModule } from './../../components/visit-add-equipment/visit-add-equipment.module';
+import { VisitAddNoteModule } from './../../components/visit-add-note/visit-add-note.module';
+import { VisitAddRetroactModule } from './../../components/visit-add-retroact/visit-add-retroact.module';
+import { ActivityVisitAddSalesModule } from './../../components/activity-visit-add-sales/activity-visit-add-sales.module';
 
 @NgModule({
   declarations: [
-    PopupInput,
-    ShopAddCallCard,
-    ShopAddChannel,
-    ShopAddContact,
-    ShopAddFreezer,
-    ShopAddPG,
-    VisitAddEquipment,
-    VisitAddNote,
-    VisitAddRetroact,
-    ActivityVisitAddSales
+    PopupInput
   ],
   imports: [
-    IonicPageModule.forChild(PopupInput),
+    ShopAddCallCardModule,
+    ShopAddChannelModule,
+    ShopAddContactModule,
+    ShopAddFreezerModule,
+    ShopAddPGModule,
+    VisitAddEquipmentModule,
+    VisitAddNoteModule,
+    VisitAddRetroactModule,
+    ActivityVisitAddSalesModule,
+    IonicPageModule.forChild(PopupInput)
   ],
   exports: [
     PopupInput
