@@ -16,6 +16,7 @@ export interface IAppConfig {
   endpoint_view_image: string;
   endpoint_production: string;
   endpoint_view_image_production: string;
+  endpoint_tracking: string;
   service: any;
 
   maxDate: any;
@@ -35,6 +36,7 @@ export const AppConfig: IAppConfig = {
   endpoint_view_image: 'http://ssv.devcode.in/',
   endpoint_production: 'https://ssv.boonrawd.co.th',
   endpoint_view_image_production: 'https://ssv.boonrawd.co.th/',
+  endpoint_tracking: 'https://ws.boonrawd.co.th/SSV/api/CustGeo/',
   service: {
     customersList: {
       url: "/v2/customers/list/format/json",

@@ -44,6 +44,15 @@ export class CallApi {
 
     }
 
+    private callTrack(url: string, param: any) {
+
+        console.log("track url", url);
+        console.log("track params", param);
+
+        return this._post_track(url, param);
+    }
+
+
     private _get(url: string, param: any) {
 
         return new Promise((resolve, reject) => {
@@ -96,6 +105,31 @@ export class CallApi {
             }
 
             this.http.post(url, formData)
+                .map(res => res.json())
+                .subscribe(data => {
+                    console.log("data resolve", data);
+                    resolve(data);
+                }, error => {
+                    reject(error);
+                });
+
+        });
+    }
+
+    private _post_track(url: string, param: any) {
+
+        return new Promise((resolve, reject) => {
+
+            let header = new Headers({
+                'Content-Type': "application/json",
+                'ssv_api': "gvlgvl;u@lv'ryolb[g0Hf"
+            });
+
+            let options = new RequestOptions({ headers: header });
+
+            let body = JSON.stringify(param);
+
+            this.http.post(url, body, options)
                 .map(res => res.json())
                 .subscribe(data => {
                     console.log("data resolve", data);

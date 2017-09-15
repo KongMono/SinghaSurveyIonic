@@ -677,4 +677,38 @@ export class SinghaSurveyService {
         return this.Api.call(service.url, service.method, service.param);
     }
 
+    setTracking(CUSTOMER_ID, ARM_CODE, ACTION_ID, lat, long) {
+
+        let param = {
+            SELL_ID: this.config.userInfo.username,
+            CUSTOMER_ID: CUSTOMER_ID,
+            AGENT_CODE: "",
+            LATITUDE: lat,
+            LONGITUDE: long,
+            APP_SOURCE: "SSV",
+            MOBILE_DEVICE: "iOS",
+            ARM_CODE: ARM_CODE,
+            ACTION_ID: ACTION_ID,
+        }
+
+        return this.Api.call(this.config.endpoint_tracking, param);
+    }
+
+    setTrackingBackground(lat, long) {
+
+        let param = {
+            SELL_ID: this.config.userInfo.username,
+            CUSTOMER_ID: "",
+            AGENT_CODE: "",
+            LATITUDE: lat,
+            LONGITUDE: long,
+            APP_SOURCE: "SSV",
+            MOBILE_DEVICE: "iOS",
+            ARM_CODE: "",
+            ACTION_ID: "0",
+        }
+
+        return this.Api.call(this.config.endpoint_tracking, param);
+    }
+
 }
