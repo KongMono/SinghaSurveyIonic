@@ -54,7 +54,7 @@ export class ShopAddContact {
         }
         this.data.contacts.push(contacts);
       }
+      this.customerDetailDataOutput.emit(this.data);
     }
-    this.customerDetailDataOutput.emit(this.data);
   }
 }

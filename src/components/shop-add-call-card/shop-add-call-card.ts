@@ -185,26 +185,33 @@ export class ShopAddCallCard {
   }
 
   save() {
-    if (this.inputShopAddCallCardData.start_date && this.inputShopAddCallCardData.end_date && this.inputShopAddCallCardData.value && this.inputShopAddCallCardData.spst_no && this.inputShopAddCallCardData.prq_no && this.inputShopAddCallCardData.images) {
-      if (this.index != null || this.index != undefined) {
-        this.data.callcard[this.index].start_date = this.inputShopAddCallCardData.start_date;
-        this.data.callcard[this.index].end_date = this.inputShopAddCallCardData.end_date;
-        this.data.callcard[this.index].value = this.inputShopAddCallCardData.value;
-        this.data.callcard[this.index].spst_no = this.inputShopAddCallCardData.spst_no;
-        this.data.callcard[this.index].prq_no = this.inputShopAddCallCardData.prq_no;
-        this.data.callcard[this.index].images = this.inputShopAddCallCardData.images;
-      } else {
-        let callcard = {
-          start_date: this.inputShopAddCallCardData.start_date,
-          end_date: this.inputShopAddCallCardData.end_date,
-          value: this.inputShopAddCallCardData.value,
-          spst_no: this.inputShopAddCallCardData.spst_no,
-          prq_no: this.inputShopAddCallCardData.prq_no,
-          images: this.inputShopAddCallCardData.images
+    console.log('start_date: ', this.inputShopAddCallCardData.start_date);
+    console.log('end_date: ', this.inputShopAddCallCardData.end_date);
+    this.util.validateStartEndDate(this.inputShopAddCallCardData.start_date, this.inputShopAddCallCardData.end_date);
+    // if (this.inputShopAddCallCardData.start_date && this.inputShopAddCallCardData.end_date) {
+    //   if (this.util.validateStartEndDate(this.inputShopAddCallCardData.start_date, this.inputShopAddCallCardData.end_date)) {
+        if (this.inputShopAddCallCardData.value && this.inputShopAddCallCardData.spst_no && this.inputShopAddCallCardData.prq_no && this.inputShopAddCallCardData.images) {
+          if (this.index != null || this.index != undefined) {
+            this.data.callcard[this.index].start_date = this.inputShopAddCallCardData.start_date;
+            this.data.callcard[this.index].end_date = this.inputShopAddCallCardData.end_date;
+            this.data.callcard[this.index].value = this.inputShopAddCallCardData.value;
+            this.data.callcard[this.index].spst_no = this.inputShopAddCallCardData.spst_no;
+            this.data.callcard[this.index].prq_no = this.inputShopAddCallCardData.prq_no;
+            this.data.callcard[this.index].images = this.inputShopAddCallCardData.images;
+          } else {
+            let callcard = {
+              start_date: this.inputShopAddCallCardData.start_date,
+              end_date: this.inputShopAddCallCardData.end_date,
+              value: this.inputShopAddCallCardData.value,
+              spst_no: this.inputShopAddCallCardData.spst_no,
+              prq_no: this.inputShopAddCallCardData.prq_no,
+              images: this.inputShopAddCallCardData.images
+            }
+            this.data.callcard.push(callcard);
+          }
+          this.customerDetailDataOutput.emit(this.data);
         }
-        this.data.callcard.push(callcard);
-      }
-    }
-    this.customerDetailDataOutput.emit(this.data);
+    //   }
+    // }
   }
 }

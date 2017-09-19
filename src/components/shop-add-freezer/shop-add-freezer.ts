@@ -38,7 +38,7 @@ export class ShopAddFreezer {
         }
         this.data.freezer.push(freezer);
       }
+      this.customerDetailDataOutput.emit(this.data);
     }
-    this.customerDetailDataOutput.emit(this.data);
   }
 }

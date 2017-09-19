@@ -242,7 +242,7 @@ export class VisitAddNote {
         }
         this.data.note.push(note);
       }
+      this.callbackData.emit(this.data);
     }
-    this.callbackData.emit(this.data);
   }
 }

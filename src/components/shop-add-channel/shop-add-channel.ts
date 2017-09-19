@@ -129,7 +129,7 @@ export class ShopAddChannel {
         }
         this.data.channels.push(channels);
       }
+      this.customerDetailDataOutput.emit(this.data);
     }
-    this.customerDetailDataOutput.emit(this.data);
   }
 }

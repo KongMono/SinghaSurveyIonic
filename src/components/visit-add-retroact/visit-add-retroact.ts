@@ -70,7 +70,8 @@ export class VisitAddRetroact {
   }
 
   save() {
-    if (this.indexProduct && this.qty && this.buy && this.stock) {
+    // if (this.indexProduct && this.qty && this.buy && this.stock) {
+    if (this.indexProduct) {
       if (this.index.indexValue != null || this.index.indexValue != undefined) {
         this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].product_id = this.optionsVisitSale[this.indexProduct].product_id;
         this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].qty = this.qty;
@@ -85,7 +86,7 @@ export class VisitAddRetroact {
         }
         this.data.sale[this.action][this.index.indexPath].value.push(retroact);
       }
+      this.callbackData.emit(this.data);
     }
-    this.callbackData.emit(this.data);
   }
 }

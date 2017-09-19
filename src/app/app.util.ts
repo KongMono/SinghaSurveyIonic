@@ -96,6 +96,11 @@ export class AppUtilService {
         return valueBE;
     }
 
+    public validateStartEndDate(startDate, endDate) {
+        console.log(moment(endDate).diff(moment(startDate), 'days'));
+        // return valueBE;
+    }
+
     public showAlertDialog(text) {
 
         let toast = this.toastCtrl.create({

@@ -123,7 +123,8 @@ export class ActivityVisitAddSales {
   }
 
   save() {
-    if (this.indexProductGroup && this.indexProduct && this.inputActivityVisitAddSalesData.unit_qty && this.inputActivityVisitAddSalesData.subunit_qty && this.inputActivityVisitAddSalesData.unit_price && this.inputActivityVisitAddSalesData.subunit_price && this.indexPromotion) {
+    // if (this.indexProductGroup && this.indexProduct && this.inputActivityVisitAddSalesData.unit_qty && this.inputActivityVisitAddSalesData.subunit_qty && this.inputActivityVisitAddSalesData.unit_price && this.inputActivityVisitAddSalesData.subunit_price && this.indexPromotion) {
+    if (this.indexProductGroup && this.indexProduct && this.indexPromotion) {
       if (this.index != null || this.index != undefined) {
         this.data.sales[this.index].product_group_id = this.optionsSale.product_group[this.indexProductGroup].product_group_id;
         this.data.sales[this.index].product_id = this.optionsSale.product_group[this.indexProductGroup].product[this.indexProduct].product_id,
@@ -145,7 +146,7 @@ export class ActivityVisitAddSales {
         }
         this.data.sales.push(sales);
       }
+      this.callbackData.emit(this.data);
     }
-    this.callbackData.emit(this.data);
   }
 }

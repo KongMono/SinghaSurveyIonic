@@ -122,7 +122,8 @@ export class VisitAddEquipment {
   }
 
   save() {
-    if (this.indexProductVendor && this.indexProductGroup && this.indexProduct && this.inputVisitAddEquipmentData.qty) {
+    // if (this.indexProductVendor && this.indexProductGroup && this.indexProduct && this.inputVisitAddEquipmentData.qty) {
+    if (this.indexProductVendor && this.indexProductGroup && this.indexProduct) {
       if (this.index != null || this.index != undefined) {
         this.data.equipment[this.index].product_vendor_id = this.optionEquipment.data[this.indexProductVendor].product_vendor_id;
         this.data.equipment[this.index].product_group_id = this.optionEquipment.data[this.indexProductVendor].product_group[this.indexProductGroup].product_group_id;
@@ -138,7 +139,7 @@ export class VisitAddEquipment {
         }
         this.data.equipment.push(equipment);
       }
+      this.callbackData.emit(this.data);
     }
-    this.callbackData.emit(this.data);
   }
 }

@@ -46,7 +46,7 @@ export class ShopAddPG {
         }
         this.data.pg.push(pg);
       }
+      this.customerDetailDataOutput.emit(this.data);
     }
-    this.customerDetailDataOutput.emit(this.data);
   }
 }
