@@ -98,7 +98,7 @@ export class AppUtilService {
 
     public validateStartEndDate(startDate, endDate) {
         console.log(moment(endDate).diff(moment(startDate), 'days'));
-        // return valueBE;
+        return moment(endDate).diff(moment(startDate), 'days');
     }
 
     public showAlertDialog(text) {

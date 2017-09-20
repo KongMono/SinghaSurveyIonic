@@ -65,6 +65,19 @@ export class SearchVisitPage {
     if (this.keyName) {
       name = this.keyName
     }
+    if (this.startDate && !this.endDate) {
+      this.util.showAlertDialog('กรุณาเลือกวันสิ้นสุด');
+      return;
+    } else if (!this.startDate && this.endDate) {
+      this.util.showAlertDialog('กรุณาเลือกวันเริ่มต้น');
+      return;
+    }
+    if (this.startDate && this.endDate) {
+      if (this.util.validateStartEndDate(this.startDate, this.endDate) < 0) {
+        this.util.showAlertDialog('วันสิ้นสุดไม่สามารถเลือกน้อยกว่าวันเริ่มต้นได้');
+        return;
+      }
+    }
     this.util.showLoading();
     this.service.searchVisitCustomer(name, this.startDate, this.endDate)
       .then(

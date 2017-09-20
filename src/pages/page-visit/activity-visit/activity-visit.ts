@@ -563,6 +563,24 @@ export class ActivityVisitPage {
 
     if (this.visitActivityDetailData.activity_name == "") {
       this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      return;
+    }
+    
+    if (!this.visitActivityDetailData.start_date && this.visitActivityDetailData.end_date) {
+      this.util.showAlertDialog('กรุณาเลือกระยะเวลาเริ่ม');
+      return;
+    }
+
+    if (this.visitActivityDetailData.start_date && !this.visitActivityDetailData.end_date) {
+      this.util.showAlertDialog('กรุณาเลือกระยะเวลาสิ้นสุด');
+      return;
+    }
+    
+    if (this.visitActivityDetailData.start_date && this.visitActivityDetailData.end_date) {
+      if (this.util.validateStartEndDate(this.visitActivityDetailData.start_date, this.visitActivityDetailData.end_date) <= 0) {
+        this.util.showAlertDialog('ระยะเวลาสิ้นสุดไม่สามารถเลือกน้อยกว่า หรือ เท่ากับระยะเวลาเริ่มได้');
+        return;
+      }
     }
 
     this.callApiUpdate();
