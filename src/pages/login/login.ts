@@ -40,6 +40,10 @@ export class LoginPage {
   }
 
   callLogin() {
+    if (!this.inputLoginData.username || !this.inputLoginData.password) {
+      this.util.showAlertDialog('กรุณาใส่ข้อมูล');
+      return;
+    }
     this.util.showLoading();
     this.service.login(
       this.inputLoginData.username,

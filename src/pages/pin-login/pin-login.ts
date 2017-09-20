@@ -56,11 +56,15 @@ export class PinLoginPage {
           this.util.setVersion();
           this.navCtrl.setRoot('Tabs');
         } else {
+          this.util.showAlertDialog("รหัสไม่ถูกต้อง");
           this.inputPinLoginData.passcode = '';
           this.inputPinLoginData.pin1 = '';
           this.inputPinLoginData.pin2 = '';
           this.inputPinLoginData.pin3 = '';
           this.inputPinLoginData.pin4 = '';
+          setTimeout(() => {
+            this.focusInputPasscode();
+          }, 800);
         }
       }, 250);
     }
