@@ -17,8 +17,8 @@ import { AppUtilService } from './../../app/app.util';
 
 export class SetpinPage {
   inputSetPinData = {
-    passcode: '1111',
-    confirmPasscode: '1111',
+    passcode: '',
+    confirmPasscode: '',
     passcodeLength: '',
     confirmPasscodeLength: ''
   }

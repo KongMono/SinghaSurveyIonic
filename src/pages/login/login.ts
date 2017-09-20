@@ -19,8 +19,8 @@ import { Geolocation } from '@ionic-native/geolocation';
 
 export class LoginPage {
   inputLoginData = {
-    username: '002605',
-    password: 'boon555',
+    username: '',
+    password: '',
     lat: null,
     long: null
   }
