@@ -213,7 +213,9 @@ export const AppConfig: IAppConfig = {
       url: "/v2/visit/customers/format/json",
       method: "GET",
       param: {
-        user_id: ""
+        user_id: "",
+        lat: "",
+        long: ""
       }
     },
     visitCustomersChecked: {

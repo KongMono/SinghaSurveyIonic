@@ -4,6 +4,7 @@ import { CallApi } from './../../providers/call-api';
 import { SinghaSurveyService } from './../../providers/service';
 import { AppUtilService } from './../../app/app.util';
 import { ConfigApp, IAppConfig } from './../../app/app.config';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @IonicPage()
 @Component({
@@ -25,9 +26,14 @@ export class TabVisitAndRecord {
   showCheckNameDialog: boolean = true;
   waitData: boolean = false;
   actionScroll: any = 'up';
+  private latLong = {
+    lat: 0.0,
+    long: 0.0
+  }
 
   constructor(
     public app: App,
+    private geolocation: Geolocation,
     public navCtrl: NavController,
     public navParams: NavParams,
     public service: SinghaSurveyService,
@@ -36,6 +42,13 @@ export class TabVisitAndRecord {
     public modalCtrl: ModalController,
     @Inject(ConfigApp) private config: IAppConfig) {
 
+    this.geolocation.getCurrentPosition()
+      .then((resp) => {
+        this.latLong.lat = resp.coords.latitude;
+        this.latLong.long = resp.coords.longitude;
+      }).catch((error) => {
+        console.log('Error getting location', error);
+      });
   }
 
   ionViewWillEnter() {
@@ -52,6 +65,9 @@ export class TabVisitAndRecord {
     setInterval(() => {
       // call interval fix binding actionScroll hide fab
     });
+
+
+
   }
 
   scrollHandler(event) {
@@ -175,14 +191,14 @@ export class TabVisitAndRecord {
   checkFab() {
     if (this.actionScroll == 'down')
       return 'animated bounceOutDown'
-    else 
+    else
       return 'animated bounceInUp'
   }
 
 
   checkNameVisit() {
     this.util.showLoading();
-    this.service.visitCustomersListCheck()
+    this.service.visitCustomersListCheck(this.latLong.lat, this.latLong.long)
       .then(
       (result: visitCustomersListModel) => {
         this.util.hideLoading();

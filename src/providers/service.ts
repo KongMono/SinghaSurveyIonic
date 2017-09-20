@@ -220,11 +220,13 @@ export class SinghaSurveyService {
         return this.Api.call(service.url, service.method, service.param);
     }
 
-    visitCustomersListCheck() {
+    visitCustomersListCheck(lat, long) {
         let service = this.config.service.visitCustomersListCheck;
 
         service.param = {
-            user_id: this.config.userInfo.username
+            user_id: this.config.userInfo.username,
+            lat: lat,
+            long: long
         }
 
         return this.Api.call(service.url, service.method, service.param);
