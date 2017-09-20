@@ -52,11 +52,10 @@ export class LoginPage {
         this.util.hideLoading();
         this.util.setDataInfo(result);
         this.util.setLogin();
-
         this.navCtrl.push('SetpinPage');
-
       }, error => {
         this.util.hideLoading();
+        this.util.showAlertDialog(error.statusText);
         console.log(error);
       });
   }

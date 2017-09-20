@@ -47,6 +47,8 @@ export class SetpinPage {
       this.util.setPin(this.inputSetPinData.passcode);
       this.navCtrl.push('PinLoginPage'); //forward: right to left
       // this.navCtrl.push('PinLoginPage', {}, {animate:true,animation:'transition',duration:1000,direction:'back'}); //back: left to right
+    } else {
+      this.util.showAlertDialog("กรุณาเช็ค Passcode อีกครั้ง");
     }
   }
 }
