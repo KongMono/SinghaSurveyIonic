@@ -122,7 +122,8 @@ export class CallApi {
 
             let header = new Headers({
                 'Content-Type': "application/json",
-                'ssv_api': "gvlgvl;u@lv'ryolb[g0Hf"
+                'APIKey': "ssv_api",
+                'APISecret': "vijvp,kdqg]p0hk8787"
             });
 
             let options = new RequestOptions({ headers: header });

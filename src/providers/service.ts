@@ -693,7 +693,7 @@ export class SinghaSurveyService {
             ACTION_ID: ACTION_ID,
         }
 
-        return this.Api.call(this.config.endpoint_tracking, param);
+        return this.Api.callTrack(this.config.endpoint_tracking, param);
     }
 
     setTrackingBackground(lat, long) {
@@ -710,7 +710,7 @@ export class SinghaSurveyService {
             ACTION_ID: "0",
         }
 
-        return this.Api.call(this.config.endpoint_tracking, param);
+        return this.Api.callTrack(this.config.endpoint_tracking, param);
     }
 
 }

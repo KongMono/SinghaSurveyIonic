@@ -19,6 +19,8 @@ export interface IAppConfig {
   endpoint_tracking: string;
   service: any;
 
+  latitude: any;
+  longitude: any;
   maxDate: any;
 }
 
@@ -30,6 +32,8 @@ export const AppConfig: IAppConfig = {
   isProduction: false,
   versionApp: null,
   versionBuild: null,
+  latitude: null,
+  longitude: null,
   maxDate: null,
 
   endpoint: 'http://ssv.devcode.in',
