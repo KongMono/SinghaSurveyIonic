@@ -4,6 +4,7 @@ interface CustomersListModel {
 interface CustomersListData {
   'customer_id': string;
   name: string;
+  code: null | string;
   latitude: null | string;
   longitude: null | string;
   'customer_group_id': string;
@@ -124,6 +125,7 @@ interface VisitListData {
 interface CustomerDetailModel {
   customer_id: string;
   name: string;
+  code: null | string;
   latitude: string;
   longitude: string;
   address: string;
