@@ -69,6 +69,7 @@ export class EditVisitPage {
     @Inject(ConfigApp) public config: IAppConfig) {
     this.visit_id = navParams.get('data');
     console.log(this.visit_id);
+    console.log(navParams.get('status'));
   }
 
   ionViewDidLoad() {
@@ -532,6 +533,10 @@ export class EditVisitPage {
 
   callServiceUpdateVisitCustomer() {
     this.util.showLoading();
+    let customer_id = '';
+    if (!this.navParams.get('status')) {
+      customer_id = this.visitCustomerDetailData.customer_id;
+    }
     this.service.updateVisitCustomer(
       this.config.userInfo.username,
       this.visitCustomerDetailData.id,
@@ -546,9 +551,16 @@ export class EditVisitPage {
       JSON.stringify(this.visitCustomerDetailData.images),
       JSON.stringify(this.visitCustomerDetailData.note))
       .then(result => {
-        this.util.hideLoading();
-        this.util.showAlertDialog(result.msg);
-        this.backPage();
+        this.service.setTracking(customer_id, '', 2, this.config.latitude, this.config.longitude)
+        .then((resultTracking: any) => {
+          console.log(resultTracking.status_code);
+          this.util.hideLoading();
+          this.util.showAlertDialog(result.msg);
+          this.backPage();
+        }, error => {
+          this.util.hideLoading();
+          console.log(error);
+        });
       }, error => {
         this.util.hideLoading();
         console.log(error.message);

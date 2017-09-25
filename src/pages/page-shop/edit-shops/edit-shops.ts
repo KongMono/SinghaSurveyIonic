@@ -216,8 +216,8 @@ export class EditShopsPage {
   }
 
   popupInput(action, index) {
-    this.navCtrl.push('PopupInput', 
-    { action: action, data: this.customerDetailData, option: this.optionChannelCustomer, index: index, callback: this.popupInputCallback }, 
+    this.navCtrl.push('PopupInput',
+      { action: action, data: this.customerDetailData, option: this.optionChannelCustomer, index: index, callback: this.popupInputCallback },
       { animate: true, animation: 'transition', direction: 'forward' });
   }
 
@@ -575,6 +575,10 @@ export class EditShopsPage {
     console.log("callServiceUpdateCustomer", this.customerDetailData);
     this.util.showLoading();
 
+    if (!this.customerDetailData.code) {
+      this.customerDetailData.code = '';
+    }
+
     this.service.updateCustomer(
       this.customerDetailData.customer_id,
       this.config.userInfo.username,
@@ -601,9 +605,16 @@ export class EditShopsPage {
       JSON.stringify(this.customerDetailData.images),
       JSON.stringify(this.customerDetailData.callcard))
       .then(result => {
-        this.util.hideLoading();
-        this.util.showAlertDialog(result.msg);
-        this.backPage();
+        this.service.setTracking(this.customer_id, this.customerDetailData.code, 1, this.config.latitude, this.config.longitude)
+        .then((resultTracking: any) => {
+          console.log(resultTracking.status_code);
+          this.util.hideLoading();
+          this.util.showAlertDialog(result.msg);
+          this.backPage();
+        }, error => {
+          this.util.hideLoading();
+          console.log(error);
+        });
       }, error => {
         this.util.hideLoading();
         console.log(error.message);

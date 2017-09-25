@@ -316,9 +316,19 @@ export class TabShop {
           handler: () => {
             this.service.deleteCustomer(customer.customer_id)
               .then((result) => {
+                this.service.setTracking(customer.customer_id, customer.code, 1, this.config.latitude, this.config.longitude)
+                .then((resultTracking: any) => {
+                  console.log(resultTracking.status_code);
+                  this.util.hideLoading();
+                  this.util.showAlertDialog(result.msg);
+                  this.callCustomerList();
+                }, error => {
+                  this.util.hideLoading();
+                  console.log(error);
+                });
+              }, error => {
                 this.util.hideLoading();
-                this.util.showAlertDialog(result.msg);
-                this.callCustomerList();
+                console.log(error);
               });
           }
         }

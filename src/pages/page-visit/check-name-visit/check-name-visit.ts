@@ -69,7 +69,8 @@ export class CheckNameVisitPage {
         this.util.hideLoading();
         this.viewCtrl.dismiss();
         this.app.getRootNav().push('EditVisitPage', {
-          data: result.visit_id
+          data: result.visit_id,
+          status: 'add new'
         });
       }, error => {
         this.util.hideLoading();

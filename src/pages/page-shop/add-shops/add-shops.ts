@@ -31,6 +31,7 @@ export class AddShopsPage {
   customerDetailData: CustomerDetailModel = {
     customer_id: "",
     name: "",
+    code: "",
     latitude: "",
     longitude: "",
     address: "",
@@ -527,9 +528,16 @@ export class AddShopsPage {
       JSON.stringify(this.customerDetailData.images),
       JSON.stringify(this.customerDetailData.callcard))
       .then(result => {
-        this.util.hideLoading();
-        this.util.showAlertDialog(result.msg);
-        this.backPage();
+        this.service.setTracking('', '', 1, this.config.latitude, this.config.longitude)
+        .then((resultTracking: any) => {
+          console.log(resultTracking.status_code);
+          this.util.hideLoading();
+          this.util.showAlertDialog(result.msg);
+          this.backPage();
+        }, error => {
+          this.util.hideLoading();
+          console.log(error);
+        });
       }, error => {
         this.util.hideLoading();
         console.log(error);
