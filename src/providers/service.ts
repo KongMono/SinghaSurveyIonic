@@ -696,10 +696,10 @@ export class SinghaSurveyService {
         return this.Api.callTrack(this.config.endpoint_tracking, param);
     }
 
-    setTrackingBackground(lat, long) {
+    setTrackingBackground(username, lat, long) {
 
         let param = {
-            SELL_ID: this.config.userInfo.username,
+            SELL_ID: username,
             CUSTOMER_ID: "",
             AGENT_CODE: "",
             LATITUDE: lat,

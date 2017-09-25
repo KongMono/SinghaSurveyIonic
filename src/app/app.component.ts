@@ -7,6 +7,7 @@ import { ConfigApp, IAppConfig } from "./app.config";
 import { LocationTracker } from './../providers/location-tracker';
 import { CallApi } from './../providers/call-api';
 import { SinghaSurveyService } from './../providers/service';
+import { BackgroundMode } from '@ionic-native/background-mode';
 
 @Component({
   templateUrl: 'app.html',
@@ -23,6 +24,7 @@ export class MyApp {
     config: Config,
     public locationTracker: LocationTracker,
     public service: SinghaSurveyService,
+    public backgroundMode: BackgroundMode,
     @Inject(ConfigApp) private configApp: IAppConfig) {
 
     /**
@@ -58,28 +60,41 @@ export class MyApp {
       statusBar.backgroundColorByHexString('#455A64');
       splashScreen.hide();
 
-      this.locationTracking();
+      // update location first
+      this.locationTracker.startTracking();
+      // update location every 1 min
+      setInterval(() => {
+        this.locationTracker.startTracking();
+      }, 60000);
+
+      this.backgroundMode.enable();
       // location tracking every 5 min
       setInterval(() => {
-        this.locationTracking();
-      }, 60000);
+        // console.log('isEnabled: ' , this.backgroundMode.isEnabled());
+        // console.log('isActive: ' , this.backgroundMode.isActive());
+        if (this.backgroundMode.isActive()) {
+          console.log('locationTracking', new Date);
+          this.locationTracking();
+        }
+      }, 300000);
     });
   }
 
   locationTracking() {
-    this.locationTracker.startTracking();
-    // setTimeout(() => {
-    //   if (this.configApp.latitude && this.configApp.longitude) {
-    //     console.log('tracking:' + this.configApp.latitude, this.configApp.longitude);
-    //     this.service.setTrackingBackground(this.configApp.latitude, this.configApp.longitude)
-    //     .then(
-    //     (result: any) => {
-    //       console.log(result.status_code);
-    //     }, error => {
-    //       console.log(error);
-    //     });
-    //   }
-    // }, 1000);
+    if (this.configApp.latitude && this.configApp.longitude) {
+      console.log('tracking: ' + this.configApp.latitude, this.configApp.longitude);
+      let username = '';
+      if (this.configApp.userInfo) {
+        username = this.configApp.userInfo.username;
+      }
+      this.service.setTrackingBackground(username, this.configApp.latitude, this.configApp.longitude)
+        .then(
+        (result: any) => {
+          console.log(result.status_code);
+        }, error => {
+          console.log(error);
+        });
+    }
   }
 }
 

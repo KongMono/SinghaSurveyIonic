@@ -4,7 +4,6 @@ import { IonicPage, NavController, NavParams, Platform, App } from 'ionic-angula
 import { CallApi } from './../../providers/call-api';
 import { SinghaSurveyService } from './../../providers/service';
 import { AppUtilService } from "../../app/app.util";
-import { LocationTracker } from './../../providers/location-tracker';
 
 @IonicPage()
 @Component({
@@ -34,7 +33,6 @@ export class TabSetting {
     public plt: Platform,
     public util: AppUtilService,
     public service: SinghaSurveyService,
-    public locationTracker: LocationTracker,
     @Inject(ConfigApp) public config: IAppConfig) {
     this.plt.ready().then(() => {
 
@@ -74,13 +72,5 @@ export class TabSetting {
       this.util.hideLoading();
       this.app.getRootNav().setRoot('LoginPage');
     }, 250);
-  }
-
-  start() {
-    this.locationTracker.startTracking();
-  }
-
-  stop() {
-    this.locationTracker.stopTracking();
   }
 }
