@@ -1,9 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { AppUtilService } from './../../app/app.util';
 
 @Component({
   selector: 'visit-add-retroact',
-  templateUrl: 'visit-add-retroact.html'
+  templateUrl: 'visit-add-retroact.html',
+  providers: [AppUtilService]
 })
 
 export class VisitAddRetroact {
@@ -21,7 +23,7 @@ export class VisitAddRetroact {
   buy: any;
   stock: any;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public util: AppUtilService) {
 
   }
 
@@ -72,6 +74,15 @@ export class VisitAddRetroact {
   save() {
     // if (this.indexProduct && this.qty && this.buy && this.stock) {
     if (this.indexProduct) {
+      if (!this.qty) {
+        this.qty = 0;
+      }
+      if (!this.buy) {
+        this.buy = 0;
+      }
+      if (!this.stock) {
+        this.stock = 0;
+      }
       if (this.index.indexValue != null || this.index.indexValue != undefined) {
         this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].product_id = this.optionsVisitSale[this.indexProduct].product_id;
         this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].qty = this.qty;
@@ -87,6 +98,9 @@ export class VisitAddRetroact {
         this.data.sale[this.action][this.index.indexPath].value.push(retroact);
       }
       this.callbackData.emit(this.data);
+    } else {
+      this.util.showAlertDialog('กรุณาเลือกข้อมูล');
+      return;
     }
   }
 }

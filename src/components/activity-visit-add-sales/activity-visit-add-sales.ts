@@ -1,9 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { AppUtilService } from './../../app/app.util';
 
 @Component({
   selector: 'activity-visit-add-sales',
-  templateUrl: 'activity-visit-add-sales.html'
+  templateUrl: 'activity-visit-add-sales.html',
+  providers: [AppUtilService]
 })
 
 export class ActivityVisitAddSales {
@@ -35,7 +37,7 @@ export class ActivityVisitAddSales {
     subunit_price: ''
   }
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public util: AppUtilService) {
 
   }
 
@@ -124,7 +126,23 @@ export class ActivityVisitAddSales {
 
   save() {
     // if (this.indexProductGroup && this.indexProduct && this.inputActivityVisitAddSalesData.unit_qty && this.inputActivityVisitAddSalesData.subunit_qty && this.inputActivityVisitAddSalesData.unit_price && this.inputActivityVisitAddSalesData.subunit_price && this.indexPromotion) {
+    if (!this.indexProductGroup || !this.indexProduct || !this.indexPromotion) {
+      this.util.showAlertDialog('กรุณาเลือกข้อมูล');
+      return;
+    }
     if (this.indexProductGroup && this.indexProduct && this.indexPromotion) {
+      if (!this.inputActivityVisitAddSalesData.unit_qty) {
+        this.inputActivityVisitAddSalesData.unit_qty = '0';
+      }
+      if (!this.inputActivityVisitAddSalesData.subunit_qty) {
+        this.inputActivityVisitAddSalesData.subunit_qty = '0';
+      }
+      if (!this.inputActivityVisitAddSalesData.unit_price) {
+        this.inputActivityVisitAddSalesData.unit_price = '0';
+      }
+      if (!this.inputActivityVisitAddSalesData.subunit_price) {
+        this.inputActivityVisitAddSalesData.subunit_price = '0';
+      }
       if (this.index != null || this.index != undefined) {
         this.data.sales[this.index].product_group_id = this.optionsSale.product_group[this.indexProductGroup].product_group_id;
         this.data.sales[this.index].product_id = this.optionsSale.product_group[this.indexProductGroup].product[this.indexProduct].product_id,

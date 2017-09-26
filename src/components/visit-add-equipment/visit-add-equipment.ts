@@ -1,9 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { AppUtilService } from './../../app/app.util';
 
 @Component({
   selector: 'visit-add-equipment',
-  templateUrl: 'visit-add-equipment.html'
+  templateUrl: 'visit-add-equipment.html',
+  providers: [AppUtilService]
 })
 
 export class VisitAddEquipment {
@@ -32,7 +34,7 @@ export class VisitAddEquipment {
     qty: ''
   }
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public util: AppUtilService) {
 
   }
 
@@ -122,8 +124,15 @@ export class VisitAddEquipment {
   }
 
   save() {
-    // if (this.indexProductVendor && this.indexProductGroup && this.indexProduct && this.inputVisitAddEquipmentData.qty) {
-    if (this.indexProductVendor && this.indexProductGroup && this.indexProduct) {
+    if (!this.indexProductVendor || !this.indexProductGroup || !this.indexProduct) {
+      this.util.showAlertDialog('กรุณาเลือกข้อมูล');
+      return;
+    }
+    if (!this.inputVisitAddEquipmentData.qty) {
+      this.util.showAlertDialog('กรุณากรอกข้อมูลให้ถูกต้อง');
+      return;
+    }
+    if (this.indexProductVendor && this.indexProductGroup && this.indexProduct && this.inputVisitAddEquipmentData.qty) {
       if (this.index != null || this.index != undefined) {
         this.data.equipment[this.index].product_vendor_id = this.optionEquipment.data[this.indexProductVendor].product_vendor_id;
         this.data.equipment[this.index].product_group_id = this.optionEquipment.data[this.indexProductVendor].product_group[this.indexProductGroup].product_group_id;

@@ -1,8 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { AppUtilService } from './../../app/app.util';
 
 @Component({
   selector: 'shop-add-pg',
-  templateUrl: 'shop-add-pg.html'
+  templateUrl: 'shop-add-pg.html',
+  providers: [AppUtilService]
 })
 
 export class ShopAddPG {
@@ -15,7 +17,7 @@ export class ShopAddPG {
     telLength: ''
   }
 
-  constructor() {
+  constructor(public util: AppUtilService) {
     this.inputShopAddPGData.telLength = this.inputShopAddPGData.tel.length.toString();
   }
 
@@ -38,7 +40,7 @@ export class ShopAddPG {
       if (this.index != null || this.index != undefined) {
         this.data.pg[this.index].name = this.inputShopAddPGData.name;
         this.data.pg[this.index].tel = this.inputShopAddPGData.tel;
-      }else {
+      } else {
         let pg = {
           name: this.inputShopAddPGData.name,
           tel: this.inputShopAddPGData.tel
@@ -47,6 +49,9 @@ export class ShopAddPG {
         this.data.pg.push(pg);
       }
       this.customerDetailDataOutput.emit(this.data);
+    } else {
+      this.util.showAlertDialog('กรุณากรอกข้อมูลให้ถูกต้อง');
+      return;
     }
   }
 }

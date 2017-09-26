@@ -1,9 +1,11 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { AppUtilService } from './../../app/app.util';
 
 @Component({
   selector: 'shop-add-channel',
-  templateUrl: 'shop-add-channel.html'
+  templateUrl: 'shop-add-channel.html',
+  providers: [AppUtilService]
 })
 
 export class ShopAddChannel {
@@ -30,8 +32,7 @@ export class ShopAddChannel {
   indexCustomerChannel = 0;
   indexProductCategory = 0;
 
-  constructor(
-    public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public util: AppUtilService) {
 
   }
 
@@ -130,6 +131,9 @@ export class ShopAddChannel {
         this.data.channels.push(channels);
       }
       this.customerDetailDataOutput.emit(this.data);
+    } else {
+      this.util.showAlertDialog('กรุณาเลือกข้อมูล');
+      return;
     }
   }
 }

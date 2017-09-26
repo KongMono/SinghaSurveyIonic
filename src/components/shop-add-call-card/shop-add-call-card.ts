@@ -192,10 +192,13 @@ export class ShopAddCallCard {
       this.util.showAlertDialog('กรุณาเลือกสัญญาเริ่ม');
       return;
     }
-    if (this.inputShopAddCallCardData.start_date && this.inputShopAddCallCardData.end_date && this.inputShopAddCallCardData.value && this.inputShopAddCallCardData.spst_no && this.inputShopAddCallCardData.prq_no && this.inputShopAddCallCardData.images) {
+    if (this.inputShopAddCallCardData.start_date && this.inputShopAddCallCardData.end_date && this.inputShopAddCallCardData.spst_no && this.inputShopAddCallCardData.prq_no && this.inputShopAddCallCardData.images) {
       if (this.util.validateStartEndDate(this.inputShopAddCallCardData.start_date, this.inputShopAddCallCardData.end_date) <= 0) {
         this.util.showAlertDialog('สัญญาสิ้นสุดไม่สามารถเลือกน้อยกว่า หรือ เท่ากับสัญญาเริ่มได้');
         return;
+      }
+      if (!this.inputShopAddCallCardData.value) {
+        this.inputShopAddCallCardData.value = '0';
       }
       if (this.index != null || this.index != undefined) {
         this.data.callcard[this.index].start_date = this.inputShopAddCallCardData.start_date;
@@ -216,6 +219,9 @@ export class ShopAddCallCard {
         this.data.callcard.push(callcard);
       }
       this.customerDetailDataOutput.emit(this.data);
+    } else {
+      this.util.showAlertDialog('กรุณากรอกข้อมูลให้ถูกต้อง');
+      return;
     }
   }
 }

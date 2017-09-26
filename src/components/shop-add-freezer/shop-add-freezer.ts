@@ -1,8 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { AppUtilService } from './../../app/app.util';
 
 @Component({
   selector: 'shop-add-freezer',
-  templateUrl: 'shop-add-freezer.html'
+  templateUrl: 'shop-add-freezer.html',
+  providers: [AppUtilService]
 })
 
 export class ShopAddFreezer {
@@ -12,7 +14,7 @@ export class ShopAddFreezer {
   door: any;
   qty: any;
 
-  constructor() {
+  constructor(public util: AppUtilService) {
 
   }
 
@@ -27,18 +29,22 @@ export class ShopAddFreezer {
   }
 
   save() {
-    if (this.door && this.qty) {
-      if (this.index != null || this.index != undefined) {
-        this.data.freezer[this.index].door = this.door;
-        this.data.freezer[this.index].qty = this.qty;
-      }else {
-        let freezer = {
-          door: this.door,
-          qty: this.qty
-        }
-        this.data.freezer.push(freezer);
-      }
-      this.customerDetailDataOutput.emit(this.data);
+    if (!this.door) {
+      this.door = 0;
     }
+    if (!this.qty) {
+      this.qty = 0;
+    }
+    if (this.index != null || this.index != undefined) {
+      this.data.freezer[this.index].door = this.door;
+      this.data.freezer[this.index].qty = this.qty;
+    } else {
+      let freezer = {
+        door: this.door,
+        qty: this.qty
+      }
+      this.data.freezer.push(freezer);
+    }
+    this.customerDetailDataOutput.emit(this.data);
   }
 }
