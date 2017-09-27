@@ -28,7 +28,7 @@ export const AppConfig: IAppConfig = {
   isLogged: null,
   pin_logged: null,
   userInfo: null,
-  isBuildDevice: false,
+  isBuildDevice: true,
   isProduction: false,
   versionApp: null,
   versionBuild: null,
