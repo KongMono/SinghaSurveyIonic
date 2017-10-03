@@ -684,7 +684,7 @@ export class SinghaSurveyService {
         let param = {
             SELL_ID: this.config.userInfo.username,
             CUSTOMER_ID: CUSTOMER_ID,
-            AGENT_CODE: "",
+            AGENT_CODE: "\"\"",
             LATITUDE: lat,
             LONGITUDE: long,
             APP_SOURCE: "SSV",
@@ -700,13 +700,13 @@ export class SinghaSurveyService {
 
         let param = {
             SELL_ID: username,
-            CUSTOMER_ID: "",
-            AGENT_CODE: "",
+            CUSTOMER_ID: "\"\"",
+            AGENT_CODE: "\"\"",
             LATITUDE: lat,
             LONGITUDE: long,
             APP_SOURCE: "SSV",
             MOBILE_DEVICE: "iOS",
-            ARM_CODE: "",
+            ARM_CODE: "\"\"",
             ACTION_ID: "0",
         }
 
