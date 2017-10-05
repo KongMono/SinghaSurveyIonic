@@ -431,9 +431,11 @@ export class EditShopsPage {
       return;
     }
 
-    if (this.util.isEmpty(this.customerDetailData.tax_number) || this.customerDetailData.tax_number.length != 13) {
-      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
-      return;
+    if (this.customerDetailData.tax_number) {
+      if (this.customerDetailData.tax_number.length != 13) {
+        this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+        return;
+      }
     }
 
     this.callServiceUpdateCustomer();
