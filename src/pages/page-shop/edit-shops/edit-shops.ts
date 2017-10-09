@@ -411,7 +411,7 @@ export class EditShopsPage {
       return;
     }
 
-    if (this.optionCustomer.customer_group[this.indexCustomerGroup].project_type[this.indexProjectType].project_type_id == ("0")) {
+    if (this.optionCustomer.customer_group[this.indexCustomerGroup].project_type[this.indexProjectType].project_type_id == ("99999")) {
       this.util.showAlertDialog("กรุณาเลือกโครงการ");
       return;
     }
