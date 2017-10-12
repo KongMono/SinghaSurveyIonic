@@ -1,3 +1,4 @@
+import { TabShop } from './../../tab-shop/tab-shop';
 import { Component, Inject } from '@angular/core';
 import { NavController, IonicPage, NavParams, App, ViewController } from 'ionic-angular';
 import { CallApi } from "../../../providers/call-api";
@@ -14,7 +15,8 @@ import 'rxjs/add/operator/debounceTime';
   providers: [
     CallApi,
     SinghaSurveyService,
-    AppUtilService]
+    AppUtilService,
+    TabShop]
 })
 
 export class CheckNameShopPage {
@@ -29,7 +31,8 @@ export class CheckNameShopPage {
     public navParams: NavParams,
     public service: SinghaSurveyService,
     public util: AppUtilService,
-    public viewCtrl: ViewController) {
+    public viewCtrl: ViewController,
+    public tabShop: TabShop) {
     this.searchControl = new FormControl();
   }
 
@@ -37,7 +40,14 @@ export class CheckNameShopPage {
     this.viewCtrl.dismiss();
 
     this.app.getRootNav().push('AddShopsPage', {
-      data: this.searchText
+      data: this.searchText, callback: this.pushCallback
+    });
+  }
+
+  pushCallback = () => {
+    return new Promise(resolve => {
+      this.tabShop.pushAddCallback();
+      resolve();
     });
   }
 
@@ -55,7 +65,7 @@ export class CheckNameShopPage {
   }
 
   setFilteredItems() {
-    if (this.util.isEmpty(this.searchText) || this.searchText.length < 3) {
+    if (this.util.isEmpty(this.searchText) || this.searchText.length < 2) {
       this.list = [];
     } else {
       this.list = this.list.filter(ls => {

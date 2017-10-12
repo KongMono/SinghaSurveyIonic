@@ -22,6 +22,7 @@ import { Http, Headers, Response, RequestOptions } from '@angular/http';
 })
 
 export class EditShopsPage {
+  callback: any;
   map: any = { lat: 13.7, lng: 100.5, zoom: 15 };
   customer_id: any;
   optionChannelCustomer: optionChannelCustomerModel;
@@ -52,6 +53,7 @@ export class EditShopsPage {
     private alertCtrl: AlertController,
     private photoViewer: PhotoViewer,
     @Inject(ConfigApp) public config: IAppConfig) {
+    this.callback = this.navParams.get("callback")
     this.customer_id = navParams.get('data');
     console.log(this.customer_id);
   }
@@ -417,23 +419,23 @@ export class EditShopsPage {
     }
 
     if (this.util.isEmpty(this.customerDetailData.name)) {
-      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      this.util.showAlertDialog("กรุณากรอกชื่อร้านให้ถูกต้อง");
       return;
     }
 
     if (this.util.isEmpty(this.customerDetailData.address)) {
-      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      this.util.showAlertDialog("กรุณากรอกที่อยู่ให้ถูกต้อง");
       return;
     }
 
     if (this.util.isEmpty(this.customerDetailData.postcode) || this.customerDetailData.postcode.length != 5) {
-      this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+      this.util.showAlertDialog("กรุณากรอกรหัสไปรษณีย์ให้ถูกต้อง");
       return;
     }
 
     if (this.customerDetailData.tax_number) {
       if (this.customerDetailData.tax_number.length != 13) {
-        this.util.showAlertDialog("กรุณากรอกข้อมูลให้ถูกต้อง");
+        this.util.showAlertDialog("กรุณากรอกเลขผู้เสียภาษีให้ถูกต้อง");
         return;
       }
     }
@@ -607,16 +609,19 @@ export class EditShopsPage {
       JSON.stringify(this.customerDetailData.images),
       JSON.stringify(this.customerDetailData.callcard))
       .then(result => {
-        this.service.setTracking(this.customer_id, this.customerDetailData.code, 1, this.config.latitude, this.config.longitude)
-        .then((resultTracking: any) => {
-          console.log(resultTracking.status_code);
-          this.util.hideLoading();
-          this.util.showAlertDialog(result.msg);
+        this.util.hideLoading();
+        this.callback().then(() => {
           this.backPage();
-        }, error => {
-          this.util.hideLoading();
-          console.log(error);
         });
+        if (this.config.isBuildDevice) {
+          this.service.setTracking(this.customer_id, this.customerDetailData.code, 1, this.config.latitude, this.config.longitude)
+            .then((resultTracking: any) => {
+              console.log(resultTracking.status_code);
+              this.util.showAlertDialog(result.msg);
+            }, error => {
+              console.log(error);
+            });
+        }
       }, error => {
         this.util.hideLoading();
         console.log(error.message);

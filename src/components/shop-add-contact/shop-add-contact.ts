@@ -43,21 +43,26 @@ export class ShopAddContact {
   save() {
     if (this.inputShopAddContactData.name && this.inputShopAddContactData.tel && this.inputShopAddContactData.position && this.inputShopAddContactData.birthdate) {
       if (this.inputShopAddContactData.birthdate != new Date().toISOString().slice(0,10)) {
-        if (this.index != null || this.index != undefined) {
-          this.data.contacts[this.index].name = this.inputShopAddContactData.name;
-          this.data.contacts[this.index].tel = this.inputShopAddContactData.tel;
-          this.data.contacts[this.index].position = this.inputShopAddContactData.position;
-          this.data.contacts[this.index].birthdate = this.inputShopAddContactData.birthdate;
-        }else {
-          let contacts = {
-            name: this.inputShopAddContactData.name,
-            tel: this.inputShopAddContactData.tel,
-            position: this.inputShopAddContactData.position,
-            birthdate: this.inputShopAddContactData.birthdate
+        if (this.util.validateStartEndDate(new Date().toISOString().slice(0,10), this.inputShopAddContactData.birthdate) < 0) {
+          if (this.index != null || this.index != undefined) {
+            this.data.contacts[this.index].name = this.inputShopAddContactData.name;
+            this.data.contacts[this.index].tel = this.inputShopAddContactData.tel;
+            this.data.contacts[this.index].position = this.inputShopAddContactData.position;
+            this.data.contacts[this.index].birthdate = this.inputShopAddContactData.birthdate;
+          } else {
+            let contacts = {
+              name: this.inputShopAddContactData.name,
+              tel: this.inputShopAddContactData.tel,
+              position: this.inputShopAddContactData.position,
+              birthdate: this.inputShopAddContactData.birthdate
+            }
+            this.data.contacts.push(contacts);
           }
-          this.data.contacts.push(contacts);
+          this.customerDetailDataOutput.emit(this.data);
+        } else {
+          this.util.showAlertDialog('ไม่สามารถเลือกวันเกิดเกินวันปัจจุบันได้');
+          return;
         }
-        this.customerDetailDataOutput.emit(this.data);
       } else {
         this.util.showAlertDialog('ไม่สามารถเลือกวันเกิดเป็นวันปัจจุบันได้');
         return;

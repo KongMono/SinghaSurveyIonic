@@ -220,13 +220,15 @@ export class VisitAddNote {
 
   save() {
     if (this.inputVisitAddNoteData.start_date && !this.inputVisitAddNoteData.end_date) {
-      this.util.showAlertDialog('กรุณาเลือกวันเสร็จ');
-      return;
+      this.inputVisitAddNoteData.end_date = '';
     } else if (!this.inputVisitAddNoteData.start_date && this.inputVisitAddNoteData.end_date) {
       this.util.showAlertDialog('กรุณาเลือกวันเริ่ม');
       return;
     }
-    if (this.inputVisitAddNoteData.title && this.inputVisitAddNoteData.detail && this.inputVisitAddNoteData.start_date && this.inputVisitAddNoteData.howto && this.inputVisitAddNoteData.end_date && this.inputVisitAddNoteData.status) {
+    if (!this.inputVisitAddNoteData.howto) {
+      this.inputVisitAddNoteData.howto = '';
+    }
+    if (this.inputVisitAddNoteData.title && this.inputVisitAddNoteData.detail && this.inputVisitAddNoteData.start_date && this.inputVisitAddNoteData.status) {
     // if (this.inputVisitAddNoteData.title && this.inputVisitAddNoteData.detail && this.inputVisitAddNoteData.start_date && this.inputVisitAddNoteData.howto && this.inputVisitAddNoteData.end_date && this.inputVisitAddNoteData.status && this.inputVisitAddNoteData.images.length > 0) {
       if (this.util.validateStartEndDate(this.inputVisitAddNoteData.start_date, this.inputVisitAddNoteData.end_date) <= 0) {
         this.util.showAlertDialog('วันเสร็จไม่สามารถเลือกน้อยกว่า หรือ เท่ากับวันเริ่มได้');

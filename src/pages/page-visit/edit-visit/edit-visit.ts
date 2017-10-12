@@ -23,6 +23,7 @@ import { LocationAccuracy } from '@ionic-native/location-accuracy';
 })
 
 export class EditVisitPage {
+  callback: any;
   map: any = { lat: 13.7, lng: 100.5, zoom: 15 };
   visit_id: any;
   optionsVisitSale: optionsVisitSaleModel;
@@ -67,6 +68,7 @@ export class EditVisitPage {
     private alertCtrl: AlertController,
     private photoViewer: PhotoViewer,
     @Inject(ConfigApp) public config: IAppConfig) {
+    this.callback = this.navParams.get("callback")
     this.visit_id = navParams.get('data');
     console.log(this.visit_id);
     console.log(navParams.get('status'));
@@ -86,6 +88,9 @@ export class EditVisitPage {
         this.visitCustomerDetailData = result;
         if (!this.visitCustomerDetailData.images) {
           this.visitCustomerDetailData.images = [];
+        }
+        if (this.visitCustomerDetailData.remark == 'null') {
+          this.visitCustomerDetailData.remark = '';
         }
         this.setVisitCustomerDetailData();
         this.enableLocation();
@@ -213,6 +218,12 @@ export class EditVisitPage {
           }
         }
       }
+    }
+  }
+
+  checkNoteEndDate(endDate) {
+    if (!endDate) {
+      return 'ไม่ระบุ';
     }
   }
 
@@ -551,16 +562,19 @@ export class EditVisitPage {
       JSON.stringify(this.visitCustomerDetailData.images),
       JSON.stringify(this.visitCustomerDetailData.note))
       .then(result => {
-        this.service.setTracking(customer_id, '', 2, this.config.latitude, this.config.longitude)
-        .then((resultTracking: any) => {
-          console.log(resultTracking.status_code);
-          this.util.hideLoading();
-          this.util.showAlertDialog(result.msg);
+        this.util.hideLoading();
+        this.callback().then(() => {
           this.backPage();
-        }, error => {
-          this.util.hideLoading();
-          console.log(error);
         });
+        if (this.config.isBuildDevice) {
+          this.service.setTracking(customer_id, '', 2, this.config.latitude, this.config.longitude)
+            .then((resultTracking: any) => {
+              console.log(resultTracking.status_code);
+              this.util.showAlertDialog(result.msg);
+            }, error => {
+              console.log(error);
+            });
+        }
       }, error => {
         this.util.hideLoading();
         console.log(error.message);

@@ -180,7 +180,7 @@
           <span class="text-sub-title">ปี {{receipt.year}} เดือน {{receipt.month}}</span>
           <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="receipt.status" (click)="addImage('receipt', indexMonth)"
             tappable></ion-icon>
-          <ion-row *ngIf="receipt.value.length > 0" style="height: 80px;">
+          <ion-row *ngIf="receipt.value.length > 0" style="height: 80px; width: 100%; padding-right: 16px;">
             <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
               <div style="display: flex">
                 <img *ngFor="let images of receipt.value; let i = index" [src]="getImagePath(images)" (click)="viewImage('receipt', indexMonth, i)"
@@ -281,7 +281,7 @@
           </ion-row>
           <ion-row class="row-full-size">
             <ion-col class="col-sub">
-              <span class="text-title-sub">ระยะเวลา:<span class="text-value-sub value-row">{{note.start_date}} - {{note.end_date}}</span></span>
+              <span class="text-title-sub">ระยะเวลา:<span class="text-value-sub value-row">{{note.start_date}} - {{checkNoteEndDate(note.end_date)}}</span></span>
             </ion-col>
           </ion-row>
           <ion-row class="row-full-size">

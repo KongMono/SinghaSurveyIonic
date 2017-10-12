@@ -34,6 +34,46 @@ export class PopupInput {
     this.navCtrl.pop({animate: true, animation: 'transition', direction: 'back'});
   }
 
+  title() {
+    let title;
+    switch (this.action) {
+      case 'freezer':
+        title = 'ข้อมูลตู้แช่';
+        break;
+      case 'pg':
+        title = 'ข้อมูล PG';
+        break;
+      case 'contacts':
+        title = 'ข้อมูลผู้ติดต่อ';
+        break;
+      case 'channels':
+        title = 'ช่องทางการซื้อสินค้า';
+        break;
+      case 'callcard':
+        title = 'ข้อมูล Call Card';
+        break;
+      case 'equipment':
+        title = 'อุปกรณ์ส่งเสริมการขาย';
+        break;
+      case 'note':
+        title = 'หัวข้อติดตาม';
+        break;
+      case 'boonrawd':
+        title = 'ยอดขายสินค้าบุญรอดย้อนหลัง 3 เดือนจากปัจจุบัน';
+        break;
+      case 'rival':
+        title = 'ยอดขายสินค้าคู่แข่งย้อนหลัง 3 เดือนจากปัจจุบัน';
+        break;
+      case 'sales':
+        title = 'ข้อมูลสินค้า';
+        break;
+      default:
+      title = '';
+        break;
+    }
+    return title;
+  }
+
   reciveDataFromInput(data) {
     let dataCallback = {
       action: this.action,

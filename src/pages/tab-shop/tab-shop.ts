@@ -252,7 +252,7 @@ export class TabShop {
             console.log('Infomation clicked');
             setTimeout(() => {
               this.app.getRootNav().push('EditShopsPage', {
-                data: customer.customer_id
+                data: customer.customer_id, callback: this.pushCallback
               });
             }, 0);
           }
@@ -307,7 +307,7 @@ export class TabShop {
           text: 'แก้ไข',
           handler: () => {
             this.app.getRootNav().push('EditShopsPage', {
-              data: customer.customer_id
+              data: customer.customer_id, callback: this.pushCallback
             });
           }
         }, {
@@ -316,16 +316,18 @@ export class TabShop {
           handler: () => {
             this.service.deleteCustomer(customer.customer_id)
               .then((result) => {
-                this.service.setTracking(customer.customer_id, customer.code, 1, this.config.latitude, this.config.longitude)
-                .then((resultTracking: any) => {
-                  console.log(resultTracking.status_code);
-                  this.util.hideLoading();
-                  this.util.showAlertDialog(result.msg);
-                  this.callCustomerList();
-                }, error => {
-                  this.util.hideLoading();
-                  console.log(error);
-                });
+                if (this.config.isBuildDevice) {
+                  this.service.setTracking(customer.customer_id, customer.code, 1, this.config.latitude, this.config.longitude)
+                    .then((resultTracking: any) => {
+                      console.log(resultTracking.status_code);
+                      this.util.hideLoading();
+                      this.util.showAlertDialog(result.msg);
+                      this.callCustomerList();
+                    }, error => {
+                      this.util.hideLoading();
+                      console.log(error);
+                    });
+                }
               }, error => {
                 this.util.hideLoading();
                 console.log(error);
@@ -335,5 +337,16 @@ export class TabShop {
       ]
     });
     this.actionSheet.present();
+  }
+
+  pushCallback = () => {
+    return new Promise(resolve => {
+      this.callCustomerList();
+      resolve();
+    });
+  }
+
+  public pushAddCallback() {
+    this.callCustomerList();
   }
 }

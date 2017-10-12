@@ -52,7 +52,7 @@ export class TabVisitAndRecord {
   }
 
   ionViewWillEnter() {
-
+    
   }
 
   searchVisit() {
@@ -65,9 +65,6 @@ export class TabVisitAndRecord {
     setInterval(() => {
       // call interval fix binding actionScroll hide fab
     });
-
-
-
   }
 
   scrollHandler(event) {
@@ -224,7 +221,7 @@ export class TabVisitAndRecord {
 
   onClick(visit_id: any) {
     this.app.getRootNav().push('EditVisitPage', {
-      data: visit_id
+      data: visit_id, callback: this.pushCallback
     });
   }
 
@@ -251,7 +248,7 @@ export class TabVisitAndRecord {
           text: 'แก้ไข',
           handler: () => {
             this.app.getRootNav().push('EditVisitPage', {
-              data: visit.visit_id
+              data: visit.visit_id, callback: this.pushCallback
             });
           }
         }
@@ -260,4 +257,10 @@ export class TabVisitAndRecord {
     this.actionSheet.present();
   }
 
+  pushCallback = () => {
+    return new Promise(resolve => {
+      this.calVisitList();
+      resolve();
+    });
+  }
 }

@@ -87,13 +87,15 @@ export class MyApp {
       if (this.configApp.userInfo) {
         username = this.configApp.userInfo.username;
       }
-      this.service.setTrackingBackground(username, this.configApp.latitude, this.configApp.longitude)
-        .then(
-        (result: any) => {
-          console.log(result.status_code);
-        }, error => {
-          console.log(error);
-        });
+      if (this.configApp.isBuildDevice) {
+        this.service.setTrackingBackground(username, this.configApp.latitude, this.configApp.longitude)
+          .then(
+          (result: any) => {
+            console.log(result.status_code);
+          }, error => {
+            console.log(error);
+          });
+        }
     }
   }
 }
