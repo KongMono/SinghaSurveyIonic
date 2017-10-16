@@ -89,7 +89,7 @@ export class EditVisitPage {
         if (!this.visitCustomerDetailData.images) {
           this.visitCustomerDetailData.images = [];
         }
-        if (this.visitCustomerDetailData.remark == 'null') {
+        if (!this.visitCustomerDetailData.remark || this.visitCustomerDetailData.remark == 'null') {
           this.visitCustomerDetailData.remark = '';
         }
         this.setVisitCustomerDetailData();
@@ -448,7 +448,11 @@ export class EditVisitPage {
   }
 
   updateAddImageReceipt(indexMonth, res) {
-    this.visitCustomerDetailData.receipt[indexMonth].value.push(res.path);
+    let imageReceipt = {
+      id: '',
+      value: res.path
+    }
+    this.visitCustomerDetailData.receipt[indexMonth].value.push(imageReceipt);
   }
 
   setUploadImage(imageBase64) {
@@ -493,7 +497,7 @@ export class EditVisitPage {
                 endpoint = this.config.endpoint_view_image;
               }
               if (action == 'receipt') {
-                this.photoViewer.show(endpoint + this.visitCustomerDetailData.receipt[index].value[subIndex]);
+                this.photoViewer.show(endpoint + this.visitCustomerDetailData.receipt[index].value[subIndex].value);
               } else if (action == 'tool') {
                 this.photoViewer.show(endpoint + this.visitCustomerDetailData.images[subIndex]);
               }
