@@ -25,6 +25,19 @@ shop-add-call-card {
             line-height: 32px;
         }
     }
+    .wrap-list {
+        margin: 0;
+        .item {
+            .item-inner {
+                border-bottom: 1px solid #dedede !important;
+                .input-wrapper {
+                    .label {
+                        margin: 13px 8px;
+                    }
+                }
+            }
+        }
+    }
     .button-add-input {
         position: absolute;
         top: 0;

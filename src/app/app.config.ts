@@ -120,7 +120,7 @@ export const AppConfig: IAppConfig = {
       },
     },
     searchCustomer: {
-      url: "/v3/customers/search/format/json",
+      url: "/v3/customers/search_new/format/json",
       method: "POST",
       param: {
         user_id: "",

@@ -308,7 +308,7 @@
       </ion-row>
       <ion-row class="line-top-row">
         <ion-col>
-          <p>ข้อมูล Call Card</p>
+          <p>ข้อมูล Proposal</p>
         </ion-col>
         <ion-col>
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('callcard')" tappable></ion-icon>
@@ -353,6 +353,25 @@
             </ion-col>
             <ion-col col-4 class="col-sub">
               <span class="text-value-sub">{{callcard.value}}</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">เงินคงเหลือ</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub">
+              <span class="text-title-sub">สถานะ</span>
+            </ion-col>
+          </ion-row>
+          <ion-row class="row-full-size">
+            <ion-col col-6 class="col-sub">
+              <span class="text-value-sub">{{callcard.balance}}</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub" *ngIf="callcard.status == '1'">
+              <span class="text-value-sub">เปิดสัญญา</span>
+            </ion-col>
+            <ion-col col-6 class="col-sub" *ngIf="callcard.status == '2'">
+              <span class="text-value-sub">ปิดสัญญา</span>
             </ion-col>
           </ion-row>
         </ion-item>

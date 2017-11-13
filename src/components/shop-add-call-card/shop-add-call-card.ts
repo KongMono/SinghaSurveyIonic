@@ -3,7 +3,7 @@ import { IAppConfig, ConfigApp } from './../../app/app.config';
 import { CallApi } from './../../providers/call-api';
 import { SinghaSurveyService } from './../../providers/service';
 import { AppUtilService } from './../../app/app.util';
-import { ActionSheetController, AlertController, App } from 'ionic-angular';
+import { NavController, ActionSheetController, AlertController, App } from 'ionic-angular';
 import { PhotoViewer } from '@ionic-native/photo-viewer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 
@@ -26,14 +26,27 @@ export class ShopAddCallCard {
     start_date: '',
     end_date: '',
     value: '',
+    balance: '',
     spst_no: '',
     prq_no: '',
     images: []
   }
+  optionStatus = {
+    status: [
+      {
+        status_id: '1',
+        name: 'เปิดสัญญา'
+      },{
+        status_id: '2',
+        name: 'ปิดสัญญา'
+      }]
+  };
+  indexStatus = 0;
   endPoint = 'http://128.199.72.29/';
 
   constructor(
     public app: App,
+    public navCtrl: NavController,
     public service: SinghaSurveyService,
     public util: AppUtilService,
     public actionSheetCtrl: ActionSheetController,
@@ -52,9 +65,42 @@ export class ShopAddCallCard {
       this.inputShopAddCallCardData.start_date = this.data.callcard[this.index].start_date;
       this.inputShopAddCallCardData.end_date = this.data.callcard[this.index].end_date;
       this.inputShopAddCallCardData.value = this.data.callcard[this.index].value;
+      this.inputShopAddCallCardData.balance = this.data.callcard[this.index].balance;
       this.inputShopAddCallCardData.spst_no = this.data.callcard[this.index].spst_no;
       this.inputShopAddCallCardData.prq_no = this.data.callcard[this.index].prq_no;
       this.inputShopAddCallCardData.images = this.data.callcard[this.index].images;
+      this.setIndexStatus();
+    }
+  }
+
+  selectOption(action) {
+    let title, listSelectOption, keyOption, indexSelect;
+    if (action == 'status') {
+      title = 'เลือกสถานะ';
+      listSelectOption = this.optionStatus.status;
+      keyOption = 'name';
+      indexSelect = this.indexStatus;
+    }
+    this.navCtrl.push('ListSelectOptionPage', { action: action, title: title, option: listSelectOption, key: keyOption, indexSelect: indexSelect, callback: this.selectOptionCallback }, { animate: true, animation: 'transition', direction: 'forward' });
+  }
+
+  selectOptionCallback = (_params) => {
+    return new Promise(resolve => {
+      if (_params.action == 'status') {
+        this.indexStatus = _params.indexSelect;
+        resolve();
+      } else {
+        resolve();
+      }
+    });
+  }
+
+  setIndexStatus() {
+    for (var i = 0; i < this.optionStatus.status.length; i++) {
+      if (this.optionStatus.status[i].status_id == this.data.callcard[this.index].status) {
+        this.indexStatus = i;
+        return
+      }
     }
   }
 
@@ -200,6 +246,9 @@ export class ShopAddCallCard {
       if (!this.inputShopAddCallCardData.value) {
         this.inputShopAddCallCardData.value = '0';
       }
+      if (!this.inputShopAddCallCardData.balance) {
+        this.inputShopAddCallCardData.balance = '0';
+      }
       if (this.index != null || this.index != undefined) {
         this.data.callcard[this.index].start_date = this.inputShopAddCallCardData.start_date;
         this.data.callcard[this.index].end_date = this.inputShopAddCallCardData.end_date;
@@ -207,6 +256,7 @@ export class ShopAddCallCard {
         this.data.callcard[this.index].spst_no = this.inputShopAddCallCardData.spst_no;
         this.data.callcard[this.index].prq_no = this.inputShopAddCallCardData.prq_no;
         this.data.callcard[this.index].images = this.inputShopAddCallCardData.images;
+        this.data.callcard[this.index].status = this.optionStatus.status[this.indexStatus].status_id;
       } else {
         let callcard = {
           start_date: this.inputShopAddCallCardData.start_date,
@@ -214,7 +264,8 @@ export class ShopAddCallCard {
           value: this.inputShopAddCallCardData.value,
           spst_no: this.inputShopAddCallCardData.spst_no,
           prq_no: this.inputShopAddCallCardData.prq_no,
-          images: this.inputShopAddCallCardData.images
+          images: this.inputShopAddCallCardData.images,
+          status: this.optionStatus.status[this.indexStatus].status_id
         }
         this.data.callcard.push(callcard);
       }

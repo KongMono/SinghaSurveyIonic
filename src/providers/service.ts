@@ -14,14 +14,16 @@ export class SinghaSurveyService {
         this.Api = Api;
     }
 
-    customersList(limit: any, offset: any, order: any) {
+    customersList(limit: any, offset: any, order: any, latitude: any, longitude: any) {
         let service = this.config.service.customersList;
 
         service.param = {
             user_id: this.config.userInfo.username,
             offset: offset,
             limit: limit,
-            order: order
+            order: order,
+            latitude: latitude,
+            longitude: longitude,
         };
         return this.Api.call(service.url, service.method, service.param);
     }
@@ -83,7 +85,7 @@ export class SinghaSurveyService {
         return this.Api.call(service.url, service.method, service.param);
     }
 
-    searchCustomer(key: string, province_id: string, ampher_id: string, tumbol_id: string) {
+    searchCustomer(key: string, province_id: string, ampher_id: string, tumbol_id: string, latitude: any, longitude: any) {
         let service = this.config.service.searchCustomer;
 
         service.param = {
@@ -91,7 +93,9 @@ export class SinghaSurveyService {
             key: key,
             province_id: province_id,
             ampher_id: ampher_id,
-            tumbol_id: tumbol_id
+            tumbol_id: tumbol_id,
+            latitude: latitude,
+            longitude: longitude,
         }
 
         return this.Api.call(service.url, service.method, service.param);

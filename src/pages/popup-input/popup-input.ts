@@ -50,7 +50,7 @@ export class PopupInput {
         title = 'ช่องทางการซื้อสินค้า';
         break;
       case 'callcard':
-        title = 'ข้อมูล Call Card';
+        title = 'ข้อมูล Proposal';
         break;
       case 'equipment':
         title = 'อุปกรณ์ส่งเสริมการขาย';

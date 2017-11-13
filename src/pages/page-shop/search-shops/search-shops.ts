@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { NavController, IonicPage, NavParams, App, ActionSheetController } from 'ionic-angular';
 import { CallApi } from "../../../providers/call-api";
+import { ConfigApp, IAppConfig } from "../../../app/app.config";
 import { SinghaSurveyService } from "../../../providers/service";
 import { AppUtilService } from "../../../app/app.util";
-
 
 @IonicPage()
 @Component({
@@ -31,7 +31,8 @@ export class SearchShopsPage {
         public navParams: NavParams,
         public actionSheetCtrl: ActionSheetController,
         public service: SinghaSurveyService,
-        public util: AppUtilService) {
+        public util: AppUtilService,
+        @Inject(ConfigApp) private config: IAppConfig) {
     }
 
     backPage() {
@@ -188,7 +189,8 @@ export class SearchShopsPage {
         this.service.searchCustomer(name,
             this.optionCustomer.province[this.indexProvince].province_id,
             this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].ampher_id,
-            this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].tumbol[this.indexTumbol].tumbol_id)
+            this.optionCustomer.province[this.indexProvince].ampher[this.indexAmpher].tumbol[this.indexTumbol].tumbol_id,
+            this.config.latitude, this.config.longitude)
             .then(
             (result) => {
                 this.util.hideLoading();

@@ -39,6 +39,7 @@ export class EditShopsPage {
     channels: []
   }
   indexStatus = 0;
+
   constructor(
     public app: App,
     private http: Http,

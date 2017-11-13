@@ -95,6 +95,8 @@
       <p class="text-name">{{customer.name}}</p>
       <p class="text-group-name">{{customer.customer_group_name}}</p>
       <p class="text-address">{{customer.address}}</p>
+      <p class="text-address">ต.{{customer.tumbol}} อ.{{customer.ampher}}</p>
+      <p *ngIf="customer.distance" class="text-distance">ระยะห่าง: {{customer.distance}} กิโลเมตร</p>
       <div item-end class="wrap-end">
         <div class="wrap-end-top">
           <ion-icon class="icon-marker" name="_icon-marker"></ion-icon>

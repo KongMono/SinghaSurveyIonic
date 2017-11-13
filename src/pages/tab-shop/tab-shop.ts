@@ -5,6 +5,8 @@ import { CallApi } from "../../providers/call-api";
 import { ConfigApp, IAppConfig } from "../../app/app.config";
 import { AppUtilService } from './../../app/app.util';
 import { CallNumber } from '@ionic-native/call-number';
+import { LocationAccuracy } from '@ionic-native/location-accuracy';
+import { Geolocation } from '@ionic-native/geolocation';
 
 @IonicPage()
 @Component({
@@ -28,6 +30,10 @@ export class TabShop {
   }
   waitData: boolean = false;
   actionScroll: any = 'up';
+  location = {
+    lat: null,
+    long: null
+  }
 
   public scrollAmount = 0;
   constructor(
@@ -41,6 +47,8 @@ export class TabShop {
     public modalCtrl: ModalController,
     public zone: NgZone,
     public callNumber: CallNumber,
+    private locationAccuracy: LocationAccuracy,
+    private geolocation: Geolocation,
     @Inject(ConfigApp) private config: IAppConfig) {
 
   }
@@ -64,7 +72,7 @@ export class TabShop {
   }
 
   ionViewDidLoad() {
-    this.callCustomerList();
+    this.enableLocation();
 
     setInterval(() => {
       // call interval fix binding actionScroll hide fab
@@ -132,9 +140,38 @@ export class TabShop {
       });
   }
 
+  enableLocation() {
+    this.util.showLoading();
+    this.waitData = true;
+    this.geolocation.getCurrentPosition()
+      .then((resp) => {
+        this.util.hideLoading();
+        this.location.lat = resp.coords.latitude;
+        this.location.long = resp.coords.longitude;
+        this.callCustomerList();
+      }).catch((error) => {
+        this.util.hideLoading();
+        this.callCustomerList();
+        console.log('Error getting location', error);
+      });
+
+    if (this.config.isBuildDevice) {
+      this.locationAccuracy.canRequest().then(
+        (canRequest: boolean) => {
+          if (canRequest) {
+            // the accuracy option will be ignored by iOS
+            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+              () => alert('Request successful'),
+              error => alert('Error requesting location permissions' + JSON.stringify(error))
+            );
+          }
+        });
+    }
+  }
+
   callRefreshCustomerList() {
     this.customersListData = [];
-    this.service.customersList(this.limit, this.offset, this.filterData.order)
+    this.service.customersList(this.limit, this.offset, this.filterData.order, this.location.lat, this.location.long)
       .then(
       (result: CustomersListModel) => {
         this.customersListData = result.data;
@@ -167,7 +204,7 @@ export class TabShop {
     this.customersListData = [];
     this.waitData = true;
     this.util.showLoading();
-    this.service.customersList(this.limit, this.offset, this.filterData.order)
+    this.service.customersList(this.limit, this.offset, this.filterData.order, this.location.lat, this.location.long)
       .then(
       (result: CustomersListModel) => {
         this.util.hideLoading();
@@ -196,7 +233,7 @@ export class TabShop {
   doInfinite(infiniteScroll: any) {
     this.infiniteScroll = infiniteScroll;
     this.offset += this.limit;
-    this.service.customersList(this.limit, this.offset, this.filterData.order)
+    this.service.customersList(this.limit, this.offset, this.filterData.order, this.location.lat, this.location.long)
       .then(
       (result: CustomersListModel) => {
         this.customersListData = this.customersListData.concat(result.data);
