@@ -20,7 +20,7 @@
     <shop-add-contact *ngIf="action == 'contacts'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-contact>
     <shop-add-freezer *ngIf="action == 'freezer'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-freezer>
     <shop-add-pg *ngIf="action == 'pg'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-pg>
-    <visit-add-equipment *ngIf="action == 'equipment'" [data]="data" [option]="option" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-add-equipment>
+    <visit-add-equipment *ngIf="action == 'equipment' || action == 'equipment_activity'" [data]="data" [option]="option" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-add-equipment>
     <visit-add-note *ngIf="action == 'note'" [data]="data" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-add-note>
     <visit-add-retroact *ngIf="action == 'boonrawd' || action == 'rival'" [action]="action" [data]="data" [option]="option" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-add-retroact>
     <activity-visit-add-sales *ngIf="action == 'sales'" [data]="data" [option]="option" [index]="index" (callbackData)="reciveDataFromInput($event)"></activity-visit-add-sales>

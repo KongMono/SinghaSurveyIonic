@@ -4,12 +4,13 @@ import { SinghaSurveyService } from "../../providers/service";
 import { CallApi } from "../../providers/call-api";
 import { ConfigApp, IAppConfig } from "../../app/app.config";
 import { AppUtilService } from './../../app/app.util';
+import { CallNumber } from '@ionic-native/call-number';
 
 @IonicPage()
 @Component({
   selector: 'page-tab-shop',
   templateUrl: 'tab-shop.html',
-  providers: [CallApi, SinghaSurveyService]
+  providers: [CallApi, SinghaSurveyService, CallNumber]
 })
 
 export class TabShop {
@@ -23,7 +24,7 @@ export class TabShop {
   showCheckNameDialog: boolean = true;
   customersCycleData: CustomersCycleModel;
   filterData = {
-    order: "1"
+    order: "0"
   }
   waitData: boolean = false;
   actionScroll: any = 'up';
@@ -39,6 +40,7 @@ export class TabShop {
     public actionSheetCtrl: ActionSheetController,
     public modalCtrl: ModalController,
     public zone: NgZone,
+    public callNumber: CallNumber,
     @Inject(ConfigApp) private config: IAppConfig) {
 
   }
@@ -243,27 +245,44 @@ export class TabShop {
       this.actionSheet.dismiss();
     }
 
+    let listButtonActionSheet = [];
+    let buttonDashboardActionSheet = {
+      icon: '_icon-dashboard',
+      text: 'รายละเอียด',
+      handler: () => {
+        console.log('Infomation clicked');
+        setTimeout(() => {
+          this.app.getRootNav().push('EditShopsPage', {
+            data: customer.customer_id, callback: this.pushCallback
+          });
+        }, 0);
+      }
+    };
+    let buttonVisitActionSheet = {
+      icon: '_icon-visit',
+      text: 'เข้าเยี่ยม',
+      handler: () => {
+        this.callCustomersChecked(customer.customer_id);
+      }
+    };
+    let buttonCallActionSheet = {
+      icon: 'call',
+      text: 'โทร',
+      handler: () => {
+        this.callNumber.callNumber(customer.tel, true);
+      }
+    };
+
+    if (customer.is_edit == '1') {
+      listButtonActionSheet.push(buttonDashboardActionSheet);
+    }
+    listButtonActionSheet.push(buttonVisitActionSheet);
+    if (customer.tel) {
+      listButtonActionSheet.push(buttonCallActionSheet);
+    }
+
     this.actionSheet = this.actionSheetCtrl.create({
-      buttons: [
-        {
-          icon: '_icon-dashboard',
-          text: 'รายละเอียด',
-          handler: () => {
-            console.log('Infomation clicked');
-            setTimeout(() => {
-              this.app.getRootNav().push('EditShopsPage', {
-                data: customer.customer_id, callback: this.pushCallback
-              });
-            }, 0);
-          }
-        }, {
-          icon: '_icon-visit',
-          text: 'เข้าเยี่ยม',
-          handler: () => {
-            this.callCustomersChecked(customer.customer_id);
-          }
-        }
-      ]
+      buttons: listButtonActionSheet
     });
     this.actionSheet.present();
   }
@@ -288,53 +307,65 @@ export class TabShop {
     if (this.actionSheet) {
       this.actionSheet.dismiss();
     }
+
+    let listButtonActionSheet = [];
+    let buttonMapActionSheet = {
+      icon: '_icon-map',
+      text: 'แผนที่',
+      handler: () => {
+        this.app.getRootNav().push('ViewMapPage', {
+          data: {
+            title: customer.name,
+            latitude: customer.latitude,
+            longitude: customer.longitude
+          }
+        }, { animate: true, animation: 'transition', direction: 'forward' });
+      }
+    };
+    let buttonVisitActionSheet = {
+      icon: '_icon-visit',
+      text: 'แก้ไข',
+      handler: () => {
+        this.app.getRootNav().push('EditShopsPage', {
+          data: customer.customer_id, callback: this.pushCallback
+        });
+      }
+    };
+    let buttonTrashActionSheet = {
+      icon: '_icon-trash',
+      text: 'ลบ',
+      handler: () => {
+        this.service.deleteCustomer(customer.customer_id)
+          .then((result) => {
+            if (this.config.isBuildDevice) {
+              this.service.setTracking(customer.customer_id, customer.code, 1, this.config.latitude, this.config.longitude)
+                .then((resultTracking: any) => {
+                  console.log(resultTracking.status_code);
+                  this.util.hideLoading();
+                  this.util.showAlertDialog(result.msg);
+                  this.callCustomerList();
+                }, error => {
+                  this.util.hideLoading();
+                  console.log(error);
+                });
+            }
+          }, error => {
+            this.util.hideLoading();
+            console.log(error);
+          });
+      }
+    };
+
+    listButtonActionSheet.push(buttonMapActionSheet);
+    if (customer.is_edit == '1') {
+      listButtonActionSheet.push(buttonVisitActionSheet);
+    }
+    if (customer.is_delete == '1') {
+      listButtonActionSheet.push(buttonTrashActionSheet);
+    }
+
     this.actionSheet = this.actionSheetCtrl.create({
-      buttons: [
-        {
-          icon: '_icon-map',
-          text: 'แผนที่',
-          handler: () => {
-            this.app.getRootNav().push('ViewMapPage', {
-              data: {
-                title: customer.name,
-                latitude: customer.latitude,
-                longitude: customer.longitude
-              }
-            }, { animate: true, animation: 'transition', direction: 'forward' });
-          }
-        }, {
-          icon: '_icon-visit',
-          text: 'แก้ไข',
-          handler: () => {
-            this.app.getRootNav().push('EditShopsPage', {
-              data: customer.customer_id, callback: this.pushCallback
-            });
-          }
-        }, {
-          icon: '_icon-trash',
-          text: 'ลบ',
-          handler: () => {
-            this.service.deleteCustomer(customer.customer_id)
-              .then((result) => {
-                if (this.config.isBuildDevice) {
-                  this.service.setTracking(customer.customer_id, customer.code, 1, this.config.latitude, this.config.longitude)
-                    .then((resultTracking: any) => {
-                      console.log(resultTracking.status_code);
-                      this.util.hideLoading();
-                      this.util.showAlertDialog(result.msg);
-                      this.callCustomerList();
-                    }, error => {
-                      this.util.hideLoading();
-                      console.log(error);
-                    });
-                }
-              }, error => {
-                this.util.hideLoading();
-                console.log(error);
-              });
-          }
-        }
-      ]
+      buttons: listButtonActionSheet
     });
     this.actionSheet.present();
   }

@@ -342,7 +342,7 @@ export class ActivityVisitPage {
     let option;
     if (action == 'sales') {
       option = this.optionsSale;
-    } else if (action == 'equipment') {
+    } else if (action == 'equipment_activity') {
       option = this.optionEquipment;
     }
     this.navCtrl.push('PopupInput',
@@ -358,7 +358,7 @@ export class ActivityVisitPage {
         if (_params.action == 'sales') {
           this.setVisitActivityDetailDataSales();
         }
-        else if (_params.action == 'equipment') {
+        else if (_params.action == 'equipment_activity') {
           this.setVisitActivityDetailDataEquipment();
         }
         resolve();
@@ -393,7 +393,7 @@ export class ActivityVisitPage {
     this.visitActivityDetailData[action].splice(index, 1);
     if (action == 'sales') {
       this.visitActivityDetail[action].splice(index, 1);
-    } else if (action == 'equipment') {
+    } else if (action == 'equipment_activity') {
       this.visitActivityDetail[action].splice(index, 1);
     }
   }

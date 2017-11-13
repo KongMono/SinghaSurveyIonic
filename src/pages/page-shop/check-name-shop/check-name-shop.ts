@@ -7,6 +7,7 @@ import { AppUtilService } from "../../../app/app.util";
 import { ConfigApp, IAppConfig } from "../../../app/app.config";
 import { FormControl } from '@angular/forms';
 import 'rxjs/add/operator/debounceTime';
+import { CallNumber } from '@ionic-native/call-number';
 
 @IonicPage()
 @Component({
@@ -16,7 +17,8 @@ import 'rxjs/add/operator/debounceTime';
     CallApi,
     SinghaSurveyService,
     AppUtilService,
-    TabShop]
+    TabShop,
+    CallNumber]
 })
 
 export class CheckNameShopPage {
@@ -86,6 +88,10 @@ export class CheckNameShopPage {
         console.log(result);
         this.util.hideLoading();
         this.viewCtrl.dismiss();
+        if (result.status == '2') {
+          this.util.showAlertDialog(result.msg);
+          return;
+        }
         this.app.getRootNav().push('EditShopsPage', {
           data: customers_id
         });

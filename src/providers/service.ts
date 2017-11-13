@@ -489,6 +489,7 @@ export class SinghaSurveyService {
 
     createCustomer(
         user_id,
+        code,
         name,
         latitude,
         longitude,
@@ -544,8 +545,9 @@ export class SinghaSurveyService {
     }
 
     updateCustomer(
-        customer_id,
         user_id,
+        customer_id,
+        code,
         name,
         latitude,
         longitude,

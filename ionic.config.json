@@ -3,8 +3,8 @@
   "app_id": "5be79fc5",
   "proxies": [
     {
-      "path": "/v2",
-      "proxyUrl": "http://ssv.devcode.in/v2"
+      "path": "/v3",
+      "proxyUrl": "http://ssv.devcode.in/v3"
     }
   ],
   "type": "ionic-angular",

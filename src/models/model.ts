@@ -10,12 +10,16 @@ interface CustomersListData {
   'customer_group_id': string;
   status: string;
   address: string;
+  tumbol: string;
+  ampher: string;
   'customer_group_name': string;
   'project_type_name': string;
   'long_address': string;
   'is_edit': string;
+  'is_delete': string;
   'status_plan': string;
   'count_survey': number;
+  tel: string;
 }
 
 interface LoginModel {

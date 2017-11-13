@@ -53,6 +53,25 @@ export class EditVisitPage {
     }],
     equipment: []
   };
+  expand = {
+    order: {
+     collapse: false,
+     icon: 'ios-arrow-down-outline'
+    },
+    boonrawd: {
+      collapse: false,
+      icon: 'ios-arrow-down-outline'
+    },
+    rival: {
+      collapse: false,
+      icon: 'ios-arrow-down-outline'
+    },
+    receipt: {
+      collapse: false,
+      icon: 'ios-arrow-down-outline'
+    }
+  };
+
   constructor(
     private locationAccuracy: LocationAccuracy,
     public app: App,
@@ -267,6 +286,45 @@ export class EditVisitPage {
 
   removeDataInActivityList(index) {
     this.visitCustomerDetailData.activities.splice(index, 1);
+  }
+
+  expandCollapse(action) {
+    switch (action) {
+      case 'order':
+        this.expand.order.collapse = !this.expand.order.collapse;
+        if (this.expand.order.collapse) {
+          this.expand.order.icon = 'ios-arrow-up-outline';
+        } else {
+          this.expand.order.icon = 'ios-arrow-down-outline';
+        }
+        break;
+      case 'boonrawd':
+        this.expand.boonrawd.collapse = !this.expand.boonrawd.collapse;
+        if (this.expand.boonrawd.collapse) {
+          this.expand.boonrawd.icon = 'ios-arrow-up-outline';
+        } else {
+          this.expand.boonrawd.icon = 'ios-arrow-down-outline';
+        }
+        break;
+      case 'rival':
+        this.expand.rival.collapse = !this.expand.rival.collapse;
+        if (this.expand.rival.collapse) {
+          this.expand.rival.icon = 'ios-arrow-up-outline';
+        } else {
+          this.expand.rival.icon = 'ios-arrow-down-outline';
+        }
+        break;
+      case 'receipt':
+        this.expand.receipt.collapse = !this.expand.receipt.collapse;
+        if (this.expand.receipt.collapse) {
+          this.expand.receipt.icon = 'ios-arrow-up-outline';
+        } else {
+          this.expand.receipt.icon = 'ios-arrow-down-outline';
+        }
+        break;
+      default:
+        break;
+    }
   }
 
   popupInput(action, indexValue, indexPath) {

@@ -55,6 +55,9 @@ export class PopupInput {
       case 'equipment':
         title = 'อุปกรณ์ส่งเสริมการขาย';
         break;
+      case 'equipment_activity':
+        title = 'สื่อและพรีเมี่ยมกิจกรรม';
+        break;
       case 'note':
         title = 'หัวข้อติดตาม';
         break;

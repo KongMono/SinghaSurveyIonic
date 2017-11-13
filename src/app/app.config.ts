@@ -28,7 +28,7 @@ export const AppConfig: IAppConfig = {
   isLogged: null,
   pin_logged: null,
   userInfo: null,
-  isBuildDevice: true,
+  isBuildDevice: false,
   isProduction: false,
   versionApp: null,
   versionBuild: null,
@@ -43,7 +43,7 @@ export const AppConfig: IAppConfig = {
   endpoint_tracking: 'https://ws.boonrawd.co.th/SSV/api/CustGeo/',
   service: {
     customersList: {
-      url: "/v2/customers/list/format/json",
+      url: "/v3/customers/list/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -53,7 +53,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     login: {
-      url: "/v2/auth/login/format/json",
+      url: "/v3/auth/login/format/json",
       method: "POST",
       param: {
         username: "",
@@ -64,46 +64,46 @@ export const AppConfig: IAppConfig = {
       }
     },
     forgot: {
-      url: "/v2/auth/forgot/format/json",
+      url: "/v3/auth/forgot/format/json",
       method: "POST",
       param: {
         username: ""
       }
     },
     visitCycle: {
-      url: "/v2/visit/cycle/format/json",
+      url: "/v3/visit/cycle/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     customersCycle: {
-      url: "/v2/customers/cycle/format/json",
+      url: "/v3/customers/cycle/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     optionSearch: {
-      url: "/v2/options/search/format/json",
+      url: "/v3/options/search/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     uploadImageCustomer: {
-      url: "/v2/customers/image64/format/json",
+      url: "/v3/customers/image64/format/json",
       method: "POST",
       param: {}
     },
     uploadImageVisitCustomer: {
-      url: "/v2/visit/image64/format/json",
+      url: "/v3/visit/image64/format/json",
       method: "POST",
       param: {}
     },
 
     customersCheck: {
-      url: "/v2/customers/check/format/json",
+      url: "/v3/customers/check/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -112,7 +112,7 @@ export const AppConfig: IAppConfig = {
       },
     },
     customersChecked: {
-      url: "/v2/customers/checked/format/json",
+      url: "/v3/customers/checked/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -120,7 +120,7 @@ export const AppConfig: IAppConfig = {
       },
     },
     searchCustomer: {
-      url: "/v2/customers/search/format/json",
+      url: "/v3/customers/search/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -131,7 +131,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     searchVisitCustomer: {
-      url: "/v2/visit/list/format/json",
+      url: "/v3/visit/list/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -141,14 +141,14 @@ export const AppConfig: IAppConfig = {
       }
     },
     profile: {
-      url: "/v2/user/profile/format/json",
+      url: "/v3/user/profile/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     schedule: {
-      url: "/v2/schedule/list/format/json",
+      url: "/v3/schedule/list/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -157,7 +157,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     visit: {
-      url: "/v2/visit/list/format/json",
+      url: "/v3/visit/list/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -166,7 +166,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     customerDetail: {
-      url: "/v2/customers/customer/format/json",
+      url: "/v3/customers/customer/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -174,14 +174,14 @@ export const AppConfig: IAppConfig = {
       }
     },
     optionCustomer: {
-      url: "/v2/options/customer/format/json",
+      url: "/v3/options/customer/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     optionChannelCustomer: {
-      url: "/v2/options/channel/format/json",
+      url: "/v3/options/channel/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -189,21 +189,21 @@ export const AppConfig: IAppConfig = {
       }
     },
     optionCustomerFilter: {
-      url: "/v2/options/customer_filter/format/json",
+      url: "/v3/options/customer_filter/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     optionUser: {
-      url: "/v2/user/option/format/json",
+      url: "/v3/user/option/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     updateUser: {
-      url: "/v2/user/updated/format/json",
+      url: "/v3/user/updated/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -214,7 +214,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     visitCustomersListCheck: {
-      url: "/v2/visit/customers/format/json",
+      url: "/v3/visit/customers/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -223,7 +223,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     visitCustomersChecked: {
-      url: "/v2/visit/selected/format/json",
+      url: "/v3/visit/selected/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -231,7 +231,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     createCustomer: {
-      url: "/v2/customers/created/format/json",
+      url: "/v3/customers/created/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -260,7 +260,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     updateCustomer: {
-      url: "/v2/customers/updated/format/json",
+      url: "/v3/customers/updated/format/json",
       method: "POST",
       param: {
         customer_id: "",
@@ -290,35 +290,35 @@ export const AppConfig: IAppConfig = {
       }
     },
     optionVisitSale: {
-      url: "/v2/options/visit_sale/format/json",
+      url: "/v3/options/visit_sale/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     optionEquipment: {
-      url: "/v2/options/equipment/format/json",
+      url: "/v3/options/equipment/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     optionSale: {
-      url: "/v2/options/sale/format/json",
+      url: "/v3/options/sale/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     optionActivity: {
-      url: "/v2/options/activity/format/json",
+      url: "/v3/options/activity/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     visitActivityDetail: {
-      url: "/v2/visit/activity_row/format/json",
+      url: "/v3/visit/activity_row/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -326,7 +326,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     updateVisitCustomer: {
-      url: "/v2/visit/updated/format/json",
+      url: "/v3/visit/updated/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -344,7 +344,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     updateVisitActivity: {
-      url: "/v2/visit/create_activity/format/json",
+      url: "/v3/visit/create_activity/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -367,7 +367,7 @@ export const AppConfig: IAppConfig = {
     },
 
     visitCustomerDetail: {
-      url: "/v2/visit/row/format/json",
+      url: "/v3/visit/row/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -375,7 +375,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     deleteCustomer: {
-      url: "/v2/customers/deleted/format/json",
+      url: "/v3/customers/deleted/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -383,7 +383,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     deleteSchedule: {
-      url: "/v2/schedule/deleted/format/json",
+      url: "/v3/schedule/deleted/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -391,7 +391,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     updatedSchedule: {
-      url: "/v2/schedule/updated/format/json",
+      url: "/v3/schedule/updated/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -401,14 +401,14 @@ export const AppConfig: IAppConfig = {
       }
     },
     getScheduleCycleList: {
-      url: "/v2/schedule/cycle/format/json",
+      url: "/v3/schedule/cycle/format/json",
       method: "GET",
       param: {
         user_id: ""
       }
     },
     createdSchedule: {
-      url: "/v2/schedule/created/format/json",
+      url: "/v3/schedule/created/format/json",
       method: "POST",
       param: {
         user_id: "",
@@ -416,7 +416,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     getScheduleView: {
-      url: "/v2/schedule/cal/format/json",
+      url: "/v3/schedule/cal/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -424,7 +424,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     getScheduleDetailList: {
-      url: "/v2/schedule/row/format/json",
+      url: "/v3/schedule/row/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -432,7 +432,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     getOptionSchedule: {
-      url: "/v2/schedule/option/format/json",
+      url: "/v3/schedule/option/format/json",
       method: "GET",
       param: {
         user_id: "",
@@ -440,7 +440,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     checkVersion: {
-      url: "/v2/version/ios/format/json",
+      url: "/v3/version/ios/format/json",
       method: "GET",
       param: {
       }

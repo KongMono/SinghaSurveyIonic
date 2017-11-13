@@ -53,8 +53,13 @@
         </ion-item>
       </ion-row>
       <ion-row class="line-top-row">
-        <p class="text-title-retroact">ยอดสั่งซื้อย้อนหลัง 3 เดือนจากปัจจุบัน</p>
-        <ion-row class="row-full-size row-title" *ngFor="let order of visitCustomerDetailData.order">
+        <ion-col col-auto class="col-title">
+          <p>ยอดสั่งซื้อย้อนหลัง 3 เดือนจากปัจจุบัน</p>
+        </ion-col>
+        <ion-col class="col-title">
+          <ion-icon name="{{expand.order.icon}}" ion-button class="button-expand" (click)="expandCollapse('order')" tappable></ion-icon>
+        </ion-col>
+        <ion-row class="row-full-size row-title" *ngFor="let order of visitCustomerDetailData.order" [ngClass]="{'hide-expand-collapse': (expand.order.collapse == false)}">
           <span class="text-sub-title">ปี {{order.year}} เดือน {{order.month}}</span>
           <ion-row class="row-full-size" *ngFor="let value of order.value; let i = index" [ngClass]="{'hide-line-last-item': (order.value.length-1 == i)}"
             tappable>
@@ -107,8 +112,13 @@
         </ion-row>
       </ion-row> -->
       <ion-row class="line-top-row">
-        <p class="text-title-retroact">ยอดขายสินค้าบุญรอดย้อนหลัง 3 เดือนจากปัจจุบัน</p>
-        <ion-row class="row-full-size row-title" *ngFor="let boonrawd of visitCustomerDetailData.sale.boonrawd; let indexBoonrawd = index">
+        <ion-col col-auto class="col-title">
+          <p>ยอดขายสินค้าบุญรอดย้อนหลัง 3 เดือนจากปัจจุบัน</p>
+        </ion-col>
+        <ion-col class="col-title">
+          <ion-icon name="{{expand.boonrawd.icon}}" ion-button class="button-expand" (click)="expandCollapse('boonrawd')" tappable></ion-icon>
+        </ion-col>
+        <ion-row class="row-full-size row-title" *ngFor="let boonrawd of visitCustomerDetailData.sale.boonrawd; let indexBoonrawd = index" [ngClass]="{'hide-expand-collapse': (expand.boonrawd.collapse == false)}">
           <span class="text-sub-title">ปี {{boonrawd.year}} เดือน {{boonrawd.month}}</span>
           <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="boonrawd.status" (click)="popupInput('boonrawd', null, indexBoonrawd)"
             tappable></ion-icon>
@@ -141,8 +151,13 @@
         </ion-row>
       </ion-row>
       <ion-row class="line-top-row">
-        <p class="text-title-retroact">ยอดขายสินค้าคู่แข่งย้อนหลัง 3 เดือนจากปัจจุบัน</p>
-        <ion-row class="row-full-size row-title" *ngFor="let rival of visitCustomerDetailData.sale.rival; let indexRival = index">
+        <ion-col col-auto class="col-title">
+          <p>ยอดขายสินค้าคู่แข่งย้อนหลัง 3 เดือนจากปัจจุบัน</p>
+        </ion-col>
+        <ion-col class="col-title">
+          <ion-icon name="{{expand.rival.icon}}" ion-button class="button-expand" (click)="expandCollapse('rival')" tappable></ion-icon>
+        </ion-col>
+        <ion-row class="row-full-size row-title" *ngFor="let rival of visitCustomerDetailData.sale.rival; let indexRival = index" [ngClass]="{'hide-expand-collapse': (expand.rival.collapse == false)}">
           <span class="text-sub-title">ปี {{rival.year}} เดือน {{rival.month}}</span>
           <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="rival.status" (click)="popupInput('rival', null, indexRival)"
             tappable></ion-icon>
@@ -175,8 +190,13 @@
         </ion-row>
       </ion-row>
       <ion-row class="line-top-row">
-        <p class="text-title-retroact">แสดงแนบรูปใบเสร็จย้อนหลัง 3 เดือนจากปัจจุบัน</p>
-        <ion-row class="row-full-size row-title" *ngFor="let receipt of visitCustomerDetailData.receipt; let indexMonth = index">
+        <ion-col col-auto class="col-title">
+          <p>แสดงแนบรูปใบเสร็จย้อนหลัง 3 เดือนจากปัจจุบัน</p>
+        </ion-col>
+        <ion-col class="col-title">
+          <ion-icon name="{{expand.receipt.icon}}" ion-button class="button-expand" (click)="expandCollapse('receipt')" tappable></ion-icon>
+        </ion-col>
+        <ion-row class="row-full-size row-title" *ngFor="let receipt of visitCustomerDetailData.receipt; let indexMonth = index" [ngClass]="{'hide-expand-collapse': (expand.receipt.collapse == false)}">
           <span class="text-sub-title">ปี {{receipt.year}} เดือน {{receipt.month}}</span>
           <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="receipt.status" (click)="addImage('receipt', indexMonth)"
             tappable></ion-icon>

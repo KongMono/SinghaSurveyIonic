@@ -213,13 +213,13 @@
       </ion-row>
       <ion-row class="line-top-row">
         <ion-col>
-          <p>อุปกรณ์ส่งเสริมการขาย</p>
+          <p>สื่อและพรีเมี่ยมกิจกรรม</p>
         </ion-col>
         <ion-col>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('equipment')" tappable></ion-icon>
+          <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('equipment_activity')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let equipment of visitActivityDetail.equipment; let i = index" (click)="actionSheetInList('equipment', i)"
+      <ion-row *ngFor="let equipment of visitActivityDetail.equipment; let i = index" (click)="actionSheetInList('equipment_activity', i)"
         [ngClass]="{'hide-line-last-item': (visitActivityDetailData.equipment.length-1 == i)}" tappable>
         <ion-item>
           <ion-row class="row-full-size">
@@ -256,7 +256,7 @@
           </ion-row>
         </ion-item>
       </ion-row>
-      <ion-row class="line-top-row">
+      <!-- <ion-row class="line-top-row">
         <ion-col>
           <p>รูปอุปกรณ์ส่งเสริมการขาย</p>
         </ion-col>
@@ -271,7 +271,7 @@
               height="80px" width="auto" style="margin: 0 10px;" tappable/>
           </div>
         </ion-scroll>
-      </ion-row>
+      </ion-row> -->
       <ion-row class="line-top-row">
         <ion-col>
           <p>รูปกิจกรรม</p>

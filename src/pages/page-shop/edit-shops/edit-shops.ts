@@ -413,6 +413,11 @@ export class EditShopsPage {
       return;
     }
 
+    if (this.optionCustomer.customer_group[this.indexCustomerGroup].customer_type[this.indexCustomerType].customer_type_id == ("58")) {
+      this.util.showAlertDialog("กรุณากรอกรหัส ARM");
+      return;
+    }
+
     if (this.optionCustomer.customer_group[this.indexCustomerGroup].project_type[this.indexProjectType].project_type_id == ("99999")) {
       this.util.showAlertDialog("กรุณาเลือกโครงการ");
       return;
@@ -584,8 +589,9 @@ export class EditShopsPage {
     }
 
     this.service.updateCustomer(
-      this.customerDetailData.customer_id,
       this.config.userInfo.username,
+      this.customerDetailData.customer_id,
+      this.customerDetailData.code,
       this.customerDetailData.name,
       this.customerDetailData.latitude,
       this.customerDetailData.longitude,
