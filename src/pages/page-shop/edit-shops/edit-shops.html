@@ -28,7 +28,9 @@
     <ion-grid>
       <ion-row>
         <ion-col col-3>
-          <p>ตำแหน่ง<span class="required">*</span></p>
+          <p>ตำแหน่ง
+            <span class="required">*</span>
+          </p>
         </ion-col>
         <ion-col>
           <ion-item>
@@ -59,7 +61,9 @@
       </ion-row>
       <ion-row>
         <ion-col col-3>
-          <p>ชื่อร้าน<span class="required">*</span></p>
+          <p>ชื่อร้าน
+            <span class="required">*</span>
+          </p>
         </ion-col>
         <ion-col>
           <ion-item>
@@ -69,7 +73,9 @@
       </ion-row>
       <ion-row>
         <ion-col col-3>
-          <p>ที่อยู่<span class="required">*</span></p>
+          <p>ที่อยู่
+            <span class="required">*</span>
+          </p>
         </ion-col>
         <ion-col>
           <ion-item>
@@ -80,7 +86,9 @@
       </ion-row>
       <ion-row>
         <ion-col col-3>
-          <p>จังหวัด<span class="required">*</span></p>
+          <p>จังหวัด
+            <span class="required">*</span>
+          </p>
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list">
@@ -92,7 +100,9 @@
       </ion-row>
       <ion-row>
         <ion-col col-3>
-          <p>อำเภอ<span class="required">*</span></p>
+          <p>อำเภอ
+            <span class="required">*</span>
+          </p>
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list">
@@ -104,7 +114,9 @@
       </ion-row>
       <ion-row>
         <ion-col col-3>
-          <p>ตำบล<span class="required">*</span></p>
+          <p>ตำบล
+            <span class="required">*</span>
+          </p>
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list">
@@ -116,7 +128,9 @@
       </ion-row>
       <ion-row>
         <ion-col col-auto style="padding-right: 0;">
-          <p>รหัสไปรษณีย์<span class="required">*</span></p>
+          <p>รหัสไปรษณีย์
+            <span class="required">*</span>
+          </p>
         </ion-col>
         <ion-col class="wrap-col wrap-length">
           <ion-item>
@@ -140,7 +154,9 @@
       </ion-row>
       <ion-row>
         <ion-col col-3>
-          <p>กลุ่มร้านค้า<span class="required">*</span></p>
+          <p>กลุ่มร้านค้า
+            <span class="required">*</span>
+          </p>
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list">
@@ -152,7 +168,9 @@
       </ion-row>
       <ion-row>
         <ion-col col-auto style="padding-right: 0;">
-          <p>ประเภทร้านค้า<span class="required">*</span></p>
+          <p>ประเภทร้านค้า
+            <span class="required">*</span>
+          </p>
         </ion-col>
         <ion-col class="wrap-col">
           <ion-list class="wrap-list">
@@ -175,7 +193,9 @@
       </ion-row>
       <ion-row>
         <ion-col col-3>
-          <p>โครงการ<span class="required">*</span></p>
+          <p>โครงการ
+            <span class="required">*</span>
+          </p>
         </ion-col>
         <ion-col>
           <ion-list class="wrap-list">
@@ -183,6 +203,42 @@
               {{ optionCustomer.customer_group[indexCustomerGroup].project_type[indexProjectType].name }}
             </button>
           </ion-list>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="wrap-col-30">
+          <p>ความสัมพันธ์
+            <span class="required">*</span>
+          </p>
+        </ion-col>
+        <ion-col class="wrap-col-70">
+          <ion-row>
+            <ion-col>
+              <ion-item class="item-checkbox">
+                <ion-label>ไม่มีสาขา</ion-label>
+                <ion-checkbox></ion-checkbox>
+                <!-- <ion-checkbox checked="status.progress" [(ngModel)]="status.progress" (ngModelChange)="changeStatus('progress')"></ion-checkbox> -->
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item class="item-checkbox">
+                <ion-label>สาขาใหญ่</ion-label>
+                <ion-checkbox></ion-checkbox>
+                <!-- <ion-checkbox checked="status.complete" [(ngModel)]="status.complete" (ngModelChange)="changeStatus('complete')"></ion-checkbox> -->
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item class="item-checkbox">
+                <ion-label>สาขาย่อย</ion-label>
+                <ion-checkbox></ion-checkbox>
+                <!-- <ion-checkbox checked="status.complete" [(ngModel)]="status.complete" (ngModelChange)="changeStatus('complete')"></ion-checkbox> -->
+              </ion-item>
+            </ion-col>
+          </ion-row>
         </ion-col>
       </ion-row>
       <ion-row class="line-top-row">
@@ -193,7 +249,8 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('freezer')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let freezer of customerDetailData.freezer; let i = index" (click)="actionSheetInList('freezer', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.freezer.length-1 == i)}" tappable>
+      <ion-row *ngFor="let freezer of customerDetailData.freezer; let i = index" (click)="actionSheetInList('freezer', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.freezer.length-1 == i)}"
+        tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -221,7 +278,8 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('pg')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let pg of customerDetailData.pg; let i = index" (click)="actionSheetInList('pg', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.pg.length-1 == i)}" tappable>
+      <ion-row *ngFor="let pg of customerDetailData.pg; let i = index" (click)="actionSheetInList('pg', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.pg.length-1 == i)}"
+        tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -249,7 +307,8 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('contacts')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let contacts of customerDetailData.contacts; let i = index" (click)="actionSheetInList('contacts', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.contacts.length-1 == i)}" tappable>
+      <ion-row *ngFor="let contacts of customerDetailData.contacts; let i = index" (click)="actionSheetInList('contacts', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.contacts.length-1 == i)}"
+        tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -293,7 +352,8 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('channels')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let channels of customerDetail.channels; let i = index" (click)="actionSheetInList('channels', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.channels.length-1 == i)}" tappable>
+      <ion-row *ngFor="let channels of customerDetail.channels; let i = index" (click)="actionSheetInList('channels', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.channels.length-1 == i)}"
+        tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">
@@ -321,7 +381,8 @@
           <ion-icon name="_icon-plus" ion-button class="button-add-input" (click)="popupInput('callcard')" tappable></ion-icon>
         </ion-col>
       </ion-row>
-      <ion-row *ngFor="let callcard of customerDetailData.callcard; let i = index" (click)="actionSheetInList('callcard', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.callcard.length-1 == i)}" tappable>
+      <ion-row *ngFor="let callcard of customerDetailData.callcard; let i = index" (click)="actionSheetInList('callcard', i)" [ngClass]="{'hide-line-last-item': (customerDetailData.callcard.length-1 == i)}"
+        tappable>
         <ion-item>
           <ion-row class="row-full-size">
             <ion-col col-6 class="col-sub">

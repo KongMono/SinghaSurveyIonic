@@ -141,31 +141,37 @@ export class TabShop {
   }
 
   enableLocation() {
-    this.util.showLoading();
-    this.waitData = true;
-    this.geolocation.getCurrentPosition()
-      .then((resp) => {
-        this.util.hideLoading();
-        this.location.lat = resp.coords.latitude;
-        this.location.long = resp.coords.longitude;
-        this.callCustomerList();
-      }).catch((error) => {
-        this.util.hideLoading();
-        this.callCustomerList();
-        console.log('Error getting location', error);
-      });
-
-    if (this.config.isBuildDevice) {
-      this.locationAccuracy.canRequest().then(
-        (canRequest: boolean) => {
-          if (canRequest) {
-            // the accuracy option will be ignored by iOS
-            this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
-              () => alert('Request successful'),
-              error => alert('Error requesting location permissions' + JSON.stringify(error))
-            );
-          }
+    if (this.config.latitude && this.config.longitude) {
+      this.location.lat = this.config.latitude;
+      this.location.long = this.config.longitude;
+      this.callCustomerList();
+    } else {
+      this.util.showLoading();
+      this.waitData = true;
+      this.geolocation.getCurrentPosition()
+        .then((resp) => {
+          this.util.hideLoading();
+          this.location.lat = resp.coords.latitude;
+          this.location.long = resp.coords.longitude;
+          this.callCustomerList();
+        }).catch((error) => {
+          this.util.hideLoading();
+          this.callCustomerList();
+          console.log('Error getting location', error);
         });
+  
+      if (this.config.isBuildDevice) {
+        this.locationAccuracy.canRequest().then(
+          (canRequest: boolean) => {
+            if (canRequest) {
+              // the accuracy option will be ignored by iOS
+              this.locationAccuracy.request(this.locationAccuracy.REQUEST_PRIORITY_HIGH_ACCURACY).then(
+                () => alert('Request successful'),
+                error => alert('Error requesting location permissions' + JSON.stringify(error))
+              );
+            }
+          });
+      }
     }
   }
 
