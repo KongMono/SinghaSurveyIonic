@@ -239,6 +239,15 @@
               </ion-item>
             </ion-col>
           </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item class="item-select">
+                <ion-select interface="popover" [(ngModel)]="hqCustomers">
+                  <ion-option *ngFor="let hq_customers of optionCustomer.hq_customers" [value]="hq_customers.customer_id">{{hq_customers.name}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
         </ion-col>
       </ion-row>
       <ion-row class="line-top-row">

@@ -145,6 +145,7 @@ interface CustomerDetailModel {
   founder_date: string;
   status: string;
   remark: string;
+  parent_customer_id: string;
   user_last_updated: string;
   updated_at: string;
   created_at: string;
@@ -359,6 +360,12 @@ interface optionCustomerModel {
   province: Province[];
   customer_group: Customergroup[];
   status: Status[];
+  hq_customers: HQ_customers[];
+}
+
+interface HQ_customers {
+  customer_id: string;
+  name: string;
 }
 
 interface Status {

@@ -170,6 +170,15 @@ page-edit-shops {
                 border-bottom: none !important;
             }
         }
+        .item-select {
+            .select {
+                width: 100%;
+                max-width: 100%;
+            }
+            .item-inner {
+                border-bottom: none !important;
+            }
+        }
         .button-edit {
             width: 100%;
             background-color: $singha-survey-color-gray-3;

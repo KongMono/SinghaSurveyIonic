@@ -48,6 +48,7 @@ export class AddShopsPage {
     founder_date: "",
     status: "",
     remark: "",
+    parent_customer_id: "",
     user_last_updated: "",
     updated_at: "",
     created_at: "",
