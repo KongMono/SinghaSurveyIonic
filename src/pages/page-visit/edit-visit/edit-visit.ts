@@ -243,6 +243,8 @@ export class EditVisitPage {
   checkNoteEndDate(endDate) {
     if (!endDate) {
       return 'ไม่ระบุ';
+    } else {
+      return endDate;
     }
   }
 
