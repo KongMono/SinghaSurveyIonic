@@ -151,6 +151,34 @@ page-add-shops {
             font-size: 22px;
             color: $singha-survey-color-primary;
         }
+        .wrap-col-30 {
+            flex: 0 0 30%;
+            width: 30%;
+            max-width: 30%;
+        }
+        .wrap-col-70 {
+            flex: 0 0 70%;
+            width: 70%;
+            max-width: 70%;
+        }
+        .item-checkbox {
+            .checkbox {
+                margin: 9px 4px !important;
+            }
+            .item-inner {
+                padding-right: 0 !important;
+                border-bottom: none !important;
+            }
+        }
+        .item-select {
+            .select {
+                width: 100%;
+                max-width: 100%;
+            }
+            .item-inner {
+                border-bottom: none !important;
+            }
+        }
         .button-edit {
             width: 100%;
             background-color: $singha-survey-color-gray-3;

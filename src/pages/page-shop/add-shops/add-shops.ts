@@ -69,6 +69,12 @@ export class AddShopsPage {
     channels: []
   }
   indexStatus = 0;
+  relation = {
+    noBranch: true,
+    mainCenter: false,
+    branch: false
+  }
+
   constructor(
     public app: App,
     private http: Http,
@@ -104,6 +110,7 @@ export class AddShopsPage {
     });
 
     this.getOptionCustomer();
+    this.setParentCustomer();
   }
 
 
@@ -184,6 +191,61 @@ export class AddShopsPage {
           }
         }
       }
+    }
+  }
+
+  setParentCustomer() {
+    if (this.customerDetailData.parent_customer_id) {
+      if (this.customerDetailData.parent_customer_id == '0') {
+        this.relation.noBranch = true;
+        this.relation.mainCenter = false;
+        this.relation.branch = false;
+      } else if (this.customerDetailData.parent_customer_id == '1') {
+        this.relation.noBranch = false;
+        this.relation.mainCenter = true;
+        this.relation.branch = false;
+      } else {
+        this.relation.noBranch = false;
+        this.relation.mainCenter = false;
+        this.relation.branch = true;
+      }
+    } else {
+      this.relation.noBranch = true;
+      this.relation.mainCenter = false;
+      this.relation.branch = false;
+      this.customerDetailData.parent_customer_id = '0';
+    }
+  }
+
+  changeRelation(event, action) {
+    if (action == 'noBranch') {
+      this.relation.noBranch = event;
+      this.relation.mainCenter = false;
+      this.relation.branch = false;
+      this.customerDetailData.parent_customer_id = '0';
+    } else if (action == 'mainCenter') {
+      this.relation.noBranch = false;
+      this.relation.mainCenter = event;
+      this.relation.branch = false;
+      this.customerDetailData.parent_customer_id = '1';
+    } else if (action == 'branch') {
+      this.relation.noBranch = false;
+      this.relation.mainCenter = false;
+      this.relation.branch = event;
+      if (!this.customerDetailData.parent_customer_id || this.customerDetailData.parent_customer_id == '0' || this.customerDetailData.parent_customer_id == '1') {
+        this.customerDetailData.parent_customer_id = this.optionCustomer.hq_customers[0].customer_id;
+      }
+    }
+    if (!this.relation.noBranch && !this.relation.mainCenter && !this.relation.branch) {
+      setTimeout(() => {
+        if (action == 'noBranch') {
+          this.relation.noBranch = true;
+        } else if (action == 'mainCenter') {
+          this.relation.mainCenter = true;
+        } else if (action == 'branch') {
+          this.relation.branch = true;
+        }
+      }, 0);
     }
   }
 
@@ -481,6 +543,11 @@ export class AddShopsPage {
       return;
     }
 
+    if (this.util.isEmpty(this.customerDetailData.parent_customer_id)) {
+      this.util.showAlertDialog("กรุณาเลือกความสัมพันธ์");
+      return;
+    }
+
     if (this.util.isEmpty(this.customerDetailData.name)) {
       this.util.showAlertDialog("กรุณากรอกชื่อร้านให้ถูกต้อง");
       return;
@@ -532,6 +599,7 @@ export class AddShopsPage {
       this.customerDetailData.founder_date,
       this.optionCustomer.status[this.indexStatus].status_id,
       this.customerDetailData.remark,
+      this.customerDetailData.parent_customer_id,
       JSON.stringify(this.customerDetailData.contacts),
       JSON.stringify(this.customerDetailData.channels),
       JSON.stringify(this.customerDetailData.freezer),

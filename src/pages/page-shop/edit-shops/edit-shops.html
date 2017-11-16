@@ -216,8 +216,7 @@
             <ion-col>
               <ion-item class="item-checkbox">
                 <ion-label>ไม่มีสาขา</ion-label>
-                <ion-checkbox></ion-checkbox>
-                <!-- <ion-checkbox checked="status.progress" [(ngModel)]="status.progress" (ngModelChange)="changeStatus('progress')"></ion-checkbox> -->
+                <ion-checkbox checked="relation.noBranch" [(ngModel)]="relation.noBranch" (ngModelChange)="changeRelation($event, 'noBranch')" ></ion-checkbox>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -225,8 +224,7 @@
             <ion-col>
               <ion-item class="item-checkbox">
                 <ion-label>สาขาใหญ่</ion-label>
-                <ion-checkbox></ion-checkbox>
-                <!-- <ion-checkbox checked="status.complete" [(ngModel)]="status.complete" (ngModelChange)="changeStatus('complete')"></ion-checkbox> -->
+                <ion-checkbox checked="relation.mainCenter" [(ngModel)]="relation.mainCenter" (ngModelChange)="changeRelation($event, 'mainCenter')" ></ion-checkbox>
               </ion-item>
             </ion-col>
           </ion-row>
@@ -234,15 +232,14 @@
             <ion-col>
               <ion-item class="item-checkbox">
                 <ion-label>สาขาย่อย</ion-label>
-                <ion-checkbox></ion-checkbox>
-                <!-- <ion-checkbox checked="status.complete" [(ngModel)]="status.complete" (ngModelChange)="changeStatus('complete')"></ion-checkbox> -->
+                <ion-checkbox checked="relation.branch" [(ngModel)]="relation.branch" (ngModelChange)="changeRelation($event, 'branch')" ></ion-checkbox>
               </ion-item>
             </ion-col>
           </ion-row>
-          <ion-row>
+          <ion-row *ngIf="customerDetailData.parent_customer_id != '0' && customerDetailData.parent_customer_id != '1'">
             <ion-col>
               <ion-item class="item-select">
-                <ion-select interface="popover" [(ngModel)]="hqCustomers">
+                <ion-select interface="popover" [(ngModel)]="customerDetailData.parent_customer_id">
                   <ion-option *ngFor="let hq_customers of optionCustomer.hq_customers" [value]="hq_customers.customer_id">{{hq_customers.name}}</ion-option>
                 </ion-select>
               </ion-item>

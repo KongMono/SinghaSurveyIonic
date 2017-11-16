@@ -174,6 +174,48 @@
           </ion-list>
         </ion-col>
       </ion-row>
+      <ion-row>
+        <ion-col class="wrap-col-30">
+          <p>ความสัมพันธ์
+            <span class="required">*</span>
+          </p>
+        </ion-col>
+        <ion-col class="wrap-col-70">
+          <ion-row>
+            <ion-col>
+              <ion-item class="item-checkbox">
+                <ion-label>ไม่มีสาขา</ion-label>
+                <ion-checkbox checked="relation.noBranch" [(ngModel)]="relation.noBranch" (ngModelChange)="changeRelation($event, 'noBranch')" ></ion-checkbox>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item class="item-checkbox">
+                <ion-label>สาขาใหญ่</ion-label>
+                <ion-checkbox checked="relation.mainCenter" [(ngModel)]="relation.mainCenter" (ngModelChange)="changeRelation($event, 'mainCenter')" ></ion-checkbox>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item class="item-checkbox">
+                <ion-label>สาขาย่อย</ion-label>
+                <ion-checkbox checked="relation.branch" [(ngModel)]="relation.branch" (ngModelChange)="changeRelation($event, 'branch')" ></ion-checkbox>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngIf="customerDetailData.parent_customer_id != '0' && customerDetailData.parent_customer_id != '1'">
+            <ion-col>
+              <ion-item class="item-select">
+                <ion-select interface="popover" [(ngModel)]="customerDetailData.parent_customer_id" *ngIf="optionCustomer">
+                  <ion-option *ngFor="let hq_customers of optionCustomer.hq_customers" [value]="hq_customers.customer_id">{{hq_customers.name}}</ion-option>
+                </ion-select>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
       <ion-row class="line-top-row">
         <ion-col>
           <p>ข้อมูลตู้แช่</p>
