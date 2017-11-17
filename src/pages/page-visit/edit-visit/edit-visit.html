@@ -120,12 +120,12 @@
         </ion-col>
         <ion-row class="row-full-size row-title" *ngFor="let boonrawd of visitCustomerDetailData.sale.boonrawd; let indexBoonrawd = index" [ngClass]="{'hide-expand-collapse': (expand.boonrawd.collapse == false)}">
           <span class="text-sub-title">ปี {{boonrawd.year}} เดือน {{boonrawd.month}}</span>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="boonrawd.status" (click)="popupInput('boonrawd', null, indexBoonrawd)"
+          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="boonrawd.status" (click)="popupInput('boonrawd_new', null, indexBoonrawd)"
             tappable></ion-icon>
-          <ion-row class="row-full-size" *ngFor="let value of visitCustomerDetail.boonrawd[indexBoonrawd].value; let i = index" (click)="actionSheetInList('boonrawd', i, indexBoonrawd)"
+          <ion-row class="row-full-size" *ngFor="let value of boonrawd.value; let i = index" (click)="actionSheetInList('boonrawd', i, indexBoonrawd)"
             [ngClass]="{'hide-line-last-item': (boonrawd.value.length-1 == i)}" tappable>
             <ion-item class="item-sub-title">
-              <span class="text-title-product">{{value.product.product_name}}</span>
+              <span class="text-title-product">{{value.product_name}}</span>
               <ion-row class="row-full-size">
                 <ion-col col-2 class="col-sub value-row">
                   <span class="text-title-sub">ขาย</span>
@@ -159,12 +159,12 @@
         </ion-col>
         <ion-row class="row-full-size row-title" *ngFor="let rival of visitCustomerDetailData.sale.rival; let indexRival = index" [ngClass]="{'hide-expand-collapse': (expand.rival.collapse == false)}">
           <span class="text-sub-title">ปี {{rival.year}} เดือน {{rival.month}}</span>
-          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="rival.status" (click)="popupInput('rival', null, indexRival)"
+          <ion-icon name="_icon-plus" ion-button class="button-add-input-retroact" *ngIf="rival.status" (click)="popupInput('rival_new', null, indexRival)"
             tappable></ion-icon>
-          <ion-row class="row-full-size" *ngFor="let value of visitCustomerDetail.rival[indexRival].value; let i = index" (click)="actionSheetInList('rival', i, indexRival)"
+          <ion-row class="row-full-size" *ngFor="let value of rival.value; let i = index" (click)="actionSheetInList('rival', i, indexRival)"
             [ngClass]="{'hide-line-last-item': (rival.value.length-1 == i)}" tappable>
             <ion-item class="item-sub-title">
-              <span class="text-title-product">{{value.product.product_name}}</span>
+              <span class="text-title-product">{{value.product_name}}</span>
               <ion-row class="row-full-size">
                 <ion-col col-2 class="col-sub value-row">
                   <span class="text-title-sub">ขาย</span>
@@ -324,13 +324,13 @@
               <span class="text-value-sub">{{note.howto}}</span>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="note.images.length > 0" style="height: 80px;">
+          <!-- <ion-row *ngIf="note.images.length > 0" style="height: 80px;">
             <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
               <div style="display: flex">
                 <img *ngFor="let images of note.images" [src]="getImagePath(images)" height="80px" width="auto" style="margin: 0 10px;" tappable/>
               </div>
             </ion-scroll>
-          </ion-row>
+          </ion-row> -->
         </ion-item>
       </ion-row>
       <ion-row>

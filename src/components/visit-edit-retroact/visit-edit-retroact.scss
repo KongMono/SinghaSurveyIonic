@@ -1,4 +1,4 @@
-visit-add-retroact {
+visit-edit-retroact {
     .wrap-list {
         margin: 0;
         .item {
@@ -12,14 +12,16 @@ visit-add-retroact {
             }
         }
     }
-    .button-add {
-        background-color: $singha-survey-color-gray-3;
-        color: $singha-survey-color-primaryDark;
-    }
     .wrap-input {
         input {
             margin: 5px 8px;
             line-height: 32px;
         }
+    }
+    .button-save {
+        margin: auto;
+        display: flex;
+        background-color: $singha-survey-color-gray-3;
+        color: $singha-survey-color-primaryDark;
     }
 }

@@ -6,10 +6,13 @@
       </button>
     </ion-buttons>
     <ion-title class="title">{{title()}}</ion-title>
-    <ion-buttons right>
+    <ion-buttons right *ngIf="action != 'boonrawd_new' && action != 'rival_new'">
       <button icon-only style="background-color:#455A64">
         <ion-icon class="icon-size"></ion-icon>
       </button>
+    </ion-buttons>
+    <ion-buttons right *ngIf="action == 'boonrawd_new' || action == 'rival_new'">
+      <button ion-button (click)="save()">บันทึก</button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -22,6 +25,7 @@
     <shop-add-pg *ngIf="action == 'pg'" [customerDetailDataInput]="data" [index]="index" (customerDetailDataOutput)="reciveDataFromInput($event)"></shop-add-pg>
     <visit-add-equipment *ngIf="action == 'equipment' || action == 'equipment_activity'" [data]="data" [option]="option" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-add-equipment>
     <visit-add-note *ngIf="action == 'note'" [data]="data" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-add-note>
-    <visit-add-retroact *ngIf="action == 'boonrawd' || action == 'rival'" [action]="action" [data]="data" [option]="option" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-add-retroact>
+    <visit-add-retroact *ngIf="action == 'boonrawd_new' || action == 'rival_new'" [action]="action" [data]="data" [option]="option" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-add-retroact>
+    <visit-edit-retroact *ngIf="action == 'boonrawd' || action == 'rival'" [action]="action" [data]="data" [index]="index" (callbackData)="reciveDataFromInput($event)"></visit-edit-retroact>
     <activity-visit-add-sales *ngIf="action == 'sales'" [data]="data" [option]="option" [index]="index" (callbackData)="reciveDataFromInput($event)"></activity-visit-add-sales>
 </ion-content>

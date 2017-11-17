@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
+import { VisitAddRetroact } from './../../components/visit-add-retroact/visit-add-retroact';
 
 @IonicPage()
 @Component({
   selector: 'page-popup-input',
   templateUrl: 'popup-input.html',
+  providers: [VisitAddRetroact]
 })
 
 export class PopupInput {
@@ -14,7 +16,7 @@ export class PopupInput {
   index: any;
   callback: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, public visitAddRetroact: VisitAddRetroact) {
     this.action = navParams.get('action');
     this.data = navParams.get('data');
     this.option = navParams.get('option');
@@ -32,6 +34,10 @@ export class PopupInput {
 
   backPage() {
     this.navCtrl.pop({animate: true, animation: 'transition', direction: 'back'});
+  }
+
+  save() {
+    this.visitAddRetroact.save();
   }
 
   title() {
@@ -62,9 +68,11 @@ export class PopupInput {
         title = 'หัวข้อติดตาม';
         break;
       case 'boonrawd':
+      case 'boonrawd_new':
         title = 'ยอดขายสินค้าบุญรอดย้อนหลัง 3 เดือนจากปัจจุบัน';
         break;
       case 'rival':
+      case 'rival_new':
         title = 'ยอดขายสินค้าคู่แข่งย้อนหลัง 3 เดือนจากปัจจุบัน';
         break;
       case 'sales':

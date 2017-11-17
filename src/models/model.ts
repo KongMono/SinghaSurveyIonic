@@ -160,8 +160,19 @@ interface CustomerDetailModel {
 interface optionsVisitSaleModel {
   boonrawd: Boonrawd[];
   rival: Boonrawd[];
+  config: Config;
+}
+interface Config {
+  qty: string;
+  buy: string;
+  stock: string;
 }
 interface Boonrawd {
+  product_group_id: string;
+  product_group_name: string;
+  products: Product[];
+}
+interface Product {
   product_id: string;
   product_name: string;
 }

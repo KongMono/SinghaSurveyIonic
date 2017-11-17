@@ -1,0 +1,44 @@
+<div>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <p>{{productName}}</p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <p>ขาย</p>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="qty"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <p>ซื้อ</p>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="buy"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-3>
+        <p>stock</p>
+      </ion-col>
+      <ion-col>
+        <ion-item>
+          <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="stock"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-12>
+        <button ion-button class="button-save" (click)="save()">บันทึก</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>

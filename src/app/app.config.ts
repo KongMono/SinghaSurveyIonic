@@ -290,7 +290,7 @@ export const AppConfig: IAppConfig = {
       }
     },
     optionVisitSale: {
-      url: "/v3/options/visit_sale/format/json",
+      url: "/v3/options/visit_sale_new/format/json",
       method: "GET",
       param: {
         user_id: ""

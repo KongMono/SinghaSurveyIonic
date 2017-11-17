@@ -4,45 +4,50 @@
       <ion-col>
         <ion-list class="wrap-list">
           <button ion-item (click)="selectOption('product')">
-            {{ optionsVisitSale[indexProduct].product_name }}
+            {{ optionsVisitSale[indexProduct].product_group_name }}
           </button>
         </ion-list>
       </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-3>
-        <p>ขาย</p>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="qty"></ion-input>
-        </ion-item>
+      <ion-col col-3 align="right">
+        <button ion-button class="button-add" (click)="add()">เพิ่ม</button>
       </ion-col>
     </ion-row>
-    <ion-row>
-      <ion-col col-3>
-        <p>ซื้อ</p>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="buy"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-3>
-        <p>stock</p>
-      </ion-col>
-      <ion-col>
-        <ion-item>
-          <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="stock"></ion-input>
-        </ion-item>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col col-12>
-        <button ion-button class="button-save" (click)="save()">บันทึก</button>
-      </ion-col>
-    </ion-row>
+    <div *ngFor="let products of optionsVisitSale[indexProduct].products; let i = index">
+      <ion-row>
+        <ion-col>
+          <p>{{products.product_name}}</p>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>ขาย</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="qty"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>ซื้อ</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="buy"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col col-3>
+          <p>stock</p>
+        </ion-col>
+        <ion-col>
+          <ion-item>
+            <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="stock"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+    </div>
   </ion-grid>
 </div>

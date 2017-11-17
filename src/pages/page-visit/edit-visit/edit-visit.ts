@@ -144,64 +144,7 @@ export class EditVisitPage {
   }
 
   setVisitCustomerDetailData() {
-    this.setVisitCustomerDetailDataBoonrawd();
-    this.setVisitCustomerDetailDataRival();
     this.setVisitCustomerDetailDataEquipment();
-  }
-
-
-  setVisitCustomerDetailDataBoonrawd() {
-    for (var i = 0; i < this.visitCustomerDetailData.sale.boonrawd.length; i++) {
-      if (this.visitCustomerDetailData.sale.boonrawd[i].value.length > 0) {
-        this.visitCustomerDetail.boonrawd[i].value = [];
-        for (var j = 0; j < this.visitCustomerDetailData.sale.boonrawd[i].value.length; j++) {
-          for (var indexProduct = 0; indexProduct < this.optionsVisitSale.boonrawd.length; indexProduct++) {
-            if (this.optionsVisitSale.boonrawd[indexProduct].product_id == this.visitCustomerDetailData.sale.boonrawd[i].value[j].product_id) {
-              let boonrawd = {
-                product: this.optionsVisitSale.boonrawd[indexProduct],
-                qty: this.visitCustomerDetailData.sale.boonrawd[i].value[j].qty,
-                buy: this.visitCustomerDetailData.sale.boonrawd[i].value[j].buy,
-                stock: this.visitCustomerDetailData.sale.boonrawd[i].value[j].stock
-              }
-              this.visitCustomerDetail.boonrawd[i].value.push(boonrawd);
-              indexProduct = this.optionsVisitSale.boonrawd.length;
-            }
-          }
-        }
-      } else {
-        let boonrawd = {
-          value: []
-        }
-        this.visitCustomerDetail.boonrawd.push(boonrawd);
-      }
-    }
-  }
-
-  setVisitCustomerDetailDataRival() {
-    for (var i = 0; i < this.visitCustomerDetailData.sale.rival.length; i++) {
-      if (this.visitCustomerDetailData.sale.rival[i].value.length > 0) {
-        this.visitCustomerDetail.rival[i].value = [];
-        for (var j = 0; j < this.visitCustomerDetailData.sale.rival[i].value.length; j++) {
-          for (var indexProduct = 0; indexProduct < this.optionsVisitSale.rival.length; indexProduct++) {
-            if (this.optionsVisitSale.rival[indexProduct].product_id == this.visitCustomerDetailData.sale.rival[i].value[j].product_id) {
-              let rival = {
-                product: this.optionsVisitSale.rival[indexProduct],
-                qty: this.visitCustomerDetailData.sale.rival[i].value[j].qty,
-                buy: this.visitCustomerDetailData.sale.rival[i].value[j].buy,
-                stock: this.visitCustomerDetailData.sale.rival[i].value[j].stock
-              }
-              this.visitCustomerDetail.rival[i].value.push(rival);
-              indexProduct = this.optionsVisitSale.rival.length;
-            }
-          }
-        }
-      } else {
-        let rival = {
-          value: []
-        }
-        this.visitCustomerDetail.rival.push(rival);
-      }
-    }
   }
 
   setVisitCustomerDetailDataEquipment() {
@@ -332,10 +275,10 @@ export class EditVisitPage {
   popupInput(action, indexValue, indexPath) {
     let option;
     let index = indexValue;
-    if (action == 'boonrawd' || action == 'rival') {
-      if (action == 'boonrawd') {
+    if (action == 'boonrawd' || action == 'boonrawd_new' || action == 'rival' || action == 'rival_new') {
+      if (action == 'boonrawd_new') {
         option = this.optionsVisitSale.boonrawd;
-      } else if (action == 'rival') {
+      } else if (action == 'rival_new') {
         option = this.optionsVisitSale.rival;
       }
       index = {
@@ -355,11 +298,7 @@ export class EditVisitPage {
       console.log(_params);
       if (_params.data) {
         this.visitCustomerDetailData = _params.data;
-        if (_params.action == 'boonrawd') {
-          this.setVisitCustomerDetailDataBoonrawd();
-        } else if (_params.action == 'rival') {
-          this.setVisitCustomerDetailDataRival();
-        } else if (_params.action == 'equipment') {
+        if (_params.action == 'equipment') {
           this.setVisitCustomerDetailDataEquipment();
         }
         resolve();
