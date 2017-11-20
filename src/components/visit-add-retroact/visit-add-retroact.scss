@@ -16,6 +16,20 @@ visit-add-retroact {
         background-color: $singha-survey-color-gray-3;
         color: $singha-survey-color-primaryDark;
     }
+    .text-product-name {
+        margin-bottom: 0;
+    }
+    .button-remove {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 14px;
+        margin: auto 0 auto auto;
+        padding: 0;
+        font-size: 22px;
+        color: $singha-survey-color-primary;
+    }
     .wrap-input {
         input {
             margin: 5px 8px;

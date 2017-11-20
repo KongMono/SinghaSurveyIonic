@@ -8,14 +8,17 @@
           </button>
         </ion-list>
       </ion-col>
-      <ion-col col-3 align="right">
+      <ion-col col-auto align="right">
         <button ion-button class="button-add" (click)="add()">เพิ่ม</button>
       </ion-col>
     </ion-row>
     <div *ngFor="let products of optionsVisitSale[indexProduct].products; let i = index">
       <ion-row>
         <ion-col>
-          <p>{{products.product_name}}</p>
+          <p class="text-product-name">{{products.product_name}}</p>
+        </ion-col>
+        <ion-col col-auto align="right">
+          <ion-icon name="_icon-close" ion-button class="button-remove" (click)="removeListProduct()" tappable></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row>
