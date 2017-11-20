@@ -15,39 +15,26 @@ export class VisitAddRetroact {
   @Input('index') index;
   @Output() callbackData = new EventEmitter();
   optionsVisitSale = [{
-    product_id: '',
-    product_name: '',
+    product_group_id: '',
+    product_group_name: '',
+    products: []
   }];
   indexProduct = 0;
-  qty: any;
-  buy: any;
-  stock: any;
+
+  retroact = [];
 
   constructor(public navCtrl: NavController, public util: AppUtilService) {
 
   }
 
   ngAfterViewInit() {
+    console.log(this.action);
     console.log(this.data);
     console.log(this.option);
     console.log(this.index);
 
     this.optionsVisitSale = this.option;
-    // if (this.index.indexValue || this.index.indexValue == 0) {
-    //   this.setIndexProduct();
-    //   this.qty = this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].qty;
-    //   this.buy = this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].buy;
-    //   this.stock = this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].stock;
-    // }
   }
-
-  // setIndexProduct() {
-  //   for (var i = 0; i < this.optionsVisitSale.length; i++) {
-  //     if (this.optionsVisitSale[i].product_id == this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].product_id) {
-  //       return this.indexProduct = i;
-  //     }
-  //   }
-  // }
 
   selectOption(action) {
     let title, listSelectOption, keyOption, indexSelect;
@@ -70,54 +57,55 @@ export class VisitAddRetroact {
       }
     });
   }
-  
-  save() {
-    if (this.indexProduct) {
-      // let retroact = {
-      //   product_id: this.optionsVisitSale[this.indexProduct].product_id,
-      //   qty: this.qty,
-      //   buy: this.buy,
-      //   stock: this.stock
-      // }
-      // this.data.sale[this.action][this.index.indexPath].value.push(retroact);
 
-      this.callbackData.emit(this.data);
-    } else {
-      this.util.showAlertDialog('กรุณาเลือกสินค้า');
-      return;
+  add() {
+    for (let i = 0; i < this.optionsVisitSale[this.indexProduct].products.length; i++) {
+      let retroact = {
+        product_id: this.optionsVisitSale[this.indexProduct].products[i].product_id,
+        product_name: this.optionsVisitSale[this.indexProduct].products[i].product_name,
+        qty: '',
+        buy: '',
+        stock: ''
+      }
+      this.retroact.push(retroact);
     }
   }
 
-  // save() {
-  //   // if (this.indexProduct && this.qty && this.buy && this.stock) {
-  //   if (this.indexProduct) {
-  //     if (!this.qty) {
-  //       this.qty = 0;
-  //     }
-  //     if (!this.buy) {
-  //       this.buy = 0;
-  //     }
-  //     if (!this.stock) {
-  //       this.stock = 0;
-  //     }
-  //     if (this.index.indexValue != null || this.index.indexValue != undefined) {
-  //       this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].product_id = this.optionsVisitSale[this.indexProduct].product_id;
-  //       this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].qty = this.qty;
-  //       this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].buy = this.buy;
-  //       this.data.sale[this.action][this.index.indexPath].value[this.index.indexValue].stock = this.stock;
-  //     } else {
-  //       let retroact = {
-  //         product_id: this.optionsVisitSale[this.indexProduct].product_id,
-  //         qty: this.qty,
-  //         buy: this.buy,
-  //         stock: this.stock
-  //       }
-  //       this.data.sale[this.action][this.index.indexPath].value.push(retroact);
-  //     }
-  //     this.callbackData.emit(this.data);
-  //   } else {
-  //     this.util.showAlertDialog('กรุณาเลือกข้อมูล');
-  //     return;
-  //   }
-  // }
+  removeListProduct(index) {
+    this.retroact.splice(index, 1);
+  }
+
+  save() {
+    let path;
+    if (this.action == 'boonrawd_new') {
+      path = 'boonrawd'
+    } else if (this.action == 'rival_new') {
+      path = 'rival'
+    }
+    if (this.retroact.length > 0) {
+      for (let i = 0; i < this.retroact.length; i++) {
+        for (let j = 0; j < this.data.sale[path][this.index.indexPath].value.length; j++) {
+          if (this.retroact[i].product_id == this.data.sale[path][this.index.indexPath].value[j].product_id) {
+            this.util.showAlertDialog('ไม่สามารถเพิ่ม ' + this.retroact[i].product_name + ' ซ้ำได้');
+            return;
+          }
+        }
+        if (!this.retroact[i].qty) {
+          this.retroact[i].qty = '0';
+        }
+        if (!this.retroact[i].buy) {
+          this.retroact[i].buy = '0';
+        }
+        if (!this.retroact[i].stock) {
+          this.retroact[i].stock = '0';
+        }
+      }
+      let value = this.data.sale[path][this.index.indexPath].value.concat(this.retroact);
+      this.data.sale[path][this.index.indexPath].value = value;
+      this.callbackData.emit(this.data);
+    } else {
+      this.util.showAlertDialog('กรุณาเลือกสินค้าและเพิ่ม');
+      return;
+    }
+  }
 }

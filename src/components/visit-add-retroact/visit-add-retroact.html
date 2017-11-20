@@ -12,13 +12,13 @@
         <button ion-button class="button-add" (click)="add()">เพิ่ม</button>
       </ion-col>
     </ion-row>
-    <div *ngFor="let products of optionsVisitSale[indexProduct].products; let i = index">
+    <div *ngFor="let product of retroact; let i = index">
       <ion-row>
         <ion-col>
-          <p class="text-product-name">{{products.product_name}}</p>
+          <p class="text-product-name">{{product.product_name}}</p>
         </ion-col>
         <ion-col col-auto align="right">
-          <ion-icon name="_icon-close" ion-button class="button-remove" (click)="removeListProduct()" tappable></ion-icon>
+          <ion-icon name="_icon-close" ion-button class="button-remove" (click)="removeListProduct(i)" tappable></ion-icon>
         </ion-col>
       </ion-row>
       <ion-row>
@@ -27,7 +27,7 @@
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="qty"></ion-input>
+            <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="product.qty"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -37,7 +37,7 @@
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="buy"></ion-input>
+            <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="product.buy"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>
@@ -47,7 +47,7 @@
         </ion-col>
         <ion-col>
           <ion-item>
-            <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="stock"></ion-input>
+            <ion-input type="tel" pattern="[0-9]*" placeholder="0" class="wrap-input" [(ngModel)]="product.stock"></ion-input>
           </ion-item>
         </ion-col>
       </ion-row>

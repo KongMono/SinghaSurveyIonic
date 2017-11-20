@@ -1,12 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { IonicPage, NavController, NavParams, ViewController } from 'ionic-angular';
 import { VisitAddRetroact } from './../../components/visit-add-retroact/visit-add-retroact';
 
 @IonicPage()
 @Component({
   selector: 'page-popup-input',
-  templateUrl: 'popup-input.html',
-  providers: [VisitAddRetroact]
+  templateUrl: 'popup-input.html'
 })
 
 export class PopupInput {
@@ -16,7 +15,9 @@ export class PopupInput {
   index: any;
   callback: any;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController, public visitAddRetroact: VisitAddRetroact) {
+  @ViewChild(VisitAddRetroact) visitAddRetroact: VisitAddRetroact;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams, public view: ViewController) {
     this.action = navParams.get('action');
     this.data = navParams.get('data');
     this.option = navParams.get('option');
