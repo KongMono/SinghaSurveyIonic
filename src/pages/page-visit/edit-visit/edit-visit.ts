@@ -541,6 +541,19 @@ export class EditVisitPage {
     alert.present();
   }
 
+  disableKeyInSale(key) {
+    for (let i = 0; i < this.visitCustomerDetailData.sale.boonrawd.length; i++) {
+      for (let j = 0; j < this.visitCustomerDetailData.sale.boonrawd[i].value.length; j++) {
+        delete this.visitCustomerDetailData.sale.boonrawd[i].value[j][key];
+      }
+    }
+    for (let i = 0; i < this.visitCustomerDetailData.sale.rival.length; i++) {
+      for (let j = 0; j < this.visitCustomerDetailData.sale.rival[i].value.length; j++) {
+        delete this.visitCustomerDetailData.sale.rival[i].value[j][key];
+      }
+    }
+  }
+
   save() {
     this.callServiceUpdateVisitCustomer();
   }
@@ -550,6 +563,15 @@ export class EditVisitPage {
     let customer_id = '';
     if (!this.navParams.get('status')) {
       customer_id = this.visitCustomerDetailData.customer_id;
+    }
+    if (this.optionsVisitSale.config.buy == '0') {
+      this.disableKeyInSale('buy');
+    }
+    if (this.optionsVisitSale.config.qty == '0') {
+      this.disableKeyInSale('qty');
+    }
+    if (this.optionsVisitSale.config.stock == '0') {
+      this.disableKeyInSale('stock');
     }
     this.service.updateVisitCustomer(
       this.config.userInfo.username,
