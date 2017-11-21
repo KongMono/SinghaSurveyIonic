@@ -324,10 +324,10 @@
               <span class="text-value-sub">{{note.howto}}</span>
             </ion-col>
           </ion-row>
-          <ion-row *ngIf="note.images.length > 0" style="height: 80px;">
+          <ion-row *ngIf="note.images" style="height: 80px;">
             <ion-scroll scrollX="true" style="width: 100%; height: 80px;">
               <div style="display: flex">
-                <img *ngFor="let images of note.images" [src]="getImagePath(images)" height="80px" width="auto" style="margin: 0 10px;" tappable/>
+                <img [src]="getImagePath(note.images)" height="80px" width="auto" style="margin: 0 10px;"/>
               </div>
             </ion-scroll>
           </ion-row>

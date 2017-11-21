@@ -55,8 +55,8 @@ export class EditVisitPage {
   };
   expand = {
     order: {
-     collapse: false,
-     icon: 'ios-arrow-down-outline'
+      collapse: false,
+      icon: 'ios-arrow-down-outline'
     },
     boonrawd: {
       collapse: false,
@@ -87,7 +87,7 @@ export class EditVisitPage {
     private alertCtrl: AlertController,
     private photoViewer: PhotoViewer,
     @Inject(ConfigApp) public config: IAppConfig) {
-    this.callback = this.navParams.get("callback")
+    this.callback = this.navParams.get("callback");
     this.visit_id = navParams.get('data');
     console.log(this.visit_id);
     console.log(navParams.get('status'));
@@ -309,66 +309,23 @@ export class EditVisitPage {
   }
 
   actionSheetInList(action, index, indexPath) {
-    let actionSheet;
-    if (action == 'note' && this.visitCustomerDetailData.note[index].images.length > 0) {
-      actionSheet = this.actionSheetCtrl.create({
-        buttons: [
-          {
-            icon: 'ios-image',
-            text: 'ดูรูป',
-            handler: () => {
-              this.app.navPop().then(() => {
-                let endpoint
-                if (this.config.isProduction) {
-                  endpoint = this.config.endpoint_view_image_production;
-                } else {
-                  endpoint = this.config.endpoint_view_image;
-                }
-                this.photoViewer.show(endpoint + this.visitCustomerDetailData.note[index].images[0]);
-              });
-            }
-          }, {
-            icon: '_icon-trash',
-            text: 'ลบรูป',
-            handler: () => {
-              this.app.navPop().then(() => {
-                this.confirmRemoveImage(action, index, 0);
-              });
-            }
-          }, {
-            icon: '_icon-edit',
-            text: 'แก้ไข',
-            handler: () => {
-              this.popupInput(action, index, indexPath);
-            }
-          }, {
-            icon: '_icon-delete_file',
-            text: 'ลบ',
-            handler: () => {
-              this.removeDataInList(action, index, indexPath);
-            }
+    let actionSheet = this.actionSheetCtrl.create({
+      buttons: [
+        {
+          icon: '_icon-edit',
+          text: 'แก้ไข',
+          handler: () => {
+            this.popupInput(action, index, indexPath);
           }
-        ]
-      });
-    } else {
-      actionSheet = this.actionSheetCtrl.create({
-        buttons: [
-          {
-            icon: '_icon-edit',
-            text: 'แก้ไข',
-            handler: () => {
-              this.popupInput(action, index, indexPath);
-            }
-          }, {
-            icon: '_icon-delete_file',
-            text: 'ลบ',
-            handler: () => {
-              this.removeDataInList(action, index, indexPath);
-            }
+        }, {
+          icon: '_icon-delete_file',
+          text: 'ลบ',
+          handler: () => {
+            this.removeDataInList(action, index, indexPath);
           }
-        ]
-      });
-    }
+        }
+      ]
+    });
     actionSheet.present();
   }
 

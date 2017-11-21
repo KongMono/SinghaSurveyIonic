@@ -29,7 +29,7 @@ export class VisitAddNote {
     howto: '',
     end_date: '',
     status: '1',
-    images: []
+    images: ''
   }
   status = {
     progress: true,
@@ -153,7 +153,7 @@ export class VisitAddNote {
 
   updateAddImage(res) {
     // this.inputVisitAddNoteData.images.push(res.path);
-    this.inputVisitAddNoteData.images[0] = res.path;
+    this.inputVisitAddNoteData.images = res.path;
   }
 
   getImagePath(images): string {
@@ -166,7 +166,7 @@ export class VisitAddNote {
     return endpoint + images;
   }
 
-  viewImage(index) {
+  viewImage() {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [
         {
@@ -180,7 +180,7 @@ export class VisitAddNote {
               } else {
                 endpoint = this.config.endpoint_view_image;
               }
-              this.photoViewer.show(endpoint + this.inputVisitAddNoteData.images[index]);
+              this.photoViewer.show(endpoint + this.inputVisitAddNoteData.images);
             });
           }
         }, {
@@ -188,7 +188,7 @@ export class VisitAddNote {
           text: 'ลบ',
           handler: () => {
             this.app.navPop().then(() => {
-              this.confirmRemoveImage(index);
+              this.confirmRemoveImage();
             });
           }
         }
@@ -197,7 +197,7 @@ export class VisitAddNote {
     actionSheet.present();
   }
 
-  confirmRemoveImage(index) {
+  confirmRemoveImage() {
     let alert = this.alertCtrl.create({
       title: 'ต้องการลบรูปภาพ?',
       buttons: [
@@ -210,7 +210,7 @@ export class VisitAddNote {
         {
           text: 'ตกลง',
           handler: () => {
-            this.inputVisitAddNoteData.images.splice(index, 1);
+            this.inputVisitAddNoteData.images = '';
           }
         }
       ]
