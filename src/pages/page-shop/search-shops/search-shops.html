@@ -100,7 +100,9 @@
       <div item-end class="wrap-end">
         <div class="wrap-end-top">
           <ion-icon class="icon-marker" name="_icon-marker"></ion-icon>
-          <span class="text-status">{{customer.count_survey}}</span>
+          <div class="text-status">
+            <span>{{customer.count_survey}}</span>
+          </div>
         </div>
         <div>
           <ion-icon class="icon-home" name="_icon-home" [ngClass]="{'color-green': (customer.status == '1'), 'color-yellow': (customer.status == '2'), 'color-red': (customer.status == '3')}"></ion-icon>
