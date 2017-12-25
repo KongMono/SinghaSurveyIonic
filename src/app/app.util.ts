@@ -20,9 +20,9 @@ export class AppUtilService {
 
     public loadData(): any {
         let ls = [];
-        ls.push(this.storage.get('SSV_userinfo'));
-        ls.push(this.storage.get('SSV_logged'));
-        ls.push(this.storage.get('SSV_pin_logged'));
+        ls.push(this.storage.get('ssv_userinfo'));
+        ls.push(this.storage.get('ssv_logged'));
+        ls.push(this.storage.get('ssv_pin_logged'));
 
         this.setMaxDate();
         
@@ -30,24 +30,24 @@ export class AppUtilService {
     }
 
     public setDataInfo(userinfo) {
-        this.storage.set('SSV_userinfo', userinfo);
+        this.storage.set('ssv_userinfo', userinfo);
         this.config.userInfo = userinfo;
     }
 
     public setLogin() {
-        this.storage.set('SSV_logged', true);
+        this.storage.set('ssv_logged', true);
         this.config.isLogged = true;
     }
 
     public setPin(pin) {
-        this.storage.set('SSV_pin_logged', pin);
+        this.storage.set('ssv_pin_logged', pin);
         this.config.pin_logged = pin;
     }
 
     public logout() {
-        this.storage.set('SSV_logged', false);
-        this.storage.set('SSV_pin_logged', null);
-        this.storage.set('SSV_userinfo', null);
+        this.storage.set('ssv_logged', false);
+        this.storage.set('ssv_pin_logged', null);
+        this.storage.set('ssv_userinfo', null);
     }
 
     public isEmpty(data: string): boolean {
