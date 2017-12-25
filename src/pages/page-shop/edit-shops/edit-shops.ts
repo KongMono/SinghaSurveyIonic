@@ -475,8 +475,10 @@ export class EditShopsPage {
     }
 
     if (this.optionCustomer.customer_group[this.indexCustomerGroup].customer_type[this.indexCustomerType].customer_type_id == ("58")) {
-      this.util.showAlertDialog("กรุณากรอกรหัส ARM");
-      return;
+      if (this.util.isEmpty(this.customerDetailData.code)) {
+        this.util.showAlertDialog("กรุณากรอกรหัส ARM");
+        return;
+      }
     }
 
     if (this.optionCustomer.customer_group[this.indexCustomerGroup].project_type[this.indexProjectType].project_type_id == ("99999")) {

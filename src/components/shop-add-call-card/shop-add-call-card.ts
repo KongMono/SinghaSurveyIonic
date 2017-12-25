@@ -253,6 +253,7 @@ export class ShopAddCallCard {
         this.data.callcard[this.index].start_date = this.inputShopAddCallCardData.start_date;
         this.data.callcard[this.index].end_date = this.inputShopAddCallCardData.end_date;
         this.data.callcard[this.index].value = this.inputShopAddCallCardData.value;
+        this.data.callcard[this.index].balance = this.inputShopAddCallCardData.balance;
         this.data.callcard[this.index].spst_no = this.inputShopAddCallCardData.spst_no;
         this.data.callcard[this.index].prq_no = this.inputShopAddCallCardData.prq_no;
         this.data.callcard[this.index].images = this.inputShopAddCallCardData.images;
@@ -262,6 +263,7 @@ export class ShopAddCallCard {
           start_date: this.inputShopAddCallCardData.start_date,
           end_date: this.inputShopAddCallCardData.end_date,
           value: this.inputShopAddCallCardData.value,
+          balance: this.inputShopAddCallCardData.balance,
           spst_no: this.inputShopAddCallCardData.spst_no,
           prq_no: this.inputShopAddCallCardData.prq_no,
           images: this.inputShopAddCallCardData.images,
