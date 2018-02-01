@@ -522,6 +522,7 @@ export class SinghaSurveyService {
 
         service.param = {
             user_id: user_id,
+            code: code,
             name: name,
             latitude: latitude,
             longitude: longitude,
@@ -583,6 +584,7 @@ export class SinghaSurveyService {
         service.param = {
             customer_id: customer_id,
             user_id: user_id,
+            code: code,
             name: name,
             latitude: latitude,
             longitude: longitude,

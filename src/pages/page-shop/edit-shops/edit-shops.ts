@@ -686,9 +686,13 @@ export class EditShopsPage {
       JSON.stringify(this.customerDetailData.callcard))
       .then(result => {
         this.util.hideLoading();
-        this.callback().then(() => {
+        if (this.callback) {
+          this.callback().then(() => {
+            this.backPage();
+          });
+        } else {
           this.backPage();
-        });
+        }
         if (this.config.isBuildDevice) {
           this.service.setTracking(this.customer_id, this.customerDetailData.code, 1, this.config.latitude, this.config.longitude)
             .then((resultTracking: any) => {
