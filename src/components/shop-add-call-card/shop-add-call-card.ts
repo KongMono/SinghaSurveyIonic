@@ -29,7 +29,7 @@ export class ShopAddCallCard {
     balance: '',
     spst_no: '',
     prq_no: '',
-    images: []
+    images: ''
   }
   optionStatus = {
     status: [
@@ -165,7 +165,8 @@ export class ShopAddCallCard {
   }
 
   updateAddImage(res) {
-    this.inputShopAddCallCardData.images.push(res.path);
+    // this.inputShopAddCallCardData.images.push(res.path);
+    this.inputShopAddCallCardData.images = res.path;
   }
 
   getImagePath(images): string {
@@ -178,7 +179,7 @@ export class ShopAddCallCard {
     return endpoint + images;
   }
 
-  viewImage(index) {
+  viewImage() {
     let actionSheet = this.actionSheetCtrl.create({
       buttons: [
         {
@@ -192,7 +193,7 @@ export class ShopAddCallCard {
               } else {
                 endpoint = this.config.endpoint_view_image;
               }
-              this.photoViewer.show(endpoint + this.inputShopAddCallCardData.images[index]);
+              this.photoViewer.show(endpoint + this.inputShopAddCallCardData.images);
             });
           }
         }, {
@@ -200,7 +201,7 @@ export class ShopAddCallCard {
           text: 'ลบ',
           handler: () => {
             this.app.navPop().then(() => {
-              this.confirmRemoveImage(index);
+              this.confirmRemoveImage();
             });
           }
         }
@@ -209,7 +210,7 @@ export class ShopAddCallCard {
     actionSheet.present();
   }
 
-  confirmRemoveImage(index) {
+  confirmRemoveImage() {
     let alert = this.alertCtrl.create({
       title: 'ต้องการลบรูปภาพ?',
       buttons: [
@@ -222,7 +223,8 @@ export class ShopAddCallCard {
         {
           text: 'ตกลง',
           handler: () => {
-            this.inputShopAddCallCardData.images.splice(index, 1);
+            // this.inputShopAddCallCardData.images.splice(index, 1);
+            this.inputShopAddCallCardData.images = '';
           }
         }
       ]
@@ -238,7 +240,7 @@ export class ShopAddCallCard {
       this.util.showAlertDialog('กรุณาเลือกสัญญาเริ่ม');
       return;
     }
-    if (this.inputShopAddCallCardData.start_date && this.inputShopAddCallCardData.end_date && this.inputShopAddCallCardData.spst_no && this.inputShopAddCallCardData.prq_no && this.inputShopAddCallCardData.images) {
+    if (this.inputShopAddCallCardData.start_date && this.inputShopAddCallCardData.end_date && this.inputShopAddCallCardData.spst_no && this.inputShopAddCallCardData.prq_no) {
       if (this.util.validateStartEndDate(this.inputShopAddCallCardData.start_date, this.inputShopAddCallCardData.end_date) <= 0) {
         this.util.showAlertDialog('สัญญาสิ้นสุดไม่สามารถเลือกน้อยกว่า หรือ เท่ากับสัญญาเริ่มได้');
         return;
